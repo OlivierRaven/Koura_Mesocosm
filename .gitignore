@@ -3,7 +3,6 @@
 .RData
 .Ruserdata
 *.JPG
-*.png
 *.ijm
 *.jpg
 *.JPG
@@ -15,9 +14,10 @@
 manuscript/
 images/
 data/raw/
-outputs/
 .RData
 .Rhistory
 .quarto/
 _freeze/
-docs/
+
+/.quarto/
+**/*.quarto_ipynb

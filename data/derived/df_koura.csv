@@ -1,0 +1,96 @@
+"koura_id","experiment","round","exp_tank","hold_tank","location_after_exp1","size_class","sex","size_mm1","weight_g1","legs1","claws1","antenna1","moult_date","size_mm2","weight_g2","legs2","claws2","antenna2","notes"
+1,"1","1",1,"7","7","M","F",25.62,10,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+2,"1","1",2,"9","7","M","M",27.25,14,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+3,"1","1",3,"8","7","M","M",25.97,11,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+4,"1","1",4,"9","7","M","F",27.45,14,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+5,"1","1",5,"7","7","M","M",23.71,9,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+6,"1","1",6,"8","7","M","F",27.49,14,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+7,"1","2",1,"9","7","M","F",28.94,16,8,2,NA,"45924",31.49,19,8,2,2,NA
+8,"1","2",2,"8","7","M","F",29.78,17,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+9,"1","2",3,"7","7","M","M",24.7,10,7,2,NA,NA,NA,NA,NA,NA,NA,NA
+10,"1","2",4,"7","7","M","F",25.21,7,6,2,2,"45925",NA,NA,NA,NA,NA,"1 claw small"
+11,"1","2",5,"8","7","M","M",29.49,17,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+12,"1","2",6,"9","7","M","M",24.57,10,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+13,"1","3",1,"8","7","M","M",23.84,8,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+14,"1","3",2,"9","7","M","F",25.18,10,8,2,2,"45935",26.52,11,8,2,2,"blue"
+15,"1","3",3,"7","7","M","M",22.61,8,8,2,NA,"45924",24.17,8,7,1,2,NA
+16,"1","3",4,"8","8","M","M",25.8,11,7,1,NA,NA,NA,NA,NA,NA,NA,NA
+17,"1","3",5,"9","8","M","F",25.33,11,7,2,2,NA,NA,NA,NA,NA,NA,NA
+18,"1","3",6,"7","8","M","F",28.79,16,8,2,2,NA,NA,NA,NA,NA,NA,NA
+19,"1","4",1,"8","8","M","F",28.72,14,8,2,2,NA,NA,NA,NA,NA,NA,NA
+20,"1","4",2,"7","8","M","F",23.22,7,8,2,2,"45905",23.94,10,8,2,2,"Moulted"
+21,"1","4",3,"9","8","M","F",26.81,13,8,2,2,"45902",27.87,16,8,2,2,"Moulted"
+22,"1","4",4,"8","8","M","M",25.17,13,8,2,NA,"45901",28.47,14,8,1,2,"Moulted"
+23,"1","4",5,"9","8","M","M",23.85,8,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+24,"1","4",6,"7","8","M","M",28.17,15,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+25,"1","5",1,"7","8","M","F",24.34,9,7,2,2,"45924",25.73,10,8,2,2,NA
+26,"1","5",2,"9","8","M","M",25.97,13,8,2,NA,"45929",28.33,17,8,2,2,"Moulted"
+27,"1","5",3,"8","8","M","F",28.89,14,8,2,2,NA,NA,NA,NA,NA,NA,NA
+28,"1","5",4,"7","8","M","M",23.96,11,8,2,NA,"45904",26.42,13,8,2,2,"Moulted"
+29,"1","5",5,"9","8","M","M",28.41,15,8,2,NA,"45902",29.97,17,8,2,2,"Moulted"
+30,"1","5",6,"8","8","M","F",27.24,13,8,2,2,NA,NA,NA,NA,NA,NA,NA
+31,"Extra","Extra",0,"w1","9","M","M",28.86,10,6,2,2,NA,NA,NA,NA,NA,NA,NA
+32,"Extra","Extra",0,"w1","9","M","M",23.93,9,8,2,2,NA,NA,NA,NA,NA,NA,NA
+33,"Extra","Extra",0,"w1","9","M","M",27.02,13,8,2,2,NA,NA,NA,NA,NA,NA,NA
+34,"Extra","Extra",0,"w1","9","M","M",24.22,9,8,2,2,NA,NA,NA,NA,NA,NA,NA
+35,"Extra","Extra",0,"w1","9","M","M",23.28,8,8,2,2,NA,NA,NA,NA,NA,NA,NA
+36,"Extra","Extra",0,"w1","9","M","M",28.29,14,8,2,2,NA,NA,NA,NA,NA,NA,NA
+37,"2",NA,1,"10","10","S","M",17.82,1,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+73,"2",NA,1,"10","10","S","M",18.15,3,8,2,2,"45904",21.15,6,8,2,2,"Moulted, Lost last round of exp 3"
+39,"2",NA,1,"10","10","M","M",26.62,10,8,2,NA,"45908",28.79,15,8,2,2,"Moulted"
+40,"2",NA,1,"10","10","M","M",25.88,11,6,2,2,NA,NA,NA,NA,NA,NA,NA
+41,"2",NA,1,"10","10","L","M",38.88,39,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+42,"2",NA,1,"10","10","L","M",38.72,37,8,2,2,NA,NA,NA,NA,NA,NA,NA
+43,"2",NA,2,"10","10","S","M",21.55,7,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+74,"2",NA,2,"10","10","S","M",16.24,1,7,2,2,NA,NA,NA,NA,NA,NA,NA
+45,"2",NA,2,"10","10","M","M",25.2,10,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+46,"2",NA,2,"10","10","M","M",29.49,16,7,2,2,NA,NA,NA,NA,NA,NA,NA
+47,"2",NA,2,"10","10","L","M",41.25,42,8,2,NA,NA,NA,NA,NA,NA,NA,"soft"
+48,"2",NA,2,"10","10","L","M",35.25,27,8,2,2,NA,NA,NA,NA,NA,NA,NA
+49,"2",NA,3,"11","11","S","M",21.29,5,6,2,NA,NA,NA,NA,NA,NA,NA,NA
+79,"2",NA,3,"11","11","S","M",20.62,6,5,1,2,NA,NA,NA,NA,NA,NA,NA
+51,"2",NA,3,"11","11","M","M",23.49,8,8,1,NA,"45911",25.56,12,7,2,2,"Moulted"
+52,"2",NA,3,"11","11","M","M",23.92,8,8,1,2,"45904",25.55,10,6,1,2,"Moulted"
+53,"2",NA,3,"11","11","L","M",30.72,20,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+54,"2",NA,3,"11","11","L","M",43.34,57,8,2,2,NA,NA,NA,NA,NA,NA,NA
+55,"2",NA,4,"11","11","S","M",18.26,4,5,2,NA,NA,NA,NA,NA,NA,NA,NA
+83,"2",NA,4,"11","11","S","M",20.93,4,8,2,2,NA,NA,NA,NA,NA,NA,NA
+57,"2",NA,4,"11","11","M","M",24.22,8,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+58,"2",NA,4,"11","11","M","M",27.18,12,8,2,2,NA,NA,NA,NA,NA,NA,NA
+59,"2",NA,4,"11","11","L","M",31.65,23,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+60,"2",NA,4,"11","11","L","M",35.61,28,8,2,2,NA,NA,NA,NA,NA,NA,NA
+61,"2",NA,5,"12","12","S","M",17.24,3,7,2,2,NA,NA,NA,NA,NA,NA,NA
+86,"2",NA,5,"12","12","S","M",15.77,1,6,1,2,NA,NA,NA,NA,NA,NA,NA
+63,"2",NA,5,"12","12","M","M",27.27,13,8,2,1,NA,NA,NA,NA,NA,NA,NA
+64,"2",NA,5,"12","12","M","M",26.88,12,7,2,2,NA,NA,NA,NA,NA,NA,NA
+65,"2",NA,5,"12","12","L","M",37.6,32,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+66,"2",NA,5,"12","12","L","M",31.24,21,8,2,2,NA,NA,NA,NA,NA,NA,NA
+67,"2",NA,6,"12","12","S","M",19.7,5,8,2,2,NA,NA,NA,NA,NA,NA,NA
+88,"2",NA,6,"12","12","S","M",19.32,4,8,2,2,NA,NA,NA,NA,NA,NA,"Died 23/09/25 got pinched by other kōura when deploying"
+69,"2",NA,6,"12","12","M","M",27.78,14,8,2,2,NA,NA,NA,NA,NA,NA,NA
+70,"2",NA,6,"12","12","M","M",26.13,12,8,2,2,NA,NA,NA,NA,NA,NA,NA
+71,"2",NA,6,"12","12","L","M",39.14,37,8,2,2,NA,NA,NA,NA,NA,NA,NA
+72,"2",NA,6,"12","12","L","M",32.46,19,8,2,2,NA,NA,NA,NA,NA,NA,NA
+92,"Extra","Extra",0,"w2","12","S","M",19.87,4,8,1,2,NA,NA,NA,NA,NA,NA,NA
+75,"Extra","Extra",0,"w2","12","M","M",23.65,8,8,2,2,NA,NA,NA,NA,NA,NA,NA
+76,"Extra","Extra",0,"w2","12","M","M",26.88,14,8,2,2,NA,NA,NA,NA,NA,NA,NA
+77,"Extra","Extra",0,"w2","12","L","M",30.44,19,8,2,2,NA,NA,NA,NA,NA,NA,"escaped died 1/10/25 all the way to other side or parking it walked found"
+78,"Extra","Extra",0,"w2","12","L","M",30.6,19,8,2,2,NA,NA,NA,NA,NA,NA,NA
+38,"Extra","Extra",0,"w3","9","S","F",19.7,6,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+44,"Extra","Extra",0,"w3","9","S","F",19.89,4,8,2,2,NA,NA,NA,NA,NA,NA,NA
+50,"Extra","Extra",0,"w3","9","S","F",19.91,5,8,2,2,"? 6/08/25",20.86,7,8,2,2,"Moulted?"
+56,"Extra","Extra",0,"w3","9","S","F",21.85,6,6,1,2,"45894",23.13,7,6,1,2,"Moulted"
+62,"Extra","Extra",0,"w3","9","S","F",21.92,6,8,2,2,NA,NA,NA,NA,NA,NA,NA
+68,"Extra","Extra",0,"w3","9","S","F",19.1,4,8,2,2,NA,NA,NA,NA,NA,NA,NA
+80,"Extra","Extra",0,"w3","9","M","M",27.47,13,7,2,2,NA,NA,NA,NA,NA,NA,NA
+81,"Extra","Extra",0,"w3","9","M","M",23.56,7,8,2,2,NA,NA,NA,NA,NA,NA,NA
+82,"Extra","Extra",0,"w3","9","M","M",22.35,7,6,2,2,"45894",27.03,11,8,1,2,"Moulted"
+84,"Extra","Extra",0,"w3","9/ or missing","M","M",24.5,10,8,1,2,NA,NA,NA,NA,NA,NA,"soft"
+85,"Extra","Extra",0,"w3","9","M","M",26.85,10,8,0,2,"45943",29.1,13,7,1,2,"soft"
+87,"Extra","Extra",0,"w3","9","M","M",23.56,8,8,1,2,NA,NA,NA,NA,NA,NA,NA
+89,"Extra","Extra",0,"w3","9","M","M",24.6,10,8,1,2,NA,NA,NA,NA,NA,NA,NA
+90,"Extra","Extra",0,"w3","9","M","M",22.6,6,8,2,2,NA,NA,NA,NA,NA,NA,NA
+91,"Extra","Extra",0,"w3","9","M","M",24.4,9,7,2,2,NA,NA,NA,NA,NA,NA,NA
+93,"2",NA,NA,NA,NA,"M","M",24.31,8,6,2,2,NA,NA,NA,NA,NA,NA,"replace 88 in exp3"
+NA,"little one with only 3 legs left snapt by other.",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"23.81 died and eaten by others while in holding tank 1 inside",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

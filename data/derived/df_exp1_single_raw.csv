@@ -1,0 +1,31 @@
+"experiment","round","tank","group_id","date","t_leave_s","t_l0_s","l0","reef_l0","l1","reef_l1","notes_exp","koura_id","size_class","sex","size_mm1","weight_g1","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","moult_date","notes_koura"
+"SingleStone",1,1,NA,2025-09-01,"NA",242,"A","WoodLog","A","WoodLog","Different hole",1,"M","F",25.62,10,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",1,2,NA,2025-09-01,"NA",602,"B","FlatStone","D","WoodLog",NA,2,"M","M",27.25,14,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",1,3,NA,2025-09-01,"NA",193,"B","StonePile","A","WoodLog",NA,3,"M","M",25.97,11,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",1,4,NA,2025-09-01,"NA",143,"D","FlatStone","C","WoodLog",NA,4,"M","F",27.45,14,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",1,5,NA,2025-09-01,"NA",367,"A","StonePile","B","StonePile",NA,5,"M","M",23.71,9,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",1,6,NA,2025-09-01,"NA",221,"D","StonePile","A","WoodLog",NA,6,"M","F",27.49,14,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",2,1,NA,2025-09-02,"158",177,"A","WoodLog","D","StonePile","on video see kōura next to WoodLog",7,"M","F",28.94,16,8,2,NA,31.49,19,8,2,2,2025-09-24,NA
+"SingleStone",2,2,NA,2025-09-02,"10",16,"B","FlatStone","A","StonePile",NA,8,"M","F",29.78,17,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",2,3,NA,2025-09-02,"513",600,"E","TankWall","D","WoodLog",NA,9,"M","M",24.7,10,7,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",2,4,NA,2025-09-02,"135",225,"C","WoodLog","C","WoodLog",NA,10,"M","F",25.21,7,6,2,2,NA,NA,NA,NA,NA,2025-09-25,"1 claw small"
+"SingleStone",2,5,NA,2025-09-02,"9",239,"A","StonePile","C","FlatStone",NA,11,"M","M",29.49,17,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",2,6,NA,2025-09-02,"94",183,"A","WoodLog","A","WoodLog",NA,12,"M","M",24.57,10,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",3,1,NA,2025-09-03,"88",125,"A","FlatStone","C","WoodLog",NA,13,"M","M",23.84,8,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",3,2,NA,2025-09-03,"31",50,"A","StonePile","A","StonePile",NA,14,"M","F",25.18,10,8,2,2,26.52,11,8,2,2,2025-10-05,"blue"
+"SingleStone",3,3,NA,2025-09-03,"353",453,"C","SingleStone","D","WoodLog",NA,15,"M","M",22.61,8,8,2,NA,24.17,8,7,1,2,2025-09-24,NA
+"SingleStone",3,4,NA,2025-09-03,"261",600,"E","TankWall","B","WoodLog",NA,16,"M","M",25.8,11,7,1,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",3,5,NA,2025-09-03,"128",218,"A","FlatStone","B","WoodLog",NA,17,"M","F",25.33,11,7,2,2,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",3,6,NA,2025-09-03,"395",402,"B","StonePile","C","FlatStone",NA,18,"M","F",28.79,16,8,2,2,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",4,1,NA,2025-09-04,"356",408,"B","FlatStone","B","FlatStone",NA,19,"M","F",28.72,14,8,2,2,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",4,2,NA,2025-09-04,"429",466,"D","SingleStone","D","SingleStone","Moulted",20,"M","F",23.22,7,8,2,2,23.94,10,8,2,2,2025-09-05,"Moulted"
+"SingleStone",4,3,NA,2025-09-04,"221",268,"D","FlatStone","D","FlatStone",NA,21,"M","F",27.87,16,8,2,2,NA,NA,NA,NA,NA,2025-09-02,"Moulted"
+"SingleStone",4,4,NA,2025-09-04,"1",7,"C","FlatStone","B","WoodLog",NA,22,"M","M",28.47,14,8,1,2,NA,NA,NA,NA,NA,2025-09-01,"Moulted"
+"SingleStone",4,5,NA,2025-09-04,"166",182,"D","FlatStone","B","WoodLog",NA,23,"M","M",23.85,8,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",4,6,NA,2025-09-04,"600",626,"C","WoodLog","C","WoodLog",NA,24,"M","M",28.17,15,8,2,NA,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",5,1,NA,2025-09-05,"221",245,"A","StonePile","D","WoodLog",NA,25,"M","F",24.34,9,7,2,2,25.73,10,8,2,2,2025-09-24,NA
+"SingleStone",5,2,NA,2025-09-05,"96",134,"D","FlatStone","B","WoodLog",NA,26,"M","M",25.97,13,8,2,NA,28.33,17,8,2,2,2025-09-29,"Moulted"
+"SingleStone",5,3,NA,2025-09-05,"406",651,"A","StonePile","B","WoodLog",NA,27,"M","F",28.89,14,8,2,2,NA,NA,NA,NA,NA,NA,NA
+"SingleStone",5,4,NA,2025-09-05,"600",735,"C","WoodLog","C","WoodLog",NA,28,"M","M",26.42,13,8,2,2,NA,NA,NA,NA,NA,2025-09-04,"Moulted"
+"SingleStone",5,5,NA,2025-09-05,"1",60,"B","SingleStone","A","FlatStone",NA,29,"M","M",29.97,17,8,2,2,NA,NA,NA,NA,NA,2025-09-02,"Moulted"
+"SingleStone",5,6,NA,2025-09-05,"25",60,"B","WoodLog","B","WoodLog",NA,30,"M","F",27.24,13,8,2,2,NA,NA,NA,NA,NA,NA,NA
