@@ -147,6 +147,68 @@ write_out(df_exp4_brick_long, "df_exp4_brick_long.csv")
 ```
 
 # Exp 1 Single koura
+## Exp 1 Statistic
+```{r}
+#| label: stats-exp1
+#| tbl-cap: "Exp 1 statistical results"
+
+# RQ1: Is there a preference for a specific reef type at L1?
+# RQ2: Does reef type preference differ between sexes at L1?
+# RQ3: Did reef type use shift directionally between L0 and L1?
+
+df1 <- df_exp1_single_long %>%
+  mutate(
+    reef_type     = factor(reef_type),
+    stage         = factor(stage, levels = c("L0", "L1")),
+    sex           = factor(sex),
+    size_class    = factor(size_class),
+    location_code = factor(location_code),
+    tank          = factor(tank),
+    round         = factor(round),
+    koura_id      = factor(koura_id),
+    size_mm1      = as.numeric(size_mm1),
+    weight_g1     = as.numeric(weight_g1)) %>%
+  filter(!is.na(reef_type))
+
+# RQ1 — Reef type preference at L1
+df1_L1       <- df1 %>% filter(stage == "L1" , reef_type != "TankWall") %>%
+  mutate(reef_type = droplevels(reef_type))
+tab1_L1      <- table(df1_L1$reef_type)
+tab1_L1_nz   <- tab1_L1[tab1_L1 > 0]
+
+xmulti1      <- XNomial::xmulti(
+  obs  = as.numeric(tab1_L1_nz),
+  expr = rep(sum(tab1_L1_nz) / length(tab1_L1_nz), length(tab1_L1_nz)))
+p_xmulti1    <- xmulti1$pLLR
+
+# Post-hoc pairwise G-tests
+pgtest1      <- pairwise_gtest(tab1_L1_nz)
+p_single_vs_flat1 <- pgtest1$p_adj[pgtest1$pair == "SingleStone vs FlatStone"]
+p_single_vs_pile1 <- pgtest1$p_adj[pgtest1$pair == "SingleStone vs StonePile"]
+p_single_vs_wood1 <- pgtest1$p_adj[pgtest1$pair == "SingleStone vs WoodLog"]
+p_flat_vs_pile1   <- pgtest1$p_adj[pgtest1$pair == "FlatStone vs StonePile"]
+p_flat_vs_wood1   <- pgtest1$p_adj[pgtest1$pair == "FlatStone vs WoodLog"]
+p_pile_vs_wood1   <- pgtest1$p_adj[pgtest1$pair == "StonePile vs WoodLog"]
+
+# RQ2 — Sex difference in reef preference at L1
+tab1_sex     <- table(df1_L1$reef_type, df1_L1$sex)
+fisher1      <- fisher.test(tab1_sex, simulate.p.value = TRUE, B = 9999)
+p_fisher1    <- fisher1$p.value
+
+# Post-hoc pairwise G-tests between sex
+pgtest_female <- pairwise_gtest(table(df1_L1$reef_type[df1_L1$sex == "F"]))
+pgtest_male   <- pairwise_gtest(table(df1_L1$reef_type[df1_L1$sex == "M"]))
+
+# RQ3 — Directional shift between L0 and L1
+df1_wide     <- df1 %>%
+  select(koura_id, stage, reef_type) %>%
+  pivot_wider(names_from = stage, values_from = reef_type)
+
+tab1_trans   <- table(L0 = df1_wide$L0, L1 = df1_wide$L1)
+symtest1     <- coin::symmetry_test(tab1_trans, distribution = approximate(nresample = 9999))
+p_symtest1   <- pvalue(symtest1)
+```
+
 ## Exp 1 I
 ```{r}
 #| label: fig-exp1
@@ -176,18 +238,66 @@ exp1_reef_all <- dplyr::bind_rows(exp1_reef_combined, exp1_reef_bysex)
 lab_stage <- c(L0 = "Initial location (L0)", L1 = "Next-day location (L1)")
 lab_panel1 <- c(Combined = "Combined", Female = "Female", Male = "Male")
 
-# One plot ADD: n values above each bar and in 
+# Function to convert pairwise G-test results to CLD letters
+gtest_to_cld <- function(pgtest_result) {
+  # Create named vector of adjusted p-values with "A:B" format keys
+  pvals <- setNames(
+    pgtest_result$p_adj,
+    gsub(" vs ", "-", pgtest_result$pair)
+  )
+  multcompView::multcompLetters(pvals)$Letters
+}
+
+# Generate CLD letters for each panel
+cld_combined <- data.frame(
+  stage      = "L1",
+  panel      = "Combined",
+  reef_type  = names(gtest_to_cld(pgtest1)),
+  cld_letter = unname(gtest_to_cld(pgtest1))
+)
+
+cld_female <- data.frame(
+  stage      = "L1",
+  panel      = "Female",
+  reef_type  = names(gtest_to_cld(pgtest_female)),
+  cld_letter = unname(gtest_to_cld(pgtest_female))
+)
+
+cld_male <- data.frame(
+  stage      = "L1",
+  panel      = "Male",
+  reef_type  = names(gtest_to_cld(pgtest_male)),
+  cld_letter = unname(gtest_to_cld(pgtest_male))
+)
+
+cld_all <- bind_rows(cld_combined, cld_female, cld_male)
+
+exp1_reef_letters <- exp1_reef_all %>%
+  relevel_reef() %>%
+  filter(stage == "L1") %>%
+  left_join(cld_all, by = c("stage", "panel", "reef_type"))
+
 Exp1_reef_p <- exp1_reef_all %>%
   relevel_reef() %>%
   ggplot(aes(reef_type, prop)) +
   geom_col(color = "black") +
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
-  facet_grid(panel ~ stage, labeller = labeller(stage = lab_stage, panel = lab_panel1)) +
+  geom_text(
+    data     = exp1_reef_letters,
+    aes(y = prop + 0.04, label = cld_letter),
+    size     = 3.5,
+    fontface = "bold"
+  ) +
+  facet_grid(panel ~ stage,
+             labeller = labeller(stage = lab_stage, panel = lab_panel1)) +
   labs(x = "Reef type", y = "Proportion")
+
+
 
 ggsave(Exp1_reef_p, file = file.path(out_dir, "Exp1_reef_p.png"), width = 8, height = 6, dpi = 300)
 
 Exp1_reef_p
+
 ```
 
 ## Exp 1 II
@@ -277,63 +387,77 @@ act_exp1_p
 
 ```
 
-## Exp 1 Statistic
-```{r}
-#| label: stats-exp1
-#| tbl-cap: "Exp 1 statistical results"
 
-# RQ1: Is there a preference for a specific reef type at L1?
-# RQ2: Does reef type preference differ between sexes at L1?
-# RQ3: Did reef type use shift directionally between L0 and L1?
-
-df1 <- df_exp1_single_long %>%
-  mutate(
-    reef_type     = factor(reef_type),
-    stage         = factor(stage, levels = c("L0", "L1")),
-    sex           = factor(sex),
-    size_class    = factor(size_class),
-    location_code = factor(location_code),
-    tank          = factor(tank),
-    round         = factor(round),
-    koura_id      = factor(koura_id),
-    size_mm1      = as.numeric(size_mm1),
-    weight_g1     = as.numeric(weight_g1)) %>%
-  filter(!is.na(reef_type))
-
-# RQ1 — Reef type preference at L1
-df1_L1       <- df1 %>% filter(stage == "L1")
-tab1_L1      <- table(df1_L1$reef_type)
-tab1_L1_nz   <- tab1_L1[tab1_L1 > 0]
-
-xmulti1      <- XNomial::xmulti(
-  obs  = as.numeric(tab1_L1_nz),
-  expr = rep(sum(tab1_L1_nz) / length(tab1_L1_nz), length(tab1_L1_nz)))
-p_xmulti1    <- xmulti1$pLLR
-
-# Post-hoc pairwise G-tests
-pgtest1      <- pairwise_gtest(tab1_L1_nz)
-p_single_vs_flat1 <- pgtest1$p_adj[pgtest1$pair == "SingleStone vs FlatStone"]
-p_single_vs_pile1 <- pgtest1$p_adj[pgtest1$pair == "SingleStone vs StonePile"]
-p_single_vs_wood1 <- pgtest1$p_adj[pgtest1$pair == "SingleStone vs WoodLog"]
-p_flat_vs_wood1   <- pgtest1$p_adj[pgtest1$pair == "FlatStone vs WoodLog"]
-p_pile_vs_wood1   <- pgtest1$p_adj[pgtest1$pair == "StonePile vs WoodLog"]
-
-# RQ2 — Sex difference in reef preference at L1
-tab1_sex     <- table(df1_L1$reef_type, df1_L1$sex)
-fisher1      <- fisher.test(tab1_sex, simulate.p.value = TRUE, B = 9999)
-p_fisher1    <- fisher1$p.value
-
-# RQ3 — Directional shift between L0 and L1
-df1_wide     <- df1 %>%
-  select(koura_id, stage, reef_type) %>%
-  pivot_wider(names_from = stage, values_from = reef_type)
-
-tab1_trans   <- table(L0 = df1_wide$L0, L1 = df1_wide$L1)
-symtest1     <- coin::symmetry_test(tab1_trans, distribution = approximate(nresample = 9999))
-p_symtest1   <- pvalue(symtest1)
-```
 
 # Exp 2 Group koura
+## Exp 2 Statistic
+```{r}
+#| label: stats-exp2
+#| tbl-cap: "..."
+
+# RQ 1: Is there a statistical difference between reef type in L1 
+# RQ 2: and between the size classes?
+# RQ 3: Is there a statistical difference between reef type between L0 vs L1? 
+
+df2 <- df_exp2_group_long %>%
+  mutate(
+    reef_type      = factor(reef_type),
+    stage          = factor(stage, levels = c("L0", "L1")),
+    sex            = factor(sex), # exclude as all male
+    size_class     = factor(size_class, levels = c("S", "M", "L")),
+    location_code  = factor(location_code),
+    tank           = factor(tank),
+    round          = factor(round),
+    group_id       = factor(group_id), # each group of 6 koura used 5 times
+    koura_id       = factor(koura_id)) %>%
+  filter(!is.na(reef_type))
+
+# RQ 1
+df2_L1 <- df2 %>% filter(stage == "L1", reef_type != "TankWall") %>%
+  mutate(reef_type = droplevels(reef_type))
+tab2_L1 <- table(df2_L1$reef_type)
+tab2_L1_nz <- tab2_L1[tab2_L1 > 0]
+
+xmulti2 <- XNomial::xmulti(obs  = as.numeric(tab2_L1_nz),
+  expr = rep(sum(tab2_L1_nz) / length(tab2_L1_nz), length(tab2_L1_nz)))
+p_xmulti2    <- xmulti2$pLLR
+
+# Post-hoc pairwise G-tests
+pgtest2      <- pairwise_gtest(tab2_L1_nz)
+p_single_vs_flat2 <- pgtest2$p_adj[pgtest2$pair == "SingleStone vs FlatStone"]
+p_single_vs_pile2 <- pgtest2$p_adj[pgtest2$pair == "SingleStone vs StonePile"]
+p_single_vs_wood2 <- pgtest2$p_adj[pgtest2$pair == "SingleStone vs WoodLog"]
+p_flat_vs_pile2   <- pgtest2$p_adj[pgtest2$pair == "FlatStone vs StonePile"]
+p_flat_vs_wood2   <- pgtest2$p_adj[pgtest2$pair == "FlatStone vs WoodLog"]
+p_pile_vs_wood2   <- pgtest2$p_adj[pgtest2$pair == "StonePile vs WoodLog"]
+
+# RQ 2 size class difference in reef preference at L1
+tab2_size <- table(df2_L1$reef_type, df2_L1$size_class)
+fisher2   <- fisher.test(tab2_size, simulate.p.value = TRUE, B = 9999)
+p_fisher2 <- fisher2$p.value
+
+# Post-hoc pairwise G-tests between size_class
+pgtest_small <- pairwise_gtest(table(df2_L1$reef_type[df2_L1$size_class == "S"]))
+pgtest_medium <- pairwise_gtest(table(df2_L1$reef_type[df2_L1$size_class == "M"]))
+pgtest_large <- pairwise_gtest(table(df2_L1$reef_type[df2_L1$size_class == "L"]))
+
+# RQ3 — Directional shift between L0 and L1
+df2_wide <- df2 %>%
+  filter(reef_type != "TankWall") %>%
+  select(koura_id, group_id, round, stage, reef_type) %>%
+  pivot_wider(names_from = stage, values_from = reef_type) %>%
+  filter(!is.na(L0), !is.na(L1)) %>%
+  mutate(L0 = factor(as.character(L0)), L1 = factor(as.character(L1), levels = levels(L0)))
+
+# Transition table
+tab2_trans <- table(L0 = df2_wide$L0, L1 = df2_wide$L1)
+
+# Stuart-Maxwell test (generalised McNemar for k > 2 categories)
+smtest2   <- DescTools::StuartMaxwellTest(tab2_trans)
+p_smtest2 <- smtest2$p.value
+
+```
+
 ## Exp 2 I
 ```{r}
 #| label: fig-exp2
@@ -365,12 +489,29 @@ exp2_reef_all <- dplyr::bind_rows(exp2_reef_combined, exp2_reef_bysize)
 # Labels 
 lab_panel2 <- c(Combined = "Combined", Small = "Small", Medium = "Medium", Large = "Large")
 
+# Generate CLD letters for each panel
+cld_combined2 <- data.frame(stage = "L1", panel = "Combined", reef_type  = names(gtest_to_cld(pgtest2)), cld_letter = unname(gtest_to_cld(pgtest2)))
+
+cld_large <- data.frame(stage = "L1", panel = "Large", reef_type  = names(gtest_to_cld(pgtest_large)), cld_letter = unname(gtest_to_cld(pgtest_large)))
+
+cld_medium <- data.frame(stage = "L1", panel = "Medium", reef_type  = names(gtest_to_cld(pgtest_medium)), cld_letter = unname(gtest_to_cld(pgtest_medium)))
+
+cld_small <- data.frame(stage = "L1", panel = "Small", reef_type  = names(gtest_to_cld(pgtest_small)),cld_letter = unname(gtest_to_cld(pgtest_small)))
+
+cld_all2 <- bind_rows(cld_combined2, cld_large, cld_medium, cld_small)
+
+exp2_reef_letters <- exp2_reef_all %>%
+  relevel_reef() %>%
+  filter(stage == "L1") %>%
+  left_join(cld_all2, by = c("stage", "panel", "reef_type"))
+
 # One plot
 Exp2_reef_p <- exp2_reef_all %>%
   relevel_reef() %>%
   ggplot(aes(reef_type, prop)) +
   geom_col(color = "black") +
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
+    geom_text(data = exp2_reef_letters,aes(y = prop + 0.04, label = cld_letter), size  = 3.5, fontface = "bold" ) +
   facet_grid(panel ~ stage, labeller = labeller(stage = lab_stage, panel = lab_panel2)) +
   labs(x = "Reef type", y = "Proportion")
 
@@ -477,73 +618,47 @@ p_stack <- ggplot(counts, aes(reef_type, number_koura, fill = size_class)) +
 p_stack
 ```
 
-## Exp 2 Statistic
+
+# Exp 3 Wood vs stone
+## Exp 3 Statistic
 ```{r}
-#| label: stats-exp2
-#| tbl-cap: "..."
+#| label: stats-exp3
+#| tbl-cap: "."
 
-# RQ 1: Is there a statistical difference between reef type in L1 
-# RQ 2: and between the size classes?
-# RQ 3: Is there a statistical difference between reef type between L0 vs L1? 
+# RQ1: Is there a statistical difference between reef type in L1 between the size classes while controlling for group_id, tank and round?
 
-df2 <- df_exp2_group_long %>%
+# RQ2: Is there a statistical difference between reef type between L0 vs L1? 
+
+df3 <- df_exp3_woodstone_long %>%
   mutate(
     reef_type      = factor(reef_type),
     stage          = factor(stage, levels = c("L0", "L1")),
-    sex            = factor(sex), # exclude as all male
+    sex            = factor(sex), # all male
     size_class     = factor(size_class, levels = c("S", "M", "L")),
     location_code  = factor(location_code),
     tank           = factor(tank),
     round          = factor(round),
-    group_id       = factor(group_id), # each group of 6 koura used 5 times
-    koura_id       = factor(koura_id)) %>%
+    group_id       = factor(group_id),
+    koura_id       = factor(koura_id)
+  ) %>%
   filter(!is.na(reef_type))
 
-# RQ 1
-df2_L1 <- df2 %>% filter(stage == "L1")
-tab2_L1 <- table(df2_L1$reef_type)
-tab2_L1_nz <- tab2_L1[tab2_L1 > 0]
+## Set FlatStone as reference so coefficients are for WoodSplit vs FlatStone
+df3 <- df3 %>% mutate(reef_type = relevel(reef_type, ref = "FlatStone"))
 
-xmulti2 <- XNomial::xmulti(obs  = as.numeric(tab2_L1_nz),
-  expr = rep(sum(tab2_L1_nz) / length(tab2_L1_nz), length(tab2_L1_nz)))
-p_xmulti2    <- xmulti2$pLLR
+m_exp3 <- glmer(
+  reef_type ~ stage + size_class + (1 | group_id) + (1 | round),
+  data    = df3,
+  family  = binomial,
+  control = glmerControl(optimizer = "bobyqa")
+)
 
-# Post-hoc pairwise G-tests
-pgtest2      <- pairwise_gtest(tab2_L1_nz)
-p_single_vs_flat2 <- pgtest2$p_adj[pgtest2$pair == "SingleStone vs FlatStone"]
-p_single_vs_pile2 <- pgtest2$p_adj[pgtest2$pair == "SingleStone vs StonePile"]
-p_single_vs_wood2 <- pgtest2$p_adj[pgtest2$pair == "SingleStone vs WoodLog"]
-p_flat_vs_wood2   <- pgtest2$p_adj[pgtest2$pair == "FlatStone vs WoodLog"]
-p_pile_vs_wood2   <- pgtest2$p_adj[pgtest2$pair == "StonePile vs WoodLog"]
-
-# RQ 2 size class difference in reef preference at L1
-tab2_size <- table(df2_L1$reef_type, df2_L1$size_class)
-fisher2   <- fisher.test(tab2_size, simulate.p.value = TRUE, B = 9999)
-p_fisher2 <- fisher2$p.value
-
-# RQ3 — Directional shift between L0 and L1
-df2_wide <- df2 %>%
-  filter(reef_type != "TankWall") %>%
-  select(koura_id, group_id, round, stage, reef_type) %>%
-  pivot_wider(names_from = stage, values_from = reef_type) %>%
-  filter(!is.na(L0), !is.na(L1)) %>%
-  mutate(L0 = factor(as.character(L0)), L1 = factor(as.character(L1), levels = levels(L0)))
-
-# Transition table
-tab2_trans <- table(L0 = df2_wide$L0, L1 = df2_wide$L1)
-
-# Stuart-Maxwell test (generalised McNemar for k > 2 categories)
-smtest2   <- DescTools::StuartMaxwellTest(tab2_trans)
-p_smtest2 <- pvalue(smtest2)
-
-str(smtest2)
-
-
-
+summary(m_exp3)
+isSingular(m_exp3)
+VarCorr(m_exp3)
 
 ```
 
-# Exp 3 Wood vs stone
 ## Exp 3 I
 ```{r}
 #| label: fig-exp3
@@ -640,46 +755,48 @@ loc_round_plots_exp3 <<- p_exp3_loc + p_exp3_loc3 + p_exp3_round + p_exp3_round3
 loc_round_plots_exp3
 ```
 
-## Exp 3 Statistic
+
+# Exp 4 Bricks
+## Exp 4 Statistic
 ```{r}
-#| label: stats-exp3
+#| label: stats-exp4
 #| tbl-cap: "."
 
 # RQ1: Is there a statistical difference between reef type in L1 between the size classes while controlling for group_id, tank and round?
 
-# RQ2: Is there a statistical difference between reef type between L0 vs L1? 
-
-df3 <- df_exp3_woodstone_long %>%
+df4 <- df_exp4_brick_long %>%
   mutate(
     reef_type      = factor(reef_type),
-    stage          = factor(stage, levels = c("L0", "L1")),
-    sex            = factor(sex), # all male
+    stage          = factor(stage, levels = c("L1")),
+    sex            = factor(sex),
     size_class     = factor(size_class, levels = c("S", "M", "L")),
     location_code  = factor(location_code),
     tank           = factor(tank),
     round          = factor(round),
     group_id       = factor(group_id),
-    koura_id       = factor(koura_id)
-  ) %>%
+    koura_id       = factor(koura_id)) %>%
   filter(!is.na(reef_type))
 
-## Set FlatStone as reference so coefficients are for WoodSplit vs FlatStone
-df3 <- df3 %>% mutate(reef_type = relevel(reef_type, ref = "FlatStone"))
+df4 <- df4 %>% mutate(reef_type = relevel(reef_type, ref = "BrickArtificial"))
 
-m_exp3 <- glmer(
-  reef_type ~ stage + size_class + (1 | group_id) + (1 | round),
-  data    = df3,
-  family  = binomial,
-  control = glmerControl(optimizer = "bobyqa")
+df4_model <- df4 %>% filter(reef_type != "TankWall") %>%
+  mutate(reef_type = droplevels(reef_type))
+
+tab4_L1 <- df4_model %>% 
+  count(reef_type)
+
+binom.test(x = tab4_L1$n[tab4_L1$reef_type == "BrickWood"], n = sum(tab4_L1$n),  p = 0.5)
+
+m_exp4 <- glm(
+  reef_type ~ size_class,
+  data   = df4_model,
+  family = binomial(link = "logit")
 )
 
-summary(m_exp3)
-isSingular(m_exp3)
-VarCorr(m_exp3)
+summary(m_exp4)
 
 ```
 
-# Exp 4 Bricks
 ## Exp 4 I
 ```{r}
 #| label: fig-exp4
@@ -861,45 +978,6 @@ loc_round_plots_exp4
 
 ```
 
-## Exp 4 Statistic
-```{r}
-#| label: stats-exp4
-#| tbl-cap: "."
-
-# RQ1: Is there a statistical difference between reef type in L1 between the size classes while controlling for group_id, tank and round?
-
-df4 <- df_exp4_brick_long %>%
-  mutate(
-    reef_type      = factor(reef_type),
-    stage          = factor(stage, levels = c("L1")),
-    sex            = factor(sex),
-    size_class     = factor(size_class, levels = c("S", "M", "L")),
-    location_code  = factor(location_code),
-    tank           = factor(tank),
-    round          = factor(round),
-    group_id       = factor(group_id),
-    koura_id       = factor(koura_id)) %>%
-  filter(!is.na(reef_type))
-
-df4 <- df4 %>% mutate(reef_type = relevel(reef_type, ref = "BrickArtificial"))
-
-df4_model <- df4 %>% filter(reef_type != "TankWall") %>%
-  mutate(reef_type = droplevels(reef_type))
-
-tab4_L1 <- df4_model %>% 
-  count(reef_type)
-
-binom.test(x = tab4_L1$n[tab4_L1$reef_type == "BrickWood"], n = sum(tab4_L1$n),  p = 0.5)
-
-m_exp4 <- glm(
-  reef_type ~ size_class,
-  data   = df4_model,
-  family = binomial(link = "logit")
-)
-
-summary(m_exp4)
-
-```
 
 # Waterquality
 ```{r}
