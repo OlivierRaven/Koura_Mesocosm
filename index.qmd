@@ -54,7 +54,7 @@ date: "..."
 
 abstract: Many native freshwater crayfishes are treated by habitat loss. Habitat restoration using artificial reefs can be a powerful tool to bring back complexity in degraded habitats, which could benefit the crayfish by providing refuge places where they can hide from predators. The Aotearoa-New Zealand native freshwater crayfish kōura (*Paranephrops planifrons*), are threatened by habitat loss and a non-native predator rapidly declining populations. To optimise restoration efforts by providing artificial reefs, the most preferred configuration and material for kōura reef construction were assessed in four mesocosm experiments testing different reef types made from stones or wood. The findings showed that kōura were not fuzzy about what material the refuge was made of as long as it provides cover and a stable place to hide. Individual kōura showed most preference for holes in a log of wood but when tested in a group a pile of stones and stones laid next to each other were preferred. For crayfish restoration using artificial reefs we conclude that the use of a stones is the optimal way as it provides refuge with various crevices sizes for different life stages of crayfish and provides the longest lasting stable habitat for crayfishes.
  
-keywords: koura
+keywords: kōura
 
 funding: "This research was supported by the Fish Futures programme funded through a Ministry of Business, Innovation and Employment grant (CAWX2101)"
 
@@ -83,64 +83,56 @@ The Aotearoa-New Zealand (hereafter Aotearoa) the endemic freshwater crayfish k�
 
 
 # Materials and Methods
-Animal collection
+## Animal collection
 Kōura were sourced from Lake Ōkāreka and Lake Tikitapu (Blue Lake), located within the Rotorua Te Arawa Lakes area in the North Island of Aotearoa. Collected animals were transported to the aquatic research centre at the University of Waikato in Hamilton. Individuals were assigned to one of three size classes based on orbital carapace length (OCL): small (< 22 mm), medium (22–29 mm), and large (≥ 30 mm). Each animal was marked with a unique identification number written on the carapace using an orange oil-based paint marker (Sharpie, medium point). This method provides a simple, non-aggressive means of temporarily marking crayfish (@Ramalho2010).
 
 ## Holding tank setup
 Kōura were acclimatised for 12 days in outdoor concrete holding tanks (Ø 1.4 m, 0.5 m deep), each filled to a depth of 0.4 m with dechlorinated water that had been conditioned for three months. Paving sand was used as substrate, and shelter was provided using PVC pipes, broken terracotta pots, and perforated building bricks. Each holding tank housed 10–12 kōura. Kōura were fed every second day with two sinking fish food pellets per individual (Hikari Tropical Carnivore Pellets; animal protein content 47%).
 
 ## Experiment tank setup
-Experiments were conducted outside in six circular concrete tanks (1425 L; Ø 1.85 m, 0.53 m deep), each filled to a depth of 0.4 m with dechlorinated water conditioned for three months. Paving sand was used as substrate in all experimental tanks. Tanks were closed off with lid constructed of 2 layers of shade cloth to prevent escape and minimise sun activity. To prevent temperatures in the tanks getting too high the experiments were conducted in spring (September till October).
-
-And between experiment rounds oxygen and fresh dechlorinated water was added to the tanks.
+Experiments were conducted outside in six circular concrete tanks (1425 L; Ø 1.85 m, 0.53 m deep), each filled to a depth of 0.4 m with dechlorinated water conditioned for three months. Paving sand was used as substrate in all experimental tanks. Tanks were closed off with a lid constructed of two layers of shade cloth to prevent escape and minimise sun activity. Fresh dechlorinated tap water and an air stone was added to each tank in between the experimental rounds. To prevent temperatures in the tanks getting too high the experiments were conducted in spring (September till October).
 
 ## Exp 1: Single kōura
 This experiment assessed individual kōura preferences for different reef structures under controlled conditions. Six experimental tanks were used, each housing a single medium-sized kōura. Across all individuals, mean (± SD) body size was 26.5 ± 2.1 mm OCL (range: 22.6–30.0 mm) and mean (± SD) body mass was 12.2 ± 3.2 g (range: 7–17 g). A total of 30 kōura (15 males and 15 females) were tested across five experimental replicates, with each replicate conducted over one day.
 
-Each kōura was offered a choice between four reef types (@Figure 1a):
-1.	SingleStone: ten quarried stones (150–250 mm) placed separately.
-2.	FlatStone: ten quarried stones arranged tightly without stacking.
-3.	StonePile: ten quarried stones stacked to form a pile.
-4.	WoodLog: a tānekaha (*Phyllocladus trichomanoides*) log (500 mm long, 150 mm diameter) containing six drilled refuges (70 mm deep, 32 mm diameter).
+Kōura were offered a choice between four reef types: SingleStone (ten quarried stones (150–250 mm) placed separately), FlatStone (ten quarried stones arranged tightly without stacking), StonePile (ten quarried stones stacked to form a pile), and WoodLog (a tānekaha (*Phyllocladus trichomanoides*) log (500 mm long, 150 mm diameter) containing six drilled holes (70 mm deep, 32 mm diameter))(@fig-exp-setup a).
 
-The four reef types were placed in each tank at random locations determined using a randomisation tool (randomizer.org). If a koura was not using a reef TankWall was noted as location which represents the wall of the tank. For each trial, a single kōura was placed inside a vertically oriented plastic tube (50 mm long, open at one end and sealed at the other) positioned at the centre of the tank, with the sealed end resting on the substrate. This ensured a standardised starting position from which the kōura could exit in any direction. The time taken for the kōura to locate its first reef structure was recorded. On the following day, the final location of the kōura was noted before it was removed from the tank. Tanks were reset and reef placements re-randomised prior to the next trial. Each kōura was used in a single trial only and was not reused across replicates.
+The four reef types were placed in each tank at random locations determined using a randomisation tool (randomizer.org). If a kōura was not using a reef TankWall was noted as location which represents the wall of the tank. For each trial, a single kōura was placed inside a vertically oriented plastic tube (50 mm long, open at one end and sealed at the other) positioned at the centre of the tank, with the sealed end resting on the substrate. This ensured a standardised starting position from which the kōura could exit in any direction. The time taken for the kōura to locate its first reef structure was recorded (L0). On the following day, the final location of the kōura was noted (L1) after which it was removed from the tank. Tanks were reset and reef placements re-randomised prior to the next trial. Each kōura was used in a single trial only and was not reused across replicates.
 
-To test the difference between the reef types where the koura were found the next day a multinomial goodness-of-fit test was performed using the XNomial package (@BRON). Additionally, pairwise comparisons between reef types were conducted using a custom likelihood-ratio G-test function with Bonferroni correction to identify specific differences between pairs of reef types. To test whether reef type use differed between sexes, fisher’s exact test with simulated p-values (9999 replicates) was used due to small expected counts. A symmetry test was applied to assess whether the distribution of reef types at L0 and L1 differed symmetrically, indicating koura leave their initial refuge place and seek other refuge. 
+To test the difference between the reef types where the kōura were found the next day a multinomial goodness-of-fit test was performed using the XNomial package (@BRON). Additionally, pairwise comparisons between reef types were conducted using a custom likelihood-ratio G-test function with Bonferroni correction to identify specific differences between pairs of reef types. To test whether reef type use differed between sexes, fisher’s exact test with simulated p-values (9999 replicates) was used due to small expected counts. A permutation-based symmetry test was applied to assess whether reef type transitions between L0 and L1 were directional rather than random. 
 
 ## Exp 2: Group kōura
-This experiment examined how group dynamics, including variation in body size and sex, influenced reef preference. Six experimental tanks were used and configured with the same reef types and randomisation procedure as in the single kōura reef experiment (@Figure 1b). In contrast to the single-animal trials, each tank housed a group of six kōura, comprising two small males, two medium males, and two large males. Across all individuals, mean (± SD) body size was 27.3 ± 7.6 mm OCL (range: 15.8–43.3 mm) and mean (± SD) body mass was 15.8 ± 13.4 g (range: 1–57 g).
+This experiment examined how group dynamics, including variation in body size and sex, influenced reef preference. Six experimental tanks were used and configured with the same reef types and randomisation procedure as in experiment 1 (@fig-exp-setup b). In contrast to the single-animal trials, each tank housed a group of six kōura, comprising two small males, two medium males, and two large males. Across all individuals, mean (± SD) body size was 27.3 ± 7.6 mm OCL (range: 15.8–43.3 mm) and mean (± SD) body mass was 15.8 ± 13.4 g (range: 1–57 g).
 Each group was introduced to the centre of the tank within an open-top plastic container (150 × 150 × 85 mm). The container was then removed, and the location each individual was searching refuge was recorded. On the following day, the final location of each kōura was documented, before all individuals were removed from the tank. This procedure was repeated across five experimental replicates reusing the same six groups of animals.
 
-As similar experimental setup was used in experiment 1 also here a multinomial goodness-of-fit test was used to assessed whether reef types were used equally, comparing observed counts to an expected uniform distribution. Fisher’s exact test was used to test the effect of size classes between reef types. The Stuart-Maxwell test (@BRON) was used to test for stitistical differences between stage L0 and L1. 
+Just as in experiment 1 a multinomial goodness-of-fit test was used to assessed whether reef types were used equally by kōura, comparing observed counts to an expected uniform distribution. Fisher’s exact test was used to test the effect of size classes between reef types. The Stuart-Maxwell test (@BRON) was used to test for statistical differences between stage L0 and L1. 
+
+To confirm that kōura were moving around the different reefs at night, three GoPro’s (Hero 3) were placed in tank one during experiment 1 and 2 at the end of the day and filmed for 5 hours into the night. 
 
 ## Exp 3: Wood vs Stone
-This experiment tested kōura reef preference between stone and wood structures. Two reef types were provided: (1) a flat stone reef (FlatStone) constructed from twelve stones placed tightly together, and (2) a wood reef consisting of twelve wood splits (WoodSplit) made from tānekaha logs (@Figure 1c). The same six groups of kōura used in experiment 2 were reused. Each group was released at the centre of the tank, and the initial reef selected by each kōura was recorded. The following day, the final location of each kōura was documented. This procedure was repeated three times.
+This experiment tested kōura reef preference between stone and wood structures. Two reef types were provided: (1) a flat stone reef (FlatStone) constructed from twelve stones placed tightly together, and (2) a wood reef consisting of twelve wood splits (WoodSplit) made from tānekaha logs (@fig-exp-setup c). The same six groups of kōura used in experiment 2 were reused. Each group was released at the centre of the tank, and the initial reef selected by each kōura was recorded. The following day, the final location of each kōura was documented. This procedure was repeated three times.
 
-To test the difference between FlatStone and WoodSplit a generalized linear mixed-effects model was used with reef type as response variable and stage and size class as fixt variables. Random intercepts for group id and round were included to control for potential correlation. The model was optimized using the “bobyqa” optimizer for improved convergence.
+To test the difference between FlatStone and WoodSplit a generalized linear mixed-effects model using the lme4 package in R (@Bates2015) was used with reef type as response variable and stage and size class as fixed variables. Random intercepts for group id and round were included to control for potential correlation. The model was optimized using the “bobyqa” optimizer for improved convergence.
 
 ## Exp 4: Bricks
-This experiment compared refuge preference between artificial and wooden perforated structures. Two perforated building bricks (BrickArtificial) of 80 × 80 × 225 mm with 5 holes (Ø 30 mm) were tested against two wooden bricks (BrickWood) made from Western red cedar (*Thuja plicata*), constructed to match the building bricks in external dimensions and hole size 
-To keep the wooden bricks from floating a clay brick with same dimensions was placed on top (@Figure-1 d). New groups of 10 kōura and four experiment tanks were used for this experiment, comprising a total of 40 individuals (22 males and 18 females). Across all individuals, mean (± SD) body size was 26.1 ± 2.6 mm OCL (range: 20.2–30.8 mm; note: this is slightly outside of the preset size classes) and mean (± SD) body mass was 11.9 ± 3.7 g (range: 5–20 g). Each experimental tank was divided into four quadrants, with one brick placed in each quadrant. Within each quadrant, the two brick types were positioned opposite one another. Each group of kōura was released at the centre of the tank lit was placed over the tank. On the following day, the final location of each kōura was documented. This experiment was repeated four times by reusing the four groups of kōura.
+This experiment compared refuge preference between artificial and wooden perforated structures. Two perforated building bricks (BrickArtificial) of 80 × 80 × 225 mm with five holes (Ø 30 mm) were tested against two wooden bricks (BrickWood) made from Western red cedar (*Thuja plicata*), constructed to match the building bricks in external dimensions and hole size. To prevent floating a solid clay brick of identical dimensions was placed on top of each wooden brick (@fig-exp-setup d). New groups of ten kōura and four experiment tanks were used for this experiment, comprising a total of 40 individuals (22 males and 18 females). Across all individuals, mean (± SD) body size was 26.1 ± 2.6 mm OCL (range: 20.2–30.8 mm) and mean (± SD) body mass was 11.9 ± 3.7 g (range: 5–20 g). Due to reduced animal availability, individuals were drawn from a broader size range than in previous experiments, resulting in unbalanced size class representation (small: n = 4, medium: n = 35, large: n = 1). Each experimental tank was divided into four quadrants, with one brick placed in each quadrant. Within each quadrant, the two brick types were positioned opposite one another. Each group of kōura was released at the centre of the tank and the lid was placed over the tank. The following day, the final location of each kōura was documented. This experiment was repeated four times by reusing the four groups of ten kōura.
 
-## Data analysis
-
-
-<!--When the kōura were not using a reef, they were found along the tank wall, and the wall was therefore treated as a non-reef boundary option and recorded separately from reef structures.
-Bar graphs with the proportion of the kōura at the initial location and the next day location were made for all 4 experiments. Showing the combined and separation over sex or size. 
-For experiments 1 and 2 a standard Multinomial logistic regression (MLR) was used to assess reef preference. 
-To confirm that kōura were moving around the different reefs at night, three GoPro’s (Hero 3) were placed in tank one at the end of the day. -->
+To test whether kōura showed a preference between BrickArtificial and BrickWood, an exact binomial test was applied to the count of BrickWood observations relative to the total, testing whether the observed proportion differed significantly from 0.5. Sex and size class were excluded from the analysis due to unbalanced group sizes.
 
 # Results
-## Single kōura
-The first experiment where a single kōura was presented to four different reef types the kōura’s initial location (L0) was relatively equal distributed between the reefs (@Exp1_reef_p). The next-day location (L1) showed that WoodLog was chosen in 67 % of the time. For males this was 80 % and for females 53 % of the time. Statistical test show … 
+## Exp 1: Single kōura
+Individual kōura were offered a choice among four reef types. Initial locations (L0) were relatively evenly distributed across reef types (@fig-exp1). Next-day locations (L1) showed a significant overall difference in reef preference (*p* = `r p_xmulti1`), with WoodLog selected significantly more often than SingleStone, FlatStone, and StonePile (pairwise G-test, Bonferroni adjusted: *p* = `r p_single_vs_wood1`, `r p_flat_vs_wood1`, `r p_pile_vs_wood1`, respectively). No significant differences were found among the stone reef types. Overall, WoodLog was selected by 67% of kōura at L1 (males: 80%; females: 53%), though reef preference did not differ significantly between sexes (Fisher's exact test: *p* = `r p_fisher1`). The symmetry test confirmed that kōura moved directionally between L0 and L1, indicating active reef selection rather than random relocation (*p* = `r p_symtest1`).
 
-## Group kōura 
-The second experiment where a group of six male kōura of different sizes were tested against four reef types showed not much variation in L0 and also not so for L1 (@Exp2_reef_p). In 40 % of the time FlatStone was the location most kōura were found followed by StonePile with 31 % of the time. The large kōura were at L1 most found in FlatStone (40 %) followed by StonePile (38 %), for medium size this was FlatStone (33 %) followed by WoodLog (28 %), and for small size this was FlatStone (48 %) followed by StonePile (28 %). There has been found statistically significant differences between …
+## Exp 2: Group kōura
+The group experiment 
 
-## Wood vs stone
+
+The second experiment where a group of six male kōura of different sizes were tested against four reef types showed not much variation in L0 and also not so for L1 (@fig-exp2). In 40 % of the time FlatStone was the location most kōura were found followed by StonePile with 31 % of the time. The large kōura were at L1 most found in FlatStone (40 %) followed by StonePile (38 %), for medium size this was FlatStone (33 %) followed by WoodLog (28 %), and for small size this was FlatStone (48 %) followed by StonePile (28 %). There has been found statistically significant differences between …
+
+## Exp 3: Wood vs Stone
 The third experiment where the same groups as used in experiment 2 where now tested against two reefs WoodSplit and FlatStone. At L0 the choice was for all kōura almost equal but the next-day 73 % of the kōura were found at the FlatStone reef. Large kōura’s ended up in 92 % in FlatStone, for middle size this was 66 % and for small this was 55 %. Statistically differences were found between L0 and L1 (*p* = ) and between large and small kōura (*p* = ). 
 
-## Bricks
+## Exp 4: Bricks
 The fourth experiment where mixed groups of ten kōura were tested against two types of bricks, the next-day location of the kōura 48 % for BrickWood and 43 % for BrickArtificial. Females ended up in 50% in the BrickWood and males 46 %. There was no significant difference found between the reef types (*p* = ). 
 
 # Discussion
@@ -163,5 +155,12 @@ In round 1 of the group experiment wood was also the most preferred structure bu
 # Acknowledgements
 
 # References
+
+# Tables
+
+# Figures
+![Fotos of the experimental tank setups showing .](images/Setup_exp_tanks.png){#fig-exp-setup}
+
+{{< embed analysis.qmd#fig-exp1 >}}
 
 # Supplementary information
