@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 *.JPG
+
 *.ijm
 *.jpg
 *.JPG
@@ -11,9 +12,11 @@
 *.MOV
 *.zip
 *.txt
-manuscript/
-images/
-data/raw/
+*.r
+*.R
+
+GoPro/
+
 .RData
 .Rhistory
 .quarto/

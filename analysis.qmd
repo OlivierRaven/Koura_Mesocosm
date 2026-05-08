@@ -136,7 +136,22 @@ sig_label <- function(p) {
   )
 }
 
-shape_map <- c(SingleStone = 1, FlatStone = 16, StonePile = 18, WoodLog = 17, WoodSplit = 2, BrickArtificial = 0, BrickWood = 15, TankWall = 4)
+get_brms <- function(model, param, col = "Estimate") {
+  tbl <- fixef(model) %>% as.data.frame() %>% rownames_to_column("parameter")
+  round(tbl[[col]][tbl$parameter == param], 2)
+}
+
+format_brms <- function(model, param, post_prob = NULL) {
+  b    <- get_brms(model, param)
+  low  <- get_brms(model, param, "Q2.5")
+  high <- get_brms(model, param, "Q97.5")
+  base <- paste0("(\u03b2 = ", b, ", 95% CI: ", low, " to ", high)
+  if (!is.null(post_prob)) paste0(base, "; posterior probability = ", round(post_prob, 2), ")")
+  else paste0(base, ")")
+}
+
+size_shape_map <- c(S = 15, M = 17, L = 18) 
+sex_shape_map  <- c(F = 1, M = 16)
 
 ```
 
@@ -298,7 +313,7 @@ symtest1     <- coin::symmetry_test(tab1_trans, distribution = approximate(nresa
 p_symtest1   <- pvalue(symtest1)
 ```
 
-## Exp 1 figure
+## Exp 1 Figure
 ```{r}
 #| label: fig-exp1
 #| fig-width: 4
@@ -487,8 +502,22 @@ p_wilcox2_adjusted <- p.adjust(
     p_wilcox_pile   = wilcox_pile$p.value,
     p_wilcox_wood   = wilcox_wood$p.value),
   method = "bonferroni")
+#p_wilcox2_adjusted
 
-p_wilcox2_adjusted
+# Extract named values for inline use
+p_wilcox2_flat   <- p_wilcox2_adjusted["p_wilcox_flat"]
+p_wilcox2_single <- p_wilcox2_adjusted["p_wilcox_single"]
+p_wilcox2_pile   <- p_wilcox2_adjusted["p_wilcox_pile"]
+p_wilcox2_wood   <- p_wilcox2_adjusted["p_wilcox_wood"]
+
+# Direct comparison FlatStone vs StonePile at group level
+fs_props <- df2_grp %>% filter(reef_type == "FlatStone") %>% pull(prop)
+sp_props <- df2_grp %>% filter(reef_type == "StonePile") %>% pull(prop)
+
+wilcox_fs_vs_sp <- wilcox.test(fs_props, sp_props, paired = TRUE, exact = FALSE)
+p_fs_vs_sp <- wilcox_fs_vs_sp$p.value
+#p_fs_vs_sp
+
 
 # RQ2 — Does size class affect reef preference?
 # Model last fit: 2024-10-15
@@ -550,9 +579,11 @@ pp_summary2 <- pp %>%
     .groups   = "drop")
 
 # Posterior probability of being most preferred reef per size class
-p_top_S <- prop.table(table(apply(pp[,1,], 1, which.max)))
-p_top_M <- prop.table(table(apply(pp[,2,], 1, which.max)))
-p_top_L <- prop.table(table(apply(pp[,3,], 1, which.max)))
+pct_top_S <- round(max(prop.table(table(apply(pp[,1,], 1, which.max)))) * 100)
+pct_top_M <- round(max(prop.table(table(apply(pp[,2,], 1, which.max)))) * 100)
+pct_top_L <- round(max(prop.table(table(apply(pp[,3,], 1, which.max)))) * 100)
+pct_flat_L <- round(pp_summary2$mean_prob[pp_summary2$reef_type == "FlatStone" & pp_summary2$size_class == "L"] * 100)
+pct_pile_L <- round(pp_summary2$mean_prob[pp_summary2$reef_type == "StonePile" & pp_summary2$size_class == "L"] * 100)
 
 
 # RQ4 — Directional shift between L0 and L1
@@ -569,7 +600,20 @@ p_smtest2  <- smtest2$p.value
 
 ```
 
-## Exp 2 figure
+## Exp 2 Table
+```{r}
+#| label: tbl-exp2
+#| tbl-cap: "Experiment 2 Bayesian model fixed effects"
+
+fixef(m_exp2_bayes) %>%
+  as.data.frame() %>%
+  rownames_to_column("Parameter") %>%
+  rename(Mean = Estimate, SD = Est.Error,
+         `2.5%` = Q2.5, `97.5%` = Q97.5) %>%
+  knitr::kable(digits = 2)
+```
+
+## Exp 2 Figure
 ```{r}
 #| label: fig-exp2
 #| fig-width: 8
@@ -602,19 +646,19 @@ Exp2_combined_p <- exp2_combined %>%
   geom_hline(yintercept = 0.25, linetype = "dashed", linewidth = 0.5) +
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
   geom_text(data = ann_wilcox2, aes(x = reef_type, y = y, label = label), size = 3.5, fontface = "bold") +
-  scale_y_continuous(limits = c(0, 0.7)) +
+  #scale_y_continuous(limits = c(0, 0.7)) +
   labs(x = "Reef type", y = "Proportion (L1)", tag = "A")
 
 ce2_p <- pp_summary2 %>%
   filter(reef_type != "TankWall") %>%
   relevel_reef() %>%
   mutate(size_class = factor(size_class, levels = c("S", "M", "L"))) %>%
-  ggplot(aes(size_class, mean_prob, shape = reef_type, group = reef_type)) +
+  ggplot(aes(reef_type, mean_prob, shape = size_class, group = size_class)) +
   geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.15, position = position_dodge(0.5)) +
-  geom_point(size = 2, position = position_dodge(0.5)) +
-  scale_shape_manual(values = shape_map) +
-  scale_x_discrete(labels = c(S = "Small", M = "Medium", L = "Large")) +
-  labs(x = "Size class", y = "Predicted probability (95% CI)", shape = "Reef type", tag = "B")
+  geom_point(size = 3, position = position_dodge(0.5)) +
+  scale_shape_manual(values = size_shape_map, labels = c(S = "Small", M = "Medium", L = "Large")) +
+  labs(x = "Reef type", y = "Predicted probability (95% CI)", shape = "Size class", tag = "B")
+
 
 # Combine plots
 Exp2_p <- Exp2_combined_p | ce2_p 
@@ -755,22 +799,23 @@ df3 <- df_exp3_woodstone_long %>%
 df3_L1 <- df3 %>% filter(stage == "L1", !is.na(reef_type), reef_type != "NA")
 
 # RQ1 — Overall reef preference at group level
-df3_grp_reefs <- df3_L1 %>%
+df3_grp <- df3_L1 %>%
   count(group_id, round, reef_type) %>%
   filter(reef_type != "TankWall") %>%
   group_by(group_id, round) %>%
   mutate(prop = n / sum(n)) %>%
   ungroup()
 
-wilcox3_flat  <- wilcox.test(df3_grp_reefs$prop[df3_grp_reefs$reef_type == "FlatStone"], mu = 0.5, exact = FALSE)
-wilcox3_split <- wilcox.test(df3_grp_reefs$prop[df3_grp_reefs$reef_type == "WoodSplit"], mu = 0.5, exact = FALSE)
+wilcox3_flat  <- wilcox.test(df3_grp$prop[df3_grp$reef_type == "FlatStone"], mu = 0.5, exact = FALSE)
+wilcox3_split <- wilcox.test(df3_grp$prop[df3_grp$reef_type == "WoodSplit"], mu = 0.5, exact = FALSE)
 
-p_wilcox3_adjusted <- p.adjust(
-  c(p_wilcox3_flat  = wilcox3_flat$p.value,
-    p_wilcox3_split = wilcox3_split$p.value),
-  method = "bonferroni")
+p_wilcox3_adjusted <- p.adjust(c(p_wilcox3_flat  = wilcox3_flat$p.value,p_wilcox3_split = wilcox3_split$p.value), method = "bonferroni")
 
-p_wilcox3_adjusted
+#p_wilcox3_adjusted
+
+# Extract named values for inline use
+p_wilcox3_flat  <- p_wilcox3_adjusted["p_wilcox3_flat"]
+p_wilcox3_split <- p_wilcox3_adjusted["p_wilcox3_split"]
 
 
 # RQ2 — Does size class affect reef preference?
@@ -817,9 +862,13 @@ pp_summary3 <- pp3 %>%
   summarise(mean_prob = mean(prob), lower = quantile(prob, 0.025), upper = quantile(prob, 0.975), .groups = "drop")
 
 # Most preferred reef per size class
-p_top3_S <- prop.table(table(apply(pp3[,1,], 1, which.max)))
-p_top3_M <- prop.table(table(apply(pp3[,2,], 1, which.max)))
-p_top3_L <- prop.table(table(apply(pp3[,3,], 1, which.max)))
+pct_top3_S <- round(max(prop.table(table(apply(pp3[,1,], 1, which.max)))) * 100)
+pct_top3_M <- round(max(prop.table(table(apply(pp3[,2,], 1, which.max)))) * 100)
+pct_top3_L <- round(max(prop.table(table(apply(pp3[,3,], 1, which.max)))) * 100)
+
+pct_flat3_L <- round(pp_summary3$mean_prob[pp_summary3$reef_type == "FlatStone" & pp_summary3$size_class == "L"] * 100)
+pct_split3_L <- round(pp_summary3$mean_prob[pp_summary3$reef_type == "WoodSplit" & pp_summary3$size_class == "L"] * 100)
+
 
 # RQ4 — Directional shift L0 → L1
 df3_wide <- df3 %>%
@@ -835,7 +884,20 @@ p_smtest3  <- smtest3$p.value
 
 ```
 
-## Exp 3 figure
+## Exp 3 Table
+```{r}
+#| label: tbl-exp3
+#| tbl-cap: "Experiment 3 Bayesian model fixed effects"
+
+fixef(m_exp3_bayes) %>%
+  as.data.frame() %>%
+  rownames_to_column("Parameter") %>%
+  rename(Mean = Estimate, SD = Est.Error,
+         `2.5%` = Q2.5, `97.5%` = Q97.5) %>%
+  knitr::kable(digits = 2)
+```
+
+## Exp 3 Figure
 ```{r}
 #| label: fig-exp3
 #| fig-width: 8
@@ -852,14 +914,10 @@ exp3_combined <- df_exp3_woodstone_long %>%
 ann_wilcox3 <- data.frame(
   reef_type = c("FlatStone", "WoodSplit"),
   label     = c(sig_label(p_wilcox3_adjusted["p_wilcox3_flat"]),
-                sig_label(p_wilcox3_adjusted["p_wilcox3_wood"]))) %>%
+                sig_label(p_wilcox3_adjusted["p_wilcox3_split"]))) %>%
   mutate(reef_type = factor(reef_type, levels = REEF_LEVELS3)) %>%
   left_join(exp3_combined %>% select(reef_type, prop), by = "reef_type") %>%
-  mutate(y = prop + 0.04,
-         label = case_when(
-           reef_type == "FlatStone" & label != "ns" ~ paste0(label, "↑"),
-           reef_type %in% c("WoodSplit") & label != "ns" ~ paste0(label, "↓"),
-           TRUE ~ label))
+  mutate(y = prop + 0.04, label = case_when( reef_type == "FlatStone" & label != "ns" ~ paste0(label, "↑"), reef_type %in% c("WoodSplit") & label != "ns" ~ paste0(label, "↓"), TRUE ~ label))
 
 Exp3_combined_p <- exp3_combined %>%
   relevel_reef3() %>%
@@ -868,19 +926,18 @@ Exp3_combined_p <- exp3_combined %>%
   geom_hline(yintercept = .5, linetype = "dashed", linewidth = 0.5) +
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
   geom_text(data = ann_wilcox3, aes(x = reef_type, y = y, label = label), size = 3.5, fontface = "bold") +
-  scale_y_continuous(limits = c(0, 0.85)) +
+  #scale_y_continuous(limits = c(0, 0.85)) +
   labs(x = "Reef type", y = "Proportion (L1)", tag = "A")
 
 ce3_p <- pp_summary3 %>%
   filter(reef_type != "NA") %>%
   relevel_reef3() %>%
   mutate(size_class = factor(size_class, levels = c("S", "M", "L"))) %>%
-  ggplot(aes(size_class, mean_prob, shape = reef_type, group = reef_type)) +
+  ggplot(aes(reef_type, mean_prob, shape = size_class, group = size_class)) +
   geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.15, position = position_dodge(0.5)) +
-  geom_point(size = 2, position = position_dodge(0.5)) +
-  scale_shape_manual(values = shape_map) +
-  scale_x_discrete(labels = c(S = "Small", M = "Medium", L = "Large")) +
-  labs(x = "Size class", y = "Predicted probability (95% CI)", shape = "Reef type", tag = "B")
+  geom_point(size = 3, position = position_dodge(0.5)) +
+  scale_shape_manual(values = size_shape_map, labels = c(S = "Small", M = "Medium", L = "Large")) +
+  labs(x = "Reef type", y = "Predicted probability (95% CI)", shape = "Size class", tag = "B")
 
 Exp3_p <- Exp3_combined_p | ce3_p
 
@@ -979,9 +1036,15 @@ p_wilcox4_adjusted <- p.adjust(c(p_wilcox4_bart = wilcox_bart$p.value, p_wilcox4
 
 p_wilcox4_adjusted
 
+# Extract named values for inline use
+p_wilcox4_bart  <- p_wilcox4_adjusted["p_wilcox4_bart"]
+p_wilcox4_bwood <- p_wilcox4_adjusted["p_wilcox4_bwood"]
+
+
 # Direct comparison BrickWood vs BrickArtificial at group level
-bw_props <- df4_grp %>% filter(reef_type == "BrickWood") %>% pull(prop)
 ba_props <- df4_grp %>% filter(reef_type == "BrickArtificial") %>% pull(prop)
+bw_props <- df4_grp %>% filter(reef_type == "BrickWood") %>% pull(prop)
+
 
 wilcox_bw_vs_ba <- wilcox.test(bw_props, ba_props, paired = TRUE, exact = FALSE)
 p_bw_vs_ba <- wilcox_bw_vs_ba$p.value
@@ -1022,12 +1085,26 @@ pp_summary4 <- pp4 %>%
   group_by(sex, reef_type) %>%
   summarise(mean_prob = mean(prob), lower = quantile(prob, 0.025), upper = quantile(prob, 0.975), .groups = "drop")
 
-
-
+pct_bart4  <- round(mean(df4_grp$prop[df4_grp$reef_type == "BrickArtificial"]) * 100)
+pct_bwood4 <- round(mean(df4_grp$prop[df4_grp$reef_type == "BrickWood"]) * 100)
+p_post_sexM <- mean(as_draws_df(m_exp4_bayes)$b_muBrickWood_sexM < 0)
 
 ```
 
-## Exp 4 figure
+## Exp 4 Table
+```{r}
+#| label: tbl-exp4
+#| tbl-cap: "Experiment 4 Bayesian model fixed effects"
+
+fixef(m_exp4_bayes) %>%
+  as.data.frame() %>%
+  rownames_to_column("Parameter") %>%
+  rename(Mean = Estimate, SD = Est.Error,
+         `2.5%` = Q2.5, `97.5%` = Q97.5) %>%
+  knitr::kable(digits = 2)
+```
+
+## Exp 4 Figure
 ```{r}
 #| label: fig-exp4
 #| fig-width: 8
@@ -1052,18 +1129,17 @@ Exp4_combined_p <- exp4_combined %>%
   geom_hline(yintercept = .5, linetype = "dashed", linewidth = 0.5) +
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
   geom_text(data = ann_wilcox4, aes(x = reef_type, y = y, label = label), size = 3.5, fontface = "bold") +
-  scale_y_continuous(limits = c(0, 0.75)) +
+  #scale_y_continuous(limits = c(0, 0.75)) +
   labs(x = "Reef type", y = "Proportion (L1)", tag = "A")
 
 ce4_p <- pp_summary4 %>%
   filter(reef_type != "TankWall") %>%
   relevel_reef4() %>%
-  mutate(sex = factor(sex, levels = c("F", "M"), labels = c("Female", "Male"))) %>%
-  ggplot(aes(sex, mean_prob, shape = reef_type, group = reef_type)) +
+  ggplot(aes(reef_type, mean_prob, shape = sex, group = sex)) +
   geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.15, position = position_dodge(0.5)) +
   geom_point(size = 3, position = position_dodge(0.5)) +
-  scale_shape_manual(values = shape_map) +
-  labs(x = "Sex", y = "Predicted probability (95% CI)", shape = "Reef type", tag = "B")
+  scale_shape_manual(values = sex_shape_map, labels = c(F = "Female", M = "Male")) +
+  labs(x = "Reef type", y = "Predicted probability (95% CI)", shape = "Sex", tag = "B")
 
 Exp4_p <- Exp4_combined_p | ce4_p
 
@@ -1157,7 +1233,7 @@ p1 <- exp1_reef_all %>%
   geom_text(aes(label = n), vjust = 1.3, colour = "white", size = 3) +
   geom_text(data = exp1_reef_letters %>% filter(panel == "Combined"),
     aes(y = prop + 0.04, label = cld_letter), size = 3.5, fontface = "bold") +
-  scale_y_continuous(limits = c(0, 1)) +
+  #scale_y_continuous(limits = c(0, 1)) +
   labs(x = NULL, y = "Proportion", title = "Exp 1: Single kōura")
 
 p2 <- Exp2_combined_p + labs(x = NULL, y = NULL, title = "Exp 2: Group kōura", tag = NULL)
@@ -1169,6 +1245,23 @@ fig_all_presentation <- p1 + p2 + p3 + p4 + plot_layout(nrow = 2)
 ggsave(fig_all_presentation, file = file.path(out_dir, "fig-all-presentation.png"), width = 6.5, height = 6.5, dpi = 300)
 fig_all_presentation
 
+```
+
+```{r}
+#| label: fig-ce-all-presentation
+#| fig-width: 7
+#| fig-height: 7
+#| fig-cap: "."
+
+ce2_pp <- ce2_p + labs(x = NULL, y = NULL, title = "Exp 2: Group kōura", tag = NULL)
+ce3_pp <- ce3_p + labs(x = NULL, y = "Predicted probability (95% CI)", title = "Exp 3: Wood vs Stone", tag = NULL)
+ce4_pp <- ce4_p + labs(x = NULL, y = NULL, title = "Exp 4: Bricks", tag = NULL)
+
+ce_all <- ce2_pp + ce3_pp + ce4_pp + plot_layout(nrow = 2)
+
+ggsave(ce_all, file = file.path(out_dir, "fig-ce-all-presentation.png"), width = 6.5, height = 6.5, dpi = 300)
+
+ce_all
 ```
 
 # Waterquality
