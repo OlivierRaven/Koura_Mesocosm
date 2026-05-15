@@ -76,6 +76,7 @@ relevel_reef3 <- function(df) df %>% mutate(reef_type = factor(as.character(reef
 relevel_reef4 <- function(df) df %>% mutate(reef_type = factor(as.character(reef_type),levels = REEF_LEVELS4))
 
 # Set plot theme
+windowsFonts(Arial = windowsFont("Arial"))
 base_theme_bw <- theme_classic() +
   theme(text     = element_text(family = "Arial", size = 11),
     axis.title   = element_text(face = "plain"),
@@ -410,7 +411,7 @@ exp1_reef_p
 
 ## Exp 1 II
 ```{r}
-#| label: fig-exp1-II
+#| label: fig-exp1-tank-round
 #| fig-width: 8
 #| fig-height: 6
 #| fig-cap: "."
@@ -457,6 +458,9 @@ invisible(capture.output({
   loc_round_plots_exp1 <<- p_exp1_loc + p_exp1_loc2 + p_exp1_round + p_exp1_round2 +
     patchwork::plot_layout(ncol = 4)
 }))
+
+ggsave(loc_round_plots_exp1, file = file.path(out_dir, "fig-exp1-tank-round.png"), width = 10, height = 7, dpi = 300)
+
 loc_round_plots_exp1
 
 ```
@@ -740,7 +744,7 @@ Exp2_p
 
 ## Exp 2 II
 ```{r}
-#| label: fig-exp2-II
+#| label: fig-exp2-tank-round
 #| fig-width: 8
 #| fig-height: 6
 #| fig-cap: "."
@@ -788,6 +792,9 @@ invisible(capture.output({
   loc_round_plots_exp2 <<- p_exp2_loc + p_exp2_loc2 + p_exp2_round + p_exp2_round2 +
     patchwork::plot_layout(ncol = 4)
 }))
+
+ggsave(loc_round_plots_exp2, file = file.path(out_dir, "fig-exp2-tank-round.png"), width = 10, height = 7, dpi = 300)
+
 loc_round_plots_exp2
 
 ```
@@ -801,7 +808,7 @@ loc_round_plots_exp2
 
 exp2_reef_koura <- df_exp2_group_long %>%
   mutate(stage = toupper(stage)) %>%
-  filter(stage %in% c("L0","L1")) %>%
+  filter(stage == "L1") %>%
   count(stage, reef_type, koura_id, name = "n") %>%
   group_by(stage, koura_id) %>%
   mutate(N = sum(n), prop = n / N) %>%
@@ -819,14 +826,14 @@ p_exp2_reef_koura
 
 
 exp2_use <- df_exp2_group_long %>% 
-  filter(stage %in% c("L0","L1"))
+  filter(stage == "L1")
 
 counts <- exp2_use %>%
   filter(!is.na(reef_type), !is.na(size_class)) %>%
   mutate(
     tank = factor(tank),
     round = factor(round),
-    stage = factor(stage, levels = c("L0","L1")),
+    stage = factor(stage),
     reef_type  = fct_relevel(reef_type,"SingleStone","FlatStone","StonePile","WoodLog","TankWall"),
     size_class = factor(size_class)) %>%
   count(stage, round, tank, reef_type, size_class, name = "number_koura") %>%
@@ -1016,7 +1023,7 @@ Exp3_p
 
 ## Exp 3 II
 ```{r}
-#| label: fig-exp3-II
+#| label: fig-exp3-tank-round
 #| fig-width: 8
 #| fig-height: 6
 #| fig-cap: "."
@@ -1061,6 +1068,8 @@ invisible(capture.output({
 loc_round_plots_exp3 <<- p_exp3_loc + p_exp3_loc3 + p_exp3_round + p_exp3_round3 +
     patchwork::plot_layout(ncol = 4)
 }))
+
+ggsave(loc_round_plots_exp3, file = file.path(out_dir, "fig-exp3-tank-round.png"), width = 10, height = 7, dpi = 300)
 
 loc_round_plots_exp3
 ```
@@ -1244,7 +1253,7 @@ Exp4_p
 
 ## Exp 4 II
 ```{r}
-#| label: fig-exp4-II
+#| label: fig-exp4-tank-round
 #| fig-width: 8
 #| fig-height: 8
 #| fig-cap: "."
@@ -1307,6 +1316,8 @@ invisible(capture.output({
   loc_round_plots_exp4 <<- p_exp4_loc + p_exp4_loc4 + p_exp4_round + p_exp4_round4 +
     patchwork::plot_layout(ncol = 4)
 }))
+
+ggsave(loc_round_plots_exp4, file = file.path(out_dir, "fig-exp4-tank-round.png"), width = 10, height = 7, dpi = 300)
 
 loc_round_plots_exp4
 
@@ -1411,27 +1422,6 @@ ggsave(wq_all_plot, file = file.path(out_dir, "fig-wq.png"), width = 5, height =
 #| fig-width: 9
 #| fig-height: 5
 #| fig-cap: "."
-
-summarise_size_weight <- function(df) {
-  df %>%
-    summarise(
-      n_size          = sum(!is.na(size_mm1)),
-      n_weight        = sum(!is.na(weight_g1)),
-      size_mm1_mean   = mean(size_mm1, na.rm = TRUE),
-      size_mm1_sd     = sd(size_mm1, na.rm = TRUE),
-      size_mm1_range  = paste0(min(size_mm1, na.rm = TRUE), "–", max(size_mm1, na.rm = TRUE)),
-      weight_g1_mean  = mean(weight_g1, na.rm = TRUE),
-      weight_g1_sd    = sd(weight_g1, na.rm = TRUE),
-      weight_g1_range = paste0(min(weight_g1, na.rm = TRUE), "–", max(weight_g1, na.rm = TRUE))
-    )
-}
-
-summarise_size_weight(df_exp1_single_raw)
-summarise_size_weight(df_exp2_group_raw)
-summarise_size_weight(df_exp3_woodstone_raw)
-summarise_size_weight(df_exp4_brick_raw)
-
-
 
 df_size_weight_all <- dplyr::bind_rows(
   df_exp1_single_raw %>%
