@@ -1,10 +1,10 @@
 project:
   type: manuscript
   output-dir: docs
-  post-render: deploy.R
+  #post-render: deploy.R
 
 execute:
-  freeze: false
+  freeze: auto
   cache: false
 
 manuscript:

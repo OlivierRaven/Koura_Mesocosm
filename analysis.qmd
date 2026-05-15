@@ -85,6 +85,14 @@ base_theme_bw <- theme_classic() +
     panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5))
 theme_set(base_theme_bw)
 
+get_sex <- function(tbl, sex, col) {
+  tbl[[col]][tbl$sex == sex]
+}
+
+get_size <- function(tbl, class, col) {
+  tbl[[col]][tbl$size_class == class]
+}
+
 # Build pairwise_gtest
 pairwise_gtest <- function(counts) {
   nms   <- names(counts)
@@ -240,6 +248,31 @@ df1 <- df_exp1_single_long %>%
     weight_g1     = as.numeric(weight_g1)) %>%
   filter(!is.na(reef_type))
 
+size_stats1 <- df1 %>%
+  distinct(koura_id, sex, size_mm1, weight_g1) %>%
+  group_by(sex) %>%
+  summarise(mean_ocl = round(mean(size_mm1,  na.rm = TRUE), 1),
+    sd_ocl   = round(sd(size_mm1,    na.rm = TRUE), 1),
+    min_ocl  = round(min(size_mm1,   na.rm = TRUE), 1),
+    max_ocl  = round(max(size_mm1,   na.rm = TRUE), 1),
+    mean_wt  = round(mean(weight_g1, na.rm = TRUE), 1),
+    sd_wt    = round(sd(weight_g1,   na.rm = TRUE), 1),
+    min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
+    max_wt   = round(max(weight_g1,  na.rm = TRUE), 1),
+    .groups  = "drop") %>%
+  bind_rows(df1 %>%
+      distinct(koura_id, size_mm1, weight_g1) %>%
+      summarise(sex = "Total",
+        mean_ocl = round(mean(size_mm1,  na.rm = TRUE), 1),
+        sd_ocl   = round(sd(size_mm1,    na.rm = TRUE), 1),
+        min_ocl  = round(min(size_mm1,   na.rm = TRUE), 1),
+        max_ocl  = round(max(size_mm1,   na.rm = TRUE), 1),
+        mean_wt  = round(mean(weight_g1, na.rm = TRUE), 1),
+        sd_wt    = round(sd(weight_g1,   na.rm = TRUE), 1),
+        min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
+        max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
+
+
 df1_L1 <- df1 %>% filter(stage == "L1" , reef_type != "TankWall") %>%
   mutate(reef_type = droplevels(reef_type))
 
@@ -316,8 +349,8 @@ p_symtest1   <- pvalue(symtest1)
 ## Exp 1 Figure
 ```{r}
 #| label: fig-exp1
-#| fig-width: 4
-#| fig-height: 6
+#| fig-width: 8
+#| fig-height: 4
 #| fig-cap: "."
 
 exp1_reef_combined <- df_exp1_single_long %>%
@@ -329,6 +362,22 @@ exp1_reef_combined <- df_exp1_single_long %>%
   relevel_reef() %>%
   mutate(panel = "Combined")
 
+exp1_reef_letters <- exp1_reef_combined %>%
+  relevel_reef() %>%
+  filter(stage == "L1") %>%
+  left_join(cld_all1, by = c("stage", "panel", "reef_type"))
+
+exp1_p_combined <- exp1_reef_combined %>%
+  relevel_reef() %>%
+  ggplot(aes(reef_type, prop)) +
+  geom_col(color = "black") +
+  geom_text(aes(label = n), vjust = 1.3, colour = "white", size = 3) +
+  geom_text(data = exp1_reef_letters %>% filter(panel == "Combined"),
+    aes(y = prop + 0.04, label = cld_letter), size = 3.5, fontface = "bold") +
+  labs(x = "Reef type", y = "Proportion (L1)", tag = "A")
+
+
+
 exp1_reef_bysex <- df_exp1_single_long %>%
   filter(stage == "L1") %>%
   count(stage, reef_type, sex, name = "n") %>%
@@ -339,28 +388,23 @@ exp1_reef_bysex <- df_exp1_single_long %>%
   mutate(panel = dplyr::recode(sex, F = "Female", M = "Male")) %>%
   select(-sex)
 
-lab_panel1 <- c(Combined = "Combined", Female = "Female", Male = "Male")
-
-exp1_reef_all <- dplyr::bind_rows(exp1_reef_combined, exp1_reef_bysex)
-
-exp1_reef_letters <- exp1_reef_all %>%
-  relevel_reef() %>%
-  filter(stage == "L1") %>%
+exp1_reef_letters_sex <- exp1_reef_bysex %>%
   left_join(cld_all1, by = c("stage", "panel", "reef_type"))
 
-Exp1_reef_p <- exp1_reef_all %>%
+exp1_p_sex <- exp1_reef_bysex %>%
   relevel_reef() %>%
-  ggplot(aes(reef_type, prop)) +
-  geom_col(color = "black") +
-  geom_text(aes(label = n), vjust = 1.3, colour = "white") +
-  geom_text(data = exp1_reef_letters,aes(y = prop + 0.04, label = cld_letter), size  = 3.5, fontface = "bold") +
-  facet_wrap(~ panel, ncol = 1, labeller = labeller(panel = lab_panel1)) +
-  labs(x = "Reef type", y = "Proportion (L1)")
+  ggplot(aes(reef_type, prop, fill = panel)) +
+  geom_col(color = "black", position = position_dodge(0.9)) +
+  geom_text(aes(label = n), position = position_dodge(0.9), vjust = 1.3, colour = "grey50", size = 3) +
+  geom_text(data = exp1_reef_letters_sex,  aes(y = prop + 0.04, label = cld_letter), position = position_dodge(0.9), size = 3.5, fontface = "bold") +
+  scale_fill_manual(values = c(Female = "white", Male = "black"), name = "Sex") +
+  labs(x = "Reef type", y = NULL, tag = "B") 
 
-ggsave(Exp1_reef_p, file = file.path(out_dir, "fig-exp1.png"), width = 4, height = 6, dpi = 300)
+exp1_reef_p <- exp1_p_combined + exp1_p_sex 
 
-Exp1_reef_p
+ggsave(exp1_reef_p, file = file.path(out_dir, "fig-exp1.png"), width = 8, height = 4, dpi = 300)
 
+exp1_reef_p
 ```
 
 
@@ -480,6 +524,31 @@ df2 <- df_exp2_group_long %>%
     group_id   = factor(group_id),
     koura_id   = factor(koura_id)) %>%
   filter(!is.na(reef_type))
+
+size_stats2 <- df2 %>%
+  distinct(koura_id, size_class, size_mm1, weight_g1) %>%
+  group_by(size_class) %>%
+  summarise(mean_ocl = round(mean(size_mm1,  na.rm = TRUE), 1),
+    sd_ocl   = round(sd(size_mm1,    na.rm = TRUE), 1),
+    min_ocl  = round(min(size_mm1,   na.rm = TRUE), 1),
+    max_ocl  = round(max(size_mm1,   na.rm = TRUE), 1),
+    mean_wt  = round(mean(weight_g1, na.rm = TRUE), 1),
+    sd_wt    = round(sd(weight_g1,   na.rm = TRUE), 1),
+    min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
+    max_wt   = round(max(weight_g1,  na.rm = TRUE), 1),
+    .groups  = "drop") %>%
+  bind_rows(df2 %>%
+      distinct(koura_id, size_mm1, weight_g1) %>%
+      summarise(size_class = "Total",
+        mean_ocl = round(mean(size_mm1,  na.rm = TRUE), 1),
+        sd_ocl   = round(sd(size_mm1,    na.rm = TRUE), 1),
+        min_ocl  = round(min(size_mm1,   na.rm = TRUE), 1),
+        max_ocl  = round(max(size_mm1,   na.rm = TRUE), 1),
+        mean_wt  = round(mean(weight_g1, na.rm = TRUE), 1),
+        sd_wt    = round(sd(weight_g1,   na.rm = TRUE), 1),
+        min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
+        max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
+
 
 # RQ1 — Overall reef preference at group level
 df2_grp <- df2 %>%
@@ -930,7 +999,7 @@ Exp3_combined_p <- exp3_combined %>%
   labs(x = "Reef type", y = "Proportion (L1)", tag = "A")
 
 ce3_p <- pp_summary3 %>%
-  filter(reef_type != "NA") %>%
+  filter(reef_type != "NA", reef_type != "TankWall") %>%
   relevel_reef3() %>%
   mutate(size_class = factor(size_class, levels = c("S", "M", "L"))) %>%
   ggplot(aes(reef_type, mean_prob, shape = size_class, group = size_class)) +
@@ -1018,6 +1087,31 @@ df4 <- df_exp4_brick_long %>%
     group_id       = factor(group_id),
     koura_id       = factor(koura_id)) %>%
   filter(!is.na(reef_type))
+
+size_stats4 <- df4 %>%
+  distinct(koura_id, sex, size_mm1, weight_g1) %>%
+  group_by(sex) %>%
+  summarise(mean_ocl = round(mean(size_mm1,  na.rm = TRUE), 1),
+    sd_ocl   = round(sd(size_mm1,    na.rm = TRUE), 1),
+    min_ocl  = round(min(size_mm1,   na.rm = TRUE), 1),
+    max_ocl  = round(max(size_mm1,   na.rm = TRUE), 1),
+    mean_wt  = round(mean(weight_g1, na.rm = TRUE), 1),
+    sd_wt    = round(sd(weight_g1,   na.rm = TRUE), 1),
+    min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
+    max_wt   = round(max(weight_g1,  na.rm = TRUE), 1),
+    .groups  = "drop") %>%
+  bind_rows(df4 %>%
+      distinct(koura_id, size_mm1, weight_g1) %>%
+      summarise(sex = "Total",
+        mean_ocl = round(mean(size_mm1,  na.rm = TRUE), 1),
+        sd_ocl   = round(sd(size_mm1,    na.rm = TRUE), 1),
+        min_ocl  = round(min(size_mm1,   na.rm = TRUE), 1),
+        max_ocl  = round(max(size_mm1,   na.rm = TRUE), 1),
+        mean_wt  = round(mean(weight_g1, na.rm = TRUE), 1),
+        sd_wt    = round(sd(weight_g1,   na.rm = TRUE), 1),
+        min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
+        max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
+
 
 # RQ1 — Overall reef preference at group level
 df4_grp <- df4 %>%
@@ -1225,17 +1319,7 @@ loc_round_plots_exp4
 #| fig-height: 7
 #| fig-cap: "."
 
-p1 <- exp1_reef_all %>%
-  relevel_reef() %>%
-  filter(panel == "Combined", stage == "L1") %>%
-  ggplot(aes(reef_type, prop)) +
-  geom_col(color = "black") +
-  geom_text(aes(label = n), vjust = 1.3, colour = "white", size = 3) +
-  geom_text(data = exp1_reef_letters %>% filter(panel == "Combined"),
-    aes(y = prop + 0.04, label = cld_letter), size = 3.5, fontface = "bold") +
-  #scale_y_continuous(limits = c(0, 1)) +
-  labs(x = NULL, y = "Proportion", title = "Exp 1: Single kōura")
-
+p1 <- exp1_p_combined + labs(x = NULL, y = "Proportion", title = "Exp 1: Single kōura")
 p2 <- Exp2_combined_p + labs(x = NULL, y = NULL, title = "Exp 2: Group kōura", tag = NULL)
 p3 <- Exp3_combined_p + labs(x = NULL, y = "Proportion", title = "Exp 3: Wood vs Stone", tag = NULL)
 p4 <- Exp4_combined_p + labs(x = NULL, y = NULL, title = "Exp 4: Bricks", tag = NULL)
@@ -1249,17 +1333,19 @@ fig_all_presentation
 
 ```{r}
 #| label: fig-ce-all-presentation
-#| fig-width: 7
+#| fig-width: 7.5
 #| fig-height: 7
 #| fig-cap: "."
 
-ce2_pp <- ce2_p + labs(x = NULL, y = NULL, title = "Exp 2: Group kōura", tag = NULL)
-ce3_pp <- ce3_p + labs(x = NULL, y = "Predicted probability (95% CI)", title = "Exp 3: Wood vs Stone", tag = NULL)
-ce4_pp <- ce4_p + labs(x = NULL, y = NULL, title = "Exp 4: Bricks", tag = NULL)
 
-ce_all <- ce2_pp + ce3_pp + ce4_pp + plot_layout(nrow = 2)
+sex1_p <- exp1_p_sex + labs(x = NULL, y = "Proportion (L1)", title = "Exp 1: Single kōura by sex") + theme(legend.position = "none")
+ce2_pp <- ce2_p + labs(x = NULL, y = "Predicted probability (95% CI)", title = "Exp 2: Group kōura by size", tag = NULL)
+ce3_pp <- ce3_p + labs(x = NULL, y = "Predicted probability (95% CI)", title = "Exp 3: Wood vs Stone by size", tag = NULL) + theme(legend.position = "none")
+ce4_pp <- ce4_p + labs(x = NULL, y = "Predicted probability (95% CI)", title = "Exp 4: Bricks by sex", tag = NULL)
 
-ggsave(ce_all, file = file.path(out_dir, "fig-ce-all-presentation.png"), width = 6.5, height = 6.5, dpi = 300)
+ce_all <- sex1_p + ce2_pp + ce3_pp + ce4_pp + plot_layout(nrow = 2)
+
+ggsave(ce_all, file = file.path(out_dir, "fig-ce-all-presentation.png"), width = 7.5, height = 7, dpi = 300)
 
 ce_all
 ```
