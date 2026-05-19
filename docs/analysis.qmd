@@ -155,8 +155,10 @@ format_brms <- function(model, param, post_prob = NULL) {
   low  <- get_brms(model, param, "Q2.5")
   high <- get_brms(model, param, "Q97.5")
   base <- paste0("(\u03b2 = ", b, ", 95% CI: ", low, " to ", high)
-  if (!is.null(post_prob)) paste0(base, "; posterior probability = ", round(post_prob, 2), ")")
-  else paste0(base, ")")
+  if (!is.null(post_prob)) {
+    pp_label <- ifelse(round(post_prob, 2) >= 1, "> 0.99", as.character(round(post_prob, 2)))
+    paste0(base, "; posterior probability = ", pp_label, ")")
+  } else paste0(base, ")")
 }
 
 size_shape_map <- c(S = 15, M = 17, L = 18) 
@@ -280,6 +282,7 @@ df1_L1 <- df1 %>% filter(stage == "L1" , reef_type != "TankWall") %>%
 pct_wood_overall <- round(mean(df1_L1$reef_type == "WoodLog") * 100)
 pct_wood_male    <- round(mean(df1_L1$reef_type[df1_L1$sex == "M"] == "WoodLog") * 100)
 pct_wood_female  <- round(mean(df1_L1$reef_type[df1_L1$sex == "F"] == "WoodLog") * 100)
+pct_wall1 <- round(sum(df1$reef_type == "TankWall" & df1$stage == "L1") / sum(df1$stage == "L1") * 100)
 
 # RQ1 — Reef type preference at L1
 tab1_L1 <- table(df1_L1$reef_type)
@@ -552,6 +555,9 @@ size_stats2 <- df2 %>%
         sd_wt    = round(sd(weight_g1,   na.rm = TRUE), 1),
         min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
         max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
+
+pct_wall2 <- round(sum(df2$reef_type == "TankWall" & df2$stage == "L1") /
+  sum(df2$stage == "L1") * 100)
 
 
 # RQ1 — Overall reef preference at group level
@@ -874,6 +880,8 @@ df3 <- df_exp3_woodstone_long %>%
 
 df3_L1 <- df3 %>% filter(stage == "L1", !is.na(reef_type), reef_type != "NA")
 
+pct_wall3 <- round(sum(df3$reef_type == "TankWall" & df3$stage == "L1") / sum(df3$stage == "L1") * 100)
+
 # RQ1 — Overall reef preference at group level
 df3_grp <- df3_L1 %>%
   count(group_id, round, reef_type) %>%
@@ -1121,6 +1129,7 @@ size_stats4 <- df4 %>%
         min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
         max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
 
+pct_wall4 <- round(sum(df4$reef_type == "TankWall" & df4$stage == "L1") / sum(df4$stage == "L1") * 100)
 
 # RQ1 — Overall reef preference at group level
 df4_grp <- df4 %>%
@@ -1425,22 +1434,22 @@ ggsave(wq_all_plot, file = file.path(out_dir, "fig-wq.png"), width = 5, height =
 
 df_size_weight_all <- dplyr::bind_rows(
   df_exp1_single_raw %>%
-    dplyr::transmute(experiment = "Single",
+    dplyr::transmute(experiment = "Exp 1: Single kōura",
       size_mm1   = as.numeric(size_mm1),
       weight_g1  = as.numeric(weight_g1),
       sex= as.factor(sex)), df_exp2_group_raw %>%
     dplyr::transmute(
-      experiment = "Group",
+      experiment = "Exp 2: Group kōura",
       size_mm1   = as.numeric(size_mm1),
       weight_g1  = as.numeric(weight_g1),
       sex= as.factor(sex)),df_exp3_woodstone_raw %>%
     dplyr::transmute(
-      experiment = "StoneWood",
+      experiment = "Exp 3: Wood vs Stone",
       size_mm1   = as.numeric(size_mm1),
       weight_g1  = as.numeric(weight_g1),
       sex= as.factor(sex)),df_exp4_brick_raw %>%
     dplyr::transmute(
-      experiment = "Brick",
+      experiment = "Exp 4: Bricks",
       size_mm1   = as.numeric(size_mm1),
       weight_g1  = as.numeric(weight_g1),
       sex= as.factor(sex))) %>%
