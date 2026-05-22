@@ -805,7 +805,7 @@ P value (LLR) = 5.454e-05</code></pre>
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n), <span class="at">vjust =</span> <span class="fl">1.3</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> exp1_reef_letters <span class="sc">%&gt;%</span> <span class="fu">filter</span>(panel <span class="sc">==</span> <span class="st">"Combined"</span>),</span>
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> prop <span class="sc">+</span> <span class="fl">0.04</span>, <span class="at">label =</span> cld_letter), <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reef type"</span>, <span class="at">y =</span> <span class="st">"Proportion (L1)"</span>, <span class="at">tag =</span> <span class="st">"A"</span>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reef type"</span>, <span class="at">y =</span> <span class="st">"Proportion (L1)"</span>)</span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
@@ -829,11 +829,11 @@ P value (LLR) = 5.454e-05</code></pre>
 <span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>), <span class="at">vjust =</span> <span class="fl">1.3</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> exp1_reef_letters_sex,  <span class="fu">aes</span>(<span class="at">y =</span> prop <span class="sc">+</span> <span class="fl">0.04</span>, <span class="at">label =</span> cld_letter), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>), <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
 <span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">Female =</span> <span class="st">"white"</span>, <span class="at">Male =</span> <span class="st">"black"</span>), <span class="at">name =</span> <span class="st">"Sex"</span>) <span class="sc">+</span></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reef type"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">tag =</span> <span class="st">"B"</span>) </span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reef type"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) </span>
 <span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>exp1_reef_p <span class="ot">&lt;-</span> exp1_p_combined <span class="sc">+</span> exp1_p_sex </span>
 <span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(exp1_reef_p, <span class="at">file =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"fig-exp1.png"</span>), <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(exp1_p_sex, <span class="at">file =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"fig-exp1.png"</span>), <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>systemfonts and textshaping have been compiled with different versions of Freetype. Because of this, textshaping will not use the font cache provided by systemfonts</code></pre>
@@ -841,16 +841,16 @@ P value (LLR) = 5.454e-05</code></pre>
 <details class="code-fold">
 <summary>View Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>exp1_reef_p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>exp1_p_sex</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-exp1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-exp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="analysis_files/figure-html/fig-exp1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="."><img src="analysis_files/figure-html/fig-exp1-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="analysis_files/figure-html/fig-exp1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Proportion of individual kōura (Experiment 1) found at each reef type at final observation (L1), shown separately for female and male kōura. Bars show observed proportions with sample sizes (n) shown in white. Letters above bars indicate significant pairwise differences (G-test, Bonferroni adjusted)."><img src="analysis_files/figure-html/fig-exp1-1.png" class="img-fluid figure-img" width="480"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-exp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-.
+Proportion of individual kōura (Experiment 1) found at each reef type at final observation (L1), shown separately for female and male kōura. Bars show observed proportions with sample sizes (n) shown in white. Letters above bars indicate significant pairwise differences (G-test, Bonferroni adjusted).
 </figcaption>
 </figure>
 </div>
@@ -1397,10 +1397,10 @@ Experiment 2 Bayesian model fixed effects
 <div id="fig-exp2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-exp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="analysis_files/figure-html/fig-exp2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="."><img src="analysis_files/figure-html/fig-exp2-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="analysis_files/figure-html/fig-exp2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Reef type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of reef type use by size class from Bayesian categorical mixed model, with 95% credible intervals."><img src="analysis_files/figure-html/fig-exp2-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-exp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-.
+Reef type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of reef type use by size class from Bayesian categorical mixed model, with 95% credible intervals.
 </figcaption>
 </figure>
 </div>
@@ -1885,10 +1885,10 @@ Experiment 3 Bayesian model fixed effects
 <div id="fig-exp3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-exp3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="analysis_files/figure-html/fig-exp3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="."><img src="analysis_files/figure-html/fig-exp3-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="analysis_files/figure-html/fig-exp3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Reef type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of reef type use by size class from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."><img src="analysis_files/figure-html/fig-exp3-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-exp3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-.
+Reef type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of reef type use by size class from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions.
 </figcaption>
 </figure>
 </div>
@@ -2333,10 +2333,10 @@ Experiment 4 Bayesian model fixed effects
 <div id="fig-exp4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-exp4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="analysis_files/figure-html/fig-exp4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="."><img src="analysis_files/figure-html/fig-exp4-1.png" class="img-fluid figure-img" width="768"></a>
+<a href="analysis_files/figure-html/fig-exp4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Brick material preference (Experiment 4). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of reef type use by sex from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."><img src="analysis_files/figure-html/fig-exp4-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-exp4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-.
+Brick material preference (Experiment 4). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of reef type use by sex from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions.
 </figcaption>
 </figure>
 </div>
@@ -3554,9 +3554,9 @@ loaded via a namespace (and not attached):
 <span id="cb74-359"><a href="#cb74-359" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exp 1 Figure</span></span>
 <span id="cb74-362"><a href="#cb74-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb74-363"><a href="#cb74-363" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-exp1</span></span>
-<span id="cb74-364"><a href="#cb74-364" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb74-364"><a href="#cb74-364" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 5</span></span>
 <span id="cb74-365"><a href="#cb74-365" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb74-366"><a href="#cb74-366" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "."</span></span>
+<span id="cb74-366"><a href="#cb74-366" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Proportion of individual kōura (Experiment 1) found at each reef type at final observation (L1), shown separately for female and male kōura. Bars show observed proportions with sample sizes (n) shown in white. Letters above bars indicate significant pairwise differences (G-test, Bonferroni adjusted)."</span></span>
 <span id="cb74-367"><a href="#cb74-367" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-368"><a href="#cb74-368" aria-hidden="true" tabindex="-1"></a>exp1_reef_combined <span class="ot">&lt;-</span> df_exp1_single_long <span class="sc">%&gt;%</span></span>
 <span id="cb74-369"><a href="#cb74-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(stage <span class="sc">==</span> <span class="st">"L1"</span>) <span class="sc">%&gt;%</span></span>
@@ -3579,7 +3579,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-386"><a href="#cb74-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n), <span class="at">vjust =</span> <span class="fl">1.3</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb74-387"><a href="#cb74-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> exp1_reef_letters <span class="sc">%&gt;%</span> <span class="fu">filter</span>(panel <span class="sc">==</span> <span class="st">"Combined"</span>),</span>
 <span id="cb74-388"><a href="#cb74-388" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> prop <span class="sc">+</span> <span class="fl">0.04</span>, <span class="at">label =</span> cld_letter), <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
-<span id="cb74-389"><a href="#cb74-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reef type"</span>, <span class="at">y =</span> <span class="st">"Proportion (L1)"</span>, <span class="at">tag =</span> <span class="st">"A"</span>)</span>
+<span id="cb74-389"><a href="#cb74-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reef type"</span>, <span class="at">y =</span> <span class="st">"Proportion (L1)"</span>)</span>
 <span id="cb74-390"><a href="#cb74-390" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-391"><a href="#cb74-391" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-392"><a href="#cb74-392" aria-hidden="true" tabindex="-1"></a></span>
@@ -3603,13 +3603,13 @@ loaded via a namespace (and not attached):
 <span id="cb74-410"><a href="#cb74-410" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>), <span class="at">vjust =</span> <span class="fl">1.3</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb74-411"><a href="#cb74-411" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> exp1_reef_letters_sex,  <span class="fu">aes</span>(<span class="at">y =</span> prop <span class="sc">+</span> <span class="fl">0.04</span>, <span class="at">label =</span> cld_letter), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>), <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
 <span id="cb74-412"><a href="#cb74-412" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">Female =</span> <span class="st">"white"</span>, <span class="at">Male =</span> <span class="st">"black"</span>), <span class="at">name =</span> <span class="st">"Sex"</span>) <span class="sc">+</span></span>
-<span id="cb74-413"><a href="#cb74-413" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reef type"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">tag =</span> <span class="st">"B"</span>) </span>
+<span id="cb74-413"><a href="#cb74-413" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reef type"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) </span>
 <span id="cb74-414"><a href="#cb74-414" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-415"><a href="#cb74-415" aria-hidden="true" tabindex="-1"></a>exp1_reef_p <span class="ot">&lt;-</span> exp1_p_combined <span class="sc">+</span> exp1_p_sex </span>
 <span id="cb74-416"><a href="#cb74-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-417"><a href="#cb74-417" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(exp1_reef_p, <span class="at">file =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"fig-exp1.png"</span>), <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
+<span id="cb74-417"><a href="#cb74-417" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(exp1_p_sex, <span class="at">file =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"fig-exp1.png"</span>), <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
 <span id="cb74-418"><a href="#cb74-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-419"><a href="#cb74-419" aria-hidden="true" tabindex="-1"></a>exp1_reef_p</span>
+<span id="cb74-419"><a href="#cb74-419" aria-hidden="true" tabindex="-1"></a>exp1_p_sex</span>
 <span id="cb74-420"><a href="#cb74-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb74-421"><a href="#cb74-421" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-422"><a href="#cb74-422" aria-hidden="true" tabindex="-1"></a></span>
@@ -3898,7 +3898,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-715"><a href="#cb74-715" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-exp2</span></span>
 <span id="cb74-716"><a href="#cb74-716" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
 <span id="cb74-717"><a href="#cb74-717" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb74-718"><a href="#cb74-718" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "."</span></span>
+<span id="cb74-718"><a href="#cb74-718" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Reef type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of reef type use by size class from Bayesian categorical mixed model, with 95% credible intervals."</span></span>
 <span id="cb74-719"><a href="#cb74-719" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-720"><a href="#cb74-720" aria-hidden="true" tabindex="-1"></a>exp2_combined <span class="ot">&lt;-</span> df_exp2_group_long <span class="sc">%&gt;%</span></span>
 <span id="cb74-721"><a href="#cb74-721" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(stage <span class="sc">==</span> <span class="st">"L1"</span>) <span class="sc">%&gt;%</span></span>
@@ -4187,7 +4187,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-1014"><a href="#cb74-1014" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-exp3</span></span>
 <span id="cb74-1015"><a href="#cb74-1015" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
 <span id="cb74-1016"><a href="#cb74-1016" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb74-1017"><a href="#cb74-1017" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "."</span></span>
+<span id="cb74-1017"><a href="#cb74-1017" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Reef type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of reef type use by size class from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."</span></span>
 <span id="cb74-1018"><a href="#cb74-1018" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1019"><a href="#cb74-1019" aria-hidden="true" tabindex="-1"></a>exp3_combined <span class="ot">&lt;-</span> df_exp3_woodstone_long <span class="sc">%&gt;%</span></span>
 <span id="cb74-1020"><a href="#cb74-1020" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(stage <span class="sc">==</span> <span class="st">"L1"</span>, <span class="sc">!</span><span class="fu">is.na</span>(reef_type), reef_type <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span></span>
@@ -4422,7 +4422,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-1257"><a href="#cb74-1257" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-exp4</span></span>
 <span id="cb74-1258"><a href="#cb74-1258" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
 <span id="cb74-1259"><a href="#cb74-1259" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb74-1260"><a href="#cb74-1260" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "."</span></span>
+<span id="cb74-1260"><a href="#cb74-1260" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Brick material preference (Experiment 4). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of reef type use by sex from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."</span></span>
 <span id="cb74-1261"><a href="#cb74-1261" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1262"><a href="#cb74-1262" aria-hidden="true" tabindex="-1"></a>exp4_combined <span class="ot">&lt;-</span> df_exp4_brick_long <span class="sc">%&gt;%</span></span>
 <span id="cb74-1263"><a href="#cb74-1263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(stage <span class="sc">==</span> <span class="st">"L1"</span>, <span class="sc">!</span><span class="fu">is.na</span>(reef_type)) <span class="sc">%&gt;%</span></span>
