@@ -67,7 +67,7 @@ write_out(df_loggers,            "df_loggers.csv")
 # set preferred orders
 REEF_LEVELS  <- c("SingleStone","FlatStone","StonePile","WoodLog","TankWall")
 REEF_LEVELS3 <- c("FlatStone","WoodSplit","TankWall")
-REEF_LEVELS4 <- c("BrickArtificial","BrickWood","TankWall")
+REEF_LEVELS4 <- c("BrickConcrete","BrickWood","TankWall")
 LOC_LEVELS   <- c("A", "B", "C", "D", "E")
 LOC_LEVELS3  <- c("A", "B", "E")
 
@@ -599,7 +599,7 @@ p_fs_vs_sp <- wilcox_fs_vs_sp$p.value
 
 
 # RQ2 — Does size class affect reef preference?
-# Model last fit: 2024-10-15
+# Model last fit: 2026-5-25
 # Delete m2_size_bayes.rds to refit
 
 # Path to saved model
@@ -903,7 +903,7 @@ p_wilcox3_split <- p_wilcox3_adjusted["p_wilcox3_split"]
 
 
 # RQ2 — Does size class affect reef preference?
-# Model last fit: 2024-10-15
+# Model last fit: 2026-5-25
 # Delete m_exp3_bayes.rds to refit
 
 df3_L1 <- df3_L1 %>% mutate(reef_type = relevel(factor(reef_type), ref = "FlatStone"))
@@ -1140,7 +1140,7 @@ df4_grp <- df4 %>%
   ungroup()
 
 # Test whether proportion at each reef type differs from uniform (.5)
-wilcox_bart  <- wilcox.test(df4_grp$prop[df4_grp$reef_type == "BrickArtificial"],  mu = .5, exact = FALSE)
+wilcox_bart  <- wilcox.test(df4_grp$prop[df4_grp$reef_type == "BrickConcrete"],  mu = .5, exact = FALSE)
 wilcox_bwood  <- wilcox.test(df4_grp$prop[df4_grp$reef_type == "BrickWood"],  mu = .5, exact = FALSE)
 
 
@@ -1153,8 +1153,8 @@ p_wilcox4_bart  <- p_wilcox4_adjusted["p_wilcox4_bart"]
 p_wilcox4_bwood <- p_wilcox4_adjusted["p_wilcox4_bwood"]
 
 
-# Direct comparison BrickWood vs BrickArtificial at group level
-ba_props <- df4_grp %>% filter(reef_type == "BrickArtificial") %>% pull(prop)
+# Direct comparison BrickWood vs BrickConcrete at group level
+ba_props <- df4_grp %>% filter(reef_type == "BrickConcrete") %>% pull(prop)
 bw_props <- df4_grp %>% filter(reef_type == "BrickWood") %>% pull(prop)
 
 
@@ -1163,7 +1163,7 @@ p_bw_vs_ba <- wilcox_bw_vs_ba$p.value
 p_bw_vs_ba
 
 # RQ2 — Does sex affect reef preference?
-# Model last fit: 2024-10-15
+# Model last fit: 2026-5-25
 # Delete m_exp4_bayes.rds to refit
 m_path4 <- file.path(der_data_dir, "m_exp4_bayes.rds")
 
@@ -1197,7 +1197,7 @@ pp_summary4 <- pp4 %>%
   group_by(sex, reef_type) %>%
   summarise(mean_prob = mean(prob), lower = quantile(prob, 0.025), upper = quantile(prob, 0.975), .groups = "drop")
 
-pct_bart4  <- round(mean(df4_grp$prop[df4_grp$reef_type == "BrickArtificial"]) * 100)
+pct_bart4  <- round(mean(df4_grp$prop[df4_grp$reef_type == "BrickConcrete"]) * 100)
 pct_bwood4 <- round(mean(df4_grp$prop[df4_grp$reef_type == "BrickWood"]) * 100)
 p_post_sexM <- mean(as_draws_df(m_exp4_bayes)$b_muBrickWood_sexM < 0)
 
@@ -1229,10 +1229,10 @@ exp4_combined <- df_exp4_brick_long %>%
   mutate(N = sum(n), prop = n / N) %>%
   relevel_reef4()
 
-ann_wilcox4 <- data.frame(reef_type = c("BrickArtificial", "BrickWood"),label = c(sig_label(p_wilcox4_adjusted["p_wilcox4_bart"]), sig_label(p_wilcox4_adjusted["p_wilcox4_bwood"]))) %>%
+ann_wilcox4 <- data.frame(reef_type = c("BrickConcrete", "BrickWood"),label = c(sig_label(p_wilcox4_adjusted["p_wilcox4_bart"]), sig_label(p_wilcox4_adjusted["p_wilcox4_bwood"]))) %>%
   mutate(reef_type = factor(reef_type, levels = REEF_LEVELS4)) %>%
   left_join(exp4_combined %>% select(reef_type, prop), by = "reef_type") %>%
-  mutate(y = prop + 0.04, label = case_when( reef_type %in% c("BrickArtificial", "BrickWood") & label != "ns" ~ paste0(label, "↑"), TRUE ~ label))
+  mutate(y = prop + 0.04, label = case_when( reef_type %in% c("BrickConcrete", "BrickWood") & label != "ns" ~ paste0(label, "↑"), TRUE ~ label))
 
 Exp4_combined_p <- exp4_combined %>%
   relevel_reef4() %>%

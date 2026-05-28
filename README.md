@@ -60,7 +60,7 @@ quarto render
 ```
 
 The rendered HTML manuscript will be available at:  
-🌐 https://olivierraven.github.io/Reefs_Mesocosm/
+🌐 https://olivierraven.github.io/Koura_Mesocosm/
 
 ### Bayesian models
 

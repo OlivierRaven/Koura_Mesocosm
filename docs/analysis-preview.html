@@ -467,7 +467,7 @@
 <span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"># set preferred orders</span></span>
 <span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>REEF_LEVELS  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SingleStone"</span>,<span class="st">"FlatStone"</span>,<span class="st">"StonePile"</span>,<span class="st">"WoodLog"</span>,<span class="st">"TankWall"</span>)</span>
 <span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>REEF_LEVELS3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"FlatStone"</span>,<span class="st">"WoodSplit"</span>,<span class="st">"TankWall"</span>)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>REEF_LEVELS4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BrickArtificial"</span>,<span class="st">"BrickWood"</span>,<span class="st">"TankWall"</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>REEF_LEVELS4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BrickConcrete"</span>,<span class="st">"BrickWood"</span>,<span class="st">"TankWall"</span>)</span>
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>LOC_LEVELS   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>)</span>
 <span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>LOC_LEVELS3  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"E"</span>)</span>
 <span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
@@ -1067,7 +1067,7 @@ Proportion of individual kōura (Experiment 1) found at each reef type at final 
 <span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a><span class="co"># RQ2 — Does size class affect reef preference?</span></span>
-<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2024-10-15</span></span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2026-5-25</span></span>
 <span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete m2_size_bayes.rds to refit</span></span>
 <span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to saved model</span></span>
@@ -1111,55 +1111,55 @@ Formula: reef_type ~ size_class + (1 | group_id/koura_id) + (1 | round)
 Multilevel Hyperparameters:
 ~group_id (Number of levels: 6) 
                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(muFlatStone_Intercept)     0.26      0.24     0.01     0.92 1.00     4911
-sd(muStonePile_Intercept)     0.33      0.30     0.01     1.09 1.00     4285
-sd(muWoodLog_Intercept)       0.46      0.39     0.02     1.44 1.00     3512
+sd(muFlatStone_Intercept)     0.26      0.25     0.01     0.92 1.00     4235
+sd(muStonePile_Intercept)     0.33      0.31     0.01     1.13 1.00     3802
+sd(muWoodLog_Intercept)       0.46      0.38     0.02     1.43 1.00     3670
                           Tail_ESS
-sd(muFlatStone_Intercept)     4371
-sd(muStonePile_Intercept)     4639
-sd(muWoodLog_Intercept)       4328
+sd(muFlatStone_Intercept)     4283
+sd(muStonePile_Intercept)     4401
+sd(muWoodLog_Intercept)       4231
 
 ~group_id:koura_id (Number of levels: 36) 
                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(muFlatStone_Intercept)     0.25      0.19     0.01     0.69 1.00     4344
-sd(muStonePile_Intercept)     0.37      0.27     0.02     1.00 1.00     3120
-sd(muWoodLog_Intercept)       0.30      0.23     0.01     0.88 1.00     4685
+sd(muFlatStone_Intercept)     0.25      0.18     0.01     0.69 1.00     4732
+sd(muStonePile_Intercept)     0.37      0.26     0.02     0.99 1.00     3649
+sd(muWoodLog_Intercept)       0.31      0.24     0.01     0.88 1.00     4218
                           Tail_ESS
-sd(muFlatStone_Intercept)     4724
-sd(muStonePile_Intercept)     4437
-sd(muWoodLog_Intercept)       3909
+sd(muFlatStone_Intercept)     4848
+sd(muStonePile_Intercept)     4402
+sd(muWoodLog_Intercept)       3908
 
 ~round (Number of levels: 5) 
                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(muFlatStone_Intercept)     0.34      0.36     0.01     1.24 1.00     3902
-sd(muStonePile_Intercept)     0.57      0.48     0.02     1.81 1.00     2257
-sd(muWoodLog_Intercept)       1.12      0.63     0.31     2.81 1.00     3892
+sd(muFlatStone_Intercept)     0.33      0.35     0.01     1.27 1.00     3672
+sd(muStonePile_Intercept)     0.55      0.47     0.02     1.77 1.00     2282
+sd(muWoodLog_Intercept)       1.11      0.62     0.29     2.66 1.00     3518
                           Tail_ESS
-sd(muFlatStone_Intercept)     4812
-sd(muStonePile_Intercept)     3097
-sd(muWoodLog_Intercept)       3721
+sd(muFlatStone_Intercept)     4340
+sd(muStonePile_Intercept)     3740
+sd(muWoodLog_Intercept)       3634
 
 Regression Coefficients:
                         Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-muFlatStone_Intercept       2.79      0.82     1.38     4.57 1.00     2784
-muStonePile_Intercept       2.15      0.88     0.58     4.06 1.00     2917
-muWoodLog_Intercept         1.59      1.01    -0.31     3.73 1.00     2936
-muFlatStone_size_classM    -1.76      0.91    -3.73    -0.11 1.00     2976
-muFlatStone_size_classL    -0.99      0.95    -2.97     0.77 1.00     2986
-muStonePile_size_classM    -1.44      0.95    -3.46     0.28 1.00     2949
-muStonePile_size_classL    -0.44      0.98    -2.52     1.37 1.00     2977
-muWoodLog_size_classM      -0.92      0.96    -2.97     0.85 1.00     2998
-muWoodLog_size_classL      -1.14      1.04    -3.25     0.79 1.00     3203
+muFlatStone_Intercept       2.77      0.82     1.38     4.58 1.00     2959
+muStonePile_Intercept       2.14      0.87     0.60     4.04 1.00     3292
+muWoodLog_Intercept         1.62      0.99    -0.24     3.66 1.00     3425
+muFlatStone_size_classM    -1.75      0.91    -3.66    -0.09 1.00     3391
+muFlatStone_size_classL    -0.97      0.97    -2.99     0.83 1.00     3397
+muStonePile_size_classM    -1.42      0.94    -3.42     0.30 1.00     3308
+muStonePile_size_classL    -0.42      0.99    -2.48     1.41 1.00     3257
+muWoodLog_size_classM      -0.92      0.96    -2.91     0.83 1.00     3361
+muWoodLog_size_classL      -1.13      1.04    -3.27     0.85 1.00     3477
                         Tail_ESS
-muFlatStone_Intercept       2985
-muStonePile_Intercept       3226
-muWoodLog_Intercept         3178
-muFlatStone_size_classM     2689
-muFlatStone_size_classL     2837
-muStonePile_size_classM     2915
-muStonePile_size_classL     3117
-muWoodLog_size_classM       2913
-muWoodLog_size_classL       3269
+muFlatStone_Intercept       2697
+muStonePile_Intercept       3236
+muWoodLog_Intercept         3452
+muFlatStone_size_classM     3348
+muFlatStone_size_classL     3548
+muStonePile_size_classM     3096
+muStonePile_size_classL     3199
+muWoodLog_size_classM       3251
+muWoodLog_size_classL       3482
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -1172,16 +1172,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(m_exp2_bayes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>                          Estimate Est.Error       Q2.5      Q97.5
-muFlatStone_Intercept    2.7897496 0.8160380  1.3840435  4.5655209
-muStonePile_Intercept    2.1490900 0.8769514  0.5783038  4.0618278
-muWoodLog_Intercept      1.5934189 1.0138501 -0.3142599  3.7300993
-muFlatStone_size_classM -1.7624486 0.9098082 -3.7250837 -0.1063132
-muFlatStone_size_classL -0.9887577 0.9516650 -2.9666992  0.7666881
-muStonePile_size_classM -1.4384963 0.9478844 -3.4641471  0.2818704
-muStonePile_size_classL -0.4412566 0.9814677 -2.5191293  1.3744576
-muWoodLog_size_classM   -0.9190254 0.9611542 -2.9744212  0.8526398
-muWoodLog_size_classL   -1.1381381 1.0357651 -3.2523160  0.7883138</code></pre>
+<pre><code>                          Estimate Est.Error       Q2.5       Q97.5
+muFlatStone_Intercept    2.7744367 0.8220913  1.3752853  4.58226182
+muStonePile_Intercept    2.1388863 0.8731525  0.5985997  4.03589200
+muWoodLog_Intercept      1.6165862 0.9897825 -0.2420960  3.65711137
+muFlatStone_size_classM -1.7486703 0.9090147 -3.6552677 -0.08621181
+muFlatStone_size_classL -0.9718334 0.9690964 -2.9926701  0.82634480
+muStonePile_size_classM -1.4171356 0.9411656 -3.4233546  0.29874691
+muStonePile_size_classL -0.4212932 0.9888826 -2.4797980  1.40641966
+muWoodLog_size_classM   -0.9181904 0.9565192 -2.9077924  0.82976379
+muWoodLog_size_classL   -1.1334491 1.0414715 -3.2696829  0.85326077</code></pre>
 </div>
 <details class="code-fold">
 <summary>View Code</summary>
@@ -1271,66 +1271,66 @@ Experiment 2 Bayesian model fixed effects
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">muFlatStone_Intercept</td>
-<td style="text-align: right;">2.79</td>
+<td style="text-align: right;">2.77</td>
 <td style="text-align: right;">0.82</td>
 <td style="text-align: right;">1.38</td>
-<td style="text-align: right;">4.57</td>
+<td style="text-align: right;">4.58</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">muStonePile_Intercept</td>
-<td style="text-align: right;">2.15</td>
-<td style="text-align: right;">0.88</td>
-<td style="text-align: right;">0.58</td>
-<td style="text-align: right;">4.06</td>
+<td style="text-align: right;">2.14</td>
+<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">0.60</td>
+<td style="text-align: right;">4.04</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">muWoodLog_Intercept</td>
-<td style="text-align: right;">1.59</td>
-<td style="text-align: right;">1.01</td>
-<td style="text-align: right;">-0.31</td>
-<td style="text-align: right;">3.73</td>
+<td style="text-align: right;">1.62</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">-0.24</td>
+<td style="text-align: right;">3.66</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">muFlatStone_size_classM</td>
-<td style="text-align: right;">-1.76</td>
+<td style="text-align: right;">-1.75</td>
 <td style="text-align: right;">0.91</td>
-<td style="text-align: right;">-3.73</td>
-<td style="text-align: right;">-0.11</td>
+<td style="text-align: right;">-3.66</td>
+<td style="text-align: right;">-0.09</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">muFlatStone_size_classL</td>
-<td style="text-align: right;">-0.99</td>
-<td style="text-align: right;">0.95</td>
-<td style="text-align: right;">-2.97</td>
-<td style="text-align: right;">0.77</td>
+<td style="text-align: right;">-0.97</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">-2.99</td>
+<td style="text-align: right;">0.83</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">muStonePile_size_classM</td>
-<td style="text-align: right;">-1.44</td>
-<td style="text-align: right;">0.95</td>
-<td style="text-align: right;">-3.46</td>
-<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">-1.42</td>
+<td style="text-align: right;">0.94</td>
+<td style="text-align: right;">-3.42</td>
+<td style="text-align: right;">0.30</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">muStonePile_size_classL</td>
-<td style="text-align: right;">-0.44</td>
-<td style="text-align: right;">0.98</td>
-<td style="text-align: right;">-2.52</td>
-<td style="text-align: right;">1.37</td>
+<td style="text-align: right;">-0.42</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">-2.48</td>
+<td style="text-align: right;">1.41</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">muWoodLog_size_classM</td>
 <td style="text-align: right;">-0.92</td>
 <td style="text-align: right;">0.96</td>
-<td style="text-align: right;">-2.97</td>
-<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">-2.91</td>
+<td style="text-align: right;">0.83</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">muWoodLog_size_classL</td>
-<td style="text-align: right;">-1.14</td>
+<td style="text-align: right;">-1.13</td>
 <td style="text-align: right;">1.04</td>
-<td style="text-align: right;">-3.25</td>
-<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">-3.27</td>
+<td style="text-align: right;">0.85</td>
 </tr>
 </tbody>
 </table>
@@ -1599,7 +1599,7 @@ Reef type preference of group kōura (Experiment 2). (A) Proportion of kōura fo
 <span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a><span class="co"># RQ2 — Does size class affect reef preference?</span></span>
-<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2024-10-15</span></span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2026-5-25</span></span>
 <span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete m_exp3_bayes.rds to refit</span></span>
 <span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>df3_L1 <span class="ot">&lt;-</span> df3_L1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">reef_type =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(reef_type), <span class="at">ref =</span> <span class="st">"FlatStone"</span>))</span>
@@ -1641,43 +1641,43 @@ Formula: reef_type ~ size_class + (1 | group_id/koura_id) + (1 | round)
 Multilevel Hyperparameters:
 ~group_id (Number of levels: 6) 
                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(muWoodSplit_Intercept)     0.43      0.40     0.01     1.45 1.00     3765
-sd(muTankWall_Intercept)      2.31      3.16     0.07     8.19 1.00     5219
+sd(muWoodSplit_Intercept)     0.42      0.40     0.02     1.43 1.00     3438
+sd(muTankWall_Intercept)      2.33      3.17     0.08     8.34 1.00     5809
                           Tail_ESS
-sd(muWoodSplit_Intercept)     3515
-sd(muTankWall_Intercept)      3986
+sd(muWoodSplit_Intercept)     2658
+sd(muTankWall_Intercept)      4374
 
 ~group_id:koura_id (Number of levels: 36) 
                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(muWoodSplit_Intercept)     0.73      0.49     0.03     1.86 1.00     2120
-sd(muTankWall_Intercept)      2.02      1.96     0.07     6.95 1.00     4481
+sd(muWoodSplit_Intercept)     0.73      0.49     0.03     1.87 1.00     2059
+sd(muTankWall_Intercept)      1.97      1.94     0.07     6.61 1.00     5206
                           Tail_ESS
-sd(muWoodSplit_Intercept)     3204
-sd(muTankWall_Intercept)      4019
+sd(muWoodSplit_Intercept)     2519
+sd(muTankWall_Intercept)      4398
 
 ~round (Number of levels: 3) 
                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(muWoodSplit_Intercept)     1.41      1.07     0.18     4.13 1.00     3133
-sd(muTankWall_Intercept)      4.08      8.73     0.10    21.90 1.00     4056
+sd(muWoodSplit_Intercept)     1.37      1.02     0.17     3.87 1.00     2926
+sd(muTankWall_Intercept)      4.52     11.30     0.08    24.49 1.00     2915
                           Tail_ESS
-sd(muWoodSplit_Intercept)     2833
-sd(muTankWall_Intercept)      3721
+sd(muWoodSplit_Intercept)     3055
+sd(muTankWall_Intercept)      1934
 
 Regression Coefficients:
                         Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-muWoodSplit_Intercept      -0.35      1.02    -2.34     1.83 1.00     3808
-muTankWall_Intercept       -4.76      7.45   -16.45    10.54 1.00     2469
-muWoodSplit_size_classM    -0.30      0.67    -1.63     1.01 1.00     8364
-muWoodSplit_size_classL    -2.41      0.91    -4.34    -0.83 1.00     6932
-muTankWall_size_classM    -37.05    144.91  -225.08     1.17 1.01      555
-muTankWall_size_classL    -28.70     80.48  -169.82     1.01 1.01      690
+muWoodSplit_Intercept      -0.38      1.01    -2.25     1.79 1.00     3874
+muTankWall_Intercept       -4.31      8.69   -16.72    13.01 1.00     1619
+muWoodSplit_size_classM    -0.30      0.66    -1.62     1.01 1.00     7257
+muWoodSplit_size_classL    -2.40      0.90    -4.39    -0.80 1.00     7123
+muTankWall_size_classM    -33.40    114.75  -199.26     1.09 1.01      430
+muTankWall_size_classL    -22.13     35.85  -133.78     0.84 1.01      674
                         Tail_ESS
-muWoodSplit_Intercept       4157
-muTankWall_Intercept        3415
-muWoodSplit_size_classM     5848
-muWoodSplit_size_classL     4990
-muTankWall_size_classM       192
-muTankWall_size_classL       323
+muWoodSplit_Intercept       4114
+muTankWall_Intercept        1917
+muWoodSplit_size_classM     5425
+muWoodSplit_size_classL     4886
+muTankWall_size_classM       177
+muTankWall_size_classL       361
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -1689,13 +1689,13 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(m_exp3_bayes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>                           Estimate   Est.Error        Q2.5     Q97.5
-muWoodSplit_Intercept    -0.3520999   1.0152967   -2.335776  1.828462
-muTankWall_Intercept     -4.7597572   7.4513003  -16.454304 10.537060
-muWoodSplit_size_classM  -0.2991464   0.6719433   -1.633417  1.012567
-muWoodSplit_size_classL  -2.4126224   0.9059028   -4.341521 -0.825144
-muTankWall_size_classM  -37.0478202 144.9122677 -225.076450  1.173272
-muTankWall_size_classL  -28.6991726  80.4791146 -169.823448  1.012446</code></pre>
+<pre><code>                           Estimate   Est.Error        Q2.5      Q97.5
+muWoodSplit_Intercept    -0.3821432   1.0069737   -2.252055  1.7864922
+muTankWall_Intercept     -4.3137273   8.6917370  -16.722061 13.0082535
+muWoodSplit_size_classM  -0.2969921   0.6643598   -1.621193  1.0139846
+muWoodSplit_size_classL  -2.4000578   0.9026210   -4.385559 -0.7989628
+muTankWall_size_classM  -33.4028090 114.7527918 -199.261282  1.0868787
+muTankWall_size_classL  -22.1340060  35.8528415 -133.778443  0.8392832</code></pre>
 </div>
 <details class="code-fold">
 <summary>View Code</summary>
@@ -1704,7 +1704,7 @@ muTankWall_size_classL  -28.6991726  80.4791146 -169.823448  1.012446</code></pr
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as_draws_df</span>(m_exp3_bayes)<span class="sc">$</span>b_muWoodSplit_size_classM <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.671125</code></pre>
+<pre><code>[1] 0.67475</code></pre>
 </div>
 <details class="code-fold">
 <summary>View Code</summary>
@@ -1712,7 +1712,7 @@ muTankWall_size_classL  -28.6991726  80.4791146 -169.823448  1.012446</code></pr
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as_draws_df</span>(m_exp3_bayes)<span class="sc">$</span>b_muWoodSplit_size_classL <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.99875</code></pre>
+<pre><code>[1] 0.998625</code></pre>
 </div>
 <details class="code-fold">
 <summary>View Code</summary>
@@ -1787,45 +1787,45 @@ Experiment 3 Bayesian model fixed effects
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">muWoodSplit_Intercept</td>
-<td style="text-align: right;">-0.35</td>
-<td style="text-align: right;">1.02</td>
-<td style="text-align: right;">-2.34</td>
-<td style="text-align: right;">1.83</td>
+<td style="text-align: right;">-0.38</td>
+<td style="text-align: right;">1.01</td>
+<td style="text-align: right;">-2.25</td>
+<td style="text-align: right;">1.79</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">muTankWall_Intercept</td>
-<td style="text-align: right;">-4.76</td>
-<td style="text-align: right;">7.45</td>
-<td style="text-align: right;">-16.45</td>
-<td style="text-align: right;">10.54</td>
+<td style="text-align: right;">-4.31</td>
+<td style="text-align: right;">8.69</td>
+<td style="text-align: right;">-16.72</td>
+<td style="text-align: right;">13.01</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">muWoodSplit_size_classM</td>
 <td style="text-align: right;">-0.30</td>
-<td style="text-align: right;">0.67</td>
-<td style="text-align: right;">-1.63</td>
+<td style="text-align: right;">0.66</td>
+<td style="text-align: right;">-1.62</td>
 <td style="text-align: right;">1.01</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">muWoodSplit_size_classL</td>
-<td style="text-align: right;">-2.41</td>
-<td style="text-align: right;">0.91</td>
-<td style="text-align: right;">-4.34</td>
-<td style="text-align: right;">-0.83</td>
+<td style="text-align: right;">-2.40</td>
+<td style="text-align: right;">0.90</td>
+<td style="text-align: right;">-4.39</td>
+<td style="text-align: right;">-0.80</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">muTankWall_size_classM</td>
-<td style="text-align: right;">-37.05</td>
-<td style="text-align: right;">144.91</td>
-<td style="text-align: right;">-225.08</td>
-<td style="text-align: right;">1.17</td>
+<td style="text-align: right;">-33.40</td>
+<td style="text-align: right;">114.75</td>
+<td style="text-align: right;">-199.26</td>
+<td style="text-align: right;">1.09</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">muTankWall_size_classL</td>
-<td style="text-align: right;">-28.70</td>
-<td style="text-align: right;">80.48</td>
-<td style="text-align: right;">-169.82</td>
-<td style="text-align: right;">1.01</td>
+<td style="text-align: right;">-22.13</td>
+<td style="text-align: right;">35.85</td>
+<td style="text-align: right;">-133.78</td>
+<td style="text-align: right;">0.84</td>
 </tr>
 </tbody>
 </table>
@@ -2053,7 +2053,7 @@ Removed 4 rows containing missing values or values outside the scale range
 <span id="cb50-50"><a href="#cb50-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb50-51"><a href="#cb50-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-52"><a href="#cb50-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether proportion at each reef type differs from uniform (.5)</span></span>
-<span id="cb50-53"><a href="#cb50-53" aria-hidden="true" tabindex="-1"></a>wilcox_bart  <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickArtificial"</span>],  <span class="at">mu =</span> .<span class="dv">5</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb50-53"><a href="#cb50-53" aria-hidden="true" tabindex="-1"></a>wilcox_bart  <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickConcrete"</span>],  <span class="at">mu =</span> .<span class="dv">5</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb50-54"><a href="#cb50-54" aria-hidden="true" tabindex="-1"></a>wilcox_bwood  <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickWood"</span>],  <span class="at">mu =</span> .<span class="dv">5</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb50-55"><a href="#cb50-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-56"><a href="#cb50-56" aria-hidden="true" tabindex="-1"></a></span>
@@ -2073,8 +2073,8 @@ Removed 4 rows containing missing values or values outside the scale range
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>p_wilcox4_bwood <span class="ot">&lt;-</span> p_wilcox4_adjusted[<span class="st">"p_wilcox4_bwood"</span>]</span>
 <span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Direct comparison BrickWood vs BrickArtificial at group level</span></span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>ba_props <span class="ot">&lt;-</span> df4_grp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(reef_type <span class="sc">==</span> <span class="st">"BrickArtificial"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(prop)</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Direct comparison BrickWood vs BrickConcrete at group level</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>ba_props <span class="ot">&lt;-</span> df4_grp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(reef_type <span class="sc">==</span> <span class="st">"BrickConcrete"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(prop)</span>
 <span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>bw_props <span class="ot">&lt;-</span> df4_grp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(reef_type <span class="sc">==</span> <span class="st">"BrickWood"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(prop)</span>
 <span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
@@ -2089,7 +2089,7 @@ Removed 4 rows containing missing values or values outside the scale range
 <summary>View Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># RQ2 — Does sex affect reef preference?</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2024-10-15</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2026-5-25</span></span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete m_exp4_bayes.rds to refit</span></span>
 <span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>m_path4 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(der_data_dir, <span class="st">"m_exp4_bayes.rds"</span>)</span>
 <span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -2127,39 +2127,39 @@ Formula: reef_type ~ sex + (1 | group_id/koura_id) + (1 | round)
 Multilevel Hyperparameters:
 ~group_id (Number of levels: 4) 
                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(muBrickWood_Intercept)     0.40      0.46     0.01     1.62 1.00     3444
-sd(muTankWall_Intercept)      2.85      2.08     0.32     8.25 1.00     3024
+sd(muBrickWood_Intercept)     0.42      0.48     0.01     1.72 1.00     3056
+sd(muTankWall_Intercept)      2.88      2.10     0.34     8.39 1.00     2977
                           Tail_ESS
-sd(muBrickWood_Intercept)     4368
-sd(muTankWall_Intercept)      2235
+sd(muBrickWood_Intercept)     3509
+sd(muTankWall_Intercept)      2464
 
 ~group_id:koura_id (Number of levels: 40) 
                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(muBrickWood_Intercept)     0.47      0.30     0.03     1.14 1.00     2344
-sd(muTankWall_Intercept)      1.99      0.94     0.41     4.12 1.00     2304
+sd(muBrickWood_Intercept)     0.47      0.31     0.02     1.14 1.00     1986
+sd(muTankWall_Intercept)      2.00      0.95     0.42     4.18 1.00     2274
                           Tail_ESS
-sd(muBrickWood_Intercept)     3460
-sd(muTankWall_Intercept)      2433
+sd(muBrickWood_Intercept)     2619
+sd(muTankWall_Intercept)      1785
 
 ~round (Number of levels: 4) 
                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(muBrickWood_Intercept)     0.33      0.38     0.01     1.32 1.00     3258
-sd(muTankWall_Intercept)      1.54      1.06     0.16     4.28 1.00     2569
+sd(muBrickWood_Intercept)     0.33      0.38     0.01     1.32 1.00     3716
+sd(muTankWall_Intercept)      1.57      1.10     0.16     4.32 1.00     2518
                           Tail_ESS
-sd(muBrickWood_Intercept)     3779
-sd(muTankWall_Intercept)      2445
+sd(muBrickWood_Intercept)     3963
+sd(muTankWall_Intercept)      1911
 
 Regression Coefficients:
                       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-muBrickWood_Intercept     0.20      0.51    -0.83     1.23 1.00     4913
-muTankWall_Intercept     -1.44      2.59    -5.87     4.47 1.00     3621
-muBrickWood_sexM         -0.18      0.53    -1.27     0.87 1.00     6077
-muTankWall_sexM          -2.42      3.49   -11.02     2.23 1.00     4151
+muBrickWood_Intercept     0.21      0.52    -0.80     1.26 1.00     4040
+muTankWall_Intercept     -1.44      2.66    -5.93     4.72 1.00     3281
+muBrickWood_sexM         -0.18      0.54    -1.29     0.85 1.00     5571
+muTankWall_sexM          -2.43      3.57   -11.52     2.38 1.00     3652
                       Tail_ESS
-muBrickWood_Intercept     4059
-muTankWall_Intercept      3103
-muBrickWood_sexM          5013
-muTankWall_sexM           2993
+muBrickWood_Intercept     3839
+muTankWall_Intercept      3181
+muBrickWood_sexM          4827
+muTankWall_sexM           2901
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -2174,22 +2174,22 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <pre><code>$group_id
 $group_id$sd
                        Estimate Est.Error       Q2.5    Q97.5
-muBrickWood_Intercept 0.4018498 0.4625928 0.01161197 1.617930
-muTankWall_Intercept  2.8458576 2.0835434 0.31758074 8.253655
+muBrickWood_Intercept 0.4249234  0.483183 0.01244239 1.715125
+muTankWall_Intercept  2.8783310  2.104532 0.34191282 8.386438
 
 
 $`group_id:koura_id`
 $`group_id:koura_id`$sd
                        Estimate Est.Error       Q2.5    Q97.5
-muBrickWood_Intercept 0.4693453 0.3048817 0.02708613 1.136641
-muTankWall_Intercept  1.9920035 0.9407559 0.40714010 4.115587
+muBrickWood_Intercept 0.4678771 0.3069960 0.02189929 1.138449
+muTankWall_Intercept  2.0011497 0.9454752 0.41862111 4.178115
 
 
 $round
 $round$sd
-                       Estimate Est.Error        Q2.5    Q97.5
-muBrickWood_Intercept 0.3292526  0.382572 0.009059581 1.324963
-muTankWall_Intercept  1.5403343  1.063708 0.163525128 4.276531</code></pre>
+                       Estimate Est.Error       Q2.5    Q97.5
+muBrickWood_Intercept 0.3288562 0.3840231 0.01020109 1.321490
+muTankWall_Intercept  1.5681425 1.0959690 0.16208062 4.324139</code></pre>
 </div>
 <details class="code-fold">
 <summary>View Code</summary>
@@ -2197,7 +2197,7 @@ muTankWall_Intercept  1.5403343  1.063708 0.163525128 4.276531</code></pre>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">as_draws_df</span>(m_exp4_bayes)<span class="sc">$</span>b_muBrickWood_sexM <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.638375</code></pre>
+<pre><code>[1] 0.638</code></pre>
 </div>
 <details class="code-fold">
 <summary>View Code</summary>
@@ -2214,7 +2214,7 @@ muTankWall_Intercept  1.5403343  1.063708 0.163525128 4.276531</code></pre>
 <span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, reef_type) <span class="sc">%&gt;%</span></span>
 <span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_prob =</span> <span class="fu">mean</span>(prob), <span class="at">lower =</span> <span class="fu">quantile</span>(prob, <span class="fl">0.025</span>), <span class="at">upper =</span> <span class="fu">quantile</span>(prob, <span class="fl">0.975</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
 <span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>pct_bart4  <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickArtificial"</span>]) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>pct_bart4  <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickConcrete"</span>]) <span class="sc">*</span> <span class="dv">100</span>)</span>
 <span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>pct_bwood4 <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickWood"</span>]) <span class="sc">*</span> <span class="dv">100</span>)</span>
 <span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>p_post_sexM <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">as_draws_df</span>(m_exp4_bayes)<span class="sc">$</span>b_muBrickWood_sexM <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -2253,31 +2253,31 @@ Experiment 4 Bayesian model fixed effects
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">muBrickWood_Intercept</td>
-<td style="text-align: right;">0.20</td>
-<td style="text-align: right;">0.51</td>
-<td style="text-align: right;">-0.83</td>
-<td style="text-align: right;">1.23</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">-0.80</td>
+<td style="text-align: right;">1.26</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">muTankWall_Intercept</td>
 <td style="text-align: right;">-1.44</td>
-<td style="text-align: right;">2.59</td>
-<td style="text-align: right;">-5.87</td>
-<td style="text-align: right;">4.47</td>
+<td style="text-align: right;">2.66</td>
+<td style="text-align: right;">-5.93</td>
+<td style="text-align: right;">4.72</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">muBrickWood_sexM</td>
 <td style="text-align: right;">-0.18</td>
-<td style="text-align: right;">0.53</td>
-<td style="text-align: right;">-1.27</td>
-<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">-1.29</td>
+<td style="text-align: right;">0.85</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">muTankWall_sexM</td>
-<td style="text-align: right;">-2.42</td>
-<td style="text-align: right;">3.49</td>
-<td style="text-align: right;">-11.02</td>
-<td style="text-align: right;">2.23</td>
+<td style="text-align: right;">-2.43</td>
+<td style="text-align: right;">3.57</td>
+<td style="text-align: right;">-11.52</td>
+<td style="text-align: right;">2.38</td>
 </tr>
 </tbody>
 </table>
@@ -2299,10 +2299,10 @@ Experiment 4 Bayesian model fixed effects
 <span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">N =</span> <span class="fu">sum</span>(n), <span class="at">prop =</span> n <span class="sc">/</span> N) <span class="sc">%&gt;%</span></span>
 <span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relevel_reef4</span>()</span>
 <span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>ann_wilcox4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">reef_type =</span> <span class="fu">c</span>(<span class="st">"BrickArtificial"</span>, <span class="st">"BrickWood"</span>),<span class="at">label =</span> <span class="fu">c</span>(<span class="fu">sig_label</span>(p_wilcox4_adjusted[<span class="st">"p_wilcox4_bart"</span>]), <span class="fu">sig_label</span>(p_wilcox4_adjusted[<span class="st">"p_wilcox4_bwood"</span>]))) <span class="sc">%&gt;%</span></span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>ann_wilcox4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">reef_type =</span> <span class="fu">c</span>(<span class="st">"BrickConcrete"</span>, <span class="st">"BrickWood"</span>),<span class="at">label =</span> <span class="fu">c</span>(<span class="fu">sig_label</span>(p_wilcox4_adjusted[<span class="st">"p_wilcox4_bart"</span>]), <span class="fu">sig_label</span>(p_wilcox4_adjusted[<span class="st">"p_wilcox4_bwood"</span>]))) <span class="sc">%&gt;%</span></span>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reef_type =</span> <span class="fu">factor</span>(reef_type, <span class="at">levels =</span> REEF_LEVELS4)) <span class="sc">%&gt;%</span></span>
 <span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(exp4_combined <span class="sc">%&gt;%</span> <span class="fu">select</span>(reef_type, prop), <span class="at">by =</span> <span class="st">"reef_type"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> prop <span class="sc">+</span> <span class="fl">0.04</span>, <span class="at">label =</span> <span class="fu">case_when</span>( reef_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BrickArtificial"</span>, <span class="st">"BrickWood"</span>) <span class="sc">&amp;</span> label <span class="sc">!=</span> <span class="st">"ns"</span> <span class="sc">~</span> <span class="fu">paste0</span>(label, <span class="st">"↑"</span>), <span class="cn">TRUE</span> <span class="sc">~</span> label))</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> prop <span class="sc">+</span> <span class="fl">0.04</span>, <span class="at">label =</span> <span class="fu">case_when</span>( reef_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BrickConcrete"</span>, <span class="st">"BrickWood"</span>) <span class="sc">&amp;</span> label <span class="sc">!=</span> <span class="st">"ns"</span> <span class="sc">~</span> <span class="fu">paste0</span>(label, <span class="st">"↑"</span>), <span class="cn">TRUE</span> <span class="sc">~</span> label))</span>
 <span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>Exp4_combined_p <span class="ot">&lt;-</span> exp4_combined <span class="sc">%&gt;%</span></span>
 <span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relevel_reef4</span>() <span class="sc">%&gt;%</span></span>
@@ -2356,28 +2356,28 @@ Brick material preference (Experiment 4). (A) Proportion of kōura found at each
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 5
-   group_id size_class sex   reef_type           n
-      &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;           &lt;int&gt;
- 1        7 L          F     BrickArtificial     2
- 2        7 L          F     BrickWood           2
- 3        7 M          F     BrickArtificial    15
- 4        7 M          F     BrickWood           9
- 5        7 M          F     TankWall            4
- 6        7 S          F     BrickWood           8
- 7        8 M          F     BrickArtificial    11
- 8        8 M          F     BrickWood          15
- 9        8 M          F     TankWall            2
-10        8 M          M     BrickArtificial     2
-11        8 M          M     BrickWood           2
-12        8 S          F     BrickArtificial     2
-13        8 S          F     BrickWood           2
-14        8 S          M     BrickArtificial     2
-15        8 S          M     BrickWood           2
-16        9 M          M     BrickArtificial    15
-17        9 M          M     BrickWood          17
-18        9 M          M     TankWall            8
-19       10 M          M     BrickArtificial    20
-20       10 M          M     BrickWood          20</code></pre>
+   group_id size_class sex   reef_type         n
+      &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;fct&gt;         &lt;int&gt;
+ 1        7 L          F     BrickConcrete     2
+ 2        7 L          F     BrickWood         2
+ 3        7 M          F     BrickConcrete    15
+ 4        7 M          F     BrickWood         9
+ 5        7 M          F     TankWall          4
+ 6        7 S          F     BrickWood         8
+ 7        8 M          F     BrickConcrete    11
+ 8        8 M          F     BrickWood        15
+ 9        8 M          F     TankWall          2
+10        8 M          M     BrickConcrete     2
+11        8 M          M     BrickWood         2
+12        8 S          F     BrickConcrete     2
+13        8 S          F     BrickWood         2
+14        8 S          M     BrickConcrete     2
+15        8 S          M     BrickWood         2
+16        9 M          M     BrickConcrete    15
+17        9 M          M     BrickWood        17
+18        9 M          M     TankWall          8
+19       10 M          M     BrickConcrete    20
+20       10 M          M     BrickWood        20</code></pre>
 </div>
 <details class="code-fold">
 <summary>View Code</summary>
@@ -3268,7 +3268,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-69"><a href="#cb74-69" aria-hidden="true" tabindex="-1"></a><span class="co"># set preferred orders</span></span>
 <span id="cb74-70"><a href="#cb74-70" aria-hidden="true" tabindex="-1"></a>REEF_LEVELS  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SingleStone"</span>,<span class="st">"FlatStone"</span>,<span class="st">"StonePile"</span>,<span class="st">"WoodLog"</span>,<span class="st">"TankWall"</span>)</span>
 <span id="cb74-71"><a href="#cb74-71" aria-hidden="true" tabindex="-1"></a>REEF_LEVELS3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"FlatStone"</span>,<span class="st">"WoodSplit"</span>,<span class="st">"TankWall"</span>)</span>
-<span id="cb74-72"><a href="#cb74-72" aria-hidden="true" tabindex="-1"></a>REEF_LEVELS4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BrickArtificial"</span>,<span class="st">"BrickWood"</span>,<span class="st">"TankWall"</span>)</span>
+<span id="cb74-72"><a href="#cb74-72" aria-hidden="true" tabindex="-1"></a>REEF_LEVELS4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BrickConcrete"</span>,<span class="st">"BrickWood"</span>,<span class="st">"TankWall"</span>)</span>
 <span id="cb74-73"><a href="#cb74-73" aria-hidden="true" tabindex="-1"></a>LOC_LEVELS   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>)</span>
 <span id="cb74-74"><a href="#cb74-74" aria-hidden="true" tabindex="-1"></a>LOC_LEVELS3  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"E"</span>)</span>
 <span id="cb74-75"><a href="#cb74-75" aria-hidden="true" tabindex="-1"></a></span>
@@ -3800,7 +3800,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-613"><a href="#cb74-613" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-614"><a href="#cb74-614" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-615"><a href="#cb74-615" aria-hidden="true" tabindex="-1"></a><span class="co"># RQ2 — Does size class affect reef preference?</span></span>
-<span id="cb74-616"><a href="#cb74-616" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2024-10-15</span></span>
+<span id="cb74-616"><a href="#cb74-616" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2026-5-25</span></span>
 <span id="cb74-617"><a href="#cb74-617" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete m2_size_bayes.rds to refit</span></span>
 <span id="cb74-618"><a href="#cb74-618" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-619"><a href="#cb74-619" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to saved model</span></span>
@@ -4104,7 +4104,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-927"><a href="#cb74-927" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-928"><a href="#cb74-928" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-929"><a href="#cb74-929" aria-hidden="true" tabindex="-1"></a><span class="co"># RQ2 — Does size class affect reef preference?</span></span>
-<span id="cb74-930"><a href="#cb74-930" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2024-10-15</span></span>
+<span id="cb74-930"><a href="#cb74-930" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2026-5-25</span></span>
 <span id="cb74-931"><a href="#cb74-931" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete m_exp3_bayes.rds to refit</span></span>
 <span id="cb74-932"><a href="#cb74-932" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-933"><a href="#cb74-933" aria-hidden="true" tabindex="-1"></a>df3_L1 <span class="ot">&lt;-</span> df3_L1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">reef_type =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(reef_type), <span class="at">ref =</span> <span class="st">"FlatStone"</span>))</span>
@@ -4341,7 +4341,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-1172"><a href="#cb74-1172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb74-1173"><a href="#cb74-1173" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1174"><a href="#cb74-1174" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether proportion at each reef type differs from uniform (.5)</span></span>
-<span id="cb74-1175"><a href="#cb74-1175" aria-hidden="true" tabindex="-1"></a>wilcox_bart  <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickArtificial"</span>],  <span class="at">mu =</span> .<span class="dv">5</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb74-1175"><a href="#cb74-1175" aria-hidden="true" tabindex="-1"></a>wilcox_bart  <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickConcrete"</span>],  <span class="at">mu =</span> .<span class="dv">5</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb74-1176"><a href="#cb74-1176" aria-hidden="true" tabindex="-1"></a>wilcox_bwood  <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickWood"</span>],  <span class="at">mu =</span> .<span class="dv">5</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb74-1177"><a href="#cb74-1177" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1178"><a href="#cb74-1178" aria-hidden="true" tabindex="-1"></a></span>
@@ -4354,8 +4354,8 @@ loaded via a namespace (and not attached):
 <span id="cb74-1185"><a href="#cb74-1185" aria-hidden="true" tabindex="-1"></a>p_wilcox4_bwood <span class="ot">&lt;-</span> p_wilcox4_adjusted[<span class="st">"p_wilcox4_bwood"</span>]</span>
 <span id="cb74-1186"><a href="#cb74-1186" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1187"><a href="#cb74-1187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1188"><a href="#cb74-1188" aria-hidden="true" tabindex="-1"></a><span class="co"># Direct comparison BrickWood vs BrickArtificial at group level</span></span>
-<span id="cb74-1189"><a href="#cb74-1189" aria-hidden="true" tabindex="-1"></a>ba_props <span class="ot">&lt;-</span> df4_grp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(reef_type <span class="sc">==</span> <span class="st">"BrickArtificial"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(prop)</span>
+<span id="cb74-1188"><a href="#cb74-1188" aria-hidden="true" tabindex="-1"></a><span class="co"># Direct comparison BrickWood vs BrickConcrete at group level</span></span>
+<span id="cb74-1189"><a href="#cb74-1189" aria-hidden="true" tabindex="-1"></a>ba_props <span class="ot">&lt;-</span> df4_grp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(reef_type <span class="sc">==</span> <span class="st">"BrickConcrete"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(prop)</span>
 <span id="cb74-1190"><a href="#cb74-1190" aria-hidden="true" tabindex="-1"></a>bw_props <span class="ot">&lt;-</span> df4_grp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(reef_type <span class="sc">==</span> <span class="st">"BrickWood"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(prop)</span>
 <span id="cb74-1191"><a href="#cb74-1191" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1192"><a href="#cb74-1192" aria-hidden="true" tabindex="-1"></a></span>
@@ -4364,7 +4364,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-1195"><a href="#cb74-1195" aria-hidden="true" tabindex="-1"></a>p_bw_vs_ba</span>
 <span id="cb74-1196"><a href="#cb74-1196" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1197"><a href="#cb74-1197" aria-hidden="true" tabindex="-1"></a><span class="co"># RQ2 — Does sex affect reef preference?</span></span>
-<span id="cb74-1198"><a href="#cb74-1198" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2024-10-15</span></span>
+<span id="cb74-1198"><a href="#cb74-1198" aria-hidden="true" tabindex="-1"></a><span class="co"># Model last fit: 2026-5-25</span></span>
 <span id="cb74-1199"><a href="#cb74-1199" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete m_exp4_bayes.rds to refit</span></span>
 <span id="cb74-1200"><a href="#cb74-1200" aria-hidden="true" tabindex="-1"></a>m_path4 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(der_data_dir, <span class="st">"m_exp4_bayes.rds"</span>)</span>
 <span id="cb74-1201"><a href="#cb74-1201" aria-hidden="true" tabindex="-1"></a></span>
@@ -4398,7 +4398,7 @@ loaded via a namespace (and not attached):
 <span id="cb74-1229"><a href="#cb74-1229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, reef_type) <span class="sc">%&gt;%</span></span>
 <span id="cb74-1230"><a href="#cb74-1230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_prob =</span> <span class="fu">mean</span>(prob), <span class="at">lower =</span> <span class="fu">quantile</span>(prob, <span class="fl">0.025</span>), <span class="at">upper =</span> <span class="fu">quantile</span>(prob, <span class="fl">0.975</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
 <span id="cb74-1231"><a href="#cb74-1231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1232"><a href="#cb74-1232" aria-hidden="true" tabindex="-1"></a>pct_bart4  <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickArtificial"</span>]) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb74-1232"><a href="#cb74-1232" aria-hidden="true" tabindex="-1"></a>pct_bart4  <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickConcrete"</span>]) <span class="sc">*</span> <span class="dv">100</span>)</span>
 <span id="cb74-1233"><a href="#cb74-1233" aria-hidden="true" tabindex="-1"></a>pct_bwood4 <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(df4_grp<span class="sc">$</span>prop[df4_grp<span class="sc">$</span>reef_type <span class="sc">==</span> <span class="st">"BrickWood"</span>]) <span class="sc">*</span> <span class="dv">100</span>)</span>
 <span id="cb74-1234"><a href="#cb74-1234" aria-hidden="true" tabindex="-1"></a>p_post_sexM <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">as_draws_df</span>(m_exp4_bayes)<span class="sc">$</span>b_muBrickWood_sexM <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
 <span id="cb74-1235"><a href="#cb74-1235" aria-hidden="true" tabindex="-1"></a></span>
@@ -4430,10 +4430,10 @@ loaded via a namespace (and not attached):
 <span id="cb74-1265"><a href="#cb74-1265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">N =</span> <span class="fu">sum</span>(n), <span class="at">prop =</span> n <span class="sc">/</span> N) <span class="sc">%&gt;%</span></span>
 <span id="cb74-1266"><a href="#cb74-1266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relevel_reef4</span>()</span>
 <span id="cb74-1267"><a href="#cb74-1267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1268"><a href="#cb74-1268" aria-hidden="true" tabindex="-1"></a>ann_wilcox4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">reef_type =</span> <span class="fu">c</span>(<span class="st">"BrickArtificial"</span>, <span class="st">"BrickWood"</span>),<span class="at">label =</span> <span class="fu">c</span>(<span class="fu">sig_label</span>(p_wilcox4_adjusted[<span class="st">"p_wilcox4_bart"</span>]), <span class="fu">sig_label</span>(p_wilcox4_adjusted[<span class="st">"p_wilcox4_bwood"</span>]))) <span class="sc">%&gt;%</span></span>
+<span id="cb74-1268"><a href="#cb74-1268" aria-hidden="true" tabindex="-1"></a>ann_wilcox4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">reef_type =</span> <span class="fu">c</span>(<span class="st">"BrickConcrete"</span>, <span class="st">"BrickWood"</span>),<span class="at">label =</span> <span class="fu">c</span>(<span class="fu">sig_label</span>(p_wilcox4_adjusted[<span class="st">"p_wilcox4_bart"</span>]), <span class="fu">sig_label</span>(p_wilcox4_adjusted[<span class="st">"p_wilcox4_bwood"</span>]))) <span class="sc">%&gt;%</span></span>
 <span id="cb74-1269"><a href="#cb74-1269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reef_type =</span> <span class="fu">factor</span>(reef_type, <span class="at">levels =</span> REEF_LEVELS4)) <span class="sc">%&gt;%</span></span>
 <span id="cb74-1270"><a href="#cb74-1270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(exp4_combined <span class="sc">%&gt;%</span> <span class="fu">select</span>(reef_type, prop), <span class="at">by =</span> <span class="st">"reef_type"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb74-1271"><a href="#cb74-1271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> prop <span class="sc">+</span> <span class="fl">0.04</span>, <span class="at">label =</span> <span class="fu">case_when</span>( reef_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BrickArtificial"</span>, <span class="st">"BrickWood"</span>) <span class="sc">&amp;</span> label <span class="sc">!=</span> <span class="st">"ns"</span> <span class="sc">~</span> <span class="fu">paste0</span>(label, <span class="st">"↑"</span>), <span class="cn">TRUE</span> <span class="sc">~</span> label))</span>
+<span id="cb74-1271"><a href="#cb74-1271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> prop <span class="sc">+</span> <span class="fl">0.04</span>, <span class="at">label =</span> <span class="fu">case_when</span>( reef_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BrickConcrete"</span>, <span class="st">"BrickWood"</span>) <span class="sc">&amp;</span> label <span class="sc">!=</span> <span class="st">"ns"</span> <span class="sc">~</span> <span class="fu">paste0</span>(label, <span class="st">"↑"</span>), <span class="cn">TRUE</span> <span class="sc">~</span> label))</span>
 <span id="cb74-1272"><a href="#cb74-1272" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1273"><a href="#cb74-1273" aria-hidden="true" tabindex="-1"></a>Exp4_combined_p <span class="ot">&lt;-</span> exp4_combined <span class="sc">%&gt;%</span></span>
 <span id="cb74-1274"><a href="#cb74-1274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relevel_reef4</span>() <span class="sc">%&gt;%</span></span>
