@@ -3,7 +3,9 @@
     "allow": [
       "Bash(quarto render *)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "PowerShell(Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl\" -OutFile \"C:\\\\Users\\\\or81\\\\OneDrive - The University of Waikato\\\\Documents\\\\PhD\\\\01_thesis_chapters\\\\04_mesocosm_study\\\\references\\\\apa.csl\" -UseBasicParsing; $size = \\(Get-Item \"C:\\\\Users\\\\or81\\\\OneDrive - The University of Waikato\\\\Documents\\\\PhD\\\\01_thesis_chapters\\\\04_mesocosm_study\\\\references\\\\apa.csl\"\\).Length; Write-Output \"Downloaded $size bytes\")"
+      "PowerShell(Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl\" -OutFile \"C:\\\\Users\\\\or81\\\\OneDrive - The University of Waikato\\\\Documents\\\\PhD\\\\01_thesis_chapters\\\\04_mesocosm_study\\\\references\\\\apa.csl\" -UseBasicParsing; $size = \\(Get-Item \"C:\\\\Users\\\\or81\\\\OneDrive - The University of Waikato\\\\Documents\\\\PhD\\\\01_thesis_chapters\\\\04_mesocosm_study\\\\references\\\\apa.csl\"\\).Length; Write-Output \"Downloaded $size bytes\")",
+      "Bash(Rscript -e \"tinytex::install_tinytex\\(force = TRUE\\)\")",
+      "PowerShell(& \"C:\\\\Program Files\\\\R\\\\R-4.5.2\\\\bin\\\\Rscript.exe\" -e \"tinytex::install_tinytex\\(force = TRUE\\)\")"
     ]
   }
 }

@@ -56,13 +56,22 @@ date: "today"
 
 abstract: Freshwater crayfish are among the most threatened invertebrates globally, with habitat loss a primary driver of population decline, yet the optimal design of habitat enhancement structures for their restoration remains largely unknown. Four controlled mesocosm experiments with the endemic Aotearoa-New Zealand freshwater crayfish kōura (*Paranephrops planifrons*) examined how shelter structure, material composition, body size, and group dynamics influence refuge selection. Individual kōura strongly preferred a wooden log with enclosed drilled holes, but when housed in mixed-size groups, kōura preference shifted to flat and piled stone configurations, providing more complex refugia for different-size individuals simultaneously. Flat stone structures were preferred over wood splits and this was strongest for large individuals. When structural dimensions were held constant, no significant preference was detected between concrete and wooden brick structures, indicating that material composition alone does not drive refuge selection. Size class effects on shelter preference were quantified using Bayesian categorical mixed-effects models, which provide an appropriate framework for multi-choice repeated-measures designs with categorical outcomes and nested group structures. These mesocosm findings suggest that stone-based configurations warrant field evaluation as habitat enhancement structures for kōura restoration, given their structural complexity across size classes and alignment with the cultural values associated with restoring this taonga species.
 
-keywords: Kōura
+keywords: 
+  - Kōura
+  - Paranephrops planifrons
+  - Refuge selection
+  - Artificial reef
+  - Aotearoa New Zealand
 
 funding: "This research was supported by the Fish Futures programme funded through a Ministry of Business, Innovation and Employment grant (CAWX2101)"
 
 citation:
   container-title: "..."
   
+knitr:
+  opts_chunk:
+    dev: "ragg_png"
+
 format:
   html:
     theme: cosmo
@@ -70,8 +79,9 @@ format:
   pdf:
     documentclass: article
     keep-tex: false
-  docx:
-    reference-doc: null
+    pdf-engine: xelatex
+    dev: "cairo_pdf"
+  docx: default
 ---
 
 ```{r}

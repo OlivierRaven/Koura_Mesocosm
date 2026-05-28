@@ -1,0 +1,1231 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Structure over material: mesocosm experiments reveal shelter design principles for threatened freshwater crayfish restoration},
+  pdfauthor={Olivier V. Raven; Robin Holmes; Ian A. K. Kusabs; Francis J. Burdon; Deniz Özkundakci},
+  pdfkeywords={Kōura, Paranephrops planifrons, Refuge
+selection, Artificial reef, Aotearoa New Zealand},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Structure over material: mesocosm experiments reveal shelter
+design principles for threatened freshwater crayfish restoration}
+\author{Olivier V. Raven \and Robin Holmes \and Ian A. K.
+Kusabs \and Francis J. Burdon \and Deniz Özkundakci}
+\date{2026-05-28}
+\begin{document}
+\maketitle
+\begin{abstract}
+Freshwater crayfish are among the most threatened invertebrates
+globally, with habitat loss a primary driver of population decline, yet
+the optimal design of habitat enhancement structures for their
+restoration remains largely unknown. Four controlled mesocosm
+experiments with the endemic Aotearoa-New Zealand freshwater crayfish
+kōura (\emph{Paranephrops planifrons}) examined how shelter structure,
+material composition, body size, and group dynamics influence refuge
+selection. Individual kōura strongly preferred a wooden log with
+enclosed drilled holes, but when housed in mixed-size groups, kōura
+preference shifted to flat and piled stone configurations, providing
+more complex refugia for different-size individuals simultaneously. Flat
+stone structures were preferred over wood splits and this was strongest
+for large individuals. When structural dimensions were held constant, no
+significant preference was detected between concrete and wooden brick
+structures, indicating that material composition alone does not drive
+refuge selection. Size class effects on shelter preference were
+quantified using Bayesian categorical mixed-effects models, which
+provide an appropriate framework for multi-choice repeated-measures
+designs with categorical outcomes and nested group structures. These
+mesocosm findings suggest that stone-based configurations warrant field
+evaluation as habitat enhancement structures for kōura restoration,
+given their structural complexity across size classes and alignment with
+the cultural values associated with restoring this taonga species.
+\end{abstract}
+
+\renewcommand*\contentsname{Table of contents}
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+
+\section{Introduction}\label{introduction}
+
+Crayfish are among the most threatened freshwater invertebrates
+globally, with 32\% of species assessed as threatened with extinction
+due to habitat loss, water quality decline, and invasive species
+(\citeproc{ref-Richman2015}{Richman et al., 2015}). As keystone species
+and ecosystem engineers, crayfish play crucial roles in freshwater food
+webs through shredding of leaf litter, bioturbation of sediments, and
+nutrient cycling, and their loss can have profound cascading effects on
+freshwater ecosystems (\citeproc{ref-Collier1997}{Collier et al., 1997};
+\citeproc{ref-Momot1995}{Momot, 1995}; \citeproc{ref-Parkyn2001}{Parkyn
+et al., 2001}). The increasing degradation of freshwater habitats
+therefore not only threatens crayfish populations, but also risks
+disrupting the ecosystem processes crayfish sustain.
+
+Habitat complexity is a key driver of crayfish population persistence,
+as structurally diverse habitats provide physical refugia from
+predators, foraging opportunities, and shelter during moulting when
+individuals are particularly vulnerable
+(\citeproc{ref-Hammond2006}{Hammond et al., 2006}). Shelter availability
+directly increases crayfish survival and growth under predation pressure
+(\citeproc{ref-Adams2007}{Adams, 2007}), making refuge quality a
+critical consideration for both natural habitat persistence and
+restoration design. Crayfish use a wide variety of natural and
+artificial structures as shelter, including rocks, woody debris, and
+even anthropogenic objects such as bottles and discarded appliances
+(\citeproc{ref-Adams2014}{Adams, 2014}; \citeproc{ref-Parkyn2009}{Parkyn
+et al., 2009}), demonstrating considerable flexibility in habitat use.
+In the context of freshwater restoration, increasing structural
+complexity through providing shelters has improved crayfish abundance
+and restocking success in degraded streams and lakes
+(\citeproc{ref-Huolila1997}{Huolila et al., 1997};
+\citeproc{ref-Johnsen2008}{Johnsen \& Taugbøl, 2008}), and the
+availability of coarser substrate has also been shown to improve
+juvenile survival rates (\citeproc{ref-Mazlum2017}{Mazlum et al.,
+2017}). These findings indicate that enhancing habitat complexity can be
+a useful management tool for threatened crayfish populations. While
+artificial aquatic habitats have received attention in marine systems
+(\citeproc{ref-Frehse2025}{Frehse et al., 2025}), equivalent systematic
+comparisons of shelter configurations for freshwater crayfish
+restoration remain largely absent from the literature.
+
+Shelter selection in crayfish is strongly influenced by body size, as
+individuals actively select refugia proportional to their dimensions.
+Crayfish individuals selected stones more than 3 times longer and 1.25
+times wider than their carapace length, with larger males consistently
+selecting larger stones (\citeproc{ref-Streissl2002}{Streissl \& Hödl,
+2002}). Body size and shelter dimensions have direct competitive
+consequences as crayfish in undersized shelters initiated and won more
+fight than those in appropriately sized shelters, suggesting that
+shelter fit influences an individual's assessment of its own fighting
+ability (\citeproc{ref-Percival2010}{Percival \& Moore, 2010}). Social
+dynamics further complicate shelter use when refuge availability is
+limited, as competitive interactions among conspecifics determine which
+individuals gain access to preferred shelters. Dominance hierarchies
+based on body size and reproductive status show that males and maternal
+females often are able to overtake shelters from non-maternal females,
+while adults consistently outcompete juveniles for shelter access
+(\citeproc{ref-Figler2005}{Figler et al., 2005}). Body weight ratio
+between contestants is a strong predictor of shelter takeover success,
+although prior ownership can offset size disadvantages
+(\citeproc{ref-Ranta1993}{Ranta \& Lindström, 1993}), particularly when
+both individuals hold high-quality shelters
+(\citeproc{ref-Takahashi2019}{Takahashi et al., 2019}). At the
+population level, habitat complexity buffers these competitive effects,
+with juveniles in structurally complex habitats showing higher survival,
+faster growth, and greater moulting rates as more shelter availability
+reduces agonistic interactions (\citeproc{ref-Olsson2009}{Olsson \&
+Nyström, 2009}). Together, shelter use in crayfish reflects an
+interaction between individual body size and social competitive
+dynamics, suggesting that effective habitat enhancement structures must
+provide a range of shelter sizes to support different life stages and
+size classes simultaneously.
+
+The material and structural properties of shelters influence their value
+as refugia. Studies comparing shelter configurations show that the
+availability and size of enclosed spaces matters more than total
+structure volume on reef fish assemblages
+(\citeproc{ref-Hylkema2020}{Hylkema et al., 2020}), while enclosed
+structures such as PVC pipes provided greater protection against
+predatory fish than stone or vegetation structures, likely due to their
+consistent hole dimensions (\citeproc{ref-Zhao2024}{Zhao et al., 2024}).
+However, the use of synthetic materials in restoration ecology brings
+ecological concerns, particularly in contexts where introducing
+non-native materials may conflict with conservation values or indigenous
+cultural frameworks (\citeproc{ref-Cooke2023}{Cooke et al., 2023};
+\citeproc{ref-Wehi2017}{Wehi \& Lord, 2017}). Natural materials such as
+stones and wood offer ecologically compatible alternatives, yet the
+importance of structural configuration versus material composition for
+crayfish shelter preference remains largely unknown.
+
+In Aotearoa-New Zealand (hereafter Aotearoa), the endemic freshwater
+crayfish kōura (\emph{Paranephrops planifrons}) faces conservation
+pressure from habitat loss, water quality degradation, and predation by
+invasive species (\citeproc{ref-Kusabsinpress}{Kusabs et al., inpress};
+\citeproc{ref-Lee2025}{Lee et al., 2025}). Kōura are taonga (culturally
+treasured) species for Māori, the indigenous people of Aotearoa, and
+hold significant ecological and cultural value in freshwater ecosystems
+(\citeproc{ref-Kusabs2009}{Kusabs \& Quinn, 2009}). In their natural
+habitat, kōura are positively associated with overhanging banks, coarse
+substrates, and woody debris (\citeproc{ref-Jowett2008}{Jowett et al.,
+2008}; \citeproc{ref-Parkyn2009}{Parkyn et al., 2009};
+\citeproc{ref-Raveninreview}{Raven et al., inreview};
+\citeproc{ref-Usio2000}{Usio \& Townsend, 2000}). Kōura have been shown
+to significantly increase refuge use in the presence of predators
+(\citeproc{ref-Ravenindraft}{Raven et al., indraft};
+\citeproc{ref-Shave1994}{Shave et al., 1994}). However, a systematic
+study on shelter design preference on crayfish remains largely absent
+from the literature. Habitat restoration by increasing shelter
+availability represents a promising management tool for kōura recovery,
+and the use of natural materials aligns with ecological and cultural
+values set for these naturally and culturally important lakes.
+
+In this study four controlled mesocosm experiments were conducted to
+identify kōura preferences among different structures varying in
+material and configuration, to examine how individual behaviour, body
+size, and group interactions influence refuge selection. We predicted
+that 1) Structurally complex structures providing enclosed crevices
+would be preferred over isolated or open structures, as enclosed spaces
+reduce predation risk. 2) Structure preference would be size-dependent,
+with larger kōura selecting structures with larger refuge spaces
+(\citeproc{ref-Percival2010}{Percival \& Moore, 2010};
+\citeproc{ref-Streissl2002}{Streissl \& Hödl, 2002}). 3) Stone-based
+structures would be preferred over wood due to greater structural
+stability, and 4) material type alone would not influence refuge
+preference between concrete and wooden bricks. The results provide
+practical guidance for designing cost-effective, ecologically
+appropriate habitat enhancement structures to support kōura population
+recovery.
+
+\section{Materials and Methods}\label{materials-and-methods}
+
+\subsection{Animal collection and tank
+setup}\label{animal-collection-and-tank-setup}
+
+In mid-August 2025, 72 kōura were sourced from lakes Ōkāreka and
+Tikitapu, located within the Rotorua Te Arawa Lakes area in the North
+Island of Aotearoa. Collected animals were transported to the Aquatic
+Research Centre at the University of Waikato in Hamilton. Individuals
+were assigned to one of three size classes based on orbital carapace
+length (OCL): small (\textless{} 22 mm), medium (22--30 mm), and large
+(\textgreater{} 30 mm). Each animal was marked with a unique
+identification number written on the carapace using an orange oil-based
+paint marker (Sharpie, medium point) (\citeproc{ref-Ramalho2010}{Ramalho
+et al., 2010}).
+
+Kōura were acclimatised for 12 days in outdoor concrete holding tanks (Ø
+1.4 m, 0.5 m deep), each filled to a depth of 0.4 m with dechlorinated
+tab water conditioned for three months. Paving sand was used as
+substrate, and shelters were provided as PVC pipes, broken terracotta
+pots, and perforated building bricks. Each holding tank housed 10--12
+kōura. Kōura were fed every second day with commercial carnivore pellets
+(Hikari Tropical, Kyorin Food Industries Ltd., Japan; animal protein
+47\%).
+
+Experiments were conducted outside in six circular concrete tanks (1425
+L; Ø 1.85 m, 0.53 m deep), each filled to a depth of 0.4 m with
+dechlorinated tab water conditioned for three months. Paving sand was
+used as substrate and tanks were closed off with a lid constructed of
+two layers of shade cloth to prevent escape and minimise sun activity.
+Fresh dechlorinated tap water and an air stone were added to each tank
+in between the experimental rounds. To prevent temperatures in the tanks
+getting too high the experiments were conducted in spring (September
+till October). Because kōura are a taonga (treasured) species,
+permission was obtained from Te Arawa Lakes Trust and Te Komiti
+Whakahaere. All experimental procedures were conducted under University
+of Waikato animal ethics committee approval (protocol number: 1207; see
+Ethical Approval section).
+
+\subsection{Exp 1: Single kōura}\label{exp-1-single-kux14dura}
+
+This experiment assessed individual kōura structure preference by
+offering single animals a choice among four structures
+(Figure~\ref{fig-exp-setup}). The structure-types were: SingleStone (ten
+quarried stones (150--250 mm) placed separately), FlatStone (ten
+quarried stones arranged tightly without stacking), StonePile (ten
+quarried stones stacked to form a pile), and WoodLog (a tānekaha
+(\emph{Phyllocladus trichomanoides}) log (500 mm long, 150 mm diameter)
+containing six drilled holes (70 mm deep, 32 mm diameter)). Six
+experimental tanks were used, each housing a single medium-sized kōura.
+In total 30 kōura consisting of 15 females with mean OCL and weight ±
+SD: 26.9 ± 2 mm, range: 23.2--29.8 mm, 12.5 ± 3.3 g and 15 males: 26.1 ±
+2.2 mm, range: 22.6--30 mm, 11.9 ± 3.1 g were tested across five
+experimental replicates, with each replicate lasting 22 hours.
+
+Each experimental tank was divided into four quadrants, with one
+structure type placed at random (randomizer.org) in each quadrant. If a
+kōura was not using a structure, TankWall was noted as location which
+represents the wall of the tank. For each trial, a single kōura was
+placed inside a vertically oriented plastic tube (50 mm long, open at
+one end and sealed at the other) positioned at the centre of the tank,
+with the sealed end resting on the substrate. This ensured a
+standardised starting position from which the kōura could exit in any
+direction. The time taken for the kōura to locate its first structure
+was recorded (L0). On the following day, the final location of the kōura
+was noted (L1) after which it was removed from the tank. Tanks were
+reset and structure placements re-randomised prior to the next trial.
+Each kōura was used in a single trial only and was not reused across
+replicates.
+
+To test the difference between the structure types selected the next
+day, a multinomial goodness-of-fit test was performed using the XNomial
+package (\citeproc{ref-Engels2014}{Engels, 2014}). TankWall was excluded
+from preference tests as it represents the absence of structure choice
+rather than a structure type preference. Additionally, pairwise
+likelihood-ratio G-tests with Bonferroni correction were used to
+identify which structure types differed significantly from each other.
+To test whether structure type use differed between sexes, Fisher's
+exact test with simulated p-values (9999 replicates) was used due to
+small expected counts. A permutation-based symmetry test was applied to
+assess whether structure type transitions between L0 and L1 were
+directional rather than random. To confirm nocturnal activity, three
+GoPros (Hero 3) were placed in one tank at the end of the day and
+recorded for five hours.
+
+\subsection{Exp 2: Group kōura}\label{exp-2-group-kux14dura}
+
+Building on experiment 1, this experiment examined how group dynamics
+and body size influenced structure preference when kōura were housed
+together. The six experimental tanks were used and configured with the
+same structure types and randomisation procedure as in experiment 1
+(Figure~\ref{fig-exp-setup}). In contrast to the single-animal trials,
+each tank housed a group of six male kōura, comprising two small, two
+medium, and two large individuals. Size classes were defined by OCL:
+small (mean OCL and weight ± SD: 19.2 ± 2 mm, range: 15.8--21.6 mm, 3.9
+± 2.1 g), medium (26.4 ± 1.6 mm, 23.5--29.5 mm, 11.6 ± 2.4 g), and large
+(36.3 ± 4.2 mm, 30.7--43.3 mm, 31.8 ± 11.2 g). Each group was introduced
+to the centre of the tank within an open-top plastic container (150 ×
+150 × 85 mm). The container was removed, and the initial location of
+each individual was recorded. On the following day, the final location
+of each kōura was documented, before all individuals were removed from
+the tank. This procedure was repeated across five experimental
+replicates reusing the same six groups of animals.
+
+\subsection{Exp 3: Wood vs Stone}\label{exp-3-wood-vs-stone}
+
+Using the same groups from experiment 2, this experiment narrowed the
+choice to two structure types, stone and wood, to directly compare
+preference between these materials. The structure types were: (1) a flat
+stone structure (FlatStone) constructed from twelve stones placed
+tightly together, and (2) a wood structure consisting of twelve wood
+splits (WoodSplit) made from the tānekaha logs
+(Figure~\ref{fig-exp-setup}). Each group was released at the centre of
+the tank, and the initial structure selected by each kōura was recorded.
+The following day, the final location of each kōura was documented. This
+procedure was repeated three times, reusing the same six groups of
+animals.
+
+\subsection{Exp 4: Bricks}\label{exp-4-bricks}
+
+This experiment tested whether kōura showed a preference between
+concrete and wooden perforated brick structures, to isolate the effect
+of material on structure preference. Two perforated building bricks
+(BrickConcrete) of 80 × 80 × 225 mm with five holes (Ø 30 mm) were
+tested against two wooden bricks (BrickWood) made from Western red cedar
+(\emph{Thuja plicata}), constructed to match the building bricks in
+external dimensions and hole size. To prevent floating a solid clay
+brick of identical dimensions was placed on top of each wooden brick
+(Figure~\ref{fig-exp-setup}). New groups of ten kōura and four
+experiment tanks were used for this experiment, comprising a total of 40
+individuals consitting of 18 females with mean OCL and weight ± SD: 26.2
+± 3.1 mm, range: 20.2--30.8 mm, 12.2 ± 4.2 g and 22 males: 26 ± 2.1 mm,
+range: 20.9--29.5 mm, 11.6 ± 3.2 g. Due to reduced animal availability,
+individuals were drawn from a slightly broader size range than medium
+sized individuals, resulting in unbalanced size class representation
+(small: n = 4, medium: n = 35, large: n = 1). In each of the four
+experimental tank quadrants one brick was placed, with similar brick
+types positioned opposite to one another. Each group of kōura was
+released at the centre of the tank and the following day, the final
+location of each kōura was documented. This experiment was repeated four
+times by reusing the four groups of ten kōura.
+
+\subsection{Data analysis}\label{data-analysis}
+
+To test whether overall structure preference existed at the group level,
+one-sample Wilcoxon signed-rank tests were applied to group-round
+proportions for each structure type, testing against a null expectation
+of 0.25 (equal distribution among four structure types). P-values were
+Bonferroni adjusted for multiple comparisons. Normal approximation was
+used due to ties arising from discrete group counts. To test whether
+size classes affected structure preference while accounting for repeated
+measurement of individuals and groups, a Bayesian categorical
+mixed-effects model was fitted using the brms package
+(\citeproc{ref-Burkner2025}{Bürkner et al., 2025}), with structure type
+as the outcome, size class as a fixed effect, and group identity,
+individual identity nested within group, and experimental round as
+random intercepts. The Stuart-Maxwell test was used to test for
+statistical differences between stage L0 and L1. The Bayesian
+categorical mixed-effects model was used for this analysis as the
+outcome is categorical and individual animals within group within round
+create a three-level nested random effect structure. Group numbers are
+also relatively low with only six groups, and standard frequentist
+mixed-effect approaches such as lme4 (\citeproc{ref-Bates2015}{Bates et
+al., 2015}) does not support categorical outcomes with complex nested
+random effects structures, making Bayesian estimation the appropriate
+choice for this design (\citeproc{ref-Bolker2009}{Bolker et al., 2009};
+\citeproc{ref-McCarthy2007}{McCarthy, 2007}). Model convergence was
+assessed using the Gelman-Rubin diagnostic (all \(\hat{R}\) = 1.00) and
+divergent transition counts (all experiments: 0 divergences), confirming
+reliable posterior sampling (\citeproc{ref-Gelman1992}{Gelman \& Rubin,
+1992}). The same modelling framework and convergence criteria were
+applied in experiments 3 and 4.
+
+To test the difference between FlatStone and WoodSplit the Wilcoxon
+signed-rank test was applied to group-round proportions for each
+structure type, testing against a null expectation of 0.5. P-values were
+Bonferroni adjusted. To test whether size classes affected structure
+preference while accounting for repeated measurement of individuals and
+groups, a similar Bayesian categorical mixed-effects model was fitted.
+The Stuart-Maxwell test was used to test for statistical differences
+between stage L0 and L1.
+
+To test whether kōura showed a preference between BrickConcrete and
+BrickWood, the Wilcoxon signed-rank test was applied to group-round
+proportions for each brick type, testing against a null expectation of
+0.5 and P-values were Bonferroni adjusted. A paired Wilcoxon signed-rank
+test was used to directly compare group-round proportions between
+BrickConcrete and BrickWood. As size class was unbalanced, the effect of
+sex on brick preference was tested using a similar Bayesian categorical
+mixed-effects model. Finally, as only next-day locations (L1) were
+recorded in this experiment, no directional shift analysis was
+performed.
+
+\section{Results}\label{results}
+
+\subsection{Exp 1: Single kōura}\label{exp-1-single-kux14dura-1}
+
+Individual kōura showed a strong preference for WoodLog, selecting it
+significantly more often than SingleStone, FlatStone, and StonePile
+(pairwise G-test, Bonferroni adjusted: \emph{p} = \textless0.001, 0.011,
+0.004, respectively; overall multinomial test: \emph{p} =
+\textless0.001; Figure~\ref{fig-exp1}). No significant differences were
+found among the stone structure types. Overall, WoodLog was selected by
+67\% of kōura at L1 (males: 80\%; females: 53\%), and no kōura were
+found at TankWall, indicating all individuals actively selected a
+structure. Structure preference did not differ significantly between
+sexes (Fisher's exact test: \emph{p} = 0.459). The symmetry test
+indicated that structure type use shifted between L0 and L1 (\emph{p} =
+\textless0.001), suggesting kōura actively relocated to preferred
+structure types overnight rather than remaining at their initial
+location. The GoPro footage also shows kōura emerging, walking and
+climbing on the structures after sunset.
+
+\subsection{Exp 2: Group kōura}\label{exp-2-group-kux14dura-1}
+
+When housed in mixed-size groups, kōura showed a significant overall
+preference for stone-based structures (Figure~\ref{fig-exp2}). FlatStone
+was used significantly more (\emph{p} = 0.004), while SingleStone
+(\emph{p} = \textless0.001) and WoodLog (\emph{p} = 0.039) were
+significantly avoided. StonePile did not differ from random expectation
+(\emph{p} = 1.000), and did not differ significantly from FlatStone
+(\emph{p} = 0.117). No kōura were found at TankWall, indicating active
+structure selection across the group. Size classes had limited but
+credible effect on structure preference. Medium sized kōura showed a
+weaker preference for FlatStone over SingleStone compared to small kōura
+(β = -1.75, 95\% CI: -3.66 to -0.09; posterior probability = 0.98),
+while no other size class effect was credible. Overall, FlatStone
+remained the most selected structure type across all size classes, but
+its strength of preference declined from small (posterior probability of
+top choice = 85\%) to medium (53\%), and with large kōura showing
+similar preference between FlatStone and StonePile (41\% vs 38\%).
+Structure type use shifted directionally between L0 and L1
+(Stuart-Maxwell test: \emph{p} = 0.001), indicating that kōura actively
+relocated to preferred structure types overnight.
+
+\subsection{Exp 3: Wood vs Stone}\label{exp-3-wood-vs-stone-1}
+
+Kōura consistently selected FlatStone over WoodSplit, with the
+preference growing with body size (Figure~\ref{fig-exp3}). At the group
+level, FlatStone was used significantly more than expected (\emph{p} =
+0.001), while WoodSplit was significantly avoided (\emph{p} = 0.004).
+Only 1\% of kōura were found at TankWall, suggesting almost all kōura
+selected one of the two structure types. The Bayesian model indicated
+that preference for FlatStone strengthened with body size, with the
+posterior probability of FlatStone being the top-ranked structure
+increasing from small (62\%) to medium (78\%), to large kōura (96\%).
+Large kōura showed a particularly strong and credible preference for
+FlatStone over WoodSplit (β = -2.4, 95\% CI: -4.39 to -0.8; posterior
+probability = \textgreater{} 0.99), while medium kōura did not differ
+from small kōura. Structure type use shifted directionally between L0
+and L1 (Stuart-Maxwell test: \emph{p} = 0.003), with kōura relocating
+toward FlatStone overnight.
+
+\subsection{Exp 4: Bricks}\label{exp-4-bricks-1}
+
+Kōura used both brick types, showing no significant preference between
+BrickConcrete and BrickWood (\emph{p} = 0.137; Figure~\ref{fig-exp4}),
+with mean group proportions of 47\% and 53\% respectively. Neither brick
+type differed significantly from equal distribution (\emph{p} = 0.273).
+9\% of kōura were found at TankWall, which is higher than in any
+previous experiment. Sex had no credible effect on preference between
+brick types (β = -0.18, 95\% CI: -1.29 to 0.85; posterior probability =
+0.64), indicating that concrete and wooden perforated brick structures
+of identical dimensions were both suitable refuge for male and female
+kōura.
+
+\section{Discussion}\label{discussion}
+
+\subsection{Structure matters more than
+material}\label{structure-matters-more-than-material}
+
+Across four experiments, refuge configuration and structural stability
+consistently predicted kōura habitat selection more strongly than
+material composition alone. Experiment 4 shows that when kōura were
+presented with similar refuge sizes in concrete bricks and wooden bricks
+no preference for material was detected. In experiment 3 FlatStone and
+WoodSplits were tested against each other and showed a difference in
+structure preference likely due to the stability of the stones compared
+to the wood splits. The WoodSplits were sinking but created less
+structurally stable refuge places in the sandy substrate than the
+FlatStone structures {[}O.V. Raven, pers. obs.{]}. Experiment 2 showed
+that when a group of kōura is presented with multiple structure types
+the structures that provide the most crevice complexity drive
+group-level preference. This was the case for FlatStone followed by
+StonePile for harbouring the most kōura. In experiment 1 the preference
+was different as individual kōura preferred WoodLog as refuge, this is
+consistent with prediction 1, as single kōura probably searched the
+refuge that would give most protection (\citeproc{ref-Jurcak2016}{Jurcak
+et al., 2016}), and the drilled holes in the WoodLog offer most
+protection similar to what has been found for perforated brick and PVC
+tube shelters under catfish predation (\citeproc{ref-Adams2007}{Adams,
+2007}; \citeproc{ref-Zhao2024}{Zhao et al., 2024}). The directional
+shift in structure type use between L0 and L1 confirmed across all
+experiments that kōura actively relocated overnight rather than
+remaining at their initial location, supporting the interpretation that
+next-day locations reflect genuine refuge preference rather than chance
+displacement. The preference shift from WoodLog in single to stone
+structures in group experiments was unexpected. It might be explained by
+size mismatch between fixed hole dimensions and the range of body sizes
+present in each group, while the large surface area of FlatStone allowed
+multiple individuals to shelter simultaneously and reduce competitive
+displacement. Learning across rounds may also have contributed, as
+WoodLog was most selected structure in round 1 of experiment 2 (17 out
+of 36 times) but not in subsequent rounds, suggesting kōura may have
+shifted preference after initial exploration. This learning was possible
+as the groups of kōura in experiment 2 were reused all five rounds,
+while the single kōura in experiment 1 were only used once. The reuse of
+groups across rounds was necessary given the limited availability of
+kōura and ethical constraints on collection numbers. The number of
+independent groups was low across experiments (six in experiments 2 and
+3, four in experiment 4), constraining the statistical power for
+detecting group-level effects (\citeproc{ref-Hurlbert1984}{Hurlbert,
+1984}). Despite these constraints, consistent patterns in size-dependent
+preference were evident across experiments.
+
+\subsection{Body size and competitive
+dynamics}\label{body-size-and-competitive-dynamics}
+
+Size class consistently influenced refuge preference across experiments,
+but the pattern differed by context. In experiment 3, larger kōura
+showed a stronger preference for FlatStone over WoodSplit than smaller
+individuals. This may reflect larger kōura being more capable of
+asserting dominance over preferred stable refugia through competitive
+displacement, consistent with size-based dominance hierarchy documented
+in kōura populations (\citeproc{ref-Figler2005}{Figler et al., 2005};
+\citeproc{ref-Ranta1993}{Ranta \& Lindström, 1993};
+\citeproc{ref-Stewart2011}{Stewart \& Tabak, 2011}). In experiment 2,
+where four structure types were available, small kōura showed the
+strongest preference for FlatStone while large kōura distributed more
+evenly between FlatStone and StonePile, suggesting that when multiple
+stone structures are available larger individuals are less selective
+between stone configurations, likely because both provide suitable sized
+crevices for larger bodies. Small kōura may have particularly benefited
+from FlatStone's large continuous surface area, which provides the most
+accessible refuge spaces also for smaller body dimensions without
+creating competition with larger individuals. The absence of sex effects
+in experiment 1 and 4 suggests that refuge preference in kōura is driven
+primarily by body size and social dominance rather than sex.
+
+When refuge availability is limited, competitive hierarchies lead to
+smaller and recently moulted crayfish to be displaced from refuge and
+left exposed (\citeproc{ref-Figler2005}{Figler et al., 2005};
+\citeproc{ref-Ranta1993}{Ranta \& Lindström, 1993}). Providing
+sufficient refuge spaces with a range of crevice size can reduce
+agonistic interactions and benefits the whole population
+(\citeproc{ref-Olsson2009}{Olsson \& Nyström, 2009}), supporting complex
+structure configurations over structures with fixed hole dimensions.
+
+\subsection{Restoration implications}\label{restoration-implications}
+
+The finding that structural configuration and stability drive refuge
+preference more strongly than material composition has broad
+implications for habitat enhancement structure design beyond kōura
+restoration. The availability of appropriate size and structurally
+stable crevices appears to be the most important driver for use by
+crayfish (\citeproc{ref-Huolila1997}{Huolila et al., 1997};
+\citeproc{ref-Streissl2002}{Streissl \& Hödl, 2002}). Also in marine
+environments these principles may be applicable to other
+refuge-dependent species including lobsters and reef fish
+(\citeproc{ref-Hylkema2020}{Hylkema et al., 2020};
+\citeproc{ref-Spanier1994}{Spanier, 1994}). Other important factors are
+that habitat enhancement structures need to provide protection from
+predators, and there need to be food in the vicinity
+(\citeproc{ref-Huolila1997}{Huolila et al., 1997}), therefore
+understanding of local dynamics is important. When building habitat
+enhancement structures the use of locally sourced natural materials
+should be favoured as these align with both ecological best practice
+(\citeproc{ref-Cooke2023}{Cooke et al., 2023}) and with indigenous
+principles of guardianship over natural character of culturally
+significant lake environments. Natural wood structures have been shown
+to outperform bare substrates and plastic structures by attracting more
+marine shrimp and freshwater fish (\citeproc{ref-Dickson2023}{Dickson et
+al., 2023}; \citeproc{ref-Magnelia2008}{Magnelia et al., 2008}).
+
+For kōura restoration in lake environments, stone pile configurations
+are recommended over flat arrangements. Pile structures provide a range
+of crevice sizes accommodating multiple size classes simultaneously and
+are less likely to gradually sink into soft substrates than flat
+configurations (\citeproc{ref-Garron2024}{Garron et al., 2024}). For
+in-lake deployment, cobble substrate of 100--300 mm is recommended as
+kōura are positively associated with coarser substrate in this size
+range (\citeproc{ref-Johnsen2008}{Johnsen \& Taugbøl, 2008};
+\citeproc{ref-Jowett2008}{Jowett et al., 2008};
+\citeproc{ref-Kusabs2015}{Kusabs et al., 2015};
+\citeproc{ref-Olsson2006}{Olsson et al., 2006}). Providing enclosed
+crevice spaces within structures is important in lakes where kōura are
+preyed upon by invasive species such as catfish
+(\citeproc{ref-Kusabsinpress}{Kusabs et al., inpress};
+\citeproc{ref-Raveninreview}{Raven et al., inreview}), as refuge quality
+directly influences predation survival (\citeproc{ref-Zhao2024}{Zhao et
+al., 2024}). While these mesocosm findings provide clear design
+guidance, field validation in lake environments remains an essential
+next step, as in-lake conditions including water movement, natural
+substrate, and predator pressure may modify kōura preferences in ways
+not captured under controlled conditions.
+
+\subsection{Conclusion}\label{conclusion}
+
+Many crayfish species around the world live in degraded habitats with
+habitat complexity as the limiting factor. Restoration tools are needed
+to help them and protect their role in freshwater ecosystems. This study
+contributes to the understanding that structure and crevice complexity
+matter more than material. This study suggests that for lake-based kōura
+restoration, stone pile configurations represent the most effective and
+cost-efficient habitat enhancement structure design, provide a wide
+range and structurally stable crevices of different sizes for all life
+stages. Locally sourced rocks align also with ecological and cultural
+values of restoring taonga species habitat using natural materials.
+Field validation of these mesocosm-derived preferences remains an
+important next step for translating these findings into effective
+restoration practice.
+
+\section{Acknowledgements}\label{acknowledgements}
+
+We thank Te Arawa Lakes Trust and Te Komiti Whakahaere for the
+opportunity to collect and study the treasured kōura. We are grateful to
+Soweeta Fort-D'ath and William Anaru (Te Arawa Lakes Trust), and Tihini
+Grant (Ngāti Pikiao). This research was supported by the Fish Futures
+programme funded through a Ministry of Business, Innovation and
+Employment grant (CAWX2101).
+
+\subsection{Authors' contributions}\label{authors-contributions}
+
+Study conception and design were undertaken by O.V.R., R.H. and F.J.B.
+Experiments were conducted by O.V.R. Data analysis was performed by
+O.V.R. Local ecological knowledge and kōura were supplied by I.A.K.K.
+Manuscript drafting was led by O.V.R. All authors contributed to
+manuscript revision, approved the results, and the final manuscript.
+
+\subsection{Ethical approval}\label{ethical-approval}
+
+This study received ethical approval by University of Waikato animal
+ethics committee, protocol number: 1207. Additional permission to
+conduct experiments with kōura was granted by Te Arawa Lakes Trust and
+Te Komiti Whakahaere.
+
+\subsection{Declarations}\label{declarations}
+
+The corresponding author has declared that none of the authors has any
+competing interests.
+
+\subsection{Data availability
+statement}\label{data-availability-statement}
+
+The code and derived data supporting the findings of this study are
+openly available on GitHub
+(https://github.com/OlivierRaven/Koura\_Mesocosm)and a rendered version
+of the analysis is hosted at
+https://olivierraven.github.io/Koura\_Mesocosm/. The primary raw dataset
+is archived on Zenodo (https://doi.org/\ldots\ldots). Peer review
+documents, including the cover letter and reviewer responses, are
+available in the manuscript repository in the interest of open and
+transparent science.
+
+\section{Tables}\label{tables}
+
+\section{Figures}\label{figures}
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/Setup_exp_tanks.png}}
+
+}
+
+\caption{\label{fig-exp-setup}Overhead photographs of experimental tank
+configurations for each of the four mesocosm experiments. Experiment 1
+(Single kōura) and Experiment 2 (Group kōura): four shelter types,
+WoodLog (tānekaha log with drilled holes), FlatStone (stones arranged
+flat), StonePile (stones stacked), and SingleStone (individual stones
+placed separately). Experiment 3 (Wood vs Stone): WoodSplit shelter
+(tānekaha wood splits) and FlatStone shelter placed in opposing halves
+of the tank. Experiment 4 (Bricks): BrickConcrete (perforated concrete
+bricks) and BrickWood (wooden bricks of identical dimensions) placed in
+opposing quadrants of the tank.}
+
+\end{figure}%
+
+\begin{verbatim}
+systemfonts and textshaping have been compiled with different versions of Freetype. Because of this, textshaping will not use the font cache provided by systemfonts
+\end{verbatim}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/analysis-fig-exp1-output-2.png}}
+
+}
+
+\caption{\label{fig-exp1}Proportion of individual kōura (Experiment 1)
+found at each reef type at final observation (L1), shown separately for
+female and male kōura. Bars show observed proportions with sample sizes
+(n) shown in white. Letters above bars indicate significant pairwise
+differences (G-test, Bonferroni adjusted).}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://OlivierRaven.github.io/4.Mesocosm_study/analysis-preview.html\#cell-fig-exp1}{Analysis
+Notebook}}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/analysis-fig-exp2-output-1.png}}
+
+}
+
+\caption{\label{fig-exp2}Reef type preference of group kōura (Experiment
+2). (A) Proportion of kōura found at each reef type at L1 across all
+groups and rounds. The dashed line indicates the null expectation of
+equal distribution (0.25). Significance symbols indicate deviation from
+null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑
+used more than expected, ↓ used less than expected. Sample sizes shown
+in white. (B) Posterior predicted probability of reef type use by size
+class from Bayesian categorical mixed model, with 95\% credible
+intervals.}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://OlivierRaven.github.io/4.Mesocosm_study/analysis-preview.html\#cell-fig-exp2}{Analysis
+Notebook}}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/analysis-fig-exp3-output-1.png}}
+
+}
+
+\caption{\label{fig-exp3}Reef type preference in stone versus wood
+comparison (Experiment 3). (A) Proportion of kōura found at each reef
+type at L1 across all groups and rounds. The dashed line indicates the
+null expectation of equal distribution (0.5). Significance symbols as in
+Figure 3. (B) Posterior predicted probability of reef type use by size
+class from Bayesian categorical mixed model, with 95\% credible
+intervals. TankWall excluded from model predictions.}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://OlivierRaven.github.io/4.Mesocosm_study/analysis-preview.html\#cell-fig-exp3}{Analysis
+Notebook}}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/analysis-fig-exp4-output-1.png}}
+
+}
+
+\caption{\label{fig-exp4}Brick material preference (Experiment 4). (A)
+Proportion of kōura found at each reef type at L1 across all groups and
+rounds. The dashed line indicates the null expectation of equal
+distribution (0.5). (B) Posterior predicted probability of reef type use
+by sex from Bayesian categorical mixed model, with 95\% credible
+intervals. TankWall excluded from model predictions.}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://OlivierRaven.github.io/4.Mesocosm_study/analysis-preview.html\#cell-fig-exp4}{Analysis
+Notebook}}
+
+\protect\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-Adams2007}
+Adams, S. B. (2007). Direct and indirect effects of channel catfish
+(ictalurus punctatus) on native crayfishes (cambaridae) in experimental
+tanks. \emph{The American Midland Naturalist}, \emph{158}(1), 85-\/-96.
+\url{https://doi.org/10.1674/0003-0031(2007)158\%5B85:daieoc\%5D2.0.co;2}
+
+\bibitem[\citeproctext]{ref-Adams2014}
+Adams, S. B. (2014). Crayfish use of trash versus natural cover in
+incised, sand-bed streams. \emph{Environmental Management},
+\emph{53}(2), 382-\/-392.
+\url{https://doi.org/10.1007/s00267-013-0197-3}
+
+\bibitem[\citeproctext]{ref-Bates2015}
+Bates, D., Mächler, M., Bolker, B., \& Walker, S. (2015). Fitting linear
+mixed-effects models using {lme4}. \emph{Journal of Statistical
+Software}, \emph{67}(1), 1--48.
+\url{https://doi.org/10.18637/jss.v067.i01}
+
+\bibitem[\citeproctext]{ref-Bolker2009}
+Bolker, B. M., Brooks, M. E., Clark, C. J., Geange, S. W., Poulsen, J.
+R., Stevens, M. H. H., \& White, J.-S. S. (2009). Generalized linear
+mixed models: A practical guide for ecology and evolution. \emph{Trends
+in Ecology \& Evolution}, \emph{24}(3), 127-\/-135.
+\url{https://doi.org/10.1016/j.tree.2008.10.008}
+
+\bibitem[\citeproctext]{ref-Burkner2025}
+Bürkner, P.-C., Gabry, J., Weber, S., \& Johnson, A. (2025).
+\emph{{brms}: {Bayesian} regression models using {Stan}} (Version
+2.23.0) {[}Computer software{]}.
+\url{https://cran.r-project.org/web/packages/brms/index.html}
+
+\bibitem[\citeproctext]{ref-Collier1997}
+Collier, K. J., Parkyn, S. M., \& Rabeni, C. F. (1997). Koura: A
+keystone species. \emph{Water and Atmosphere}, \emph{5}(1), 18--20.
+
+\bibitem[\citeproctext]{ref-Cooke2023}
+Cooke, S. J., Piczak, M. L., Vermaire, J. C., \& Kirkwood, A. E. (2023).
+On the troubling use of plastic {``habitat''} structures for fish in
+freshwater ecosystems -- or -- when restoration is just littering.
+\emph{FACETS}, \emph{8}, 1-\/-19.
+\url{https://doi.org/10.1139/facets-2022-0210}
+
+\bibitem[\citeproctext]{ref-Dickson2023}
+Dickson, J., Franken, O., Watson, M. S., Monnich, B., Holthuijsen, S.,
+Eriksson, B. K., Govers, L. L., Heide, T. van der, \& Bouma, T. J.
+(2023). Who lives in a pear tree under the sea? A first look at tree
+reefs as a complex natural biodegradable structure to enhance
+biodiversity in marine systems. \emph{Frontiers in Marine Science},
+\emph{10}, 1213790. \url{https://doi.org/10.3389/fmars.2023.1213790}
+
+\bibitem[\citeproctext]{ref-Engels2014}
+Engels, B. (2014). XNomial: Exact goodness-of-fit test for multinomial
+data with fixed probabilities. In \emph{CRAN: Contributed Packages}. The
+R Foundation. \url{https://doi.org/10.32614/cran.package.xnomial}
+
+\bibitem[\citeproctext]{ref-Figler2005}
+Figler, M. H., Blank, G. S., \& Peeke, H. V. S. (2005). Shelter
+competition between resident male red swamp crayfish {\emph{Procambarus
+clarkii}} (girard) and conspecific intruders varying by sex and
+reproductive status. \emph{Marine and Freshwater Behaviour and
+Physiology}, \emph{38}(4), 237-\/-248.
+\url{https://doi.org/10.1080/10236240500376477}
+
+\bibitem[\citeproctext]{ref-Frehse2025}
+Frehse, F. de A., Derviche, P., Pereira, F. W., Hostim-Silva, M., \&
+Vitule, J. R. S. (2025). Artificial aquatic habitats: A systematic
+literature review and new perspectives. \emph{Hydrobiologia},
+\emph{852}(8), 1997--2012.
+\url{https://doi.org/10.1007/s10750-024-05589-0}
+
+\bibitem[\citeproctext]{ref-Garron2024}
+Garron, C., Pangaud, A., Taubaty, M., Rolan‐Meynard, M., Argillier, C.,
+Raymond, J., Dublon, J., \& Westrelin, S. (2024). Towards the
+development of a standardized method to monitor lakeshore
+hydromorphological restoration measures. \emph{Aquatic Conservation:
+Marine and Freshwater Ecosystems}, \emph{34}(4).
+\url{https://doi.org/10.1002/aqc.4152}
+
+\bibitem[\citeproctext]{ref-Gelman1992}
+Gelman, A., \& Rubin, D. B. (1992). Inference from iterative simulation
+using multiple sequences. \emph{Statistical Science}, \emph{7}(4),
+457--472. \url{https://doi.org/10.1214/ss/1177011136}
+
+\bibitem[\citeproctext]{ref-Hammond2006}
+Hammond, K. S., Hollows, J. W., Townsend, C. R., \& Lokman, P. M.
+(2006). Effects of temperature and water calcium concentration on
+growth, survival and moulting of freshwater crayfish, paranephrops
+zealandicus. \emph{Aquaculture}, \emph{251}(2-4), 271-\/-279.
+\url{https://doi.org/10.1016/j.aquaculture.2005.05.032}
+
+\bibitem[\citeproctext]{ref-Huolila1997}
+Huolila, M., Marjomäki, T. J., \& Laukkanen, E. (1997). The success of
+crayfish stocking in a dredged river with and without artificial shelter
+increase. \emph{Fisheries Research}, \emph{32}(2), 185-\/-189.
+\url{https://doi.org/10.1016/s0165-7836(97)00046-5}
+
+\bibitem[\citeproctext]{ref-Hurlbert1984}
+Hurlbert, S. H. (1984). Pseudoreplication and the design of ecological
+field experiments. \emph{Ecological Monographs}, \emph{54}(2),
+187-\/-211. \url{https://doi.org/10.2307/1942661}
+
+\bibitem[\citeproctext]{ref-Hylkema2020}
+Hylkema, A., Debrot, A. O., Osinga, R., Bron, P. S., Heesink, D. B.,
+Izioka, A. K., Reid, C. B., Rippen, J. C., Treibitz, T., Yuval, M., \&
+Murk, A. J. (2020). Fish assemblages of three common artificial reef
+designs during early colonization. \emph{Ecological Engineering},
+\emph{157}, 105994. \url{https://doi.org/10.1016/j.ecoleng.2020.105994}
+
+\bibitem[\citeproctext]{ref-Johnsen2008}
+Johnsen, S. I., \& Taugbøl, T. (2008). Add stones, get crayfish -- is it
+that simple? \emph{Freshwater Crayfish}, \emph{16}(1), 47--50.
+
+\bibitem[\citeproctext]{ref-Jowett2008}
+Jowett, I. G., Parkyn, S. M., \& Richardson, J. (2008). Habitat
+characteristics of crayfish (paranephrops planifrons) in new zealand
+streams using generalised additive models (GAMs). \emph{Hydrobiologia},
+\emph{596}(1), 353-\/-365.
+\url{https://doi.org/10.1007/s10750-007-9108-z}
+
+\bibitem[\citeproctext]{ref-Jurcak2016}
+Jurcak, A. M., Lahman, S. E., Wofford, S. J., \& Moore, P. A. (2016).
+Behavior of crayfish. In \emph{Biology and ecology of crayfish}. CRC
+Press.
+
+\bibitem[\citeproctext]{ref-Kusabsinpress}
+Kusabs, I. A., Duggan, I. C., Scholes, P., Bruere, A., Te Kurapa, T. W.,
+Grant, T., \& Burdon, F. J. (inpress). Invasive catfish linked to the
+decline of freshwater crayfish in two aotearoa new zealand lakes.
+\emph{Manuscript Submitted for Publication}.
+
+\bibitem[\citeproctext]{ref-Kusabs2009}
+Kusabs, I. A., \& Quinn, J. M. (2009). Use of a traditional maori
+harvesting method, the tau kōura, for monitoring kōura (freshwater
+crayfish, paranephrops planifrons) in lake rotoiti, north island, new
+zealand. \emph{New Zealand Journal of Marine and Freshwater Research},
+\emph{43}(3), 713--722. \url{https://doi.org/10.1080/00288330909510036}
+
+\bibitem[\citeproctext]{ref-Kusabs2015}
+Kusabs, I. A., Quinn, J. M., \& Hamilton, D. P. (2015). Effects of
+benthic substrate, nutrient enrichment and predatory fish on freshwater
+crayfish (koura, paranephrops planifrons) population characteristics in
+seven te arawa (rotorua) lakes, north island, new zealand. \emph{Marine
+and Freshwater Research}, \emph{66}(7), 631--643.
+\url{https://doi.org/10.1071/mf14148}
+
+\bibitem[\citeproctext]{ref-Lee2025}
+Lee, F., Kusabs, I. A. K., Perry, G. L. W., \& MacNeil, C. (2025).
+Identifying refugia from the synergistic threats of climate change and
+invasive species. \emph{Web Ecology}, \emph{25}(2), 221--239.
+\url{https://doi.org/10.5194/we-25-221-2025}
+
+\bibitem[\citeproctext]{ref-Magnelia2008}
+Magnelia, S. J., Jesus, M. J. D., Schlechte, J. W., Cummings, G. C., \&
+Duty, J. L. (2008). \emph{Comparison of plastic pipe and juniper tree
+fish attractors in a central texas reservoir}.
+
+\bibitem[\citeproctext]{ref-Mazlum2017}
+Mazlum, Y., Guner Gurlek, O., \& Sirin, S. (2017). Effect of different
+substrates on survival and growth of juveniles of the freshwater
+narrow-clawed crayfish astacus leptodactylus eschscholtz, 1823
+(decapoda, astacidae). \emph{Crustaceana}, \emph{90}(11-12),
+1289-\/-1302. \url{https://doi.org/10.1163/15685403-00003724}
+
+\bibitem[\citeproctext]{ref-McCarthy2007}
+McCarthy, M. A. (2007). \emph{Bayesian methods for ecology}. Cambridge
+University Press.
+
+\bibitem[\citeproctext]{ref-Momot1995}
+Momot, W. T. (1995). Redefining the role of crayfish in aquatic
+ecosystems. \emph{Reviews in Fisheries Science}, \emph{3}(1), 33-\/-63.
+\url{https://doi.org/10.1080/10641269509388566}
+
+\bibitem[\citeproctext]{ref-Olsson2009}
+Olsson, K., \& Nyström, P. (2009). Non-interactive effects of habitat
+complexity and adult crayfish on survival and growth of juvenile
+crayfish ({\emph{Pacifastacus leniusculus}}). \emph{Freshwater Biology},
+\emph{54}(1), 35-\/-46.
+\url{https://doi.org/10.1111/j.1365-2427.2008.02089.x}
+
+\bibitem[\citeproctext]{ref-Olsson2006}
+Olsson, K., Stenroth, P., Nyström, P., Holmqvist, N., McIntosh, A. R.,
+\& Winterbourn, M. J. (2006). Does natural acidity mediate interactions
+between introduced brown trout, native fish, crayfish and other
+invertebrates in west coast new zealand streams? \emph{Biological
+Conservation}, \emph{130}(2), 255-\/-267.
+\url{https://doi.org/10.1016/j.biocon.2005.12.019}
+
+\bibitem[\citeproctext]{ref-Parkyn2001}
+Parkyn, S. M., Collier, K. J., \& Hicks, B. J. (2001). New zealand
+stream crayfish: Functional omnivores but trophic predators?
+\emph{Freshwater Biology}, \emph{46}(5), 641-\/-652.
+\url{https://doi.org/10.1046/j.1365-2427.2001.00702.x}
+
+\bibitem[\citeproctext]{ref-Parkyn2009}
+Parkyn, S. M., Meleason, M. A., \& Davies‐Colley, R. J. (2009). Wood
+enhances crayfish ({\emph{Paranephrops planifrons}}) habitat in a
+forested stream. \emph{New Zealand Journal of Marine and Freshwater
+Research}, \emph{43}(3), 689-\/-700.
+\url{https://doi.org/10.1080/00288330909510034}
+
+\bibitem[\citeproctext]{ref-Percival2010}
+Percival, D., \& Moore, P. (2010). Shelter size influences
+self-assessment of size in crayfish, orconectes rusticus: Consequences
+for agonistic fights. \emph{Behaviour}, \emph{147}(1), 103-\/-119.
+\url{https://doi.org/10.1163/000579509x12512685881053}
+
+\bibitem[\citeproctext]{ref-Ramalho2010}
+Ramalho, R. O., McClain, W. R., \& Anastacio, P. M. (2010). An effective
+and simple method of temporarily marking crayfish. \emph{Freshwater
+Crayfish}, \emph{17}(1), 57--60.
+
+\bibitem[\citeproctext]{ref-Ranta1993}
+Ranta, E., \& Lindström, K. (1993). Body size and shelter possession in
+mature signal crayfish, {Pacifastacus leniusculus}. \emph{Annales
+Zoologici Fennici}, \emph{30}(2), 125--132.
+
+\bibitem[\citeproctext]{ref-Raveninreview}
+Raven, O. V., Burdon, F. J., Kusabs, I. A. K., Holmes, R., \&
+Özkundakci, D. (inreview). \emph{Littoral habitat structure influences
+freshwater crayfish populations in five volcanic lakes of aotearoa new
+zealand}. \url{https://olivierraven.github.io/Koura_shoreline_habitats/}
+
+\bibitem[\citeproctext]{ref-Ravenindraft}
+Raven, O. V., MacNeil, C., Lee, F., Holmes, R., Kusabs, I. A. K.,
+Burdon, F. J., \& Özkundakci, D. (indraft). \emph{Fear of the invader: A
+predatory invader may provoke stronger non-consumptive effects on a
+keystone native prey than a native predator}.
+\url{https://olivierraven.github.io/NCE_Koura_catfish/}
+
+\bibitem[\citeproctext]{ref-Richman2015}
+Richman, N. I., Böhm, M., Adams, S. B., Alvarez, F., Bergey, E. A.,
+Bunn, J. J. S., Burnham, Q., Cordeiro, J., Coughran, J., Crandall, K.
+A., Dawkins, K. L., DiStefano, R. J., Doran, N. E., Edsman, L.,
+Eversole, A. G., Füreder, L., Furse, J. M., Gherardi, F., Hamr, P.,
+\ldots{} Collen, B. (2015). Multiple drivers of decline in the global
+status of freshwater crayfish (decapoda: astacidea). \emph{Philosophical
+Transactions of the Royal Society B: Biological Sciences},
+\emph{370}(1662), 20140060. \url{https://doi.org/10.1098/rstb.2014.0060}
+
+\bibitem[\citeproctext]{ref-Shave1994}
+Shave, C. R., Townsend, C. R., \& Crowl, T. A. (1994). Anti-predator
+behaviours of a freshwater crayfish (\emph{paranephrops zealandicus}) to
+a native and an introduced predator. \emph{New Zealand Journal of
+Ecology}, \emph{18}(1), 1--10.
+
+\bibitem[\citeproctext]{ref-Spanier1994}
+Spanier, E. (1994). What are the characteristics of a good artificial
+reef for lobsters? \emph{Crustaceana}, \emph{67}(2), 173-\/-186.
+
+\bibitem[\citeproctext]{ref-Stewart2011}
+Stewart, C., \& Tabak, J. (2011). Size‐based dominance hierarchies in
+the new zealand freshwater crayfish (koura) {Paranephrops zealandicus}.
+\emph{New Zealand Journal of Marine and Freshwater Research},
+\emph{45}(2), 281--285.
+\url{https://doi.org/10.1080/00288330.2011.559661}
+
+\bibitem[\citeproctext]{ref-Streissl2002}
+Streissl, F., \& Hödl, W. (2002). Habitat and shelter requirements of
+the stone crayfish, {Austropotamobius torrentium} schrank.
+\emph{Hydrobiologia}, \emph{477}, 195--199.
+\url{https://doi.org/10.1023/A:1021094309738}
+
+\bibitem[\citeproctext]{ref-Takahashi2019}
+Takahashi, K., Yamaguchi, E., Fujiyama, N., \& Nagayama, T. (2019). The
+effects of quality of shelters and prior residence on marmorkrebs
+(marbled crayfish). \emph{Journal of Experimental Biology}.
+\url{https://doi.org/10.1242/jeb.197301}
+
+\bibitem[\citeproctext]{ref-Usio2000}
+Usio, N., \& Townsend, C. R. (2000). Distribution of the new zealand
+crayfish {Paranephrops zealandicus} in relation to stream
+physico‐chemistry, predatory fish, and invertebrate prey. \emph{New
+Zealand Journal of Marine and Freshwater Research}, \emph{34}(3),
+557-\/-567. \url{https://doi.org/10.1080/00288330.2000.9516957}
+
+\bibitem[\citeproctext]{ref-Wehi2017}
+Wehi, P. M., \& Lord, J. M. (2017). Importance of including cultural
+practices in ecological restoration. \emph{Conservation Biology},
+\emph{31}(5), 1109-\/-1118. \url{https://doi.org/10.1111/cobi.12915}
+
+\bibitem[\citeproctext]{ref-Zhao2024}
+Zhao, M., Feng, G., Wang, H., Shen, C., Fu, Y., Zhang, Y., Zhang, H.,
+Yao, Y., Chen, J., \& Xu, W. (2024). The influence of shelter type and
+coverage on crayfish (procambarus clarkii) predation by catfish (silurus
+asotus): A controlled environment study. \emph{Animals}, \emph{14}(8),
+1147. \url{https://doi.org/10.3390/ani14081147}
+
+\end{CSLReferences}
+
+
+
+
+\end{document}
