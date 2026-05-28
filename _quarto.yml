@@ -28,3 +28,4 @@ format:
 
 bibliography: references/references.bib
 csl: references/apa.csl
+reference-section-title: "References"
