@@ -16,6 +16,7 @@ manuscript:
 format:
   html:
     theme: cosmo
+    format-links: [pdf, docx]
   pdf:
     toc: true
     number-sections: true
@@ -28,4 +29,3 @@ format:
 
 bibliography: references/references.bib
 csl: references/apa.csl
-reference-section-title: "References"
