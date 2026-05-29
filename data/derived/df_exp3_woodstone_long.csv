@@ -1,4 +1,4 @@
-"tank","round","group_id","koura_id","size_class","sex","date","stage","location_code","reef_type","size_mm1","weight_g1","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","notes_exp","notes_koura"
+"tank","round","group_id","koura_id","size_class","sex","date","stage","location_code","structure_type","size_mm1","weight_g1","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","notes_exp","notes_koura"
 1,1,1,37,"S","M",NA,"L0","B","WoodSplit",17.82,1,8,2,NA,NA,NA,NA,NA,NA,NA,NA
 1,1,1,37,"S","M",NA,"L1","A","FlatStone",17.82,1,8,2,NA,NA,NA,NA,NA,NA,NA,NA
 1,1,1,73,"S","M",NA,"L0","A","FlatStone",21.15,6,8,2,2,NA,NA,NA,NA,NA,NA,"Moulted, Lost last round of exp 3"

@@ -47,10 +47,10 @@ write_out <- function(df, name) {write.csv(df, file.path(der_data_dir, name), ro
 # Read data
 df_koura               <- read_sheet("Koura")
 df_setup               <- read_sheet("Tank_setup")
-df_exp1_single_raw     <- read_sheet("Reef_single")
-df_exp2_group_raw      <- read_sheet("Reef_group")
-df_exp3_woodstone_raw  <- read_sheet("Stone_wood")
-df_exp4_brick_raw      <- read_sheet("Bricks")
+df_exp1_single_raw     <- read_sheet("exp1")
+df_exp2_group_raw      <- read_sheet("exp2")
+df_exp3_woodstone_raw  <- read_sheet("exp3")
+df_exp4_brick_raw      <- read_sheet("exp4")
 df_wq                  <- read_sheet("WQ")
 df_loggers             <- read_sheet("Loggers")
 
@@ -65,15 +65,15 @@ write_out(df_wq,                 "df_wq.csv")
 write_out(df_loggers,            "df_loggers.csv")
 
 # set preferred orders
-REEF_LEVELS  <- c("SingleStone","FlatStone","StonePile","WoodLog","TankWall")
-REEF_LEVELS3 <- c("FlatStone","WoodSplit","TankWall")
-REEF_LEVELS4 <- c("BrickConcrete","BrickWood","TankWall")
+STRUCTURE_LEVELS  <- c("SingleStone","FlatStone","StonePile","WoodLog","TankWall")
+STRUCTURE_LEVELS3 <- c("FlatStone","WoodSplit","TankWall")
+STRUCTURE_LEVELS4 <- c("BrickConcrete","BrickWood","TankWall")
 LOC_LEVELS   <- c("A", "B", "C", "D", "E")
 LOC_LEVELS3  <- c("A", "B", "E")
 
-relevel_reef  <- function(df) df %>% mutate(reef_type = factor(as.character(reef_type),levels = REEF_LEVELS))
-relevel_reef3 <- function(df) df %>% mutate(reef_type = factor(as.character(reef_type),levels = REEF_LEVELS3))
-relevel_reef4 <- function(df) df %>% mutate(reef_type = factor(as.character(reef_type),levels = REEF_LEVELS4))
+relevel_structure  <- function(df) df %>% mutate(structure_type = factor(as.character(structure_type),levels = STRUCTURE_LEVELS))
+relevel_structure3 <- function(df) df %>% mutate(structure_type = factor(as.character(structure_type),levels = STRUCTURE_LEVELS3))
+relevel_structure4 <- function(df) df %>% mutate(structure_type = factor(as.character(structure_type),levels = STRUCTURE_LEVELS4))
 
 # Set plot theme
 windowsFonts(Arial = windowsFont("Arial"))
@@ -178,22 +178,22 @@ df_exp1_single_long <- df_exp1_single_raw %>%
     names_pattern = "^(.*)_(l[01])$") %>%
   mutate(stage         = toupper(stage),
     location_code = factor(toupper(location), levels = LOC_LEVELS),
-    reef_type     = factor(reef, levels = REEF_LEVELS)) %>%
-  select(tank, round, group_id, koura_id, size_class, sex, size_mm1, weight_g1, date, stage, t_leave_s, t_l0_s, location_code, reef_type,legs1, claws1, antenna1, size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
+    structure_type     = factor(structure, levels = STRUCTURE_LEVELS)) %>%
+  select(tank, round, group_id, koura_id, size_class, sex, size_mm1, weight_g1, date, stage, t_leave_s, t_l0_s, location_code, structure_type,legs1, claws1, antenna1, size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
 
 write_out(df_exp1_single_long, "df_exp1_single_long.csv")
 
-# EXP 2 – Group reefs (long)
+# EXP 2 – Group structure (long)
 df_exp2_group_long <- df_exp2_group_raw %>%
   mutate(location_l0 = l0, location_l1 = l1) %>%
   pivot_longer(cols = c(location_l0, location_l1,
-      reef_l0, reef_l1,legs_l0, claws_l0, antenna_l0,legs_l1, claws_l1, antenna_l1), names_to = c(".value", "stage"), names_pattern = "^(.*)_(l[01])$") %>%
+      structure_l0, structure_l1,legs_l0, claws_l0, antenna_l0,legs_l1, claws_l1, antenna_l1), names_to = c(".value", "stage"), names_pattern = "^(.*)_(l[01])$") %>%
   mutate(stage          = toupper(stage),
     location_code  = factor(toupper(location), levels = LOC_LEVELS),
-    reef_type      = factor(reef, levels = REEF_LEVELS),
+    structure_type      = factor(structure, levels = STRUCTURE_LEVELS),
     size_mm_stage  = if_else(stage == "L0", size_mm1, size_mm2, NA_real_),
     weight_g_stage = if_else(stage == "L0", weight_g1, weight_g2, NA_real_)) %>%
-  select(tank, round, group_id, koura_id, size_class, sex, date,stage, t_leave_s, t_l0_s, location_code, reef_type,legs, claws, antenna, size_mm_stage, weight_g_stage,size_mm1, weight_g1, legs1, claws1, antenna1,size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
+  select(tank, round, group_id, koura_id, size_class, sex, date,stage, t_leave_s, t_l0_s, location_code, structure_type,legs, claws, antenna, size_mm_stage, weight_g_stage,size_mm1, weight_g1, legs1, claws1, antenna1,size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
 
 write_out(df_exp2_group_long, "df_exp2_group_long.csv")
 
@@ -201,13 +201,13 @@ write_out(df_exp2_group_long, "df_exp2_group_long.csv")
 # EXP 3 – Stone / wood (long)
 df_exp3_woodstone_long <- df_exp3_woodstone_raw %>%
   mutate(location_l0 = l0, location_l1 = l1) %>%
-  pivot_longer(cols = c(location_l0, location_l1, reef_l0, reef_l1),
+  pivot_longer(cols = c(location_l0, location_l1, structure_l0, structure_l1),
     names_to = c(".value", "stage"),
     names_pattern = "^(.*)_(l[01])$") %>%
   mutate(stage         = toupper(stage),
     location_code = factor(toupper(location), levels = LOC_LEVELS3),
-    reef_type     = factor(reef, levels = REEF_LEVELS3)) %>%
-  select(tank, round, group_id, koura_id, size_class, sex, date, stage, location_code, reef_type, size_mm1, weight_g1, legs1, claws1, antenna1, size_mm2, weight_g2, legs2, claws2, antenna2, notes_exp, notes_koura)
+    structure_type     = factor(structure, levels = STRUCTURE_LEVELS3)) %>%
+  select(tank, round, group_id, koura_id, size_class, sex, date, stage, location_code, structure_type, size_mm1, weight_g1, legs1, claws1, antenna1, size_mm2, weight_g2, legs2, claws2, antenna2, notes_exp, notes_koura)
 
 write_out(df_exp3_woodstone_long, "df_exp3_woodstone_long.csv")
 
@@ -215,13 +215,13 @@ write_out(df_exp3_woodstone_long, "df_exp3_woodstone_long.csv")
 # EXP 4 – Bricks (long)
 df_exp4_brick_long <- df_exp4_brick_raw %>%
   mutate(location_l1 = l1) %>%
-  pivot_longer(cols = c(location_l1, reef_l1),
+  pivot_longer(cols = c(location_l1, structure_l1),
     names_to = c(".value", "stage"),
     names_pattern = "^(.*)_(l[01])$") %>%
   mutate(stage         = toupper(stage),
     location_code = factor(toupper(location), levels = LOC_LEVELS),
-    reef_type     = factor(reef, levels = REEF_LEVELS4)) %>%
-  select(tank, round, group_id, koura_id, size_class, sex, date, stage, location_code, reef_type,size_mm1, weight_g1, legs1, claws1, antenna1,size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
+    structure_type     = factor(structure, levels = STRUCTURE_LEVELS4)) %>%
+  select(tank, round, group_id, koura_id, size_class, sex, date, stage, location_code, structure_type,size_mm1, weight_g1, legs1, claws1, antenna1,size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
 
 write_out(df_exp4_brick_long, "df_exp4_brick_long.csv")
 ```
@@ -232,14 +232,14 @@ write_out(df_exp4_brick_long, "df_exp4_brick_long.csv")
 #| label: stats-exp1
 #| tbl-cap: "Exp 1 statistical results"
 
-# RQ 1: Is there a statistical difference between reef type in L1?
+# RQ 1: Is there a statistical difference between structure type in L1?
 # RQ 2: Is there a preference within each sex?
-# RQ 3: Does reef type differ between sex?
-# RQ 4: Did reef type use shift directionally between L0 and L1?
+# RQ 3: Does structure type differ between sex?
+# RQ 4: Did structure type use shift directionally between L0 and L1?
 
 df1 <- df_exp1_single_long %>%
   mutate(
-    reef_type     = factor(reef_type),
+    structure_type     = factor(structure_type),
     stage         = factor(stage, levels = c("L0", "L1")),
     sex           = factor(sex),
     size_class    = factor(size_class),
@@ -249,7 +249,7 @@ df1 <- df_exp1_single_long %>%
     koura_id      = factor(koura_id),
     size_mm1      = as.numeric(size_mm1),
     weight_g1     = as.numeric(weight_g1)) %>%
-  filter(!is.na(reef_type))
+  filter(!is.na(structure_type))
 
 size_stats1 <- df1 %>%
   distinct(koura_id, sex, size_mm1, weight_g1) %>%
@@ -276,16 +276,16 @@ size_stats1 <- df1 %>%
         max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
 
 
-df1_L1 <- df1 %>% filter(stage == "L1" , reef_type != "TankWall") %>%
-  mutate(reef_type = droplevels(reef_type))
+df1_L1 <- df1 %>% filter(stage == "L1" , structure_type != "TankWall") %>%
+  mutate(structure_type = droplevels(structure_type))
 
-pct_wood_overall <- round(mean(df1_L1$reef_type == "WoodLog") * 100)
-pct_wood_male    <- round(mean(df1_L1$reef_type[df1_L1$sex == "M"] == "WoodLog") * 100)
-pct_wood_female  <- round(mean(df1_L1$reef_type[df1_L1$sex == "F"] == "WoodLog") * 100)
-pct_wall1 <- round(sum(df1$reef_type == "TankWall" & df1$stage == "L1") / sum(df1$stage == "L1") * 100)
+pct_wood_overall <- round(mean(df1_L1$structure_type == "WoodLog") * 100)
+pct_wood_male    <- round(mean(df1_L1$structure_type[df1_L1$sex == "M"] == "WoodLog") * 100)
+pct_wood_female  <- round(mean(df1_L1$structure_type[df1_L1$sex == "F"] == "WoodLog") * 100)
+pct_wall1 <- round(sum(df1$structure_type == "TankWall" & df1$stage == "L1") / sum(df1$stage == "L1") * 100)
 
-# RQ1 — Reef type preference at L1
-tab1_L1 <- table(df1_L1$reef_type)
+# RQ1 — structure type preference at L1
+tab1_L1 <- table(df1_L1$structure_type)
 tab1_L1_nz <- tab1_L1[tab1_L1 > 0]
 
 xmulti1 <- XNomial::xmulti(obs  = as.numeric(tab1_L1_nz), expr = rep(sum(tab1_L1_nz) / length(tab1_L1_nz), length(tab1_L1_nz)))
@@ -304,46 +304,46 @@ p_pile_vs_wood1   <- pgtest1$p_adj[pgtest1$pair == "StonePile vs WoodLog"]
 cld_combined1 <- data.frame(
   stage      = "L1",
   panel      = "Combined",
-  reef_type  = names(gtest_to_cld(pgtest1)),
+  structure_type  = names(gtest_to_cld(pgtest1)),
   cld_letter = unname(gtest_to_cld(pgtest1)))
 
-# RQ2 — Sex difference in reef preference at L1
-tab1_sex     <- table(df1_L1$reef_type, df1_L1$sex)
+# RQ2 — Sex difference in structure preference at L1
+tab1_sex     <- table(df1_L1$structure_type, df1_L1$sex)
 fisher1      <- fisher.test(tab1_sex, simulate.p.value = TRUE, B = 9999)
 p_fisher1    <- fisher1$p.value
 
 # RQ3 — Preference within each sex
-reef_levels <- names(tab1_L1_nz)
+structure_levels <- names(tab1_L1_nz)
 
 xmulti1_female <- XNomial::xmulti(
-  obs  = as.numeric(table(df1_L1$reef_type[df1_L1$sex == "F"])),
+  obs  = as.numeric(table(df1_L1$structure_type[df1_L1$sex == "F"])),
   expr = rep(1/4, 4))
 xmulti1_male <- XNomial::xmulti(
-  obs  = as.numeric(table(df1_L1$reef_type[df1_L1$sex == "M"])),
+  obs  = as.numeric(table(df1_L1$structure_type[df1_L1$sex == "M"])),
   expr = rep(1/4, 4))
 
 if (xmulti1_female$pLLR < 0.05) {
-  pgtest1_female <- pairwise_gtest(table(df1_L1$reef_type[df1_L1$sex == "F"]))
+  pgtest1_female <- pairwise_gtest(table(df1_L1$structure_type[df1_L1$sex == "F"]))
   cld_female1    <- data.frame(stage = "L1", panel = "Female",
-    reef_type  = names(gtest_to_cld(pgtest1_female)),
+    structure_type  = names(gtest_to_cld(pgtest1_female)),
     cld_letter = unname(gtest_to_cld(pgtest1_female)))} else {
   cld_female1 <- data.frame(stage = "L1", panel = "Female",
-    reef_type = reef_levels, cld_letter = "a")}
+    structure_type = structure_levels, cld_letter = "a")}
 
 if (xmulti1_male$pLLR < 0.05) {
-  pgtest1_male <- pairwise_gtest(table(df1_L1$reef_type[df1_L1$sex == "M"]))
+  pgtest1_male <- pairwise_gtest(table(df1_L1$structure_type[df1_L1$sex == "M"]))
   cld_male1    <- data.frame(stage = "L1", panel = "Male",
-    reef_type  = names(gtest_to_cld(pgtest1_male)),
+    structure_type  = names(gtest_to_cld(pgtest1_male)),
     cld_letter = unname(gtest_to_cld(pgtest1_male)))} else {
   cld_male1 <- data.frame(stage = "L1", panel = "Male",
-    reef_type = reef_levels, cld_letter = "a")}
+    structure_type = structure_levels, cld_letter = "a")}
 
 cld_all1 <- bind_rows(cld_combined1, cld_female1, cld_male1)
 
 # RQ4 — Directional shift between L0 and L1
 df1_wide     <- df1 %>%
-  select(koura_id, stage, reef_type) %>%
-  pivot_wider(names_from = stage, values_from = reef_type)
+  select(koura_id, stage, structure_type) %>%
+  pivot_wider(names_from = stage, values_from = structure_type)
 
 tab1_trans   <- table(L0 = df1_wide$L0, L1 = df1_wide$L1)
 symtest1     <- coin::symmetry_test(tab1_trans, distribution = approximate(nresample = 9999))
@@ -355,56 +355,56 @@ p_symtest1   <- pvalue(symtest1)
 #| label: fig-exp1
 #| fig-width: 5
 #| fig-height: 4
-#| fig-cap: "Proportion of individual kōura (Experiment 1) found at each reef type at final observation (L1), shown separately for female and male kōura. Bars show observed proportions with sample sizes (n) shown in white. Letters above bars indicate significant pairwise differences (G-test, Bonferroni adjusted)."
+#| fig-cap: "Proportion of individual kōura (Experiment 1) found at each structure type at final observation (L1), shown separately for female and male kōura. Bars show observed proportions with sample sizes (n) shown in white. Letters above bars indicate significant pairwise differences (G-test, Bonferroni adjusted)."
 
-exp1_reef_combined <- df_exp1_single_long %>%
+exp1_structure_combined <- df_exp1_single_long %>%
   filter(stage == "L1") %>%
-  count(stage, reef_type, name = "n") %>%
+  count(stage, structure_type, name = "n") %>%
   group_by(stage) %>%
   mutate(N = sum(n), prop = n / N) %>%
   ungroup() %>%
-  relevel_reef() %>%
+  relevel_structure() %>%
   mutate(panel = "Combined")
 
-exp1_reef_letters <- exp1_reef_combined %>%
-  relevel_reef() %>%
+exp1_structure_letters <- exp1_structure_combined %>%
+  relevel_structure() %>%
   filter(stage == "L1") %>%
-  left_join(cld_all1, by = c("stage", "panel", "reef_type"))
+  left_join(cld_all1, by = c("stage", "panel", "structure_type"))
 
-exp1_p_combined <- exp1_reef_combined %>%
-  relevel_reef() %>%
-  ggplot(aes(reef_type, prop)) +
+exp1_p_combined <- exp1_structure_combined %>%
+  relevel_structure() %>%
+  ggplot(aes(structure_type, prop)) +
   geom_col(color = "black") +
   geom_text(aes(label = n), vjust = 1.3, colour = "white", size = 3) +
-  geom_text(data = exp1_reef_letters %>% filter(panel == "Combined"),
+  geom_text(data = exp1_structure_letters %>% filter(panel == "Combined"),
     aes(y = prop + 0.04, label = cld_letter), size = 3.5, fontface = "bold") +
-  labs(x = "Reef type", y = "Proportion (L1)")
+  labs(x = "Structure type", y = "Proportion (L1)")
 
 
 
-exp1_reef_bysex <- df_exp1_single_long %>%
+exp1_structure_bysex <- df_exp1_single_long %>%
   filter(stage == "L1") %>%
-  count(stage, reef_type, sex, name = "n") %>%
+  count(stage, structure_type, sex, name = "n") %>%
   group_by(stage, sex) %>%
   mutate(N = sum(n), prop = n / N) %>%
   ungroup() %>%
-  relevel_reef() %>%
+  relevel_structure() %>%
   mutate(panel = dplyr::recode(sex, F = "Female", M = "Male")) %>%
   select(-sex)
 
-exp1_reef_letters_sex <- exp1_reef_bysex %>%
-  left_join(cld_all1, by = c("stage", "panel", "reef_type"))
+exp1_structure_letters_sex <- exp1_structure_bysex %>%
+  left_join(cld_all1, by = c("stage", "panel", "structure_type"))
 
-exp1_p_sex <- exp1_reef_bysex %>%
-  relevel_reef() %>%
-  ggplot(aes(reef_type, prop, fill = panel)) +
+exp1_p_sex <- exp1_structure_bysex %>%
+  relevel_structure() %>%
+  ggplot(aes(structure_type, prop, fill = panel)) +
   geom_col(color = "black", position = position_dodge(0.9)) +
   geom_text(aes(label = n), position = position_dodge(0.9), vjust = 1.3, colour = "grey50", size = 3) +
-  geom_text(data = exp1_reef_letters_sex,  aes(y = prop + 0.04, label = cld_letter), position = position_dodge(0.9), size = 3.5, fontface = "bold") +
+  geom_text(data = exp1_structure_letters_sex,  aes(y = prop + 0.04, label = cld_letter), position = position_dodge(0.9), size = 3.5, fontface = "bold") +
   scale_fill_manual(values = c(Female = "white", Male = "black"), name = "Sex") +
-  labs(x = "Reef type", y = NULL) 
+  labs(x = "Structure type", y = NULL) 
 
-exp1_reef_p <- exp1_p_combined + exp1_p_sex 
+exp1_structure_p <- exp1_p_combined + exp1_p_sex 
 
 ggsave(exp1_p_sex, file = file.path(out_dir, "fig-exp1.png"), width = 5, height = 4, dpi = 300)
 
@@ -431,16 +431,16 @@ invisible(capture.output({
   }
 
   # bar plot; rows = facetvar, cols = stage; fixed y-scale across all plots
-  mk_bar <- function(df, xvar, facetvar, title, reef = FALSE) {
+  mk_bar <- function(df, xvar, facetvar, title, structure = FALSE) {
     p <- ggplot(df, aes({{ xvar }}, prop)) +
       geom_col(color = "black") +
       geom_text(aes(label = n), vjust = 1.3, colour = "white") +
       facet_grid(rows = vars({{ facetvar }}), cols = vars(stage)) +
       labs(title = title) +
       scale_y_continuous(limits = c(0, 1), expand = expansion(mult = c(0, 0.05)))
-    if (reef) {
+    if (structure) {
       p <- p +
-        scale_x_discrete(limits = REEF_LEVELS, drop = FALSE) +
+        scale_x_discrete(limits = STRUCTURE_LEVELS, drop = FALSE) +
         theme(axis.text.x = element_text(angle = 45, hjust = 1))
     }
     p
@@ -449,14 +449,14 @@ invisible(capture.output({
   # data
   exp1_loc    <- mk_props(df_exp1_single_long, location_code, tank)
   exp1_round  <- mk_props(df_exp1_single_long, location_code, round)
-  exp1_loc2   <- mk_props(df_exp1_single_long, reef_type,     tank)
-  exp1_round2 <- mk_props(df_exp1_single_long, reef_type,     round)
+  exp1_loc2   <- mk_props(df_exp1_single_long, structure_type,     tank)
+  exp1_round2 <- mk_props(df_exp1_single_long, structure_type,     round)
 
   # plots
   p_exp1_loc    <- mk_bar(exp1_loc,   location_code, tank,  "Location by tank")
   p_exp1_round  <- mk_bar(exp1_round, location_code, round, "Location by round")
-  p_exp1_loc2   <- mk_bar(exp1_loc2,  reef_type,     tank,  "Reeftype by tank",  reef = TRUE)
-  p_exp1_round2 <- mk_bar(exp1_round2,reef_type,     round, "Reeftype by round", reef = TRUE)
+  p_exp1_loc2   <- mk_bar(exp1_loc2,  structure_type,     tank,  "Reeftype by tank",  structure = TRUE)
+  p_exp1_round2 <- mk_bar(exp1_round2,structure_type,     round, "Reeftype by round", structure = TRUE)
 
   loc_round_plots_exp1 <<- p_exp1_loc + p_exp1_loc2 + p_exp1_round + p_exp1_round2 +
     patchwork::plot_layout(ncol = 4)
@@ -477,13 +477,13 @@ loc_round_plots_exp1
 
 exp1_pairs <- df_exp1_single_long %>%
   dplyr::filter(stage %in% c("L0","L1")) %>%
-  dplyr::select(koura_id, tank, round, size_class, sex, stage,location_code, reef_type, t_leave_s, t_l0_s) %>%
+  dplyr::select(koura_id, tank, round, size_class, sex, stage,location_code, structure_type, t_leave_s, t_l0_s) %>%
   dplyr::mutate(
     location_code = forcats::fct_drop(factor(location_code, levels = LOC_LEVELS)),
-    reef_type     = forcats::fct_drop(factor(reef_type,     levels = REEF_LEVELS)),
+    structure_type     = forcats::fct_drop(factor(structure_type,     levels = STRUCTURE_LEVELS)),
     t_leave_s     = suppressWarnings(as.numeric(t_leave_s)),
     t_l0_s        = suppressWarnings(as.numeric(t_l0_s))) %>%
-  tidyr::pivot_wider(names_from = stage,values_from = c(location_code, reef_type, t_leave_s, t_l0_s),names_sep = "_")
+  tidyr::pivot_wider(names_from = stage,values_from = c(location_code, structure_type, t_leave_s, t_l0_s),names_sep = "_")
 
 activity_df <- exp1_pairs %>%
   dplyr::transmute(koura_id, tank, round, size_class, sex, time_to_leave = t_leave_s_L0, time_at_L0 = t_l0_s_L0) 
@@ -514,14 +514,14 @@ act_exp1_p
 #| label: stats-exp2
 #| tbl-cap: "..."
 
-# RQ 1: Does overall reef preference exist at group level? (Wilcoxon on group proportions)
-# RQ 2: Does size class affect reef preference?            (brms categorical)
-# RQ 3: Which reef is most preferred per size class?       (Posterior probabilities from brms)
+# RQ 1: Does overall structure preference exist at group level? (Wilcoxon on group proportions)
+# RQ 2: Does size class affect structure preference?            (brms categorical)
+# RQ 3: Which structure is most preferred per size class?       (Posterior probabilities from brms)
 # RQ 4: Did preference shift directionally L0→L1?          (Stuart-Maxwell)
 
 df2 <- df_exp2_group_long %>%
   mutate(
-    reef_type  = factor(reef_type),
+    structure_type  = factor(structure_type),
     stage      = factor(stage, levels = c("L0", "L1")),
     sex        = factor(sex),
     size_class = factor(size_class, levels = c("S", "M", "L")),
@@ -530,7 +530,7 @@ df2 <- df_exp2_group_long %>%
     round      = factor(round),
     group_id   = factor(group_id),
     koura_id   = factor(koura_id)) %>%
-  filter(!is.na(reef_type))
+  filter(!is.na(structure_type))
 
 size_stats2 <- df2 %>%
   distinct(koura_id, size_class, size_mm1, weight_g1) %>%
@@ -556,24 +556,24 @@ size_stats2 <- df2 %>%
         min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
         max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
 
-pct_wall2 <- round(sum(df2$reef_type == "TankWall" & df2$stage == "L1") /
+pct_wall2 <- round(sum(df2$structure_type == "TankWall" & df2$stage == "L1") /
   sum(df2$stage == "L1") * 100)
 
 
-# RQ1 — Overall reef preference at group level
+# RQ1 — Overall structure preference at group level
 df2_grp <- df2 %>%
   filter(stage == "L1") %>%
-  count(group_id, round, reef_type) %>%
-  complete(group_id, round, reef_type, fill = list(n = 0)) %>%
+  count(group_id, round, structure_type) %>%
+  complete(group_id, round, structure_type, fill = list(n = 0)) %>%
   group_by(group_id, round) %>%
   mutate(prop = n / sum(n)) %>%
   ungroup()
 
-# Test whether proportion at each reef type differs from uniform (0.25)
-wilcox_flat  <- wilcox.test(df2_grp$prop[df2_grp$reef_type == "FlatStone"],  mu = 0.25, exact = FALSE)
-wilcox_pile  <- wilcox.test(df2_grp$prop[df2_grp$reef_type == "StonePile"],  mu = 0.25, exact = FALSE)
-wilcox_wood  <- wilcox.test(df2_grp$prop[df2_grp$reef_type == "WoodLog"],    mu = 0.25, exact = FALSE)
-wilcox_single <- wilcox.test(df2_grp$prop[df2_grp$reef_type == "SingleStone"], mu = 0.25, exact = FALSE)
+# Test whether proportion at each structure type differs from uniform (0.25)
+wilcox_flat  <- wilcox.test(df2_grp$prop[df2_grp$structure_type == "FlatStone"],  mu = 0.25, exact = FALSE)
+wilcox_pile  <- wilcox.test(df2_grp$prop[df2_grp$structure_type == "StonePile"],  mu = 0.25, exact = FALSE)
+wilcox_wood  <- wilcox.test(df2_grp$prop[df2_grp$structure_type == "WoodLog"],    mu = 0.25, exact = FALSE)
+wilcox_single <- wilcox.test(df2_grp$prop[df2_grp$structure_type == "SingleStone"], mu = 0.25, exact = FALSE)
 
 p_wilcox2_adjusted <- p.adjust(
   c(p_wilcox_flat   = wilcox_flat$p.value,
@@ -590,15 +590,15 @@ p_wilcox2_pile   <- p_wilcox2_adjusted["p_wilcox_pile"]
 p_wilcox2_wood   <- p_wilcox2_adjusted["p_wilcox_wood"]
 
 # Direct comparison FlatStone vs StonePile at group level
-fs_props <- df2_grp %>% filter(reef_type == "FlatStone") %>% pull(prop)
-sp_props <- df2_grp %>% filter(reef_type == "StonePile") %>% pull(prop)
+fs_props <- df2_grp %>% filter(structure_type == "FlatStone") %>% pull(prop)
+sp_props <- df2_grp %>% filter(structure_type == "StonePile") %>% pull(prop)
 
 wilcox_fs_vs_sp <- wilcox.test(fs_props, sp_props, paired = TRUE, exact = FALSE)
 p_fs_vs_sp <- wilcox_fs_vs_sp$p.value
 #p_fs_vs_sp
 
 
-# RQ2 — Does size class affect reef preference?
+# RQ2 — Does size class affect structure preference?
 # Model last fit: 2026-5-25
 # Delete m2_size_bayes.rds to refit
 
@@ -608,7 +608,7 @@ m_path2 <- file.path(der_data_dir, "m_exp2_bayes.rds")
 # Only fit if model file doesn't exist
 if (!file.exists(m_path2)) {
   m_exp2_bayes <- brm(
-    reef_type ~ size_class + (1 | group_id/koura_id) + (1 | round),
+    structure_type ~ size_class + (1 | group_id/koura_id) + (1 | round),
     data          = df2 %>% filter(stage == "L1"),
     family        = categorical(),
     cores         = 4,
@@ -631,7 +631,7 @@ fixef(m_exp2_bayes)
 p_post_flatM <- mean(as_draws_df(m_exp2_bayes)$b_muFlatStone_size_classM < 0)
 
 
-# RQ3 — Which reef is most preferred per size class?
+# RQ3 — Which structure is most preferred per size class?
 newdat <- data.frame(
   size_class = c("S", "M", "L"),
   group_id   = NA,
@@ -645,31 +645,31 @@ pp <- posterior_epred(
   allow_new_levels = TRUE)
 
 dimnames(pp)[[2]] <- c("S", "M", "L")
-dimnames(pp)[[3]] <- levels(m_exp2_bayes$data$reef_type)
+dimnames(pp)[[3]] <- head(STRUCTURE_LEVELS, dim(pp)[3])
 
 pp_summary2 <- pp %>%
   as.data.frame.table(responseName = "prob") %>%
-  rename(draw = Var1, size_class = Var2, reef_type = Var3) %>%
-  group_by(size_class, reef_type) %>%
+  rename(draw = Var1, size_class = Var2, structure_type = Var3) %>%
+  group_by(size_class, structure_type) %>%
   summarise(
     mean_prob = mean(prob),
     lower     = quantile(prob, 0.025),
     upper     = quantile(prob, 0.975),
     .groups   = "drop")
 
-# Posterior probability of being most preferred reef per size class
+# Posterior probability of being most preferred structure per size class
 pct_top_S <- round(max(prop.table(table(apply(pp[,1,], 1, which.max)))) * 100)
 pct_top_M <- round(max(prop.table(table(apply(pp[,2,], 1, which.max)))) * 100)
 pct_top_L <- round(max(prop.table(table(apply(pp[,3,], 1, which.max)))) * 100)
-pct_flat_L <- round(pp_summary2$mean_prob[pp_summary2$reef_type == "FlatStone" & pp_summary2$size_class == "L"] * 100)
-pct_pile_L <- round(pp_summary2$mean_prob[pp_summary2$reef_type == "StonePile" & pp_summary2$size_class == "L"] * 100)
+pct_flat_L <- round(pp_summary2$mean_prob[pp_summary2$structure_type == "FlatStone" & pp_summary2$size_class == "L"] * 100)
+pct_pile_L <- round(pp_summary2$mean_prob[pp_summary2$structure_type == "StonePile" & pp_summary2$size_class == "L"] * 100)
 
 
 # RQ4 — Directional shift between L0 and L1
 df2_wide <- df2 %>%
-  filter(reef_type != "TankWall") %>%
-  select(koura_id, group_id, round, stage, reef_type) %>%
-  pivot_wider(names_from = stage, values_from = reef_type) %>%
+  filter(structure_type != "TankWall") %>%
+  select(koura_id, group_id, round, stage, structure_type) %>%
+  pivot_wider(names_from = stage, values_from = structure_type) %>%
   filter(!is.na(L0), !is.na(L1)) %>%
   mutate(L0 = factor(as.character(L0)), L1 = factor(as.character(L1), levels = levels(L0)))
 
@@ -697,46 +697,46 @@ fixef(m_exp2_bayes) %>%
 #| label: fig-exp2
 #| fig-width: 8
 #| fig-height: 4
-#| fig-cap: "Reef type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of reef type use by size class from Bayesian categorical mixed model, with 95% credible intervals."
+#| fig-cap: "structure type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals."
 
 exp2_combined <- df_exp2_group_long %>%
   filter(stage == "L1") %>%
-  count(reef_type, name = "n") %>%
+  count(structure_type, name = "n") %>%
   mutate(N = sum(n), prop = n / N) %>%
-  relevel_reef() %>%
+  relevel_structure() %>%
   mutate(panel = "Combined")
 
 # Wilcoxon significance
 ann_wilcox2 <- data.frame(
-  reef_type = c("SingleStone", "FlatStone", "StonePile", "WoodLog"),
+  structure_type = c("SingleStone", "FlatStone", "StonePile", "WoodLog"),
   label     = c(sig_label(p_wilcox2_adjusted["p_wilcox_single"]),
                 sig_label(p_wilcox2_adjusted["p_wilcox_flat"]),
                 sig_label(p_wilcox2_adjusted["p_wilcox_pile"]),
                 sig_label(p_wilcox2_adjusted["p_wilcox_wood"]))) %>%
-  mutate(reef_type = factor(reef_type, levels = REEF_LEVELS)) %>%
-  left_join(exp2_combined %>% select(reef_type, prop), by = "reef_type") %>%
+  mutate(structure_type = factor(structure_type, levels = STRUCTURE_LEVELS)) %>%
+  left_join(exp2_combined %>% select(structure_type, prop), by = "structure_type") %>%
   mutate(y = prop + 0.025, label = case_when(
-           reef_type == "FlatStone" & label != "ns" ~ paste0(label, "↑"), reef_type %in% c("SingleStone", "WoodLog") & label != "ns" ~ paste0(label, "↓"), TRUE ~ label))
+           structure_type == "FlatStone" & label != "ns" ~ paste0(label, "↑"), structure_type %in% c("SingleStone", "WoodLog") & label != "ns" ~ paste0(label, "↓"), TRUE ~ label))
 
 Exp2_combined_p <- exp2_combined %>%
-  relevel_reef() %>%
-  ggplot(aes(reef_type, prop)) +
+  relevel_structure() %>%
+  ggplot(aes(structure_type, prop)) +
   geom_col(color = "black", fill = "grey30") +
   geom_hline(yintercept = 0.25, linetype = "dashed", linewidth = 0.5) +
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
-  geom_text(data = ann_wilcox2, aes(x = reef_type, y = y, label = label), size = 3.5, fontface = "bold") +
+  geom_text(data = ann_wilcox2, aes(x = structure_type, y = y, label = label), size = 3.5, fontface = "bold") +
   #scale_y_continuous(limits = c(0, 0.7)) +
-  labs(x = "Reef type", y = "Proportion (L1)", tag = "A")
+  labs(x = "Structure type", y = "Proportion (L1)", tag = "A")
 
 ce2_p <- pp_summary2 %>%
-  filter(reef_type != "TankWall") %>%
-  relevel_reef() %>%
+  filter(structure_type != "TankWall") %>%
+  relevel_structure() %>%
   mutate(size_class = factor(size_class, levels = c("S", "M", "L"))) %>%
-  ggplot(aes(reef_type, mean_prob, shape = size_class, group = size_class)) +
+  ggplot(aes(structure_type, mean_prob, shape = size_class, group = size_class)) +
   geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.15, position = position_dodge(0.5)) +
   geom_point(size = 3, position = position_dodge(0.5)) +
   scale_shape_manual(values = size_shape_map, labels = c(S = "Small", M = "Medium", L = "Large")) +
-  labs(x = "Reef type", y = "Predicted probability (95% CI)", shape = "Size class", tag = "B")
+  labs(x = "Structure type", y = "Predicted probability (95% CI)", shape = "Size class", tag = "B")
 
 
 # Combine plots
@@ -768,16 +768,16 @@ invisible(capture.output({
   }
 
   # bar plot; uses facet_grid for rows=facetvar, cols=stage
-  mk_bar <- function(df, xvar, facetvar, title, reef = FALSE) {
+  mk_bar <- function(df, xvar, facetvar, title, structure = FALSE) {
     p <- ggplot(df, aes({{ xvar }}, prop)) +
       geom_col(color = "black") +
       geom_text(aes(label = n), vjust = 1.3, colour = "white") +
       facet_grid(rows = vars({{ facetvar }}), cols = vars(stage)) +
       labs(title = title)+
       scale_y_continuous(limits = c(0, 1), expand = expansion(mult = c(0, 0.05)))
-    if (reef) {
+    if (structure) {
       p <- p +
-        scale_x_discrete(limits = REEF_LEVELS, drop = FALSE) +
+        scale_x_discrete(limits = STRUCTURE_LEVELS, drop = FALSE) +
         theme(axis.text.x = element_text(angle = 45, hjust = 1))
     }
     p
@@ -786,14 +786,14 @@ invisible(capture.output({
   # data
   exp2_loc    <- mk_props(df_exp2_group_long, location_code, tank)
   exp2_round  <- mk_props(df_exp2_group_long, location_code, round)
-  exp2_loc2   <- mk_props(df_exp2_group_long, reef_type,     tank)
-  exp2_round2 <- mk_props(df_exp2_group_long, reef_type,     round)
+  exp2_loc2   <- mk_props(df_exp2_group_long, structure_type,     tank)
+  exp2_round2 <- mk_props(df_exp2_group_long, structure_type,     round)
 
   # plots
   p_exp2_loc    <- mk_bar(exp2_loc,   location_code, tank,  "Location by tank")
   p_exp2_round  <- mk_bar(exp2_round, location_code, round, "Location by round")
-  p_exp2_loc2   <- mk_bar(exp2_loc2,  reef_type,     tank,  "Reeftype by tank",  reef = TRUE)
-  p_exp2_round2 <- mk_bar(exp2_round2,reef_type,     round, "Reeftype by round", reef = TRUE)
+  p_exp2_loc2   <- mk_bar(exp2_loc2,  structure_type,     tank,  "Reeftype by tank",  structure = TRUE)
+  p_exp2_round2 <- mk_bar(exp2_round2,structure_type,     round, "Reeftype by round", structure = TRUE)
 
   loc_round_plots_exp2 <<- p_exp2_loc + p_exp2_loc2 + p_exp2_round + p_exp2_round2 +
     patchwork::plot_layout(ncol = 4)
@@ -812,40 +812,40 @@ loc_round_plots_exp2
 #| fig-height: 6
 #| fig-cap: "."
 
-exp2_reef_koura <- df_exp2_group_long %>%
+exp2_structure_koura <- df_exp2_group_long %>%
   mutate(stage = toupper(stage)) %>%
   filter(stage == "L1") %>%
-  count(stage, reef_type, koura_id, name = "n") %>%
+  count(stage, structure_type, koura_id, name = "n") %>%
   group_by(stage, koura_id) %>%
   mutate(N = sum(n), prop = n / N) %>%
   ungroup() %>%
-  relevel_reef()
+  relevel_structure()
 
-p_exp2_reef_koura <- exp2_reef_koura %>%
-  relevel_reef() %>%
-  ggplot(aes(reef_type, prop)) +
+p_exp2_structure_koura <- exp2_structure_koura %>%
+  relevel_structure() %>%
+  ggplot(aes(structure_type, prop)) +
   geom_col(color = "black") +
   facet_wrap(koura_id ~ stage, nrow = 6) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-p_exp2_reef_koura
+p_exp2_structure_koura
 
 
 exp2_use <- df_exp2_group_long %>% 
   filter(stage == "L1")
 
 counts <- exp2_use %>%
-  filter(!is.na(reef_type), !is.na(size_class)) %>%
+  filter(!is.na(structure_type), !is.na(size_class)) %>%
   mutate(
     tank = factor(tank),
     round = factor(round),
     stage = factor(stage),
-    reef_type  = fct_relevel(reef_type,"SingleStone","FlatStone","StonePile","WoodLog","TankWall"),
+    structure_type  = fct_relevel(structure_type,"SingleStone","FlatStone","StonePile","WoodLog","TankWall"),
     size_class = factor(size_class)) %>%
-  count(stage, round, tank, reef_type, size_class, name = "number_koura") %>%
-  complete(stage, round, tank, reef_type, size_class, fill = list(number_koura = 0))
+  count(stage, round, tank, structure_type, size_class, name = "number_koura") %>%
+  complete(stage, round, tank, structure_type, size_class, fill = list(number_koura = 0))
 
-p_stack <- ggplot(counts, aes(reef_type, number_koura, fill = size_class)) +
+p_stack <- ggplot(counts, aes(structure_type, number_koura, fill = size_class)) +
   geom_col() +
   facet_grid(round ~ tank+stage  , scales = "free_x")+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
@@ -860,14 +860,14 @@ p_stack
 #| label: stats-exp3
 #| tbl-cap: "."
 
-# RQ 1: Does overall reef preference exist at group level? (Wilcoxon on group proportions)
-# RQ 2: Does size class affect reef preference?            (brms categorical)
-# RQ 3: Which reef is most preferred per size class?       (Posterior probabilities from brms)
+# RQ 1: Does overall structure preference exist at group level? (Wilcoxon on group proportions)
+# RQ 2: Does size class affect structure preference?            (brms categorical)
+# RQ 3: Which structure is most preferred per size class?       (Posterior probabilities from brms)
 # RQ 4: Did preference shift directionally L0→L1?          (Stuart-Maxwell)
 
 df3 <- df_exp3_woodstone_long %>%
   mutate(
-    reef_type      = factor(reef_type),
+    structure_type      = factor(structure_type),
     stage          = factor(stage, levels = c("L0", "L1")),
     sex            = factor(sex), # all male
     size_class     = factor(size_class, levels = c("S", "M", "L")),
@@ -876,22 +876,22 @@ df3 <- df_exp3_woodstone_long %>%
     round          = factor(round),
     group_id       = factor(group_id),
     koura_id       = factor(koura_id)) %>%
-  filter(!is.na(reef_type)) 
+  filter(!is.na(structure_type)) 
 
-df3_L1 <- df3 %>% filter(stage == "L1", !is.na(reef_type), reef_type != "NA")
+df3_L1 <- df3 %>% filter(stage == "L1", !is.na(structure_type), structure_type != "NA")
 
-pct_wall3 <- round(sum(df3$reef_type == "TankWall" & df3$stage == "L1") / sum(df3$stage == "L1") * 100)
+pct_wall3 <- round(sum(df3$structure_type == "TankWall" & df3$stage == "L1") / sum(df3$stage == "L1") * 100)
 
-# RQ1 — Overall reef preference at group level
+# RQ1 — Overall structure preference at group level
 df3_grp <- df3_L1 %>%
-  count(group_id, round, reef_type) %>%
-  filter(reef_type != "TankWall") %>%
+  count(group_id, round, structure_type) %>%
+  filter(structure_type != "TankWall") %>%
   group_by(group_id, round) %>%
   mutate(prop = n / sum(n)) %>%
   ungroup()
 
-wilcox3_flat  <- wilcox.test(df3_grp$prop[df3_grp$reef_type == "FlatStone"], mu = 0.5, exact = FALSE)
-wilcox3_split <- wilcox.test(df3_grp$prop[df3_grp$reef_type == "WoodSplit"], mu = 0.5, exact = FALSE)
+wilcox3_flat  <- wilcox.test(df3_grp$prop[df3_grp$structure_type == "FlatStone"], mu = 0.5, exact = FALSE)
+wilcox3_split <- wilcox.test(df3_grp$prop[df3_grp$structure_type == "WoodSplit"], mu = 0.5, exact = FALSE)
 
 p_wilcox3_adjusted <- p.adjust(c(p_wilcox3_flat  = wilcox3_flat$p.value,p_wilcox3_split = wilcox3_split$p.value), method = "bonferroni")
 
@@ -902,17 +902,17 @@ p_wilcox3_flat  <- p_wilcox3_adjusted["p_wilcox3_flat"]
 p_wilcox3_split <- p_wilcox3_adjusted["p_wilcox3_split"]
 
 
-# RQ2 — Does size class affect reef preference?
+# RQ2 — Does size class affect structure preference?
 # Model last fit: 2026-5-25
 # Delete m_exp3_bayes.rds to refit
 
-df3_L1 <- df3_L1 %>% mutate(reef_type = relevel(factor(reef_type), ref = "FlatStone"))
+df3_L1 <- df3_L1 %>% mutate(structure_type = relevel(factor(structure_type), ref = "FlatStone"))
 
 m_path3 <- file.path(der_data_dir, "m_exp3_bayes.rds")
 
 if (!file.exists(m_path3)) {
   m_exp3_bayes <- brm(
-    reef_type ~ size_class + (1 | group_id/koura_id) + (1 | round),
+    structure_type ~ size_class + (1 | group_id/koura_id) + (1 | round),
     data = df3_L1 %>% filter(stage == "L1"),
     family = categorical(),
     cores = 4, iter = 4000, open_progress = FALSE,
@@ -931,34 +931,34 @@ fixef(m_exp3_bayes)
 mean(as_draws_df(m_exp3_bayes)$b_muWoodSplit_size_classM < 0)
 mean(as_draws_df(m_exp3_bayes)$b_muWoodSplit_size_classL < 0)
 
-# RQ3 — Which reef is most preferred per size class?
+# RQ3 — Which structure is most preferred per size class?
 newdat3 <- data.frame(size_class = c("S", "M", "L"), group_id = NA, koura_id = NA, round = NA)
 
 pp3 <- posterior_epred(m_exp3_bayes, newdata = newdat3, re_formula = NA, allow_new_levels = TRUE)
 
 dimnames(pp3)[[2]] <- c("S", "M", "L")
-dimnames(pp3)[[3]] <- levels(m_exp3_bayes$data$reef_type)
+dimnames(pp3)[[3]] <- head(STRUCTURE_LEVELS3, dim(pp3)[3])
 
 pp_summary3 <- pp3 %>%
   as.data.frame.table(responseName = "prob") %>%
-  rename(draw = Var1, size_class = Var2, reef_type = Var3) %>%
-  group_by(size_class, reef_type) %>%
+  rename(draw = Var1, size_class = Var2, structure_type = Var3) %>%
+  group_by(size_class, structure_type) %>%
   summarise(mean_prob = mean(prob), lower = quantile(prob, 0.025), upper = quantile(prob, 0.975), .groups = "drop")
 
-# Most preferred reef per size class
+# Most preferred structure per size class
 pct_top3_S <- round(max(prop.table(table(apply(pp3[,1,], 1, which.max)))) * 100)
 pct_top3_M <- round(max(prop.table(table(apply(pp3[,2,], 1, which.max)))) * 100)
 pct_top3_L <- round(max(prop.table(table(apply(pp3[,3,], 1, which.max)))) * 100)
 
-pct_flat3_L <- round(pp_summary3$mean_prob[pp_summary3$reef_type == "FlatStone" & pp_summary3$size_class == "L"] * 100)
-pct_split3_L <- round(pp_summary3$mean_prob[pp_summary3$reef_type == "WoodSplit" & pp_summary3$size_class == "L"] * 100)
+pct_flat3_L <- round(pp_summary3$mean_prob[pp_summary3$structure_type == "FlatStone" & pp_summary3$size_class == "L"] * 100)
+pct_split3_L <- round(pp_summary3$mean_prob[pp_summary3$structure_type == "WoodSplit" & pp_summary3$size_class == "L"] * 100)
 
 
 # RQ4 — Directional shift L0 → L1
 df3_wide <- df3 %>%
-  filter(!is.na(reef_type), reef_type != "NA") %>%
-  select(koura_id, group_id, round, stage, reef_type) %>%
-  pivot_wider(names_from = stage, values_from = reef_type) %>%
+  filter(!is.na(structure_type), structure_type != "NA") %>%
+  select(koura_id, group_id, round, stage, structure_type) %>%
+  pivot_wider(names_from = stage, values_from = structure_type) %>%
   filter(!is.na(L0), !is.na(L1)) %>%
   mutate( L0 = factor(as.character(L0)), L1 = factor(as.character(L1), levels = levels(L0)))
 
@@ -986,42 +986,42 @@ fixef(m_exp3_bayes) %>%
 #| label: fig-exp3
 #| fig-width: 8
 #| fig-height: 4
-#| fig-cap: "Reef type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of reef type use by size class from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."
+#| fig-cap: "structure type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."
 
 exp3_combined <- df_exp3_woodstone_long %>%
-  filter(stage == "L1", !is.na(reef_type), reef_type != "NA") %>%
-  count(reef_type, name = "n") %>%
+  filter(stage == "L1", !is.na(structure_type), structure_type != "NA") %>%
+  count(structure_type, name = "n") %>%
   mutate(N = sum(n), prop = n / N) %>%
-  relevel_reef3() %>%
+  relevel_structure3() %>%
   mutate(panel = "Combined")
 
 ann_wilcox3 <- data.frame(
-  reef_type = c("FlatStone", "WoodSplit"),
+  structure_type = c("FlatStone", "WoodSplit"),
   label     = c(sig_label(p_wilcox3_adjusted["p_wilcox3_flat"]),
                 sig_label(p_wilcox3_adjusted["p_wilcox3_split"]))) %>%
-  mutate(reef_type = factor(reef_type, levels = REEF_LEVELS3)) %>%
-  left_join(exp3_combined %>% select(reef_type, prop), by = "reef_type") %>%
-  mutate(y = prop + 0.04, label = case_when( reef_type == "FlatStone" & label != "ns" ~ paste0(label, "↑"), reef_type %in% c("WoodSplit") & label != "ns" ~ paste0(label, "↓"), TRUE ~ label))
+  mutate(structure_type = factor(structure_type, levels = STRUCTURE_LEVELS3)) %>%
+  left_join(exp3_combined %>% select(structure_type, prop), by = "structure_type") %>%
+  mutate(y = prop + 0.04, label = case_when( structure_type == "FlatStone" & label != "ns" ~ paste0(label, "↑"), structure_type %in% c("WoodSplit") & label != "ns" ~ paste0(label, "↓"), TRUE ~ label))
 
 Exp3_combined_p <- exp3_combined %>%
-  relevel_reef3() %>%
-  ggplot(aes(reef_type, prop)) +
+  relevel_structure3() %>%
+  ggplot(aes(structure_type, prop)) +
   geom_col(color = "black", fill = "grey30") +
   geom_hline(yintercept = .5, linetype = "dashed", linewidth = 0.5) +
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
-  geom_text(data = ann_wilcox3, aes(x = reef_type, y = y, label = label), size = 3.5, fontface = "bold") +
+  geom_text(data = ann_wilcox3, aes(x = structure_type, y = y, label = label), size = 3.5, fontface = "bold") +
   #scale_y_continuous(limits = c(0, 0.85)) +
-  labs(x = "Reef type", y = "Proportion (L1)", tag = "A")
+  labs(x = "Structure type", y = "Proportion (L1)", tag = "A")
 
 ce3_p <- pp_summary3 %>%
-  filter(reef_type != "NA", reef_type != "TankWall") %>%
-  relevel_reef3() %>%
+  filter(structure_type != "NA", structure_type != "TankWall") %>%
+  relevel_structure3() %>%
   mutate(size_class = factor(size_class, levels = c("S", "M", "L"))) %>%
-  ggplot(aes(reef_type, mean_prob, shape = size_class, group = size_class)) +
+  ggplot(aes(structure_type, mean_prob, shape = size_class, group = size_class)) +
   geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.15, position = position_dodge(0.5)) +
   geom_point(size = 3, position = position_dodge(0.5)) +
   scale_shape_manual(values = size_shape_map, labels = c(S = "Small", M = "Medium", L = "Large")) +
-  labs(x = "Reef type", y = "Predicted probability (95% CI)", shape = "Size class", tag = "B")
+  labs(x = "Structure type", y = "Predicted probability (95% CI)", shape = "Size class", tag = "B")
 
 Exp3_p <- Exp3_combined_p | ce3_p
 
@@ -1048,16 +1048,16 @@ invisible(capture.output({
   }
 
 # bar plot; uses facet_grid for rows=facetvar, cols=stage
-  mk_bar <- function(df, xvar, facetvar, title, reef = FALSE) {
+  mk_bar <- function(df, xvar, facetvar, title, structure = FALSE) {
     p <- ggplot(df, aes({{ xvar }}, prop)) +
       geom_col(color = "black") +
       geom_text(aes(label = n), vjust = 1.3, colour = "white") +
       facet_grid(rows = vars({{ facetvar }}), cols = vars(stage)) +
       labs(title = title)+
       scale_y_continuous(limits = c(0, 1), expand = expansion(mult = c(0, 0.05)))
-    if (reef) {
+    if (structure) {
       p <- p +
-        scale_x_discrete(limits = REEF_LEVELS3, drop = FALSE) +
+        scale_x_discrete(limits = STRUCTURE_LEVELS3, drop = FALSE) +
         theme(axis.text.x = element_text(angle = 45, hjust = 1))
     }
     p
@@ -1065,13 +1065,13 @@ invisible(capture.output({
   # data
   exp3_loc    <- mk_props(df_exp3_woodstone_long, location_code, tank)
   exp3_round  <- mk_props(df_exp3_woodstone_long, location_code, round)
-  exp3_loc3   <- mk_props(df_exp3_woodstone_long, reef_type,     tank)
-  exp3_round3 <- mk_props(df_exp3_woodstone_long, reef_type,     round)
+  exp3_loc3   <- mk_props(df_exp3_woodstone_long, structure_type,     tank)
+  exp3_round3 <- mk_props(df_exp3_woodstone_long, structure_type,     round)
   # plots
   p_exp3_loc    <- mk_bar(exp3_loc,   location_code, tank,  "Location by tank")
   p_exp3_round  <- mk_bar(exp3_round, location_code, round, "Location by round")
-  p_exp3_loc3   <- mk_bar(exp3_loc3,  reef_type,     tank,  "Reeftype by tank",  reef = TRUE)
-  p_exp3_round3 <- mk_bar(exp3_round3,reef_type,     round, "Reeftype by round", reef = TRUE)
+  p_exp3_loc3   <- mk_bar(exp3_loc3,  structure_type,     tank,  "Reeftype by tank",  structure = TRUE)
+  p_exp3_round3 <- mk_bar(exp3_round3,structure_type,     round, "Reeftype by round", structure = TRUE)
 
 loc_round_plots_exp3 <<- p_exp3_loc + p_exp3_loc3 + p_exp3_round + p_exp3_round3 +
     patchwork::plot_layout(ncol = 4)
@@ -1089,12 +1089,12 @@ loc_round_plots_exp3
 #| label: stats-exp4
 #| tbl-cap: "."
 
-# RQ 1: Does overall reef preference exist at group level? (Wilcoxon on group proportions)
-# RQ 2: Does sex affect reef preference? (brms categorical)
+# RQ 1: Does overall structure preference exist at group level? (Wilcoxon on group proportions)
+# RQ 2: Does sex affect structure preference? (brms categorical)
 
 df4 <- df_exp4_brick_long %>%
   mutate(
-    reef_type      = factor(reef_type),
+    structure_type      = factor(structure_type),
     stage          = factor(stage, levels = c("L1")),
     sex            = factor(sex),
     size_class     = factor(size_class, levels = c("S", "M", "L")),
@@ -1103,7 +1103,7 @@ df4 <- df_exp4_brick_long %>%
     round          = factor(round),
     group_id       = factor(group_id),
     koura_id       = factor(koura_id)) %>%
-  filter(!is.na(reef_type))
+  filter(!is.na(structure_type))
 
 size_stats4 <- df4 %>%
   distinct(koura_id, sex, size_mm1, weight_g1) %>%
@@ -1129,19 +1129,19 @@ size_stats4 <- df4 %>%
         min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
         max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
 
-pct_wall4 <- round(sum(df4$reef_type == "TankWall" & df4$stage == "L1") / sum(df4$stage == "L1") * 100)
+pct_wall4 <- round(sum(df4$structure_type == "TankWall" & df4$stage == "L1") / sum(df4$stage == "L1") * 100)
 
-# RQ1 — Overall reef preference at group level
+# RQ1 — Overall structure preference at group level
 df4_grp <- df4 %>%
-  count(group_id, round, reef_type) %>%
-  filter(reef_type != "TankWall") %>%
+  count(group_id, round, structure_type) %>%
+  filter(structure_type != "TankWall") %>%
   group_by(group_id, round) %>%
   mutate(prop = n / sum(n)) %>%
   ungroup()
 
-# Test whether proportion at each reef type differs from uniform (.5)
-wilcox_bart  <- wilcox.test(df4_grp$prop[df4_grp$reef_type == "BrickConcrete"],  mu = .5, exact = FALSE)
-wilcox_bwood  <- wilcox.test(df4_grp$prop[df4_grp$reef_type == "BrickWood"],  mu = .5, exact = FALSE)
+# Test whether proportion at each structure type differs from uniform (.5)
+wilcox_bart  <- wilcox.test(df4_grp$prop[df4_grp$structure_type == "BrickConcrete"],  mu = .5, exact = FALSE)
+wilcox_bwood  <- wilcox.test(df4_grp$prop[df4_grp$structure_type == "BrickWood"],  mu = .5, exact = FALSE)
 
 
 p_wilcox4_adjusted <- p.adjust(c(p_wilcox4_bart = wilcox_bart$p.value, p_wilcox4_bwood = wilcox_bwood$p.value), method = "bonferroni")
@@ -1154,22 +1154,22 @@ p_wilcox4_bwood <- p_wilcox4_adjusted["p_wilcox4_bwood"]
 
 
 # Direct comparison BrickWood vs BrickConcrete at group level
-ba_props <- df4_grp %>% filter(reef_type == "BrickConcrete") %>% pull(prop)
-bw_props <- df4_grp %>% filter(reef_type == "BrickWood") %>% pull(prop)
+ba_props <- df4_grp %>% filter(structure_type == "BrickConcrete") %>% pull(prop)
+bw_props <- df4_grp %>% filter(structure_type == "BrickWood") %>% pull(prop)
 
 
 wilcox_bw_vs_ba <- wilcox.test(bw_props, ba_props, paired = TRUE, exact = FALSE)
 p_bw_vs_ba <- wilcox_bw_vs_ba$p.value
 p_bw_vs_ba
 
-# RQ2 — Does sex affect reef preference?
+# RQ2 — Does sex affect structure preference?
 # Model last fit: 2026-5-25
 # Delete m_exp4_bayes.rds to refit
 m_path4 <- file.path(der_data_dir, "m_exp4_bayes.rds")
 
 if (!file.exists(m_path4)) {
   m_exp4_bayes <- brm(
-    reef_type ~ sex + (1 | group_id/koura_id) + (1 | round),
+    structure_type ~ sex + (1 | group_id/koura_id) + (1 | round),
     data = df4 %>% filter(stage == "L1"),
     family = categorical(),
     cores = 4, iter = 4000, open_progress = FALSE,
@@ -1189,16 +1189,16 @@ newdat4 <- data.frame(sex = c("F", "M"), group_id = NA, koura_id = NA, round = N
 
 pp4 <- posterior_epred(m_exp4_bayes, newdata = newdat4, re_formula = NA, allow_new_levels = TRUE)
 dimnames(pp4)[[2]] <- c("F", "M")
-dimnames(pp4)[[3]] <- levels(m_exp4_bayes$data$reef_type)
+dimnames(pp4)[[3]] <- head(STRUCTURE_LEVELS4, dim(pp4)[3])
 
 pp_summary4 <- pp4 %>%
   as.data.frame.table(responseName = "prob") %>%
-  rename(draw = Var1, sex = Var2, reef_type = Var3) %>%
-  group_by(sex, reef_type) %>%
+  rename(draw = Var1, sex = Var2, structure_type = Var3) %>%
+  group_by(sex, structure_type) %>%
   summarise(mean_prob = mean(prob), lower = quantile(prob, 0.025), upper = quantile(prob, 0.975), .groups = "drop")
 
-pct_bart4  <- round(mean(df4_grp$prop[df4_grp$reef_type == "BrickConcrete"]) * 100)
-pct_bwood4 <- round(mean(df4_grp$prop[df4_grp$reef_type == "BrickWood"]) * 100)
+pct_bart4  <- round(mean(df4_grp$prop[df4_grp$structure_type == "BrickConcrete"]) * 100)
+pct_bwood4 <- round(mean(df4_grp$prop[df4_grp$structure_type == "BrickWood"]) * 100)
 p_post_sexM <- mean(as_draws_df(m_exp4_bayes)$b_muBrickWood_sexM < 0)
 
 ```
@@ -1221,37 +1221,37 @@ fixef(m_exp4_bayes) %>%
 #| label: fig-exp4
 #| fig-width: 8
 #| fig-height: 4
-#| fig-cap: "Brick material preference (Experiment 4). (A) Proportion of kōura found at each reef type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of reef type use by sex from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."
+#| fig-cap: "Brick material preference (Experiment 4). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of structure type use by sex from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."
 
 exp4_combined <- df_exp4_brick_long %>%
-  filter(stage == "L1", !is.na(reef_type)) %>%
-  count(reef_type, name = "n") %>%
+  filter(stage == "L1", !is.na(structure_type)) %>%
+  count(structure_type, name = "n") %>%
   mutate(N = sum(n), prop = n / N) %>%
-  relevel_reef4()
+  relevel_structure4()
 
-ann_wilcox4 <- data.frame(reef_type = c("BrickConcrete", "BrickWood"),label = c(sig_label(p_wilcox4_adjusted["p_wilcox4_bart"]), sig_label(p_wilcox4_adjusted["p_wilcox4_bwood"]))) %>%
-  mutate(reef_type = factor(reef_type, levels = REEF_LEVELS4)) %>%
-  left_join(exp4_combined %>% select(reef_type, prop), by = "reef_type") %>%
-  mutate(y = prop + 0.04, label = case_when( reef_type %in% c("BrickConcrete", "BrickWood") & label != "ns" ~ paste0(label, "↑"), TRUE ~ label))
+ann_wilcox4 <- data.frame(structure_type = c("BrickConcrete", "BrickWood"),label = c(sig_label(p_wilcox4_adjusted["p_wilcox4_bart"]), sig_label(p_wilcox4_adjusted["p_wilcox4_bwood"]))) %>%
+  mutate(structure_type = factor(structure_type, levels = STRUCTURE_LEVELS4)) %>%
+  left_join(exp4_combined %>% select(structure_type, prop), by = "structure_type") %>%
+  mutate(y = prop + 0.04, label = case_when( structure_type %in% c("BrickConcrete", "BrickWood") & label != "ns" ~ paste0(label, "↑"), TRUE ~ label))
 
 Exp4_combined_p <- exp4_combined %>%
-  relevel_reef4() %>%
-  ggplot(aes(reef_type, prop)) +
+  relevel_structure4() %>%
+  ggplot(aes(structure_type, prop)) +
   geom_col(color = "black", fill = "grey30") +
   geom_hline(yintercept = .5, linetype = "dashed", linewidth = 0.5) +
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
-  geom_text(data = ann_wilcox4, aes(x = reef_type, y = y, label = label), size = 3.5, fontface = "bold") +
+  geom_text(data = ann_wilcox4, aes(x = structure_type, y = y, label = label), size = 3.5, fontface = "bold") +
   #scale_y_continuous(limits = c(0, 0.75)) +
-  labs(x = "Reef type", y = "Proportion (L1)", tag = "A")
+  labs(x = "Structure type", y = "Proportion (L1)", tag = "A")
 
 ce4_p <- pp_summary4 %>%
-  filter(reef_type != "TankWall") %>%
-  relevel_reef4() %>%
-  ggplot(aes(reef_type, mean_prob, shape = sex, group = sex)) +
+  filter(structure_type != "TankWall") %>%
+  relevel_structure4() %>%
+  ggplot(aes(structure_type, mean_prob, shape = sex, group = sex)) +
   geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.15, position = position_dodge(0.5)) +
   geom_point(size = 3, position = position_dodge(0.5)) +
   scale_shape_manual(values = sex_shape_map, labels = c(F = "Female", M = "Male")) +
-  labs(x = "Reef type", y = "Predicted probability (95% CI)", shape = "Sex", tag = "B")
+  labs(x = "Structure type", y = "Predicted probability (95% CI)", shape = "Sex", tag = "B")
 
 Exp4_p <- Exp4_combined_p | ce4_p
 
@@ -1268,7 +1268,7 @@ Exp4_p
 #| fig-cap: "."
 
 df_exp4_brick_long %>%
-  group_by(group_id, size_class, sex, reef_type) %>%
+  group_by(group_id, size_class, sex, structure_type) %>%
   summarise(n = n(), .groups = "drop") %>%
   arrange(group_id, size_class)
 
@@ -1295,16 +1295,16 @@ invisible(capture.output({
       dplyr::ungroup()
   }
   # bar plot; uses facet_grid for rows=facetvar, cols=stage
-  mk_bar <- function(df, xvar, facetvar, title, reef = FALSE) {
+  mk_bar <- function(df, xvar, facetvar, title, structure = FALSE) {
     p <- ggplot(df, aes({{ xvar }}, prop)) +
       geom_col(color = "black") +
       geom_text(aes(label = n), vjust = 1.3, colour = "white") +
       facet_grid(rows = vars({{ facetvar }}), cols = vars(stage)) +
       labs(title = title)+
       scale_y_continuous(limits = c(0, 1), expand = expansion(mult = c(0, 0.05)))
-    if (reef) {
+    if (structure) {
       p <- p +
-        scale_x_discrete(limits = REEF_LEVELS4, drop = FALSE) +
+        scale_x_discrete(limits = STRUCTURE_LEVELS4, drop = FALSE) +
         theme(axis.text.x = element_text(angle = 45, hjust = 1))
     }
     p
@@ -1313,14 +1313,14 @@ invisible(capture.output({
   # data
   exp4_loc    <- mk_props(df_exp4_brick_long, location_code, tank)
   exp4_round  <- mk_props(df_exp4_brick_long, location_code, round)
-  exp4_loc4   <- mk_props(df_exp4_brick_long, reef_type,     tank)
-  exp4_round4 <- mk_props(df_exp4_brick_long, reef_type,     round)
+  exp4_loc4   <- mk_props(df_exp4_brick_long, structure_type,     tank)
+  exp4_round4 <- mk_props(df_exp4_brick_long, structure_type,     round)
 
   # plots
   p_exp4_loc    <- mk_bar(exp4_loc,   location_code, tank,  "Location by tank")
   p_exp4_round  <- mk_bar(exp4_round, location_code, round, "Location by round")
-  p_exp4_loc4   <- mk_bar(exp4_loc4,  reef_type,     tank,  "Reeftype by tank",  reef = TRUE)
-  p_exp4_round4 <- mk_bar(exp4_round4,reef_type,     round, "Reeftype by round", reef = TRUE)
+  p_exp4_loc4   <- mk_bar(exp4_loc4,  structure_type,     tank,  "Reeftype by tank",  structure = TRUE)
+  p_exp4_round4 <- mk_bar(exp4_round4,structure_type,     round, "Reeftype by round", structure = TRUE)
 
   loc_round_plots_exp4 <<- p_exp4_loc + p_exp4_loc4 + p_exp4_round + p_exp4_round4 +
     patchwork::plot_layout(ncol = 4)

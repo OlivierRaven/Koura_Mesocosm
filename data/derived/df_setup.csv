@@ -1,4 +1,4 @@
-"tank","round","location","reef_id","reef_type"
+"tank","round","location","structure_id","structure_type"
 1,1,"A",1,"Wood"
 1,1,"B",2,"Single"
 1,1,"C",4,"Pile"

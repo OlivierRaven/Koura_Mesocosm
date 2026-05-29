@@ -1,4 +1,4 @@
-"experiment","round","tank","group_id","date","t_leave_s","t_l0_s","l0","reef_l0","l1","reef_l1","legs_l0","claws_l0","antenna_l0","legs_l1","claws_l1","antenna_l1","notes_exp","koura_id","size_class","sex","size_mm1","weight_g1","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","moult_date","notes_koura"
+"experiment","round","tank","group_id","date","t_leave_s","t_l0_s","l0","structure_l0","l1","structure_l1","legs_l0","claws_l0","antenna_l0","legs_l1","claws_l1","antenna_l1","notes_exp","koura_id","size_class","sex","size_mm1","weight_g1","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","moult_date","notes_koura"
 "Group",1,1,1,2025-09-08,NA,NA,"B","SingleStone","A","WoodLog",8,2,2,8,2,2,NA,37,"S","M",17.82,1,8,2,NA,NA,NA,NA,NA,NA,NA,NA
 "Group",1,1,1,2025-09-08,NA,NA,"D","FlatStone","A","WoodLog",8,2,2,8,2,2,NA,73,"S","M",21.15,6,8,2,2,NA,NA,NA,NA,NA,2025-09-04,"Moulted, Lost last round of exp 3"
 "Group",1,1,1,2025-09-08,NA,NA,"A","WoodLog","D","FlatStone",8,2,2,8,2,2,NA,39,"M","M",26.62,10,8,2,NA,28.79,15,8,2,2,2025-09-08,"Moulted"

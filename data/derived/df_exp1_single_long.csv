@@ -1,4 +1,4 @@
-"tank","round","group_id","koura_id","size_class","sex","size_mm1","weight_g1","date","stage","t_leave_s","t_l0_s","location_code","reef_type","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","notes_exp","notes_koura"
+"tank","round","group_id","koura_id","size_class","sex","size_mm1","weight_g1","date","stage","t_leave_s","t_l0_s","location_code","structure_type","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","notes_exp","notes_koura"
 1,1,NA,1,"M","F",25.62,10,2025-09-01,"L0","NA",242,"A","WoodLog",8,2,NA,NA,NA,NA,NA,NA,"Different hole",NA
 1,1,NA,1,"M","F",25.62,10,2025-09-01,"L1","NA",242,"A","WoodLog",8,2,NA,NA,NA,NA,NA,NA,"Different hole",NA
 2,1,NA,2,"M","M",27.25,14,2025-09-01,"L0","NA",602,"B","FlatStone",8,2,NA,NA,NA,NA,NA,NA,NA,NA

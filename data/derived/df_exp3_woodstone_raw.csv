@@ -1,4 +1,4 @@
-"experiment","round","tank","group_id","date","l0","reef_l0","l1","reef_l1","notes_exp","koura_id","size_class","sex","size_mm1","weight_g1","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","moult_date","notes_koura"
+"experiment","round","tank","group_id","date","l0","structure_l0","l1","structure_l1","notes_exp","koura_id","size_class","sex","size_mm1","weight_g1","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","moult_date","notes_koura"
 "FlatStone_WoodSplit",1,1,1,NA,"B","WoodSplit","A","FlatStone",NA,37,"S","M",17.82,1,8,2,NA,NA,NA,NA,NA,NA,NA,NA
 "FlatStone_WoodSplit",1,1,1,NA,"A","FlatStone","A","FlatStone",NA,73,"S","M",21.15,6,8,2,2,NA,NA,NA,NA,NA,2025-09-04,"Moulted, Lost last round of exp 3"
 "FlatStone_WoodSplit",1,1,1,NA,"A","FlatStone","B","WoodSplit",NA,39,"M","M",28.79,15,8,2,2,NA,NA,NA,NA,NA,2025-09-08,"Moulted"

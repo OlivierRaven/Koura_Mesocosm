@@ -1,4 +1,4 @@
-"experiment","round","tank","group_id","date","l1","reef_l1","notes_exp","koura_id","old_id","sex","size_class","size_mm1","weight_g1","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","moult_date","notes_koura"
+"experiment","round","tank","group_id","date","l1","structure_l1","notes_exp","koura_id","old_id","sex","size_class","size_mm1","weight_g1","legs1","claws1","antenna1","size_mm2","weight_g2","legs2","claws2","antenna2","moult_date","notes_koura"
 "Brick",1,3,7,2025-10-14,"C","BrickWood",NA,1,27,"F","M",28.66,16,8,2,2,NA,NA,NA,NA,NA,NA,NA
 "Brick",1,3,7,2025-10-14,"C","BrickWood",NA,2,30,"F","M",27.29,12,8,2,2,NA,NA,NA,NA,NA,NA,NA
 "Brick",1,3,7,2025-10-14,"B","BrickWood",NA,3,18,"F","M",28.54,16,8,2,2,NA,NA,NA,NA,NA,NA,NA
