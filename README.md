@@ -84,8 +84,7 @@ Employment grant (CAWX2101).
 
 ## Citation
 
-Raven, O.V., Holmes, R., Kusabs, I.A.K., Burdon, F.J., & 
-Özkundakci, D. (in review). [Title]. *Freshwater Biology*.
+Raven, O.V., Holmes, R., Kusabs, I.A.K., Burdon, F.J., & Özkundakci, D. (in review). [Title]. *Aquatic Conservation: Marine and Freshwater Ecosystems*.
 
 ## Licence
 
