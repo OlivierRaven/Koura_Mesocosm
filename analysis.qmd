@@ -25,7 +25,7 @@ execute:
 ```{r}
 #| label: setup
 #| include: false
-packages <- c("emmeans","DescTools", "coin","XNomial","brms","nnet","lme4","multcompView","patchwork","janitor","lubridate","stringr","tidyverse","dplyr","ggplot2","readxl","writexl","readr")
+packages <- c("emmeans","DescTools","coin","XNomial","brms","lme4","multcompView","patchwork","tidyverse","readxl")
 
 quiet_load <- function(pkg) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -33,6 +33,7 @@ quiet_load <- function(pkg) {
   suppressPackageStartupMessages(require(pkg, character.only = TRUE, quietly = TRUE))
   invisible(TRUE)}
 
+options(repos = c(CRAN = "https://cloud.r-project.org"))
 invisible(lapply(packages, quiet_load))
 
 # Set paths

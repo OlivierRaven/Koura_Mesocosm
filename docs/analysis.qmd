@@ -25,7 +25,7 @@ execute:
 ```{r}
 #| label: setup
 #| include: false
-packages <- c("emmeans","DescTools", "coin","XNomial","brms","nnet","lme4","multcompView","patchwork","janitor","lubridate","stringr","tidyverse","dplyr","ggplot2","readxl","writexl","readr")
+packages <- c("emmeans","DescTools","coin","XNomial","brms","lme4","multcompView","patchwork","tidyverse","readxl")
 
 quiet_load <- function(pkg) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -33,6 +33,7 @@ quiet_load <- function(pkg) {
   suppressPackageStartupMessages(require(pkg, character.only = TRUE, quietly = TRUE))
   invisible(TRUE)}
 
+options(repos = c(CRAN = "https://cloud.r-project.org"))
 invisible(lapply(packages, quiet_load))
 
 # Set paths
@@ -67,7 +68,7 @@ write_out(df_loggers,            "df_loggers.csv")
 # set preferred orders
 STRUCTURE_LEVELS  <- c("SingleStone","FlatStone","StonePile","WoodLog","TankWall")
 STRUCTURE_LEVELS3 <- c("FlatStone","WoodSplit","TankWall")
-STRUCTURE_LEVELS4 <- c("BrickConcrete","BrickWood","TankWall")
+STRUCTURE_LEVELS4 <- c("ConcreteBrick","WoodBlock","TankWall")
 LOC_LEVELS   <- c("A", "B", "C", "D", "E")
 LOC_LEVELS3  <- c("A", "B", "E")
 
@@ -172,41 +173,38 @@ sex_shape_map  <- c(F = 1, M = 16)
 #| label: build_dfs
 
 df_exp1_single_long <- df_exp1_single_raw %>%
-  mutate(location_l0 = l0, location_l1 = l1) %>%
-  pivot_longer(cols = matches("_(l0|l1)$"),
+  mutate(location_initial = initial, location_next_day = next_day) %>%
+  pivot_longer(cols = matches("_(initial|next_day)$"),
     names_to = c(".value", "stage"),
-    names_pattern = "^(.*)_(l[01])$") %>%
-  mutate(stage         = toupper(stage),
-    location_code = factor(toupper(location), levels = LOC_LEVELS),
+    names_pattern = "^(.*)_(initial|next_day)$") %>%
+  mutate(location_code = factor(toupper(location), levels = LOC_LEVELS),
     structure_type     = factor(structure, levels = STRUCTURE_LEVELS)) %>%
-  select(tank, round, group_id, koura_id, size_class, sex, size_mm1, weight_g1, date, stage, t_leave_s, t_l0_s, location_code, structure_type,legs1, claws1, antenna1, size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
+  select(tank, round, group_id, koura_id, size_class, sex, size_mm1, weight_g1, date, stage, t_leave_s, t_initial_s, location_code, structure_type, legs1, claws1, antenna1, size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
 
 write_out(df_exp1_single_long, "df_exp1_single_long.csv")
 
 # EXP 2 – Group structure (long)
 df_exp2_group_long <- df_exp2_group_raw %>%
-  mutate(location_l0 = l0, location_l1 = l1) %>%
-  pivot_longer(cols = c(location_l0, location_l1,
-      structure_l0, structure_l1,legs_l0, claws_l0, antenna_l0,legs_l1, claws_l1, antenna_l1), names_to = c(".value", "stage"), names_pattern = "^(.*)_(l[01])$") %>%
-  mutate(stage          = toupper(stage),
-    location_code  = factor(toupper(location), levels = LOC_LEVELS),
-    structure_type      = factor(structure, levels = STRUCTURE_LEVELS),
-    size_mm_stage  = if_else(stage == "L0", size_mm1, size_mm2, NA_real_),
-    weight_g_stage = if_else(stage == "L0", weight_g1, weight_g2, NA_real_)) %>%
-  select(tank, round, group_id, koura_id, size_class, sex, date,stage, t_leave_s, t_l0_s, location_code, structure_type,legs, claws, antenna, size_mm_stage, weight_g_stage,size_mm1, weight_g1, legs1, claws1, antenna1,size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
+  mutate(location_initial = initial, location_next_day = next_day) %>%
+  pivot_longer(cols = c(location_initial, location_next_day,
+      structure_initial, structure_next_day,legs_initial, claws_initial, antenna_initial,legs_next_day, claws_next_day, antenna_next_day), names_to = c(".value", "stage"), names_pattern = "^(.*)_(initial|next_day)$") %>%
+  mutate(location_code  = factor(toupper(location), levels = LOC_LEVELS),
+    structure_type = factor(structure, levels = STRUCTURE_LEVELS),
+    size_mm_stage  = if_else(stage == "initial", size_mm1, size_mm2, NA_real_),
+    weight_g_stage = if_else(stage == "initial", weight_g1, weight_g2, NA_real_)) %>%
+  select(tank, round, group_id, koura_id, size_class, sex, date,stage, t_leave_s, t_initial_s, location_code, structure_type,legs, claws, antenna, size_mm_stage, weight_g_stage,size_mm1, weight_g1, legs1, claws1, antenna1,size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
 
 write_out(df_exp2_group_long, "df_exp2_group_long.csv")
 
 
 # EXP 3 – Stone / wood (long)
 df_exp3_woodstone_long <- df_exp3_woodstone_raw %>%
-  mutate(location_l0 = l0, location_l1 = l1) %>%
-  pivot_longer(cols = c(location_l0, location_l1, structure_l0, structure_l1),
+  mutate(location_initial = initial, location_next_day = next_day) %>%
+  pivot_longer(cols = c(location_initial, location_next_day, structure_initial, structure_next_day),
     names_to = c(".value", "stage"),
-    names_pattern = "^(.*)_(l[01])$") %>%
-  mutate(stage         = toupper(stage),
-    location_code = factor(toupper(location), levels = LOC_LEVELS3),
-    structure_type     = factor(structure, levels = STRUCTURE_LEVELS3)) %>%
+    names_pattern = "^(.*)_(initial|next_day)$") %>%
+  mutate(location_code = factor(toupper(location), levels = LOC_LEVELS3),
+    structure_type = factor(structure, levels = STRUCTURE_LEVELS3)) %>%
   select(tank, round, group_id, koura_id, size_class, sex, date, stage, location_code, structure_type, size_mm1, weight_g1, legs1, claws1, antenna1, size_mm2, weight_g2, legs2, claws2, antenna2, notes_exp, notes_koura)
 
 write_out(df_exp3_woodstone_long, "df_exp3_woodstone_long.csv")
@@ -214,33 +212,32 @@ write_out(df_exp3_woodstone_long, "df_exp3_woodstone_long.csv")
 
 # EXP 4 – Bricks (long)
 df_exp4_brick_long <- df_exp4_brick_raw %>%
-  mutate(location_l1 = l1) %>%
-  pivot_longer(cols = c(location_l1, structure_l1),
+  mutate(location_next_day = next_day) %>%
+  pivot_longer(cols = c(location_next_day, structure_next_day),
     names_to = c(".value", "stage"),
-    names_pattern = "^(.*)_(l[01])$") %>%
-  mutate(stage         = toupper(stage),
-    location_code = factor(toupper(location), levels = LOC_LEVELS),
-    structure_type     = factor(structure, levels = STRUCTURE_LEVELS4)) %>%
+    names_pattern = "^(.*)_(initial|next_day)$") %>%
+  mutate(location_code = factor(toupper(location), levels = LOC_LEVELS),
+    structure_type = factor(structure, levels = STRUCTURE_LEVELS4)) %>%
   select(tank, round, group_id, koura_id, size_class, sex, date, stage, location_code, structure_type,size_mm1, weight_g1, legs1, claws1, antenna1,size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
 
 write_out(df_exp4_brick_long, "df_exp4_brick_long.csv")
 ```
 
-# Exp 1 Single koura
+# Exp 1 Individual koura
 ## Exp 1 Statistic
 ```{r}
 #| label: stats-exp1
 #| tbl-cap: "Exp 1 statistical results"
 
-# RQ 1: Is there a statistical difference between structure type in L1?
+# RQ 1: Is there a statistical difference between structure type in next_day?
 # RQ 2: Is there a preference within each sex?
 # RQ 3: Does structure type differ between sex?
-# RQ 4: Did structure type use shift directionally between L0 and L1?
+# RQ 4: Did structure type use shift directionally between initial and next_day?
 
 df1 <- df_exp1_single_long %>%
   mutate(
     structure_type     = factor(structure_type),
-    stage         = factor(stage, levels = c("L0", "L1")),
+    stage         = factor(stage, levels = c("initial", "next_day")),
     sex           = factor(sex),
     size_class    = factor(size_class),
     location_code = factor(location_code),
@@ -276,23 +273,23 @@ size_stats1 <- df1 %>%
         max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
 
 
-df1_L1 <- df1 %>% filter(stage == "L1" , structure_type != "TankWall") %>%
+df1_next_day <- df1 %>% filter(stage == "next_day" , structure_type != "TankWall") %>%
   mutate(structure_type = droplevels(structure_type))
 
-pct_wood_overall <- round(mean(df1_L1$structure_type == "WoodLog") * 100)
-pct_wood_male    <- round(mean(df1_L1$structure_type[df1_L1$sex == "M"] == "WoodLog") * 100)
-pct_wood_female  <- round(mean(df1_L1$structure_type[df1_L1$sex == "F"] == "WoodLog") * 100)
-pct_wall1 <- round(sum(df1$structure_type == "TankWall" & df1$stage == "L1") / sum(df1$stage == "L1") * 100)
+pct_wood_overall <- round(mean(df1_next_day$structure_type == "WoodLog") * 100)
+pct_wood_male    <- round(mean(df1_next_day$structure_type[df1_next_day$sex == "M"] == "WoodLog") * 100)
+pct_wood_female  <- round(mean(df1_next_day$structure_type[df1_next_day$sex == "F"] == "WoodLog") * 100)
+pct_walnext_day <- round(sum(df1$structure_type == "TankWall" & df1$stage == "next_day") / sum(df1$stage == "next_day") * 100)
 
-# RQ1 — structure type preference at L1
-tab1_L1 <- table(df1_L1$structure_type)
-tab1_L1_nz <- tab1_L1[tab1_L1 > 0]
+# RQ1 — structure type preference at next_day
+tab1_next_day <- table(df1_next_day$structure_type)
+tab1_next_day_nz <- tab1_next_day[tab1_next_day > 0]
 
-xmulti1 <- XNomial::xmulti(obs  = as.numeric(tab1_L1_nz), expr = rep(sum(tab1_L1_nz) / length(tab1_L1_nz), length(tab1_L1_nz)))
+xmulti1 <- XNomial::xmulti(obs  = as.numeric(tab1_next_day_nz), expr = rep(sum(tab1_next_day_nz) / length(tab1_next_day_nz), length(tab1_next_day_nz)))
 p_xmulti1 <- xmulti1$pLLR
 
 # Post-hoc pairwise G-tests
-pgtest1 <- pairwise_gtest(tab1_L1_nz)
+pgtest1 <- pairwise_gtest(tab1_next_day_nz)
 p_single_vs_flat1 <- pgtest1$p_adj[pgtest1$pair == "SingleStone vs FlatStone"]
 p_single_vs_pile1 <- pgtest1$p_adj[pgtest1$pair == "SingleStone vs StonePile"]
 p_single_vs_wood1 <- pgtest1$p_adj[pgtest1$pair == "SingleStone vs WoodLog"]
@@ -302,52 +299,81 @@ p_pile_vs_wood1   <- pgtest1$p_adj[pgtest1$pair == "StonePile vs WoodLog"]
 
 # Generate CLD letters for each panel
 cld_combined1 <- data.frame(
-  stage      = "L1",
+  stage      = "next_day",
   panel      = "Combined",
   structure_type  = names(gtest_to_cld(pgtest1)),
   cld_letter = unname(gtest_to_cld(pgtest1)))
 
-# RQ2 — Sex difference in structure preference at L1
-tab1_sex     <- table(df1_L1$structure_type, df1_L1$sex)
-fisher1      <- fisher.test(tab1_sex, simulate.p.value = TRUE, B = 9999)
-p_fisher1    <- fisher1$p.value
+# RQ2 — Does sex affect structure preference?
+# Model last fit: 2026-6-16
+# Delete m_exp1_bayes.rds to refit
+m_path1 <- file.path(der_data_dir, "m_exp1_bayes.rds")
+
+if (!file.exists(m_path1)) {
+  m_exp1_bayes <- brm(
+    structure_type ~ sex + (1|round) + (1|tank),
+    data    = df1_next_day,
+    family  = categorical(),
+    cores   = 4, iter = 4000, 
+    open_progress = FALSE,
+    control = list(adapt_delta = 0.99, max_treedepth = 12))
+  saveRDS(m_exp1_bayes, m_path1)
+} else {
+  m_exp1_bayes <- readRDS(m_path1)
+}
+
+# Diagnostics
+nuts_params(m_exp1_bayes) %>% 
+  filter(Parameter == "divergent__") %>% 
+  summarise(sum(Value))
+summary(m_exp1_bayes)
+
+# Posterior probability of sex effect
+mean(as_draws_df(m_exp1_bayes)$b_muWoodLog_sexM > 0)
+
 
 # RQ3 — Preference within each sex
-structure_levels <- names(tab1_L1_nz)
+structure_levels <- names(tab1_next_day_nz)
 
 xmulti1_female <- XNomial::xmulti(
-  obs  = as.numeric(table(df1_L1$structure_type[df1_L1$sex == "F"])),
+  obs  = as.numeric(table(df1_next_day$structure_type[df1_next_day$sex == "F"])),
   expr = rep(1/4, 4))
 xmulti1_male <- XNomial::xmulti(
-  obs  = as.numeric(table(df1_L1$structure_type[df1_L1$sex == "M"])),
+  obs  = as.numeric(table(df1_next_day$structure_type[df1_next_day$sex == "M"])),
   expr = rep(1/4, 4))
 
 if (xmulti1_female$pLLR < 0.05) {
-  pgtest1_female <- pairwise_gtest(table(df1_L1$structure_type[df1_L1$sex == "F"]))
-  cld_female1    <- data.frame(stage = "L1", panel = "Female",
+  pgtest1_female <- pairwise_gtest(table(df1_next_day$structure_type[df1_next_day$sex == "F"]))
+  cld_female1    <- data.frame(stage = "next_day", panel = "Female",
     structure_type  = names(gtest_to_cld(pgtest1_female)),
     cld_letter = unname(gtest_to_cld(pgtest1_female)))} else {
-  cld_female1 <- data.frame(stage = "L1", panel = "Female",
+  cld_female1 <- data.frame(stage = "next_day", panel = "Female",
     structure_type = structure_levels, cld_letter = "a")}
 
 if (xmulti1_male$pLLR < 0.05) {
-  pgtest1_male <- pairwise_gtest(table(df1_L1$structure_type[df1_L1$sex == "M"]))
-  cld_male1    <- data.frame(stage = "L1", panel = "Male",
+  pgtest1_male <- pairwise_gtest(table(df1_next_day$structure_type[df1_next_day$sex == "M"]))
+  cld_male1    <- data.frame(stage = "next_day", panel = "Male",
     structure_type  = names(gtest_to_cld(pgtest1_male)),
     cld_letter = unname(gtest_to_cld(pgtest1_male)))} else {
-  cld_male1 <- data.frame(stage = "L1", panel = "Male",
+  cld_male1 <- data.frame(stage = "next_day", panel = "Male",
     structure_type = structure_levels, cld_letter = "a")}
 
-cld_all1 <- bind_rows(cld_combined1, cld_female1, cld_male1)
+cld_alnext_day <- bind_rows(cld_combined1, cld_female1, cld_male1)
 
-# RQ4 — Directional shift between L0 and L1
+# RQ4 — Directional shift between initial and next_day
 df1_wide     <- df1 %>%
   select(koura_id, stage, structure_type) %>%
   pivot_wider(names_from = stage, values_from = structure_type)
 
-tab1_trans   <- table(L0 = df1_wide$L0, L1 = df1_wide$L1)
+tab1_trans   <- table(initial = df1_wide$initial, next_day = df1_wide$next_day)
 symtest1     <- coin::symmetry_test(tab1_trans, distribution = approximate(nresample = 9999))
 p_symtest1   <- pvalue(symtest1)
+
+
+
+
+
+
 ```
 
 ## Exp 1 Figure
@@ -355,10 +381,10 @@ p_symtest1   <- pvalue(symtest1)
 #| label: fig-exp1
 #| fig-width: 5
 #| fig-height: 4
-#| fig-cap: "Proportion of individual kōura (Experiment 1) found at each structure type at final observation (L1), shown separately for female and male kōura. Bars show observed proportions with sample sizes (n) shown in white. Letters above bars indicate significant pairwise differences (G-test, Bonferroni adjusted)."
+#| fig-cap: "Proportion of individual kōura (Experiment 1) found at each structure type the next day, shown separately for female (white bars) and male (black bars) kōura. Bars show observed proportions with sample sizes (n) shown on bars. Letters above bars indicate results of pairwise G-tests with Bonferroni correction within each sex group, structure types sharing the same letter within a panel do not differ significantly from each other, while structure types with different letters differ significantly in use. No significant difference in overall structure preference was detected between sexes (Fisher's exact test, see results)."
 
 exp1_structure_combined <- df_exp1_single_long %>%
-  filter(stage == "L1") %>%
+  filter(stage == "next_day") %>%
   count(stage, structure_type, name = "n") %>%
   group_by(stage) %>%
   mutate(N = sum(n), prop = n / N) %>%
@@ -368,8 +394,8 @@ exp1_structure_combined <- df_exp1_single_long %>%
 
 exp1_structure_letters <- exp1_structure_combined %>%
   relevel_structure() %>%
-  filter(stage == "L1") %>%
-  left_join(cld_all1, by = c("stage", "panel", "structure_type"))
+  filter(stage == "next_day") %>%
+  left_join(cld_alnext_day, by = c("stage", "panel", "structure_type"))
 
 exp1_p_combined <- exp1_structure_combined %>%
   relevel_structure() %>%
@@ -378,12 +404,10 @@ exp1_p_combined <- exp1_structure_combined %>%
   geom_text(aes(label = n), vjust = 1.3, colour = "white", size = 3) +
   geom_text(data = exp1_structure_letters %>% filter(panel == "Combined"),
     aes(y = prop + 0.04, label = cld_letter), size = 3.5, fontface = "bold") +
-  labs(x = "Structure type", y = "Proportion (L1)")
-
-
+  labs(x = "Structure type", y = "Proportion (next-day)")
 
 exp1_structure_bysex <- df_exp1_single_long %>%
-  filter(stage == "L1") %>%
+  filter(stage == "next_day") %>%
   count(stage, structure_type, sex, name = "n") %>%
   group_by(stage, sex) %>%
   mutate(N = sum(n), prop = n / N) %>%
@@ -393,7 +417,7 @@ exp1_structure_bysex <- df_exp1_single_long %>%
   select(-sex)
 
 exp1_structure_letters_sex <- exp1_structure_bysex %>%
-  left_join(cld_all1, by = c("stage", "panel", "structure_type"))
+  left_join(cld_alnext_day, by = c("stage", "panel", "structure_type"))
 
 exp1_p_sex <- exp1_structure_bysex %>%
   relevel_structure() %>%
@@ -402,7 +426,7 @@ exp1_p_sex <- exp1_structure_bysex %>%
   geom_text(aes(label = n), position = position_dodge(0.9), vjust = 1.3, colour = "grey50", size = 3) +
   geom_text(data = exp1_structure_letters_sex,  aes(y = prop + 0.04, label = cld_letter), position = position_dodge(0.9), size = 3.5, fontface = "bold") +
   scale_fill_manual(values = c(Female = "white", Male = "black"), name = "Sex") +
-  labs(x = "Structure type", y = NULL) 
+  labs(x = "Structure type", y = "Proportion (next-day)") 
 
 exp1_structure_p <- exp1_p_combined + exp1_p_sex 
 
@@ -423,7 +447,7 @@ invisible(capture.output({
   # proportions by x var and facet var (per stage)
   mk_props <- function(data, xvar, facetvar) {
     data %>%
-      dplyr::filter(stage %in% c("L0","L1")) %>%
+      dplyr::filter(stage %in% c("initial","next_day")) %>%
       dplyr::count(stage, {{ xvar }}, {{ facetvar }}, name = "n") %>%
       dplyr::group_by(stage, {{ facetvar }}) %>%
       dplyr::mutate(N = sum(n), prop = n / N) %>%
@@ -476,26 +500,26 @@ loc_round_plots_exp1
 #| fig-cap: "."
 
 exp1_pairs <- df_exp1_single_long %>%
-  dplyr::filter(stage %in% c("L0","L1")) %>%
-  dplyr::select(koura_id, tank, round, size_class, sex, stage,location_code, structure_type, t_leave_s, t_l0_s) %>%
+  dplyr::filter(stage %in% c("initial","next_day")) %>%
+  dplyr::select(koura_id, tank, round, size_class, sex, stage,location_code, structure_type, t_leave_s, t_initial_s) %>%
   dplyr::mutate(
     location_code = forcats::fct_drop(factor(location_code, levels = LOC_LEVELS)),
     structure_type     = forcats::fct_drop(factor(structure_type,     levels = STRUCTURE_LEVELS)),
     t_leave_s     = suppressWarnings(as.numeric(t_leave_s)),
-    t_l0_s        = suppressWarnings(as.numeric(t_l0_s))) %>%
-  tidyr::pivot_wider(names_from = stage,values_from = c(location_code, structure_type, t_leave_s, t_l0_s),names_sep = "_")
+    t_initial_s        = suppressWarnings(as.numeric(t_initial_s))) %>%
+  tidyr::pivot_wider(names_from = stage,values_from = c(location_code, structure_type, t_leave_s, t_initial_s),names_sep = "_")
 
 activity_df <- exp1_pairs %>%
-  dplyr::transmute(koura_id, tank, round, size_class, sex, time_to_leave = t_leave_s_L0, time_at_L0 = t_l0_s_L0) 
+  dplyr::transmute(koura_id, tank, round, size_class, sex, time_to_leave = t_leave_s_initial, time_at_initial = t_initial_s_initial) 
 
 activity_long <- activity_df %>%
   mutate(
-    time_to_leave = suppressWarnings(as.numeric(time_to_leave)),time_at_L0    = suppressWarnings(as.numeric(time_at_L0))) %>%
-  pivot_longer(c(time_to_leave, time_at_L0), names_to = "metric", values_to = "time") %>%
+    time_to_leave = suppressWarnings(as.numeric(time_to_leave)),time_at_initial    = suppressWarnings(as.numeric(time_at_initial))) %>%
+  pivot_longer(c(time_to_leave, time_at_initial), names_to = "metric", values_to = "time") %>%
   filter(!is.na(time), time >= 0)
 
 lab_metric <- c(time_to_leave = "Time to leave start (t_leave)",
-                time_at_L0    = "Time to reach initial hide (t_L0)")
+                time_at_initial    = "Time to reach initial hide (t_initial)")
 
 act_exp1_p <- ggplot(activity_long, aes(time, col=sex)) +
   stat_ecdf(geom = "step") +
@@ -508,7 +532,7 @@ act_exp1_p
 
 
 
-# Exp 2 Group koura
+# Exp 2 Group Dynamics
 ## Exp 2 Statistic
 ```{r}
 #| label: stats-exp2
@@ -517,12 +541,12 @@ act_exp1_p
 # RQ 1: Does overall structure preference exist at group level? (Wilcoxon on group proportions)
 # RQ 2: Does size class affect structure preference?            (brms categorical)
 # RQ 3: Which structure is most preferred per size class?       (Posterior probabilities from brms)
-# RQ 4: Did preference shift directionally L0→L1?          (Stuart-Maxwell)
+# RQ 4: Did preference shift directionally initial→next_day?          (Stuart-Maxwell)
 
 df2 <- df_exp2_group_long %>%
   mutate(
     structure_type  = factor(structure_type),
-    stage      = factor(stage, levels = c("L0", "L1")),
+    stage      = factor(stage, levels = c("initial", "next_day")),
     sex        = factor(sex),
     size_class = factor(size_class, levels = c("S", "M", "L")),
     location_code = factor(location_code),
@@ -556,13 +580,13 @@ size_stats2 <- df2 %>%
         min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
         max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
 
-pct_wall2 <- round(sum(df2$structure_type == "TankWall" & df2$stage == "L1") /
-  sum(df2$stage == "L1") * 100)
+pct_wall2 <- round(sum(df2$structure_type == "TankWall" & df2$stage == "next_day") /
+  sum(df2$stage == "next_day") * 100)
 
 
 # RQ1 — Overall structure preference at group level
 df2_grp <- df2 %>%
-  filter(stage == "L1") %>%
+  filter(stage == "next_day") %>%
   count(group_id, round, structure_type) %>%
   complete(group_id, round, structure_type, fill = list(n = 0)) %>%
   group_by(group_id, round) %>%
@@ -599,7 +623,7 @@ p_fs_vs_sp <- wilcox_fs_vs_sp$p.value
 
 
 # RQ2 — Does size class affect structure preference?
-# Model last fit: 2026-5-25
+# Model last fit: 2026-6-16
 # Delete m2_size_bayes.rds to refit
 
 # Path to saved model
@@ -608,8 +632,8 @@ m_path2 <- file.path(der_data_dir, "m_exp2_bayes.rds")
 # Only fit if model file doesn't exist
 if (!file.exists(m_path2)) {
   m_exp2_bayes <- brm(
-    structure_type ~ size_class + (1 | group_id/koura_id) + (1 | round),
-    data          = df2 %>% filter(stage == "L1"),
+    structure_type ~ size_class + (1 | group_id/koura_id) + (1 | round) + (1 | tank),
+    data          = df2 %>% filter(stage == "next_day"),
     family        = categorical(),
     cores         = 4,
     iter          = 4000,
@@ -665,15 +689,15 @@ pct_flat_L <- round(pp_summary2$mean_prob[pp_summary2$structure_type == "FlatSto
 pct_pile_L <- round(pp_summary2$mean_prob[pp_summary2$structure_type == "StonePile" & pp_summary2$size_class == "L"] * 100)
 
 
-# RQ4 — Directional shift between L0 and L1
+# RQ4 — Directional shift between initial and next_day
 df2_wide <- df2 %>%
   filter(structure_type != "TankWall") %>%
   select(koura_id, group_id, round, stage, structure_type) %>%
   pivot_wider(names_from = stage, values_from = structure_type) %>%
-  filter(!is.na(L0), !is.na(L1)) %>%
-  mutate(L0 = factor(as.character(L0)), L1 = factor(as.character(L1), levels = levels(L0)))
+  filter(!is.na(initial), !is.na(next_day)) %>%
+  mutate(initial = factor(as.character(initial)), next_day = factor(as.character(next_day), levels = levels(initial)))
 
-tab2_trans <- table(L0 = df2_wide$L0, L1 = df2_wide$L1)
+tab2_trans <- table(initial = df2_wide$initial, next_day = df2_wide$next_day)
 smtest2    <- DescTools::StuartMaxwellTest(tab2_trans)
 p_smtest2  <- smtest2$p.value
 
@@ -697,10 +721,10 @@ fixef(m_exp2_bayes) %>%
 #| label: fig-exp2
 #| fig-width: 8
 #| fig-height: 4
-#| fig-cap: "structure type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals."
+#| fig-cap: "structure type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each structure type the next day across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals."
 
 exp2_combined <- df_exp2_group_long %>%
-  filter(stage == "L1") %>%
+  filter(stage == "next_day") %>%
   count(structure_type, name = "n") %>%
   mutate(N = sum(n), prop = n / N) %>%
   relevel_structure() %>%
@@ -726,7 +750,7 @@ Exp2_combined_p <- exp2_combined %>%
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
   geom_text(data = ann_wilcox2, aes(x = structure_type, y = y, label = label), size = 3.5, fontface = "bold") +
   #scale_y_continuous(limits = c(0, 0.7)) +
-  labs(x = "Structure type", y = "Proportion (L1)", tag = "A")
+  labs(x = "Structure type", y = "Proportion (next-day)", tag = "A")
 
 ce2_p <- pp_summary2 %>%
   filter(structure_type != "TankWall") %>%
@@ -760,7 +784,7 @@ invisible(capture.output({
   # proportions by x var and facet var (per stage)
   mk_props <- function(data, xvar, facetvar) {
     data %>%
-      dplyr::filter(stage %in% c("L0","L1")) %>%
+      dplyr::filter(stage %in% c("initial","next_day")) %>%
       dplyr::count(stage, {{ xvar }}, {{ facetvar }}, name = "n") %>%
       dplyr::group_by(stage, {{ facetvar }}) %>%
       dplyr::mutate(N = sum(n), prop = n / N) %>%
@@ -813,8 +837,7 @@ loc_round_plots_exp2
 #| fig-cap: "."
 
 exp2_structure_koura <- df_exp2_group_long %>%
-  mutate(stage = toupper(stage)) %>%
-  filter(stage == "L1") %>%
+  filter(stage == "next_day") %>%
   count(stage, structure_type, koura_id, name = "n") %>%
   group_by(stage, koura_id) %>%
   mutate(N = sum(n), prop = n / N) %>%
@@ -832,7 +855,7 @@ p_exp2_structure_koura
 
 
 exp2_use <- df_exp2_group_long %>% 
-  filter(stage == "L1")
+  filter(stage == "next_day")
 
 counts <- exp2_use %>%
   filter(!is.na(structure_type), !is.na(size_class)) %>%
@@ -863,12 +886,12 @@ p_stack
 # RQ 1: Does overall structure preference exist at group level? (Wilcoxon on group proportions)
 # RQ 2: Does size class affect structure preference?            (brms categorical)
 # RQ 3: Which structure is most preferred per size class?       (Posterior probabilities from brms)
-# RQ 4: Did preference shift directionally L0→L1?          (Stuart-Maxwell)
+# RQ 4: Did preference shift directionally initial→next_day?          (Stuart-Maxwell)
 
 df3 <- df_exp3_woodstone_long %>%
   mutate(
     structure_type      = factor(structure_type),
-    stage          = factor(stage, levels = c("L0", "L1")),
+    stage          = factor(stage, levels = c("initial", "next_day")),
     sex            = factor(sex), # all male
     size_class     = factor(size_class, levels = c("S", "M", "L")),
     location_code  = factor(location_code),
@@ -878,12 +901,12 @@ df3 <- df_exp3_woodstone_long %>%
     koura_id       = factor(koura_id)) %>%
   filter(!is.na(structure_type)) 
 
-df3_L1 <- df3 %>% filter(stage == "L1", !is.na(structure_type), structure_type != "NA")
+df3_next_day <- df3 %>% filter(stage == "next_day", !is.na(structure_type), structure_type != "NA")
 
-pct_wall3 <- round(sum(df3$structure_type == "TankWall" & df3$stage == "L1") / sum(df3$stage == "L1") * 100)
+pct_wall3 <- round(sum(df3$structure_type == "TankWall" & df3$stage == "next_day") / sum(df3$stage == "next_day") * 100)
 
 # RQ1 — Overall structure preference at group level
-df3_grp <- df3_L1 %>%
+df3_grp <- df3_next_day %>%
   count(group_id, round, structure_type) %>%
   filter(structure_type != "TankWall") %>%
   group_by(group_id, round) %>%
@@ -903,19 +926,21 @@ p_wilcox3_split <- p_wilcox3_adjusted["p_wilcox3_split"]
 
 
 # RQ2 — Does size class affect structure preference?
-# Model last fit: 2026-5-25
+# Model last fit: 2026-6-16
 # Delete m_exp3_bayes.rds to refit
 
-df3_L1 <- df3_L1 %>% mutate(structure_type = relevel(factor(structure_type), ref = "FlatStone"))
+df3_next_day2 <- df3_next_day %>% 
+  filter(structure_type != "TankWall") %>%
+  mutate(structure_type = relevel(droplevels(factor(structure_type)), ref = "FlatStone"))
 
 m_path3 <- file.path(der_data_dir, "m_exp3_bayes.rds")
 
 if (!file.exists(m_path3)) {
   m_exp3_bayes <- brm(
-    structure_type ~ size_class + (1 | group_id/koura_id) + (1 | round),
-    data = df3_L1 %>% filter(stage == "L1"),
-    family = categorical(),
-    cores = 4, iter = 4000, open_progress = FALSE,
+    structure_type ~ size_class + (1 | group_id/koura_id) + (1 | round) + (1 | tank),
+    data    = df3_next_day2,
+    family  = bernoulli(),
+    cores   = 4, iter = 4000, open_progress = FALSE,
     control = list(adapt_delta = 0.99, max_treedepth = 12))
   saveRDS(m_exp3_bayes, m_path3)
 } else {
@@ -923,46 +948,66 @@ if (!file.exists(m_path3)) {
 }
 
 # Diagnostics
-nuts_params(m_exp3_bayes) %>% filter(Parameter == "divergent__") %>% summarise(sum(Value))
+nuts_params(m_exp3_bayes) %>% 
+  filter(Parameter == "divergent__") %>% 
+  summarise(sum(Value))
 summary(m_exp3_bayes)
 fixef(m_exp3_bayes)
 
-# Posterior probability that size_classM effect on WoodSplit is negative
-mean(as_draws_df(m_exp3_bayes)$b_muWoodSplit_size_classM < 0)
-mean(as_draws_df(m_exp3_bayes)$b_muWoodSplit_size_classL < 0)
+# Posterior probability size class effects are negative (prefer FlatStone)
+p_post3_M <- mean(as_draws_df(m_exp3_bayes)$b_size_classM < 0)
+p_post3_L <- mean(as_draws_df(m_exp3_bayes)$b_size_classL < 0)
 
-# RQ3 — Which structure is most preferred per size class?
-newdat3 <- data.frame(size_class = c("S", "M", "L"), group_id = NA, koura_id = NA, round = NA)
+# RQ3 — Posterior predicted probability per size class
+newdat3 <- data.frame(
+  size_class = c("S", "M", "L"),
+  group_id   = NA,
+  koura_id   = NA,
+  round      = NA,
+  tank       = NA)
 
-pp3 <- posterior_epred(m_exp3_bayes, newdata = newdat3, re_formula = NA, allow_new_levels = TRUE)
+# pp3 is draws × 3: each value is P(WoodSplit) for that size class
+pp3 <- posterior_epred(
+  m_exp3_bayes,
+  newdata          = newdat3,
+  re_formula       = NA,
+  allow_new_levels = TRUE)
 
-dimnames(pp3)[[2]] <- c("S", "M", "L")
-dimnames(pp3)[[3]] <- head(STRUCTURE_LEVELS3, dim(pp3)[3])
+colnames(pp3) <- c("S", "M", "L")
 
-pp_summary3 <- pp3 %>%
-  as.data.frame.table(responseName = "prob") %>%
-  rename(draw = Var1, size_class = Var2, structure_type = Var3) %>%
-  group_by(size_class, structure_type) %>%
-  summarise(mean_prob = mean(prob), lower = quantile(prob, 0.025), upper = quantile(prob, 0.975), .groups = "drop")
+# Posterior probability FlatStone is preferred (P(WoodSplit) < 0.5)
+pct_top3_S <- round(mean(pp3[, "S"] < 0.5) * 100)
+pct_top3_M <- round(mean(pp3[, "M"] < 0.5) * 100)
+pct_top3_L <- round(mean(pp3[, "L"] < 0.5) * 100)
 
-# Most preferred structure per size class
-pct_top3_S <- round(max(prop.table(table(apply(pp3[,1,], 1, which.max)))) * 100)
-pct_top3_M <- round(max(prop.table(table(apply(pp3[,2,], 1, which.max)))) * 100)
-pct_top3_L <- round(max(prop.table(table(apply(pp3[,3,], 1, which.max)))) * 100)
+# Mean predicted probability per structure per size class
+pct_flat3_L  <- round((1 - mean(pp3[, "L"])) * 100)
+pct_split3_L <- round(mean(pp3[, "L"]) * 100)
 
-pct_flat3_L <- round(pp_summary3$mean_prob[pp_summary3$structure_type == "FlatStone" & pp_summary3$size_class == "L"] * 100)
-pct_split3_L <- round(pp_summary3$mean_prob[pp_summary3$structure_type == "WoodSplit" & pp_summary3$size_class == "L"] * 100)
+pp_summary3 <- data.frame(
+  size_class     = rep(c("S", "M", "L"), each = 2),
+  structure_type = rep(c("FlatStone", "WoodSplit"), 3),
+  mean_prob      = c(1 - mean(pp3[,"S"]), mean(pp3[,"S"]),
+                     1 - mean(pp3[,"M"]), mean(pp3[,"M"]),
+                     1 - mean(pp3[,"L"]), mean(pp3[,"L"])),
+  lower          = c(quantile(1 - pp3[,"S"], 0.025), quantile(pp3[,"S"], 0.025),
+                     quantile(1 - pp3[,"M"], 0.025), quantile(pp3[,"M"], 0.025),
+                     quantile(1 - pp3[,"L"], 0.025), quantile(pp3[,"L"], 0.025)),
+  upper          = c(quantile(1 - pp3[,"S"], 0.975), quantile(pp3[,"S"], 0.975),
+                     quantile(1 - pp3[,"M"], 0.975), quantile(pp3[,"M"], 0.975),
+                     quantile(1 - pp3[,"L"], 0.975), quantile(pp3[,"L"], 0.975)))
 
 
-# RQ4 — Directional shift L0 → L1
+
+# RQ4 — Directional shift initial → next_day
 df3_wide <- df3 %>%
   filter(!is.na(structure_type), structure_type != "NA") %>%
   select(koura_id, group_id, round, stage, structure_type) %>%
   pivot_wider(names_from = stage, values_from = structure_type) %>%
-  filter(!is.na(L0), !is.na(L1)) %>%
-  mutate( L0 = factor(as.character(L0)), L1 = factor(as.character(L1), levels = levels(L0)))
+  filter(!is.na(initial), !is.na(next_day)) %>%
+  mutate( initial = factor(as.character(initial)), next_day = factor(as.character(next_day), levels = levels(initial)))
 
-tab3_trans <- table(L0 = df3_wide$L0, L1 = df3_wide$L1)
+tab3_trans <- table(initial = df3_wide$initial, next_day = df3_wide$next_day)
 smtest3    <- DescTools::StuartMaxwellTest(tab3_trans)
 p_smtest3  <- smtest3$p.value
 
@@ -986,10 +1031,10 @@ fixef(m_exp3_bayes) %>%
 #| label: fig-exp3
 #| fig-width: 8
 #| fig-height: 4
-#| fig-cap: "structure type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."
+#| fig-cap: "structure type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each structure type the next day across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals. ↑ used more than expected, ↓ used less than expected. TankWall excluded from model predictions."
 
 exp3_combined <- df_exp3_woodstone_long %>%
-  filter(stage == "L1", !is.na(structure_type), structure_type != "NA") %>%
+  filter(stage == "next_day", !is.na(structure_type), structure_type != "NA") %>%
   count(structure_type, name = "n") %>%
   mutate(N = sum(n), prop = n / N) %>%
   relevel_structure3() %>%
@@ -1011,7 +1056,7 @@ Exp3_combined_p <- exp3_combined %>%
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
   geom_text(data = ann_wilcox3, aes(x = structure_type, y = y, label = label), size = 3.5, fontface = "bold") +
   #scale_y_continuous(limits = c(0, 0.85)) +
-  labs(x = "Structure type", y = "Proportion (L1)", tag = "A")
+  labs(x = "Structure type", y = "Proportion (next-day)", tag = "A")
 
 ce3_p <- pp_summary3 %>%
   filter(structure_type != "NA", structure_type != "TankWall") %>%
@@ -1040,7 +1085,7 @@ invisible(capture.output({
   # proportions by x var and facet var (per stage)
   mk_props <- function(data, xvar, facetvar) {
     data %>%
-      dplyr::filter(stage %in% c("L0","L1")) %>%
+      dplyr::filter(stage %in% c("initial","next_day")) %>%
       dplyr::count(stage, {{ xvar }}, {{ facetvar }}, name = "n") %>%
       dplyr::group_by(stage, {{ facetvar }}) %>%
       dplyr::mutate(N = sum(n), prop = n / N) %>%
@@ -1083,7 +1128,7 @@ loc_round_plots_exp3
 ```
 
 
-# Exp 4 Bricks
+# Exp 4 Material Alone
 ## Exp 4 Statistic
 ```{r}
 #| label: stats-exp4
@@ -1095,7 +1140,7 @@ loc_round_plots_exp3
 df4 <- df_exp4_brick_long %>%
   mutate(
     structure_type      = factor(structure_type),
-    stage          = factor(stage, levels = c("L1")),
+    stage          = factor(stage, levels = c("next_day")),
     sex            = factor(sex),
     size_class     = factor(size_class, levels = c("S", "M", "L")),
     location_code  = factor(location_code),
@@ -1129,7 +1174,7 @@ size_stats4 <- df4 %>%
         min_wt   = round(min(weight_g1,  na.rm = TRUE), 1),
         max_wt   = round(max(weight_g1,  na.rm = TRUE), 1)))
 
-pct_wall4 <- round(sum(df4$structure_type == "TankWall" & df4$stage == "L1") / sum(df4$stage == "L1") * 100)
+pct_wall4 <- round(sum(df4$structure_type == "TankWall" & df4$stage == "next_day") / sum(df4$stage == "next_day") * 100)
 
 # RQ1 — Overall structure preference at group level
 df4_grp <- df4 %>%
@@ -1140,8 +1185,8 @@ df4_grp <- df4 %>%
   ungroup()
 
 # Test whether proportion at each structure type differs from uniform (.5)
-wilcox_bart  <- wilcox.test(df4_grp$prop[df4_grp$structure_type == "BrickConcrete"],  mu = .5, exact = FALSE)
-wilcox_bwood  <- wilcox.test(df4_grp$prop[df4_grp$structure_type == "BrickWood"],  mu = .5, exact = FALSE)
+wilcox_bart  <- wilcox.test(df4_grp$prop[df4_grp$structure_type == "ConcreteBrick"],  mu = .5, exact = FALSE)
+wilcox_bwood  <- wilcox.test(df4_grp$prop[df4_grp$structure_type == "WoodBlock"],  mu = .5, exact = FALSE)
 
 
 p_wilcox4_adjusted <- p.adjust(c(p_wilcox4_bart = wilcox_bart$p.value, p_wilcox4_bwood = wilcox_bwood$p.value), method = "bonferroni")
@@ -1153,9 +1198,9 @@ p_wilcox4_bart  <- p_wilcox4_adjusted["p_wilcox4_bart"]
 p_wilcox4_bwood <- p_wilcox4_adjusted["p_wilcox4_bwood"]
 
 
-# Direct comparison BrickWood vs BrickConcrete at group level
-ba_props <- df4_grp %>% filter(structure_type == "BrickConcrete") %>% pull(prop)
-bw_props <- df4_grp %>% filter(structure_type == "BrickWood") %>% pull(prop)
+# Direct comparison WoodBlock vs ConcreteBrick at group level
+ba_props <- df4_grp %>% filter(structure_type == "ConcreteBrick") %>% pull(prop)
+bw_props <- df4_grp %>% filter(structure_type == "WoodBlock") %>% pull(prop)
 
 
 wilcox_bw_vs_ba <- wilcox.test(bw_props, ba_props, paired = TRUE, exact = FALSE)
@@ -1163,43 +1208,66 @@ p_bw_vs_ba <- wilcox_bw_vs_ba$p.value
 p_bw_vs_ba
 
 # RQ2 — Does sex affect structure preference?
-# Model last fit: 2026-5-25
+# Model last fit: 2026-6-16
 # Delete m_exp4_bayes.rds to refit
+df4_model <- df4 %>%
+  filter(stage == "next_day", structure_type != "TankWall") %>%
+  mutate(structure_type = relevel(droplevels(factor(structure_type)), 
+                                  ref = "ConcreteBrick"))
+
 m_path4 <- file.path(der_data_dir, "m_exp4_bayes.rds")
 
 if (!file.exists(m_path4)) {
   m_exp4_bayes <- brm(
-    structure_type ~ sex + (1 | group_id/koura_id) + (1 | round),
-    data = df4 %>% filter(stage == "L1"),
-    family = categorical(),
-    cores = 4, iter = 4000, open_progress = FALSE,
+    structure_type ~ sex + (1 | group_id/koura_id) + (1 | round) + (1 | tank),
+    data    = df4_model,
+    family  = bernoulli(),
+    cores   = 4, iter = 4000, open_progress = FALSE,
     control = list(adapt_delta = 0.99, max_treedepth = 12))
   saveRDS(m_exp4_bayes, m_path4)
 } else {
   m_exp4_bayes <- readRDS(m_path4)
 }
 
-nuts_params(m_exp4_bayes) %>% filter(Parameter == "divergent__") %>% summarise(sum(Value))
+# Diagnostics
+nuts_params(m_exp4_bayes) %>% 
+  filter(Parameter == "divergent__") %>% 
+  summarise(sum(Value))
 summary(m_exp4_bayes)
-VarCorr(m_exp4_bayes)
 
-mean(as_draws_df(m_exp4_bayes)$b_muBrickWood_sexM < 0)
+# Posterior probability sex effect (negative = prefer ConcreteBrick)
+p_post_sexM <- mean(as_draws_df(m_exp4_bayes)$b_sexM < 0)
 
-newdat4 <- data.frame(sex = c("F", "M"), group_id = NA, koura_id = NA, round = NA)
+# Add tank to newdat4
+newdat4 <- data.frame(sex= c("F", "M"), group_id = NA, koura_id = NA, round = NA,tank = NA)
 
-pp4 <- posterior_epred(m_exp4_bayes, newdata = newdat4, re_formula = NA, allow_new_levels = TRUE)
-dimnames(pp4)[[2]] <- c("F", "M")
-dimnames(pp4)[[3]] <- head(STRUCTURE_LEVELS4, dim(pp4)[3])
+# pp4 is now draws × 2 (F, M) — each value is P(WoodBlock)
+pp4 <- posterior_epred(
+  m_exp4_bayes,
+  newdata          = newdat4,
+  re_formula       = NA,
+  allow_new_levels = TRUE)
 
-pp_summary4 <- pp4 %>%
-  as.data.frame.table(responseName = "prob") %>%
-  rename(draw = Var1, sex = Var2, structure_type = Var3) %>%
-  group_by(sex, structure_type) %>%
-  summarise(mean_prob = mean(prob), lower = quantile(prob, 0.025), upper = quantile(prob, 0.975), .groups = "drop")
+colnames(pp4) <- c("F", "M")
 
-pct_bart4  <- round(mean(df4_grp$prop[df4_grp$structure_type == "BrickConcrete"]) * 100)
-pct_bwood4 <- round(mean(df4_grp$prop[df4_grp$structure_type == "BrickWood"]) * 100)
-p_post_sexM <- mean(as_draws_df(m_exp4_bayes)$b_muBrickWood_sexM < 0)
+pp_summary4 <- data.frame(
+  sex            = rep(c("F", "M"), each = 2),
+  structure_type = rep(c("ConcreteBrick", "WoodBlock"), 2),
+  mean_prob      = c(1 - mean(pp4[,"F"]), mean(pp4[,"F"]),
+                     1 - mean(pp4[,"M"]), mean(pp4[,"M"])),
+  lower          = c(quantile(1 - pp4[,"F"], 0.025), 
+                     quantile(pp4[,"F"], 0.025),
+                     quantile(1 - pp4[,"M"], 0.025), 
+                     quantile(pp4[,"M"], 0.025)),
+  upper          = c(quantile(1 - pp4[,"F"], 0.975), 
+                     quantile(pp4[,"F"], 0.975),
+                     quantile(1 - pp4[,"M"], 0.975), 
+                     quantile(pp4[,"M"], 0.975)))
+
+pp_summary4
+
+pct_bart4  <- round(mean(df4_grp$prop[df4_grp$structure_type == "ConcreteBrick"]) * 100)
+pct_bwood4 <- round(mean(df4_grp$prop[df4_grp$structure_type == "WoodBlock"]) * 100)
 
 ```
 
@@ -1221,18 +1289,18 @@ fixef(m_exp4_bayes) %>%
 #| label: fig-exp4
 #| fig-width: 8
 #| fig-height: 4
-#| fig-cap: "Brick material preference (Experiment 4). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of structure type use by sex from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."
+#| fig-cap: "Material preference (Experiment 4). (A) Proportion of kōura found at each structure type the next day across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of structure type use by sex from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."
 
 exp4_combined <- df_exp4_brick_long %>%
-  filter(stage == "L1", !is.na(structure_type)) %>%
+  filter(stage == "next_day", !is.na(structure_type)) %>%
   count(structure_type, name = "n") %>%
   mutate(N = sum(n), prop = n / N) %>%
   relevel_structure4()
 
-ann_wilcox4 <- data.frame(structure_type = c("BrickConcrete", "BrickWood"),label = c(sig_label(p_wilcox4_adjusted["p_wilcox4_bart"]), sig_label(p_wilcox4_adjusted["p_wilcox4_bwood"]))) %>%
+ann_wilcox4 <- data.frame(structure_type = c("ConcreteBrick", "WoodBlock"),label = c(sig_label(p_wilcox4_adjusted["p_wilcox4_bart"]), sig_label(p_wilcox4_adjusted["p_wilcox4_bwood"]))) %>%
   mutate(structure_type = factor(structure_type, levels = STRUCTURE_LEVELS4)) %>%
   left_join(exp4_combined %>% select(structure_type, prop), by = "structure_type") %>%
-  mutate(y = prop + 0.04, label = case_when( structure_type %in% c("BrickConcrete", "BrickWood") & label != "ns" ~ paste0(label, "↑"), TRUE ~ label))
+  mutate(y = prop + 0.04, label = case_when( structure_type %in% c("ConcreteBrick", "WoodBlock") & label != "ns" ~ paste0(label, "↑"), TRUE ~ label))
 
 Exp4_combined_p <- exp4_combined %>%
   relevel_structure4() %>%
@@ -1242,7 +1310,7 @@ Exp4_combined_p <- exp4_combined %>%
   geom_text(aes(label = n), vjust = 1.3, colour = "white") +
   geom_text(data = ann_wilcox4, aes(x = structure_type, y = y, label = label), size = 3.5, fontface = "bold") +
   #scale_y_continuous(limits = c(0, 0.75)) +
-  labs(x = "Structure type", y = "Proportion (L1)", tag = "A")
+  labs(x = "Structure type", y = "Proportion (next-day)", tag = "A")
 
 ce4_p <- pp_summary4 %>%
   filter(structure_type != "TankWall") %>%
@@ -1288,7 +1356,7 @@ invisible(capture.output({
   # proportions by x var and facet var (per stage)
   mk_props <- function(data, xvar, facetvar) {
     data %>%
-      dplyr::filter(stage %in% c("L0","L1")) %>%
+      dplyr::filter(stage %in% c("initial","next_day")) %>%
       dplyr::count(stage, {{ xvar }}, {{ facetvar }}, name = "n") %>%
       dplyr::group_by(stage, {{ facetvar }}) %>%
       dplyr::mutate(N = sum(n), prop = n / N) %>%
@@ -1358,7 +1426,7 @@ fig_all_presentation
 #| fig-cap: "."
 
 
-sex1_p <- exp1_p_sex + labs(x = NULL, y = "Proportion (L1)", title = "Exp 1: Single kōura by sex") + theme(legend.position = "none")
+sex1_p <- exp1_p_sex + labs(x = NULL, y = "Proportion (next_day)", title = "Exp 1: Single kōura by sex") + theme(legend.position = "none")
 ce2_pp <- ce2_p + labs(x = NULL, y = "Predicted probability (95% CI)", title = "Exp 2: Group kōura by size", tag = NULL)
 ce3_pp <- ce3_p + labs(x = NULL, y = "Predicted probability (95% CI)", title = "Exp 3: Wood vs Stone by size", tag = NULL) + theme(legend.position = "none")
 ce4_pp <- ce4_p + labs(x = NULL, y = "Predicted probability (95% CI)", title = "Exp 4: Bricks by sex", tag = NULL)
@@ -1380,6 +1448,24 @@ ce_all
 wq_clean <- df_wq %>%
   mutate(value = suppressWarnings(as.numeric(value)),tank  = factor(tank),param_label = ifelse(is.na(unit) | unit %in% c("", "NA"), parameter_abb, paste(parameter_abb, unit))) %>%
   filter(!is.na(tank_use), !is.na(value),data_time >= as.POSIXct("2025-09-01"),tank_use == "Experiment")
+
+wq_summary <- wq_clean %>%
+  filter(param_label %in% c("Temp (°C)", "DO (%)")) %>%
+  group_by(param_label) %>%
+  summarise(
+    mean_val = round(mean(value, na.rm = TRUE), 1),
+    sd_val   = round(sd(value, na.rm = TRUE), 1),
+    min_val  = round(min(value, na.rm = TRUE), 1),
+    max_val  = round(max(value, na.rm = TRUE), 1),
+    .groups  = "drop")
+
+mean_temp <- wq_summary$mean_val[wq_summary$param_label == "Temp (°C)"]
+sd_temp   <- wq_summary$sd_val[wq_summary$param_label == "Temp (°C)"]
+mean_do   <- wq_summary$mean_val[wq_summary$param_label == "DO (%)"]
+sd_do     <- wq_summary$sd_val[wq_summary$param_label == "DO (%)"]
+
+
+
 
 wq_probe <- wq_clean %>%
   transmute(datetime = data_time,tank,param_label,value)
