@@ -2,30 +2,35 @@
 --
 -- Pandoc's docx writer only stringifies author names; it drops affiliations,
 -- ORCID, and the corresponding-author marker that the html/pdf writers render
--- automatically. This filter reads the same `author`/`abstract`/`keywords`
--- metadata used by the other formats and builds an equivalent title block
--- for docx, with numbered affiliations assigned in first-appearance order.
+-- automatically. Quarto normalizes the YAML `author:` field into a `by-author`
+-- metadata key where each author already has their affiliations embedded
+-- (with a pre-assigned `.number`), and a top-level `affiliations` key with the
+-- deduplicated, numbered affiliation list. This filter uses that normalized
+-- data to build an equivalent title block for docx.
 
 local stringify = pandoc.utils.stringify
 
 local function get_name(author)
-  if author.name then
-    if author.name.given or author.name.family then
-      local given = author.name.given and stringify(author.name.given) or ""
-      local family = author.name.family and stringify(author.name.family) or ""
-      return (given .. " " .. family):gsub("^%s+", ""):gsub("%s+$", "")
-    else
-      return stringify(author.name)
-    end
+  local given = author.name.given and stringify(author.name.given) or ""
+  local family = author.name.family and stringify(author.name.family) or ""
+  local name = (given .. " " .. family):gsub("^%s+", ""):gsub("%s+$", "")
+  if name == "" and author.name.literal then
+    name = stringify(author.name.literal)
   end
-  return ""
+  return name
 end
 
-local function affil_key(affil)
+local function is_corresponding(author)
+  return author.attributes and author.attributes.corresponding
+    and stringify(author.attributes.corresponding) == "true"
+end
+
+local function affil_text(affil)
   local parts = {}
-  for _, field in ipairs({"name", "department", "address", "country"}) do
-    if affil[field] then table.insert(parts, stringify(affil[field])) end
-  end
+  if affil.department then table.insert(parts, stringify(affil.department)) end
+  if affil.name then table.insert(parts, stringify(affil.name)) end
+  if affil.address then table.insert(parts, stringify(affil.address)) end
+  if affil.country then table.insert(parts, stringify(affil.country)) end
   return table.concat(parts, ", ")
 end
 
@@ -35,34 +40,23 @@ function Pandoc(doc)
   end
 
   local meta = doc.meta
-  if not meta.author then
+  local authors = meta["by-author"]
+  if not authors then
     return doc
-  end
-
-  -- Build affiliation registry in first-appearance order
-  local affil_order = {}
-  local affil_number = {}
-
-  local function register_affil(affil)
-    local key = affil_key(affil)
-    if not affil_number[key] then
-      table.insert(affil_order, key)
-      affil_number[key] = #affil_order
-    end
-    return affil_number[key]
   end
 
   local new_blocks = {}
   local corresponding_email = nil
 
-  -- Author lines, each on its own line via a hard line break
+  -- Author line, each author on its own line via a hard line break
   local author_inlines = {}
-  for _, author in ipairs(meta.author) do
+  for _, author in ipairs(authors) do
     local name = get_name(author)
+
     local nums = {}
     if author.affiliations then
       for _, affil in ipairs(author.affiliations) do
-        table.insert(nums, tostring(register_affil(affil)))
+        table.insert(nums, tostring(affil.number))
       end
     end
 
@@ -71,7 +65,7 @@ function Pandoc(doc)
       if i > 1 then table.insert(sup_inlines, pandoc.Str(",")) end
       table.insert(sup_inlines, pandoc.Str(n))
     end
-    if author.corresponding then
+    if is_corresponding(author) then
       table.insert(sup_inlines, pandoc.Str("*"))
       if author.email then corresponding_email = stringify(author.email) end
     end
@@ -88,14 +82,22 @@ function Pandoc(doc)
   table.remove(author_inlines) -- drop trailing line break
   table.insert(new_blocks, pandoc.Para(author_inlines))
 
-  -- Numbered affiliation list
-  local affil_inlines = {}
-  for i, key in ipairs(affil_order) do
-    if i > 1 then table.insert(affil_inlines, pandoc.LineBreak()) end
-    table.insert(affil_inlines, pandoc.Superscript({ pandoc.Str(tostring(i)) }))
-    table.insert(affil_inlines, pandoc.Str(" " .. key))
+  -- Numbered affiliation list, ordered by Quarto's assigned affiliation number
+  if meta.affiliations then
+    local affil_list = {}
+    for _, affil in ipairs(meta.affiliations) do
+      table.insert(affil_list, affil)
+    end
+    table.sort(affil_list, function(a, b) return a.number < b.number end)
+
+    local affil_inlines = {}
+    for i, affil in ipairs(affil_list) do
+      if i > 1 then table.insert(affil_inlines, pandoc.LineBreak()) end
+      table.insert(affil_inlines, pandoc.Superscript({ pandoc.Str(tostring(affil.number)) }))
+      table.insert(affil_inlines, pandoc.Str(" " .. affil_text(affil)))
+    end
+    table.insert(new_blocks, pandoc.Para(affil_inlines))
   end
-  table.insert(new_blocks, pandoc.Para(affil_inlines))
 
   -- Corresponding author line
   if corresponding_email then
