@@ -188,8 +188,8 @@
 \hypersetup{
   pdftitle={Structure over material: mesocosm experiments reveal shelter design principles for threatened freshwater crayfish restoration},
   pdfauthor={Olivier V. Raven; Robin Holmes; Ian A. K. Kusabs; Francis J. Burdon; Deniz Özkundakci},
-  pdfkeywords={kōura, Paranephrops planifrons, refuge
-selection, artificial reef, Aotearoa New Zealand},
+  pdfkeywords={Paranephrops planifrons, Behaviour, Habitat
+preference, Aotearoa New Zealand, Artificial reef},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -202,7 +202,7 @@ selection, artificial reef, Aotearoa New Zealand},
 design principles for threatened freshwater crayfish restoration}
 \author{Olivier V. Raven \and Robin Holmes \and Ian A. K.
 Kusabs \and Francis J. Burdon \and Deniz Özkundakci}
-\date{2026-06-17}
+\date{2026-06-18}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -277,9 +277,9 @@ juvenile survival rates (\citeproc{ref-Mazlum2017}{Mazlum \emph{et al.},
 2017}). These findings indicate that enhancing habitat complexity can be
 a useful management tool for threatened crayfish populations. While
 artificial aquatic habitats have received attention in marine systems
-(\citeproc{ref-Frehse2025}{\textbf{Frehse2025?}}), equivalent systematic
-comparisons of shelter configurations for freshwater crayfish
-restoration remain largely absent from the literature.
+{[}{]}, equivalent systematic comparisons of shelter configurations for
+freshwater crayfish restoration remain largely absent from the
+literature.
 
 Shelter selection in crayfish is strongly influenced by body size, as
 individuals actively select refugia proportional to their dimensions.
@@ -526,19 +526,17 @@ categorical mixed-effects models were used to test whether body size or
 sex affected structure preference across experiments 2, 3 and 4. The
 outcome is categorical and individual animals within group within round
 create a three-level nested random effect structure. Standard
-frequentist mixed-effect approaches such as lme4
-(\citeproc{ref-Bates2015}{\textbf{Bates2015?}}) do not support
+frequentist mixed-effect approaches such as lme4 {[}{]} do not support
 categorical outcomes with complex nested random effects structures,
 making Bayesian estimation the appropriate choice for this design
-(\citeproc{ref-McCarthy2007}{\textbf{McCarthy2007?}};
-\citeproc{ref-Bolker2009}{\textbf{Bolker2009?}}). Model convergence was
-assessed using the Gelman-Rubin diagnostic (all \(\hat{R}\) = 1.00) and
-divergent transition counts (all experiments: 0 divergences), confirming
-reliable posterior sampling (\citeproc{ref-Gelman1992}{Gelman and Rubin,
-1992}). To test whether size classes affected structure preference while
-accounting for repeated measurement of individuals and groups, a
-Bayesian categorical mixed-effects model was fitted using the brms
-package (\citeproc{ref-Burkner2025}{Bürkner \emph{et al.}, 2025}), with
+{[}{]}. Model convergence was assessed using the Gelman-Rubin diagnostic
+(all \(\hat{R}\) = 1.00) and divergent transition counts (all
+experiments: 0 divergences), confirming reliable posterior sampling
+(\citeproc{ref-Gelman1992}{Gelman and Rubin, 1992}). To test whether
+size classes affected structure preference while accounting for repeated
+measurement of individuals and groups, a Bayesian categorical
+mixed-effects model was fitted using the brms package
+(\citeproc{ref-Burkner2025}{Bürkner \emph{et al.}, 2025}), with
 structure type as the outcome, size class as a fixed effect, and group
 identity, individual identity nested within group, and experimental
 round as random intercepts. The Stuart-Maxwell test was used to test for
@@ -582,10 +580,10 @@ selected a structure. Sex had no credible effect on structure preference
 (β = 3.32, 95\% CI: -1.09 to 9.3; posterior probability = 0.92), with
 credible intervals spanning zero for all structure types. The symmetry
 test indicated that structure type use shifted between L0 and L1
-(\emph{p} = \textless0.001), suggesting kōura actively relocated to
-preferred structure types overnight rather than remaining at their
-initial location. The GoPro footage showed kōura emerging, walking and
-climbing on the structures after sunset.
+(\emph{p} = 0.002), suggesting kōura actively relocated to preferred
+structure types overnight rather than remaining at their initial
+location. The GoPro footage showed kōura emerging, walking and climbing
+on the structures after sunset.
 
 \subsection{Exp 2: Group kōura}\label{exp-2-group-kux14dura-1}
 
@@ -679,17 +677,15 @@ reduce competitive displacement. Learning across rounds may also have
 contributed, as WoodLog was most selected structure in round 1 of
 experiment 2 (17 out of 36 times) but not in subsequent rounds,
 suggesting kōura may have shifted preference after initial exploration
-(\citeproc{ref-Bhimani2016}{\textbf{Bhimani2016?}}). This learning was
-possible as the groups of kōura in experiment 2 were reused all five
-rounds, while the single kōura in experiment 1 were only used once. The
-reuse of groups across rounds was necessary given the limited
-availability of kōura and ethical constraints on collection numbers. The
-number of independent groups was low across experiments (six in
-experiments 2 and 3, four in experiment 4), constraining the statistical
-power for detecting group-level effects
-(\citeproc{ref-Hurlbert1984}{\textbf{Hurlbert1984?}}). Despite these
-constraints, consistent patterns in size-dependent preference were
-evident across experiments.
+{[}{]}. This learning was possible as the groups of kōura in experiment
+2 were reused all five rounds, while the single kōura in experiment 1
+were only used once. The reuse of groups across rounds was necessary
+given the limited availability of kōura and ethical constraints on
+collection numbers. The number of independent groups was low across
+experiments (six in experiments 2 and 3, four in experiment 4),
+constraining the statistical power for detecting group-level effects
+{[}{]}. Despite these constraints, consistent patterns in size-dependent
+preference were evident across experiments.
 
 \subsection{Body size and competitive
 dynamics}\label{body-size-and-competitive-dynamics}
@@ -800,17 +796,21 @@ effective kōura habitat restoration practice.
 We thank Te Arawa Lakes Trust and Te Komiti Whakahaere for the
 opportunity to collect and study the treasured kōura. We are grateful to
 Soweeta Fort-D'ath and William Anaru (Te Arawa Lakes Trust), and Tihini
-Grant (Ngāti Pikiao). This research was supported by the Fish Futures
-programme funded through a Ministry of Business, Innovation and
-Employment grant (CAWX2101).
+Grant (Ngāti Pikiao).
+
+\subsection{Funding statement}\label{funding-statement}
+
+This research was supported by the Fish Futures programme funded through
+a Ministry of Business, Innovation and Employment grant (CAWX2101).
 
 \subsection{Authors' contributions}\label{authors-contributions}
 
 Study conception and design were undertaken by O.V.R., R.H. and F.J.B.
 Experiments were conducted by O.V.R. Data analysis was performed by
-O.V.R. Local ecological knowledge and kōura were supplied by I.A.K.K.
-Manuscript drafting was led by O.V.R. All authors contributed to
-manuscript revision, approved the results, and the final manuscript.
+O.V.R. I.A.K.K. obtained iwi consent, provided local ecological
+knowledge and kōura specimens. Manuscript drafting was led by O.V.R. All
+authors contributed to manuscript revision, approved the results, and
+the final manuscript.
 
 \subsection{Ethical approval}\label{ethical-approval}
 
