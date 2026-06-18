@@ -39,7 +39,8 @@ format:
   docx:
     reference-doc: references/reference.docx
     filters:
-      - filters/docx-title-page.lua
+      - at: pre-quarto
+        path: filters/docx-title-page.lua
 
 fig-width: 8
 fig-height: 6
