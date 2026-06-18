@@ -185,6 +185,7 @@
           </group>
         </else>
       </choose>
+      <text variable="DOI" prefix=" https://doi.org/"/>
     </layout>
   </bibliography>
 </style>
