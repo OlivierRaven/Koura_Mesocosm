@@ -128,11 +128,20 @@ gtest_to_cld <- function(pgtest_result) {
 }
 
 # Format of p values in text, including the correct comparison operator and
-# the italic "p" label. Set label = FALSE for values chained after a leading
-# "*p*" (e.g. "*p* < 0.001, 0.011, 0.004, respectively").
-format_pval <- function(p, label = TRUE) {
-  out <- if (p < 0.001) "< 0.001" else paste0("= ", format(round(p, 3), nsmall = 3))
-  if (label) paste0("*p* ", out) else out
+# the italic "p" label. For values chained after a leading "*p*" (e.g.
+# "*p* < 0.001, 0.011, 0.004, respectively"), set label = FALSE and
+# symbol = FALSE so non-significant values print bare (no "="), while any
+# value below 0.001 still automatically shows "< 0.001" regardless of
+# position in the list.
+format_pval <- function(p, label = TRUE, symbol = TRUE) {
+  if (p < 0.001) {
+    out <- "< 0.001"
+  } else {
+    val <- format(round(p, 3), nsmall = 3)
+    out <- if (symbol) paste0("= ", val) else val
+  }
+  if (label) out <- paste0("*p* ", out)
+  out
 }
 
 sig_label <- function(p) {
