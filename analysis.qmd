@@ -48,20 +48,20 @@ write_out <- function(df, name) {write.csv(df, file.path(der_data_dir, name), ro
 # Read data
 df_koura               <- read_sheet("Koura")
 df_setup               <- read_sheet("Tank_setup")
-df_exp1_single_raw     <- read_sheet("exp1")
+df_exp1_individual_raw <- read_sheet("exp1")
 df_exp2_group_raw      <- read_sheet("exp2")
 df_exp3_woodstone_raw  <- read_sheet("exp3")
-df_exp4_brick_raw      <- read_sheet("exp4")
+df_exp4_material_raw   <- read_sheet("exp4")
 df_wq                  <- read_sheet("WQ")
 df_loggers             <- read_sheet("Loggers")
 
 # Save as csv to derived
 write_out(df_koura,              "df_koura.csv")
 write_out(df_setup,              "df_setup.csv")
-write_out(df_exp1_single_raw,    "df_exp1_single_raw.csv")
+write_out(df_exp1_individual_raw,"df_exp1_individual_raw.csv")
 write_out(df_exp2_group_raw,     "df_exp2_group_raw.csv")
 write_out(df_exp3_woodstone_raw, "df_exp3_woodstone_raw.csv")
-write_out(df_exp4_brick_raw,     "df_exp4_brick_raw.csv")
+write_out(df_exp4_material_raw,  "df_exp4_material_raw.csv")
 write_out(df_wq,                 "df_wq.csv")
 write_out(df_loggers,            "df_loggers.csv")
 
@@ -172,7 +172,8 @@ sex_shape_map  <- c(F = 1, M = 16)
 ```{r}
 #| label: build_dfs
 
-df_exp1_single_long <- df_exp1_single_raw %>%
+# EXP 1 – Individual preference (long)
+df_exp1_individual_long <- df_exp1_individual_raw %>%
   mutate(location_initial = initial, location_next_day = next_day) %>%
   pivot_longer(cols = matches("_(initial|next_day)$"),
     names_to = c(".value", "stage"),
@@ -181,7 +182,7 @@ df_exp1_single_long <- df_exp1_single_raw %>%
     structure_type     = factor(structure, levels = STRUCTURE_LEVELS)) %>%
   select(tank, round, group_id, koura_id, size_class, sex, size_mm1, weight_g1, date, stage, t_leave_s, t_initial_s, location_code, structure_type, legs1, claws1, antenna1, size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
 
-write_out(df_exp1_single_long, "df_exp1_single_long.csv")
+write_out(df_exp1_individual_long, "df_exp1_individual_long.csv")
 
 # EXP 2 – Group structure (long)
 df_exp2_group_long <- df_exp2_group_raw %>%
@@ -210,8 +211,8 @@ df_exp3_woodstone_long <- df_exp3_woodstone_raw %>%
 write_out(df_exp3_woodstone_long, "df_exp3_woodstone_long.csv")
 
 
-# EXP 4 – Bricks (long)
-df_exp4_brick_long <- df_exp4_brick_raw %>%
+# EXP 4 – Materials (long)
+df_exp4_material_long <- df_exp4_material_raw %>%
   mutate(location_next_day = next_day) %>%
   pivot_longer(cols = c(location_next_day, structure_next_day),
     names_to = c(".value", "stage"),
@@ -220,10 +221,10 @@ df_exp4_brick_long <- df_exp4_brick_raw %>%
     structure_type = factor(structure, levels = STRUCTURE_LEVELS4)) %>%
   select(tank, round, group_id, koura_id, size_class, sex, date, stage, location_code, structure_type,size_mm1, weight_g1, legs1, claws1, antenna1,size_mm2, weight_g2, legs2, claws2, antenna2,notes_exp, notes_koura)
 
-write_out(df_exp4_brick_long, "df_exp4_brick_long.csv")
+write_out(df_exp4_material_long, "df_exp4_material_long.csv")
 ```
 
-# Exp 1 Individual koura
+# Exp 1 Individual preference
 ## Exp 1 Statistic
 ```{r}
 #| label: stats-exp1
@@ -234,7 +235,7 @@ write_out(df_exp4_brick_long, "df_exp4_brick_long.csv")
 # RQ 3: Does structure type differ between sex?
 # RQ 4: Did structure type use shift directionally between initial and next_day?
 
-df1 <- df_exp1_single_long %>%
+df1 <- df_exp1_individual_long %>%
   mutate(
     structure_type     = factor(structure_type),
     stage         = factor(stage, levels = c("initial", "next_day")),
@@ -381,9 +382,9 @@ p_symtest1   <- pvalue(symtest1)
 #| label: fig-exp1
 #| fig-width: 5
 #| fig-height: 4
-#| fig-cap: "Proportion of individual kōura (Experiment 1) found at each structure type the next day, shown separately for female (white bars) and male (black bars) kōura. Bars show observed proportions with sample sizes (n) shown on bars. Letters above bars indicate results of pairwise G-tests with Bonferroni correction within each sex group, structure types sharing the same letter within a panel do not differ significantly from each other, while structure types with different letters differ significantly in use. No significant difference in overall structure preference was detected between sexes (Fisher's exact test, see results)."
+#| fig-cap: "Proportion of individual kōura (Experiment 1) found at each structure type the next day, shown separately for female (white bars) and male (black bars) kōura. Bars show observed proportions with sample sizes (n) shown on bars. Letters above bars indicate results of pairwise G-tests with Bonferroni correction within each sex group, structure types sharing the same letter within a panel do not differ significantly from each other, while structure types with different letters differ significantly in use. No significant difference in overall structure preference was detected between sexes (see results)."
 
-exp1_structure_combined <- df_exp1_single_long %>%
+exp1_structure_combined <- df_exp1_individual_long %>%
   filter(stage == "next_day") %>%
   count(stage, structure_type, name = "n") %>%
   group_by(stage) %>%
@@ -406,7 +407,7 @@ exp1_p_combined <- exp1_structure_combined %>%
     aes(y = prop + 0.04, label = cld_letter), size = 3.5, fontface = "bold") +
   labs(x = "Structure type", y = "Proportion (next-day)")
 
-exp1_structure_bysex <- df_exp1_single_long %>%
+exp1_structure_bysex <- df_exp1_individual_long %>%
   filter(stage == "next_day") %>%
   count(stage, structure_type, sex, name = "n") %>%
   group_by(stage, sex) %>%
@@ -471,10 +472,10 @@ invisible(capture.output({
   }
 
   # data
-  exp1_loc    <- mk_props(df_exp1_single_long, location_code, tank)
-  exp1_round  <- mk_props(df_exp1_single_long, location_code, round)
-  exp1_loc2   <- mk_props(df_exp1_single_long, structure_type,     tank)
-  exp1_round2 <- mk_props(df_exp1_single_long, structure_type,     round)
+  exp1_loc    <- mk_props(df_exp1_individual_long, location_code, tank)
+  exp1_round  <- mk_props(df_exp1_individual_long, location_code, round)
+  exp1_loc2   <- mk_props(df_exp1_individual_long, structure_type,     tank)
+  exp1_round2 <- mk_props(df_exp1_individual_long, structure_type,     round)
 
   # plots
   p_exp1_loc    <- mk_bar(exp1_loc,   location_code, tank,  "Location by tank")
@@ -499,7 +500,7 @@ loc_round_plots_exp1
 #| fig-height: 6
 #| fig-cap: "."
 
-exp1_pairs <- df_exp1_single_long %>%
+exp1_pairs <- df_exp1_individual_long %>%
   dplyr::filter(stage %in% c("initial","next_day")) %>%
   dplyr::select(koura_id, tank, round, size_class, sex, stage,location_code, structure_type, t_leave_s, t_initial_s) %>%
   dplyr::mutate(
@@ -721,7 +722,7 @@ fixef(m_exp2_bayes) %>%
 #| label: fig-exp2
 #| fig-width: 8
 #| fig-height: 4
-#| fig-cap: "structure type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each structure type the next day across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals."
+#| fig-cap: "Structure type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals."
 
 exp2_combined <- df_exp2_group_long %>%
   filter(stage == "next_day") %>%
@@ -1031,7 +1032,7 @@ fixef(m_exp3_bayes) %>%
 #| label: fig-exp3
 #| fig-width: 8
 #| fig-height: 4
-#| fig-cap: "structure type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each structure type the next day across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals. ↑ used more than expected, ↓ used less than expected. TankWall excluded from model predictions."
+#| fig-cap: "Structure type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each structure type at next-day location across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95% credible intervals. ↑ used more than expected, ↓ used less than expected. TankWall excluded from model predictions."
 
 exp3_combined <- df_exp3_woodstone_long %>%
   filter(stage == "next_day", !is.na(structure_type), structure_type != "NA") %>%
@@ -1128,7 +1129,7 @@ loc_round_plots_exp3
 ```
 
 
-# Exp 4 Material Alone
+# Exp 4 Material comparison
 ## Exp 4 Statistic
 ```{r}
 #| label: stats-exp4
@@ -1137,7 +1138,7 @@ loc_round_plots_exp3
 # RQ 1: Does overall structure preference exist at group level? (Wilcoxon on group proportions)
 # RQ 2: Does sex affect structure preference? (brms categorical)
 
-df4 <- df_exp4_brick_long %>%
+df4 <- df_exp4_material_long %>%
   mutate(
     structure_type      = factor(structure_type),
     stage          = factor(stage, levels = c("next_day")),
@@ -1289,9 +1290,9 @@ fixef(m_exp4_bayes) %>%
 #| label: fig-exp4
 #| fig-width: 8
 #| fig-height: 4
-#| fig-cap: "Material preference (Experiment 4). (A) Proportion of kōura found at each structure type the next day across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of structure type use by sex from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."
+#| fig-cap: "Material preference (Experiment 4). (A) Proportion of kōura found at each structure type at next-day location across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of structure type use by sex from Bayesian categorical mixed model, with 95% credible intervals. TankWall excluded from model predictions."
 
-exp4_combined <- df_exp4_brick_long %>%
+exp4_combined <- df_exp4_material_long %>%
   filter(stage == "next_day", !is.na(structure_type)) %>%
   count(structure_type, name = "n") %>%
   mutate(N = sum(n), prop = n / N) %>%
@@ -1335,18 +1336,18 @@ Exp4_p
 #| fig-height: 8
 #| fig-cap: "."
 
-df_exp4_brick_long %>%
+df_exp4_material_long %>%
   group_by(group_id, size_class, sex, structure_type) %>%
   summarise(n = n(), .groups = "drop") %>%
   arrange(group_id, size_class)
 
-df_exp4_brick_long %>%
+df_exp4_material_long %>%
   ggplot(aes(x = factor(group_id), fill = size_class)) +
   geom_bar(position = "fill") +  # use "stack" to show raw counts
   labs(x = "Group ID", y = "Proportion", fill = "Size class") +
   theme_bw()
 
-df_exp4_brick_long %>%
+df_exp4_material_long %>%
   ggplot(aes(x = factor(group_id), fill = interaction(sex, size_class))) +
   geom_bar(position = "fill") +
   labs(x = "Group ID", y = "Proportion", fill = "Sex × Size class") +
@@ -1379,10 +1380,10 @@ invisible(capture.output({
   }
 
   # data
-  exp4_loc    <- mk_props(df_exp4_brick_long, location_code, tank)
-  exp4_round  <- mk_props(df_exp4_brick_long, location_code, round)
-  exp4_loc4   <- mk_props(df_exp4_brick_long, structure_type,     tank)
-  exp4_round4 <- mk_props(df_exp4_brick_long, structure_type,     round)
+  exp4_loc    <- mk_props(df_exp4_material_long, location_code, tank)
+  exp4_round  <- mk_props(df_exp4_material_long, location_code, round)
+  exp4_loc4   <- mk_props(df_exp4_material_long, structure_type,     tank)
+  exp4_round4 <- mk_props(df_exp4_material_long, structure_type,     round)
 
   # plots
   p_exp4_loc    <- mk_bar(exp4_loc,   location_code, tank,  "Location by tank")
@@ -1519,7 +1520,7 @@ ggsave(wq_all_plot, file = file.path(out_dir, "fig-wq.png"), width = 5, height =
 #| fig-cap: "."
 
 df_size_weight_all <- dplyr::bind_rows(
-  df_exp1_single_raw %>%
+  df_exp1_individual_raw %>%
     dplyr::transmute(experiment = "Exp 1: Single kōura",
       size_mm1   = as.numeric(size_mm1),
       weight_g1  = as.numeric(weight_g1),
@@ -1533,7 +1534,7 @@ df_size_weight_all <- dplyr::bind_rows(
       experiment = "Exp 3: Wood vs Stone",
       size_mm1   = as.numeric(size_mm1),
       weight_g1  = as.numeric(weight_g1),
-      sex= as.factor(sex)),df_exp4_brick_raw %>%
+      sex= as.factor(sex)),df_exp4_material_raw %>%
     dplyr::transmute(
       experiment = "Exp 4: Bricks",
       size_mm1   = as.numeric(size_mm1),

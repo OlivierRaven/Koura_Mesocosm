@@ -186,10 +186,10 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Structure over material: mesocosm experiments reveal shelter design principles for threatened freshwater crayfish restoration},
+  pdftitle={The importance of structure: mesocosm evidence for shelter design in freshwater crayfish restoration},
   pdfauthor={Olivier V. Raven; Robin Holmes; Ian A. K. Kusabs; Francis J. Burdon; Deniz Özkundakci},
-  pdfkeywords={Paranephrops planifrons, Behaviour, Habitat
-preference, Aotearoa New Zealand, Artificial reef},
+  pdfkeywords={Paranephrops planifrons, Artificial
+reef, Behaviour, Habitat preference, Aotearoa New Zealand},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -198,37 +198,38 @@ preference, Aotearoa New Zealand, Artificial reef},
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{Structure over material: mesocosm experiments reveal shelter
-design principles for threatened freshwater crayfish restoration}
+\title{The importance of structure: mesocosm evidence for shelter design
+in freshwater crayfish restoration}
 \author{Olivier V. Raven \and Robin Holmes \and Ian A. K.
 Kusabs \and Francis J. Burdon \and Deniz Özkundakci}
-\date{2026-06-18}
+\date{2026-06-19}
 \begin{document}
 \maketitle
 \begin{abstract}
-Freshwater crayfish are among the most threatened invertebrates
-globally, with habitat loss as a primary driver of population decline,
-yet the optimal design of habitat enhancement structures for their
-restoration remains largely unknown. Four controlled mesocosm
-experiments with the endemic Aotearoa-New Zealand freshwater crayfish
-kōura (\emph{Paranephrops planifrons}) examined how shelter structure,
-material composition, body size, and group dynamics influence refuge
-selection. Individual kōura strongly preferred a wooden log with
-enclosed drilled holes, but when housed in mixed-size groups, kōura
-preference shifted to flat and piled stone configurations, providing
-more complex refugia for different-size individuals simultaneously. Flat
-stone structures were preferred over wood splits and this was strongest
-for large individuals. When structural dimensions were held constant, no
-significant preference was detected between concrete and wooden brick
+Freshwater crayfish are keystone species that rank among the most
+threatened invertebrate groups globally. While habitat loss and
+predation by non-native predators feature prominently as drivers of
+crayfish population declines, the optimal design of habitat enhancement
+structures for their restoration remains largely unknown. To better
+understand freshwater crayfish habitat preferences, our study focused on
+the endemic kōura (\emph{Paranephrops planifrons}) found in Aotearoa New
+Zealand. We used four mesocosm experiments to examine how shelter
+structure, material composition, individual body size, and group
+dynamics influence refuge selection in kōura. Individual kōura strongly
+preferred a wooden log with enclosed drilled holes, but when housed in
+mixed-size groups, their preference shifted to flat and piled stone
+configurations that provided more complex refugia for individuals of
+different sizes. Flat stone structures were preferred over split wood
+pieces of similar dimensions, and this was strongest for large
+individuals. When structural dimensions were held constant, no
+significant preference was detected between concrete and wooden
 structures, indicating that material composition alone does not drive
-refuge selection. Size class effects on shelter preference were
-quantified using Bayesian categorical mixed-effects models, which
-provide an appropriate framework for multi-choice repeated-measures
-designs with categorical outcomes and nested group structures. These
-mesocosm findings suggest that stone-based configurations warrant field
-evaluation as habitat enhancement structures for kōura restoration,
-given their structural complexity across size classes and alignment with
-the cultural values associated with restoring this taonga species.
+refuge selection. The findings of these mesocosm experiments suggest
+that stone pile configurations warrant field evaluations as habitat
+enhancement structures for kōura restoration. The stone piles create
+structural complexity that can provide habitat for different size
+classes and thus may add critical refuge from non-native predators for
+kōura populations.
 \end{abstract}
 
 \renewcommand*\contentsname{Table of contents}
@@ -239,9 +240,11 @@ the cultural values associated with restoring this taonga species.
 
 \section{Introduction}\label{introduction}
 
-Crayfish are among the most threatened freshwater invertebrates
-globally, with 32\% of species assessed as threatened with extinction
-due to habitat loss, water quality decline, and invasive species
+Freshwater biodiversity is declining faster than in any other ecosystem
+globally, driven by habitat loss, pollution, and invasive species
+{[}Dudgeon2006{]}. Crayfish are among the most threatened freshwater
+invertebrates, with 32\% of species assessed as threatened with
+extinction due to these same pressures
 (\citeproc{ref-Richman2015}{Richman \emph{et al.}, 2015}). As keystone
 species and ecosystem engineers, crayfish play crucial roles in
 freshwater food webs through shredding of leaf litter, bioturbation of
@@ -251,7 +254,7 @@ cascading effects on freshwater ecosystems
 \citeproc{ref-Collier1997}{Collier \emph{et al.}, 1997};
 \citeproc{ref-Parkyn2001}{Parkyn \emph{et al.}, 2001}). The increasing
 degradation of freshwater habitats therefore not only threatens crayfish
-populations, but also risks disrupting the ecosystem processes crayfish
+populations but also risks disrupting the ecosystem processes crayfish
 sustain.
 
 Habitat complexity is a key driver of crayfish population persistence,
@@ -267,38 +270,41 @@ natural and artificial structures as shelter, including rocks, woody
 debris, and even anthropogenic objects such as bottles and discarded
 appliances (\citeproc{ref-Parkyn2009}{Parkyn \emph{et al.}, 2009};
 \citeproc{ref-Adams2014}{Adams, 2014}), demonstrating considerable
-flexibility in habitat use. In the context of freshwater restoration,
-increasing structural complexity through providing shelters has improved
-crayfish abundance and restocking success in degraded streams and lakes
+flexibility in habitat use. While this diversity of potential refugia is
+well documented, preferences among different structure types remain
+poorly understood, even though knowledge of habitat preferences is
+fundamental to designing effective enhancement structures for
+restoration. In the context of freshwater restoration, increasing
+structural complexity through providing shelters has improved crayfish
+abundance and restocking success in degraded streams and lakes
 (\citeproc{ref-Huolila1997}{Huolila \emph{et al.}, 1997};
 \citeproc{ref-Johnsen2008}{Johnsen and Taugbøl, 2008}), and the
 availability of coarser substrate has also been shown to improve
 juvenile survival rates (\citeproc{ref-Mazlum2017}{Mazlum \emph{et al.},
 2017}). These findings indicate that enhancing habitat complexity can be
-a useful management tool for threatened crayfish populations. While
-artificial aquatic habitats have received attention in marine systems
-{[}{]}, equivalent systematic comparisons of shelter configurations for
-freshwater crayfish restoration remain largely absent from the
-literature.
+a useful management tool for threatened crayfish populations, yet
+systematic comparisons of shelter configurations for freshwater crayfish
+restoration remain largely absent from the literature.
 
 Shelter selection in crayfish is strongly influenced by body size, as
 individuals actively select refugia proportional to their dimensions.
-Crayfish individuals selected stones more than 3 times longer and 1.25
-times wider than their carapace length, with larger males consistently
-selecting larger stones (\citeproc{ref-Streissl2002}{Streissl and Hödl,
-2002}). Body size and shelter dimensions have direct competitive
-consequences as crayfish in undersized shelters initiated and won more
-fights than those in appropriately sized shelters, suggesting that
-shelter fit influences an individual's assessment of its own fighting
-ability (\citeproc{ref-Percival2010}{Percival and Moore, 2010}). Social
-dynamics further complicate shelter use when refuge availability is
-limited, as competitive interactions among conspecifics determine which
-individuals gain access to preferred shelters. Dominance hierarchies
-based on body size and reproductive status show that males and maternal
-females often are able to overtake shelters from non-maternal females,
-while adults consistently outcompete juveniles for shelter access
-(\citeproc{ref-Figler2005}{Figler \emph{et al.}, 2005}). Body weight
-ratio between contestants is a strong predictor of shelter takeover
+Crayfish individuals tend to select stones more than 3 times longer and
+1.25 times wider than their carapace length, with larger males
+consistently selecting larger stones
+(\citeproc{ref-Streissl2002}{Streissl and Hödl, 2002}). Social dynamics
+further complicate shelter use when refuge availability is limited, as
+competitive interactions among conspecifics determine which individuals
+gain access to preferred shelters. Dominance hierarchies based on body
+size and reproductive status show that males and maternal females often
+are able to take over shelters from non-maternal females, while adults
+consistently outcompete juveniles for shelter access
+(\citeproc{ref-Figler2005}{Figler \emph{et al.}, 2005}). Body size and
+shelter dimensions have direct competitive consequences as crayfish in
+undersized shelters initiated and won more fights than those in
+appropriately sized shelters, suggesting that shelter fit influences an
+individual's assessment of its own fighting ability
+(\citeproc{ref-Percival2010}{Percival and Moore, 2010}). Body size
+ratios between contestants are a strong predictor of shelter takeover
 success, although prior ownership can offset size disadvantages
 (\citeproc{ref-Ranta1993}{Ranta and Lindström, 1993}), particularly when
 both individuals hold high-quality shelters
@@ -313,29 +319,28 @@ dynamics, suggesting that effective habitat enhancement structures must
 provide a range of shelter sizes to support different life stages and
 size classes simultaneously.
 
-The material and structural properties of shelters influence their value
-as refugia. Studies comparing shelter configurations show that the
-availability and size of enclosed spaces matters more than total
-structure volume on reef fish assemblages
-(\citeproc{ref-Hylkema2020}{Hylkema \emph{et al.}, 2020}). Additionally,
-enclosed structures such as PVC pipes provide greater protection against
-predatory fish than stone or vegetation structures, likely due to their
-consistent hole dimensions (\citeproc{ref-Zhao2024}{Zhao \emph{et al.},
-2024}). The use of synthetic materials like PVC pipes in restoration
-ecology brings ecological concerns, particularly in contexts where
-introducing non-native materials may conflict with conservation values
-or indigenous cultural frameworks (\citeproc{ref-Wehi2017}{Wehi and
-Lord, 2017}; \citeproc{ref-Cooke2023}{Cooke \emph{et al.}, 2023}).
-Natural materials such as stones and wood offer ecologically compatible
-alternatives, yet the importance of structural configuration versus
-material composition for crayfish shelter preference remains largely
-unknown.
+The material and structural properties of shelters can influence their
+value as refugia. In a study comparing shelter configurations on reef
+fish assemblages, the availability and size of enclosed spaces mattered
+more than total structure volume (\citeproc{ref-Hylkema2020}{Hylkema
+\emph{et al.}, 2020}). Additionally, enclosed structures such as PVC
+pipes provide greater protection against predatory fish than stone or
+vegetation structures, likely due to their consistent hole dimensions
+(\citeproc{ref-Zhao2024}{Zhao \emph{et al.}, 2024}). However, the use of
+synthetic materials like PVC pipes in restoration ecology brings
+ecological concerns, particularly in contexts where introducing
+non-native materials may conflict with conservation values or indigenous
+cultural frameworks (\citeproc{ref-Wehi2017}{Wehi and Lord, 2017};
+\citeproc{ref-Cooke2023}{Cooke \emph{et al.}, 2023}). Natural materials
+such as stones and wood offer ecologically compatible alternatives, yet
+the importance of structural configuration versus material composition
+for crayfish shelter preference is poorly understood.
 
 In Aotearoa-New Zealand (hereafter Aotearoa), the endemic freshwater
 crayfish kōura (\emph{Paranephrops planifrons}) faces conservation
 pressure from habitat loss, water quality degradation, and predation by
 invasive species (\citeproc{ref-Lee2025}{Lee \emph{et al.}, 2025};
-\citeproc{ref-Kusabs2026}{Kusabs \emph{et al.}, 2026}). Kōura are
+\citeproc{ref-Kusabs2026}{Kusabs \emph{et al.}, 2026}). Kōura are a
 \emph{taonga} (culturally treasured) species for Māori, the indigenous
 people of Aotearoa, and hold significant ecological and cultural value
 in freshwater ecosystems (\citeproc{ref-Kusabs2015a}{Kusabs \emph{et
@@ -348,36 +353,33 @@ and Townsend, 2000}; \citeproc{ref-Jowett2008}{Jowett \emph{et al.},
 Kōura have been shown to significantly increase refuge use in the
 presence of predators (\citeproc{ref-Shave1994}{Shave \emph{et al.},
 1994}; \citeproc{ref-Raveninreviewb}{Raven \emph{et al.}, (b) in
-review}). However, a systematic study on shelter design preference on
-crayfish remains largely absent from the literature. Habitat restoration
-by increasing shelter availability represents a promising management
-tool for kōura recovery, and the use of natural materials aligns with
-ecological and cultural values set for these naturally and culturally
-important lakes.
+review}). Habitat restoration by increasing shelter availability
+represents a promising management tool for kōura recovery, and the use
+of natural materials aligns with ecological and cultural values.
 
-In this study, four controlled mesocosm experiments were conducted to
-identify kōura preferences among different structures varying in
-material and configuration, to examine how individual behaviour, body
-size, and group interactions influence refuge selection. We predicted
+In this study, four mesocosm experiments were conducted to identify
+kōura habitat preferences. We assessed how different structures varying
+in material and configuration influence refuge selection, accounting for
+individual behaviour, body size, and group interactions. We predicted
 that 1) Structurally complex structures providing enclosed crevices
 would be preferred over isolated or open structures, as enclosed spaces
-reduce predation risk. 2) Structure preference would be size-dependent,
+reduce predation risk; 2) structure preference would be size-dependent,
 with larger kōura selecting structures with larger refuge spaces
 (\citeproc{ref-Streissl2002}{Streissl and Hödl, 2002};
-\citeproc{ref-Percival2010}{Percival and Moore, 2010}). 3) Stone-based
+\citeproc{ref-Percival2010}{Percival and Moore, 2010}); 3) stone-based
 structures would be preferred over wood due to greater structural
 stability, and 4) material type alone would not influence refuge
 preference between concrete and wooden bricks. The results provide
 practical guidance for designing cost-effective, ecologically
-appropriate habitat enhancement structures to support kōura population
-recovery.
+appropriate habitat enhancement structures to enhance kōura abundance
+and support population recovery.
 
 \section{Materials and Methods}\label{materials-and-methods}
 
 \subsection{Animal collection and tank
 setup}\label{animal-collection-and-tank-setup}
 
-In mid-August 2025, 72 kōura were sourced from lakes Ōkāreka and
+In mid-August 2025, 72 kōura were sourced from Lakes Ōkāreka and
 Tikitapu, located within the Rotorua Te Arawa Lakes area in the North
 Island of Aotearoa. Collected animals were transported to the Aquatic
 Research Centre at the University of Waikato in Hamilton. Individuals
@@ -389,105 +391,128 @@ paint marker (Sharpie, medium point) (\citeproc{ref-Ramalho2010}{Ramalho
 \emph{et al.}, 2010}).
 
 Kōura were acclimatised for 12 days in outdoor concrete holding tanks (Ø
-1.4 m, 0.5 m deep), each filled to a depth of 0.4 m with dechlorinated
-tap water conditioned for three months. Paving sand was used as
-substrate, and shelters were provided as PVC pipes, broken terracotta
-pots, and perforated building bricks. Each holding tank housed 10--12
-kōura. Kōura were fed every second day with commercial carnivore pellets
-(Hikari Tropical, Kyorin Food Industries Ltd., Japan; animal protein
-47\%). Water temperature and dissolved oxygen remained stable throughout
-the experimental period (temperature: 12 ± 1.2 °C; dissolved oxygen:
-99.9 ± 1.7 \%).
+1.4 m), each filled to 0.4 m with dechlorinated tap water conditioned
+for three months, paving sand as substrate, shelters, and were covered
+with a single layer of shade cloth. Each holding tank housed 10--12
+individuals. Kōura were fed every second day with commercial carnivore
+pellets (Hikari Tropical, Kyorin Food Industries Ltd., Japan; animal
+protein 47\%). Water temperature and dissolved oxygen remained stable
+throughout the experimental period (temperature: 12 ± 1.2 °C; dissolved
+oxygen: 99.9 ± 1.7 \%).
 
-Experiments were conducted outside in six circular concrete tanks (1425
-L; Ø 1.85 m, 0.53 m deep), each filled to a depth of 0.4 m with
-dechlorinated tap water conditioned for three months. Paving sand was
-used as substrate and tanks were closed off with a lid constructed of
-two layers of shade cloth to prevent escape and minimise solar heating.
-Fresh dechlorinated tap water and an air stone were added to each tank
-in between the experimental rounds. To limit thermal stress, experiments
-were conducted in spring (September to October). Because kōura are a
-\emph{taonga} (treasured) species, permission was obtained from Te Arawa
-Lakes Trust and Te Komiti Whakahaere. All experimental procedures were
-conducted under University of Waikato animal ethics committee approval
-(protocol number: 1207; see Ethical Approval section).
+Experiments were conducted in six larger outdoor concrete tanks (1425 L;
+Ø 1.85 m) with the same substrate and water conditions, covered with a
+double layer of shade cloth to prevent escape and minimise solar
+heating. Fresh dechlorinated tap water and an air stone were added
+between rounds. To limit thermal stress, experiments were conducted
+during the Australasian spring (September to October). Because kōura are
+a \emph{taonga} (treasured) species, permission to conduct the
+experiments was obtained from Te Arawa Lakes Trust and Te Komiti
+Whakahaere. All experimental procedures were conducted under University
+of Waikato animal ethics committee approval (protocol number: 1207; see
+Ethical Approval section).
 
-\subsection{Exp 1: Single kōura}\label{exp-1-single-kux14dura}
+\subsection{Experiment 1: Individual
+preference}\label{experiment-1-individual-preference}
 
 This experiment assessed individual kōura structure preference by
 offering single animals a choice among four structures
 (Figure~\ref{fig-exp-setup}). The structure-types were: SingleStone (ten
-quarried stones (150--250 mm) placed separately), FlatStone (ten
-quarried stones arranged tightly without stacking), StonePile (ten
-quarried stones stacked to form a pile), and WoodLog (a tānekaha
-(\emph{Phyllocladus trichomanoides}) log (500 mm long, 150 mm diameter)
-containing six drilled holes (70 mm deep, 32 mm diameter)). Six
-experimental tanks were used, each housing a single medium-sized kōura.
-In total, 30 kōura consisting of 15 females with mean OCL and weight ±
-SD: 26.9 ± 2 mm, range: 23.2--29.8 mm, 12.5 ± 3.3 g and 15 males: 26.1 ±
-2.2 mm, range: 22.6--30 mm, 11.9 ± 3.1 g were tested across five
-experimental replicates, with each replicate lasting 22 hours.
+quarried stones (150--250 mm) placed individually across the quadrant
+with sufficient spacing between stones that no crevices formed between
+them), FlatStone (ten quarried stones arranged tightly without
+stacking), StonePile (ten quarried stones stacked to form a pile), and
+WoodLog (a tānekaha (\emph{Phyllocladus trichomanoides}) log (500 mm
+long, 150 mm diameter) containing six drilled holes (70 mm deep, 32 mm
+diameter)). If a kōura was not using a structure, TankWall was noted as
+its location which represents the wall of the tank or when the kōura was
+in the open. TankWall functioned as an indicator of structure rejection
+rather than a preference. Six experimental tanks were used, each housing
+a single medium-sized kōura. Across five experimental replicates, a
+total of 30 kōura were tested, consisting of 15 females with mean OCL
+and weight ± SD: 26.9 ± 2 mm, range: 23.2--29.8 mm, 12.5 ± 3.3 g and 15
+males: 26.1 ± 2.2 mm, range: 22.6--30 mm, 11.9 ± 3.1 g. Each replicate
+lasted 22 hours, beginning at noon (12:00) and ending at 10:00 the
+following morning.
 
 Each experimental tank was divided into four quadrants, with one
-structure type placed at random (randomizer.org) in each quadrant. If a
-kōura was not using a structure, TankWall was noted as its location
-which represents the wall of the tank. For each trial, a single kōura
-was placed inside a vertically oriented plastic tube (50 mm long, open
-at one end and sealed at the other) positioned at the centre of the
-tank, with the sealed end resting on the substrate. This ensured a
-standardised starting position from which the kōura could exit in any
-direction. The time taken for the kōura to locate its first structure
-was recorded (L0). On the following day, the final location of the kōura
-was noted (L1) after which it was removed from the tank. Tanks were
-reset and structure placements re-randomised prior to the next trial.
-Each kōura was used in a single trial only and was not reused across
-replicates. To confirm nocturnal activity, three GoPros (Hero 3) were
-placed in one tank at the end of the day and recorded for five hours.
+structure type placed at random (randomizer.org) in each quadrant. For
+each trial, a single kōura was placed inside a vertically oriented
+plastic tube (50 mm long, open at one end and sealed at the other)
+positioned at the centre of the tank, with the sealed end resting on the
+substrate. This ensured a standardised starting position from which the
+kōura could exit in any direction (\citeproc{ref-MacNeil2025}{MacNeil
+\emph{et al.}, 2025}). The time taken for the kōura to locate its
+initial refuge location was recorded. On the following day, the final
+location of the kōura was noted after which it was removed from the
+tank. Tanks were reset and structure placements re-randomised prior to
+the next trial. Each individual kōura was used once in a single trial
+and not reused across temporal replicate blocks. To confirm nocturnal
+activity, three digital cameras (GoPro Hero 3) were placed in one tank
+and recorded for five hours at the end of each of the five days.
 
-\subsection{Exp 2: Group kōura}\label{exp-2-group-kux14dura}
+\subsection{Experiment 2: Group
+dynamics}\label{experiment-2-group-dynamics}
 
-Building on experiment 1, this experiment examined how group dynamics
+Building on Experiment 1, this experiment examined how group dynamics
 and body size influenced structure preference when kōura were housed
-together. The six experimental tanks were used and configured with the
-same structure types and randomisation procedure as in experiment 1
-(Figure~\ref{fig-exp-setup}). In contrast to the single-animal trials,
-each tank housed a group of six male kōura, comprising two small, two
-medium, and two large individuals. Size classes were defined by OCL:
-small (mean OCL and weight ± SD: 19.2 ± 2 mm, range: 15.8--21.6 mm, 3.9
-± 2.1 g), medium (26.4 ± 1.6 mm, 23.5--29.5 mm, 11.6 ± 2.4 g), and large
-(36.3 ± 4.2 mm, 30.7--43.3 mm, 31.8 ± 11.2 g). Each group was introduced
-to the centre of the tank within an open-top plastic container (150 ×
-150 × 85 mm). The container was removed, and the initial location of
-each individual was recorded. On the following day, the final location
-of each kōura was documented, before all individuals were removed from
-the tank. This procedure was repeated across five experimental
-replicates reusing the same six groups of animals.
+together. The same six experimental tanks were used and configured with
+the identical structure types and randomisation procedure as in
+Experiment 1 (Figure~\ref{fig-exp-setup}). In contrast to the
+single-animal trials, each tank housed a group of six male kōura, as
+male-only groups simplified competitive dynamics and size class
+assignment given limited female availability. Groups were comprised of
+two small, two medium, and two large individuals. Size classes were
+defined by OCL: small (mean OCL and weight ± SD: 19.2 ± 2 mm, range:
+15.8--21.6 mm, 3.9 ± 2.1 g), medium (26.4 ± 1.6 mm, 23.5--29.5 mm, 11.6
+± 2.4 g), and large (36.3 ± 4.2 mm, 30.7--43.3 mm, 31.8 ± 11.2 g). Each
+group was introduced to the centre of the tank within an open-top
+plastic container (150 × 150 × 85 mm). The container was removed, and
+the initial location of each individual was recorded. On the following
+day, the final location of each kōura was documented, before all
+individuals were removed from the tank. This procedure was repeated
+across five experimental replicate blocks, resulting in 30 group-trials
+in total (six groups × five blocks). Structure placements and tank
+assignments were re-randomised between blocks, such that each group was
+housed in a different tank in each successive round. The same six groups
+were reused across all five blocks, with individuals staying with their
+assigned group between replicates. No mortality occurred during the
+experiment.
 
-\subsection{Exp 3: Wood vs Stone}\label{exp-3-wood-vs-stone}
+\subsection{Experiment 3: Wood vs
+Stone}\label{experiment-3-wood-vs-stone}
 
-Using the same groups from experiment 2, this experiment narrowed the
-choice to two structure types, stone and wood, to directly compare
-preference between these materials. The structure types were: (1) a flat
-stone structure (FlatStone) constructed from twelve stones placed
-tightly together, and (2) a wood structure consisting of twelve wood
-splits (WoodSplit) made from the tānekaha logs
+Using the same male kōura groups from Experiment 2, this experiment
+narrowed the choice to two structure types, stone and wood, to directly
+compare preference between these materials. The structure types were:
+(1) a flat stone structure (FlatStone) constructed from twelve stones
+placed tightly together, and (2) a wood structure consisting of twelve
+wood splits (WoodSplit) made from the tānekaha logs
 (Figure~\ref{fig-exp-setup}). Each group was released at the centre of
 the tank, and the initial structure selected by each kōura was recorded.
 The following day, the final location of each kōura was documented. This
-procedure was repeated three times, reusing the same six groups of
-animals.
+procedure was repeated across three experimental replicate blocks,
+resulting in 18 group-trials in total (six groups × three blocks).
+Structure placements and tank assignments were re-randomised between
+blocks, such that each group was housed in a different tank in each
+successive round. One small individual died in the first block and was
+replaced with a size-matched individual to maintain group composition.
+One individual could not be located at the end of the final block and
+was assumed to have escaped the tank.
 
-\subsection{Exp 4: Bricks}\label{exp-4-bricks}
+\subsection{Experiment 4: Material
+comparison}\label{experiment-4-material-comparison}
 
 This experiment tested whether kōura showed a preference between
-concrete and wooden perforated brick structures, to isolate the effect
-of material on structure preference. Two perforated building bricks
-(BrickConcrete) of 80 × 80 × 225 mm with five holes (Ø 30 mm) were
-tested against two wooden bricks (BrickWood) made from Western red cedar
-(\emph{Thuja plicata}), constructed to match the building bricks in
-external dimensions and hole size. To prevent floating, a solid clay
-brick of identical dimensions was placed on top of each wooden brick
-(Figure~\ref{fig-exp-setup}). New groups of ten kōura and four
+perforated concrete bricks and perforated wooden blocks to further
+identify the effect of material on structure preference. Two perforated
+building bricks (ConcreteBrick) of 80 × 80 × 225 mm with five holes (Ø
+30 mm) were tested against two wooden blocks (WoodBlock) with drilled
+holes made from Western red cedar (\emph{Thuja plicata}), constructed to
+match the building bricks in external dimensions and hole size. To
+prevent floating, a solid clay brick of identical dimensions was placed
+on top of each WoodBlock. ConcreteBrick did not require additional
+weight (Figure~\ref{fig-exp-setup}). New groups of ten kōura and four
 experiment tanks were used for this experiment, comprising a total of 40
 individuals consisting of 18 females with mean OCL and weight ± SD: 26.2
 ± 3.1 mm, range: 20.2--30.8 mm, 12.2 ± 4.2 g and 22 males: 26 ± 2.1 mm,
@@ -495,78 +520,84 @@ range: 20.9--29.5 mm, 11.6 ± 3.2 g. Due to reduced animal availability,
 individuals were drawn from a slightly broader size range than
 medium-size individuals, resulting in unbalanced size class
 representation (small: n = 4, medium: n = 35, large: n = 1). In each of
-the four experimental tank quadrants one brick was placed, with similar
-brick types positioned opposite to one another. Each group of kōura was
-released at the centre of the tank and the following day, the final
-location of each kōura was documented. This experiment was repeated four
-times by reusing the four groups of ten kōura.
+the four experimental tank quadrants one structure was placed, with
+similar structure types positioned opposite to one another. Each group
+of kōura was released at the centre of the tank and the following day,
+the final location of each kōura was documented. This experiment was
+repeated across four temporal blocks using the same four groups of ten
+kōura, resulting in 16 group-trials in total (four groups × four
+blocks). Structure placements and tank assignments were re-randomised
+between blocks, such that each group was housed in a different tank in
+each successive round.
 
 \subsection{Data analysis}\label{data-analysis}
 
-To test the difference between the four structure types selected the
-next day by the single kōura, a multinomial goodness-of-fit test was
+Experiment 1: To test the difference between the four structure types
+selected by the single kōura, a multinomial goodness-of-fit test was
 performed using the XNomial package (\citeproc{ref-Engels2014}{Engels,
 2014}). TankWall was excluded from preference tests as it represents the
 absence of structure choice rather than a structure type preference.
 Additionally, pairwise likelihood-ratio G-tests with Bonferroni
 correction were used to identify which structure types differed
-significantly from each other. To test whether structure type use
-differed between sexes, Fisher's exact test with simulated p-values
-(9999 replicates) was used due to small expected counts. A
-permutation-based symmetry test was applied to assess whether structure
-type transitions between L0 and L1 were directional rather than random.
-
-To test whether overall structure preference existed at the group level,
-one-sample Wilcoxon signed-rank tests were applied to group-round
-proportions for each structure type, testing against a null expectation
-of 0.25 (equal distribution among four structure types). P-values were
-Bonferroni adjusted for multiple comparisons. Normal approximation was
-used due to ties arising from discrete group counts. Bayesian
-categorical mixed-effects models were used to test whether body size or
-sex affected structure preference across experiments 2, 3 and 4. The
-outcome is categorical and individual animals within group within round
-create a three-level nested random effect structure. Standard
-frequentist mixed-effect approaches such as lme4 {[}{]} do not support
-categorical outcomes with complex nested random effects structures,
-making Bayesian estimation the appropriate choice for this design
-{[}{]}. Model convergence was assessed using the Gelman-Rubin diagnostic
-(all \(\hat{R}\) = 1.00) and divergent transition counts (all
-experiments: 0 divergences), confirming reliable posterior sampling
+significantly from each other. Bayesian categorical mixed-effects models
+were used to test whether body size or sex affected structure preference
+across all experiments, fitted using the brms package
+(\citeproc{ref-Burkner2025}{Bürkner \emph{et al.}, 2025}). For
+Experiments 1 and 2, where kōura chose among four structure types, a
+categorical family was used. For Experiments 3 and 4, where only two
+structure types were directly compared, a Bernoulli family was used.
+Model convergence was assessed using the Gelman-Rubin diagnostic (all
+\(\hat{R}\) = 1.00) and divergent transition counts (all experiments: 0
+divergences), confirming reliable posterior sampling
 (\citeproc{ref-Gelman1992}{Gelman and Rubin, 1992}). To test whether
-size classes affected structure preference while accounting for repeated
-measurement of individuals and groups, a Bayesian categorical
-mixed-effects model was fitted using the brms package
-(\citeproc{ref-Burkner2025}{Bürkner \emph{et al.}, 2025}), with
-structure type as the outcome, size class as a fixed effect, and group
-identity, individual identity nested within group, and experimental
-round as random intercepts. The Stuart-Maxwell test was used to test for
-statistical differences between stage L0 and L1.
+structure type use differed between sexes, the Bayesian categorical
+mixed-effects model was fitted with structure type as the outcome, sex
+as a fixed effect and tank and experimental round as random intercepts.
+A permutation-based symmetry test was applied to assess whether
+structure type transitions between initial location and next-day
+location were directional rather than random.
 
-To test the difference between FlatStone and WoodSplit the Wilcoxon
-signed-rank test was applied to group-round proportions for each
-structure type, testing against a null expectation of 0.5. P-values were
-Bonferroni adjusted. To test whether size classes affected structure
-preference while accounting for repeated measurement of individuals and
-groups, a Bayesian categorical mixed-effects model was fitted with size
-class as a fixed effect, following the same structure as described for
-experiment 2. The Stuart-Maxwell test was used to test for statistical
-differences between stage L0 and L1.
+Experiment 2: To test whether overall structure preference existed at
+the group level, one-sample Wilcoxon signed-rank tests were applied to
+group-round proportions for each structure type, testing against a null
+expectation of 0.25 (equal distribution among four structure types).
+P-values were Bonferroni adjusted for multiple comparisons. Normal
+approximation was used due to ties arising from discrete group counts.
+To test whether size classes affected structure preference while
+accounting for repeated measurement of individuals and groups, the
+Bayesian categorical mixed-effects model was fitted with structure type
+as the outcome, size class as a fixed effect, and group identity,
+individual identity nested within group, and tank and experimental round
+as random intercepts. The Stuart-Maxwell test was used to test for
+statistical differences between initial and next-day location.
 
-To test whether kōura showed a preference between BrickConcrete and
-BrickWood, the Wilcoxon signed-rank test was applied to group-round
-proportions for each brick type, testing against a null expectation of
-0.5 and p-values were Bonferroni adjusted. A paired Wilcoxon signed-rank
-test was used to directly compare group-round proportions between
-BrickConcrete and BrickWood. As size class was unbalanced, the effect of
-sex on brick preference was tested using a similar Bayesian categorical
-mixed-effects model with sex as a fixed effect, following the same
-structure as described for experiment 2. Finally, as only next-day
-locations (L1) were recorded in this experiment, no directional shift
-analysis was performed.
+Experiment 3: To test the difference between FlatStone and WoodSplit the
+Wilcoxon signed-rank test was applied to group-round proportions for
+each structure type, testing against a null expectation of 0.5. P-values
+were Bonferroni adjusted. To test whether size classes affected
+structure preference while accounting for repeated measurement of
+individuals and groups, the Bayesian Bernoulli mixed-effects model was
+fitted with size class as a fixed effect, following the same random
+effects structure as described for Experiment 2. The Stuart-Maxwell test
+was used to test for statistical differences between initial and
+next-day location.
+
+Experiment 4: To test whether kōura showed a preference between
+ConcreteBrick and WoodBlock, the Wilcoxon signed-rank test was applied
+to group-round proportions for each structure type, testing against a
+null expectation of 0.5 and p-values were Bonferroni adjusted. A paired
+Wilcoxon signed-rank test was used to directly compare group-round
+proportions between ConcreteBrick and WoodBlock. As size class was
+unbalanced, the effect of sex on structure preference was tested using
+the Bayesian Bernoulli mixed-effects model with sex as a fixed effect,
+following the same random effects structure as described for Experiment
+2. Finally, as only next-day locations were recorded in this experiment,
+no directional shift analysis was performed.
 
 \section{Results}\label{results}
 
-\subsection{Exp 1: Single kōura}\label{exp-1-single-kux14dura-1}
+\subsection{Experiment 1: Individual
+preference}\label{experiment-1-individual-preference-1}
 
 Individual kōura showed a strong preference for WoodLog, selecting it
 significantly more often than SingleStone, FlatStone, and StonePile
@@ -574,169 +605,211 @@ significantly more often than SingleStone, FlatStone, and StonePile
 0.004, respectively; overall multinomial test: \emph{p} =
 \textless0.001; Figure~\ref{fig-exp1-ms}). No significant differences
 were found among the stone structure types. Overall, WoodLog was
-selected by 67\% of kōura at L1 (males: 80\%; females: 53\%), and no
-kōura were found at TankWall, indicating all individuals actively
-selected a structure. Sex had no credible effect on structure preference
-(β = 3.32, 95\% CI: -1.09 to 9.3; posterior probability = 0.92), with
-credible intervals spanning zero for all structure types. The symmetry
-test indicated that structure type use shifted between L0 and L1
-(\emph{p} = \textless0.001), suggesting kōura actively relocated to
-preferred structure types overnight rather than remaining at their
-initial location. The GoPro footage showed kōura emerging, walking and
-climbing on the structures after sunset.
+selected by 67 \% of kōura at refuge (males: 80 \%; females: 53 \%), and
+no kōura were found at TankWall. Sex had no credible effect on structure
+preference (β = 3.32, 95\% CI: -1.09 to 9.3; posterior probability =
+0.92) with credible intervals spanning zero for all structure types. The
+symmetry test indicated that structure type use shifted between initial
+and next-day location (p \textless0.001), suggesting kōura actively
+relocated to preferred structure types overnight rather than remaining
+at their initial location. The video footage showed kōura emerging,
+walking and climbing on the structures after sunset.
 
-\subsection{Exp 2: Group kōura}\label{exp-2-group-kux14dura-1}
+\subsection{Experiment 2: Group
+dynamics}\label{experiment-2-group-dynamics-1}
 
 When housed in mixed-size groups, kōura showed a significant overall
 preference for stone-based structures (Figure~\ref{fig-exp2-ms}).
 FlatStone was used significantly more (\emph{p} = 0.004), while
 SingleStone (\emph{p} = \textless0.001) and WoodLog (\emph{p} = 0.039)
 were significantly avoided. StonePile did not differ from random
-expectation (\emph{p} = 1.000), and did not differ significantly from
+expectation (\emph{p} = 1.000) and did not differ significantly from
 FlatStone (\emph{p} = 0.117). No kōura were found at TankWall,
 indicating active structure selection across the group. Size classes had
-limited but credible effect on structure preference. Medium sized kōura
+limited but credible effect on structure preference. Medium-sized kōura
 showed a weaker preference for FlatStone over SingleStone compared to
 small kōura (β = -1.77, 95\% CI: -3.7 to -0.14; posterior probability =
 0.99), while no other size class effect was credible. Overall, FlatStone
 remained the most selected structure type across all size classes, but
 its strength of preference declined from small (posterior probability of
-top choice = 82\%) to medium (53\%), and with large kōura showing
-similar preference between FlatStone and StonePile (42\% vs 38\%).
-Structure type use shifted directionally between L0 and L1
-(Stuart-Maxwell test: \emph{p} = 0.001), indicating that kōura actively
-relocated to preferred structure types overnight.
+top choice = 82 \%) to medium (53 \%), and with large kōura showing
+similar preference between FlatStone and StonePile (42 \% vs 38 \%).
+Structure type use shifted directionally between initial and next-day
+location (Stuart-Maxwell test: \emph{p} = 0.001), indicating that kōura
+actively relocated to preferred structure types overnight.
 
-\subsection{Exp 3: Wood vs Stone}\label{exp-3-wood-vs-stone-1}
+\subsection{Experiment 3: Wood vs
+Stone}\label{experiment-3-wood-vs-stone-1}
 
 Kōura consistently selected FlatStone over WoodSplit, with the
 preference growing with body size (Figure~\ref{fig-exp3-ms}). At the
 group level, FlatStone was used significantly more than expected
 (\emph{p} = 0.001), while WoodSplit was significantly avoided (\emph{p}
-= 0.004). Only 1\% of kōura were found at TankWall, suggesting almost
-all kōura selected one of the two structure types. The Bayesian model
+= 0.004). Only one kōura was found at TankWall. The Bayesian model
 indicated that preference for FlatStone strengthened with body size,
 with the posterior probability of FlatStone being the top-ranked
-structure increasing from small (66\%) to medium (79\%), to large kōura
-(99\%). Large kōura showed a particularly strong and credible preference
-for FlatStone over WoodSplit (β = -2.55, 95\% CI: -4.7 to -0.9;
-posterior probability = \textgreater{} 0.99), while medium kōura did not
-differ from small kōura. Structure type use shifted directionally
-between L0 and L1 (Stuart-Maxwell test: \emph{p} = 0.003), with kōura
-relocating toward FlatStone overnight.
+structure increasing from small (66 \%) to medium (79 \%), to large
+kōura (99 \%). Large kōura showed a particularly strong and credible
+preference for FlatStone over WoodSplit (β = -2.55, 95\% CI: -4.7 to
+-0.9; posterior probability = \textgreater{} 0.99), while medium kōura
+did not differ from small kōura. Structure type use shifted
+directionally between initial and next-day location (Stuart-Maxwell
+test: \emph{p} = 0.003), with kōura relocating toward FlatStone
+overnight.
 
-\subsection{Exp 4: Bricks}\label{exp-4-bricks-1}
+\subsection{Experiment 4: Material
+comparison}\label{experiment-4-material-comparison-1}
 
-Kōura used both brick types, showing no significant preference between
-BrickConcrete and BrickWood (\emph{p} = 0.137;
-Figure~\ref{fig-exp4-ms}), with mean group proportions of 47\% and 53\%
-respectively. Neither brick type differed significantly from equal
-distribution (\emph{p} = 0.273). 9\% of kōura were found at TankWall,
-which is higher than in any previous experiment. Sex had no credible
-effect on preference between brick types (β = -0.18, 95\% CI: -1.24 to
-0.84; posterior probability = 0.65), indicating that concrete and wooden
-perforated brick structures of identical dimensions were both suitable
-refuge for male and female kōura.
+Kōura used both structure types, showing no significant preference
+between ConcreteBrick and WoodBlock (\emph{p} = 0.137;
+Figure~\ref{fig-exp4-ms}), with mean group proportions of 47 \% and 53
+\% respectively. Neither structure type differed significantly from
+equal distribution (\emph{p} = 0.273). 9 \% of kōura were found at
+TankWall, which is higher than in any previous experiment, likely
+reflecting the smaller total structure size in this experiment rather
+than active structure avoidance. Sex had no credible effect on
+preference between structure types (β = -0.18, 95\% CI: -1.24 to 0.84;
+posterior probability = 0.65), indicating that both structures were
+equally suitable refuge for male and female kōura.
 
 \section{Discussion}\label{discussion}
 
 \subsection{Structure matters more than
 material}\label{structure-matters-more-than-material}
 
-Across four experiments, refuge configuration and structural stability
-consistently predicted kōura habitat selection more strongly than
-material composition alone. Experiment 4 showed that when kōura were
-presented with similar refuge sizes in BrickConcrete and BrickWood no
-preference for material was detected. In experiment 3 FlatStone and
-WoodSplit were tested against each other and showed a difference in
-structure preference likely due to the stability of the stones compared
-to the wooden splits. The splits sank but created less structurally
-stable refuge places in the sandy substrate than the FlatStone
-structures {[}O.V. Raven, pers. obs.{]}. Experiment 2 showed that when a
-group of kōura was presented with multiple structure types, the
-structures that provided the most crevice complexity drove group-level
-preference. This was the case for FlatStone followed by StonePile for
-harbouring the most kōura. In experiment 1 the preference was different
-as individual kōura preferred WoodLog as refuge, this was consistent
-with prediction 1, as single kōura probably searched the refuge that
-would give most protection (\citeproc{ref-Jurcak2016}{Jurcak \emph{et
-al.}, 2016}), and the drilled holes in the WoodLog offered most
-protection similar to what has been found for perforated brick and PVC
-tube shelters under catfish predation (\citeproc{ref-Adams2007}{Adams,
-2007}; \citeproc{ref-Zhao2024}{Zhao \emph{et al.}, 2024}). The
-directional shift in structure type use between L0 and L1 confirmed
-across all experiments that kōura actively relocated overnight rather
-than remaining at their initial location, supporting the interpretation
-that next-day locations reflect genuine refuge preference rather than
-chance displacement. The preference shift from WoodLog in single to
-stone structures in group experiments was unexpected. It might be
-explained by size mismatch between fixed hole dimensions and the range
-of body sizes present in each group, while the large surface area of
-FlatStone allowed multiple individuals to shelter simultaneously and
-reduce competitive displacement. Learning across rounds may also have
-contributed, as WoodLog was most selected structure in round 1 of
-experiment 2 (17 out of 36 times) but not in subsequent rounds,
-suggesting kōura may have shifted preference after initial exploration
-{[}{]}. This learning was possible as the groups of kōura in experiment
-2 were reused all five rounds, while the single kōura in experiment 1
-were only used once. The reuse of groups across rounds was necessary
-given the limited availability of kōura and ethical constraints on
-collection numbers. The number of independent groups was low across
-experiments (six in experiments 2 and 3, four in experiment 4),
-constraining the statistical power for detecting group-level effects
-{[}{]}. Despite these constraints, consistent patterns in size-dependent
-preference were evident across experiments.
+The consistent finding across all experiments that structural stability
+and cavities complexity determined preference, regardless of whether the
+comparison involved material type, configuration or group size, suggests
+that kōura, like many refuge-dependent crustaceans
+(\citeproc{ref-ZimmerFaust1987}{Zimmer-Faust and Spanier, 1987};
+\citeproc{ref-Beck1995}{Beck, 1995};
+\citeproc{ref-Streissl2002}{Streissl and Hödl, 2002};
+\citeproc{ref-Pirtle2012}{Pirtle \emph{et al.}, 2012}), are primarily
+selecting for physical shelter quality rather than material familiarity.
+When hole dimensions were held constant between concrete and wooden
+perforated structures, no preference for either material was detected,
+demonstrating that material composition alone may not drive refuge
+selection when structure is equivalent. Neither structure type was
+conditioned prior to experiments, meaning biofilm colonisation that
+occurs in natural lake environments was absent. As stone and wood
+develop different biofilm communities (\citeproc{ref-Tank1996}{Tank and
+Winterbourn, 1996}), material preference in field settings could change.
+The wooden structures required a clay brick placed on top to prevent
+floating, creating a difference with the concrete structures, though the
+absence of any preference suggests this did not meaningfully influence
+the result. This material-independence broke down when material affected
+structural properties: when flat-laid stones were compared against
+similarly sized split wood pieces, kōura showed a clear preference for
+stone. The wood splits, being less dense than stone, sank but created
+less structurally stable refuge places in the sandy substrate than the
+stones, as larger kōura were able to move them {[}O.V. Raven, pers.
+obs.{]}.
+
+In group settings, structures providing the most crevice complexity were
+strongly preferred, with flat-laid stones accommodating the most kōura,
+followed by stone piles. Individual kōura showed a different preference,
+consistently choosing the perforated wooden log over all stone options,
+which is consistent with our first prediction that structurally complex
+and enclosed refugia would be preferred as enclosed spaces reduce
+predation risk (\citeproc{ref-Jurcak2016}{Jurcak \emph{et al.}, 2016}).
+The individual drilled holes in the wooden log offered protection
+similar to what has been found for perforated brick and PVC tube
+shelters in response to the threat of catfish predation
+(\citeproc{ref-Adams2007}{Adams, 2007}; \citeproc{ref-Zhao2024}{Zhao
+\emph{et al.}, 2024}). The directional shift in structure type use,
+between initial locations shortly after release and their location
+following a night within the tank, confirmed across all experiments that
+kōura actively relocated overnight, supporting the interpretation that
+next-day locations reflect genuine refuge preference rather than chance
+displacement.
+
+The shift from the perforated wooden log in individual trials to stone
+structures in group trials was unexpected. The wooden log contained six
+individual drilled holes, so capacity was not limiting for the group of
+six kōura. The preference shift may partly reflect size mismatch between
+fixed hole dimensions, and the range of body sizes present in each
+group, with only medium-sized individual finding the holes well-suited,
+while small and large individuals were better served by the range of
+crevices created by the stone structures
+(\citeproc{ref-Streissl2002}{Streissl and Hödl, 2002}). However, a more
+fundamental explanation may relate to social behaviour. The wooden log
+was the most selected structure in round 1 of Experiment 2 (17 out of 36
+times), similar to Experiment 1, but this preference did not persist in
+subsequent rounds. This shift suggests that once kōura had experienced
+sharing the tank, they adjusted their shelter use toward structures
+allowing closer conspecific proximity. Gregarious shelter behaviour has
+been documented in juvenile burrowing crayfish
+(\citeproc{ref-Hazlett2007}{Hazlett \emph{et al.}, 2007};
+\citeproc{ref-Reynolds2013}{Reynolds \emph{et al.}, 2013};
+\citeproc{ref-Clay2017}{Clay \emph{et al.}, 2017}) and is well
+established in lobsters including the New Zealand rock lobster
+(\emph{Jasus edwardsii} Hutton, 1875) (\citeproc{ref-Butler1999}{Butler
+\emph{et al.}, 1999}), where conspecific chemical cues attract
+individuals to share refugia and find refugia significantly faster,
+reducing predation exposure (\citeproc{ref-ZimmerFaust1987}{Zimmer-Faust
+and Spanier, 1987}; \citeproc{ref-Childress2001}{Childress and
+Herrnkind, 2001}). Whether kōura exhibit similar gregarious tendencies
+remains understudied, but the preference shift observed in this study,
+might suggest that social context alters shelter preferences.
 
 \subsection{Body size and competitive
 dynamics}\label{body-size-and-competitive-dynamics}
 
 Size class consistently influenced refuge preference across experiments,
-but the pattern differed by context. In experiment 3, larger kōura
-showed a stronger preference for FlatStone over WoodSplit than smaller
-individuals, consistent with size dependent shelter selection documented
-in crayfish (\citeproc{ref-Streissl2002}{Streissl and Hödl, 2002};
-\citeproc{ref-Percival2010}{Percival and Moore, 2010}). This may reflect
-larger kōura being more capable of asserting dominance over preferred
-stable refugia through competitive displacement, which is in line with
-the size-based dominance hierarchy documented in kōura populations
-(\citeproc{ref-Ranta1993}{Ranta and Lindström, 1993};
+but the pattern differed by context. In Experiment 3, larger kōura
+showed a stronger preference for flat stones over wooden splits than
+smaller individuals, consistent with size dependent shelter selection
+documented in crayfish (\citeproc{ref-Streissl2002}{Streissl and Hödl,
+2002}; \citeproc{ref-Percival2010}{Percival and Moore, 2010}). This may
+reflect larger kōura being more capable of asserting dominance over
+preferred stable refugia through competitive displacement, which is
+consistent with the size-based dominance hierarchy documented in kōura
+populations (\citeproc{ref-Ranta1993}{Ranta and Lindström, 1993};
 \citeproc{ref-Figler2005}{Figler \emph{et al.}, 2005};
-\citeproc{ref-Stewart2011}{Stewart and Tabak, 2011}). In experiment 2,
+\citeproc{ref-Stewart2011}{Stewart and Tabak, 2011}). In Experiment 2,
 where four structure types were available, small kōura showed the
-strongest preference for FlatStone while large kōura distributed more
-evenly between FlatStone and StonePile, suggesting that FlatStone's
-large continuous surface area provides refuge spaces proportional to
-smaller body dimensions (\citeproc{ref-Streissl2002}{Streissl and Hödl,
-2002}), while larger individuals find adequate crevice space in either
-stone configuration. The absence of sex effects in experiment 1 and 4
-suggests that refuge preference in kōura is driven primarily by body
-size and competitive dominance rather than sex
-(\citeproc{ref-Figler1999}{Figler \emph{et al.}, 1999}). When refuge
-availability is limited, competitive hierarchies displace smaller and
-recently moulted individuals from preferred refugia, leaving them
-exposed (\citeproc{ref-Ranta1993}{Ranta and Lindström, 1993};
-\citeproc{ref-Figler2005}{Figler \emph{et al.}, 2005}). Providing
-sufficient refuge spaces with a range of crevice size can reduce
-agonistic interactions and benefit the whole population
+strongest preference for flat stones while large kōura distributed more
+evenly between flat stones and stone piles, suggesting that the large
+continuous surface area of the flat stones provides refuge spaces
+proportional to smaller body dimensions
+(\citeproc{ref-Streissl2002}{Streissl and Hödl, 2002}), while larger
+individuals find adequate crevice space in either stone configuration.
+The absence of sex effects in Experiments 1 and 4 suggests that refuge
+preference in kōura is driven primarily by body size and competitive
+dominance rather than sex (\citeproc{ref-Figler1999}{Figler \emph{et
+al.}, 1999}). When refuge availability is limited, competitive
+hierarchies displace smaller and recently moulted individuals from
+preferred refugia, leaving them exposed (\citeproc{ref-Ranta1993}{Ranta
+and Lindström, 1993}; \citeproc{ref-Figler2005}{Figler \emph{et al.},
+2005}). Providing sufficient refuge spaces with a range of crevice size
+can reduce agonistic interactions and benefit the whole population
 (\citeproc{ref-Olsson2009}{Olsson and Nyström, 2009}), supporting
 complex structure configurations over structures with fixed hole
 dimensions.
 
 \subsection{Restoration implications}\label{restoration-implications}
 
-The present study demonstrates that structural configuration drives
-refuge preference more strongly than material composition, with
-stone-based configurations preferred by groups and no preference
-detected between materials when dimensions were equal. These findings
-suggest that stone-based habitat enhancement structures warrant field
-evaluation in lake conditions, given their structural complexity and
-crevice diversity across size classes. The broader restoration
-literature supports both the structural principle and the choice of
-natural materials. Structurally stable crevices are important for
-freshwater species like crayfish (\citeproc{ref-Huolila1997}{Huolila
-\emph{et al.}, 1997}; \citeproc{ref-Streissl2002}{Streissl and Hödl,
-2002}), but also for marine environments, as reef fish, marine shrimp,
-and lobsters benefit from habitat enhancement structures such as
+With the threat from invasive predatory fish, such as catfish preying on
+kōura (\citeproc{ref-Kusabs2026}{Kusabs \emph{et al.}, 2026}), enhancing
+habitat complexity may reduce top-down control on kōura populations.
+Additional habitat as used here can provide shelter spaces and offers a
+promising management tool, as refuge availability directly influences
+predation survival (\citeproc{ref-Adams2007}{Adams, 2007};
+\citeproc{ref-Zhao2024}{Zhao \emph{et al.}, 2024}). The present study
+demonstrates that structural configuration and stability drive refuge
+preference more strongly than material composition, with stone-based
+configurations preferred by groups and no preference detected between
+materials when dimensions were equal, suggesting that stone-based
+habitat enhancement structures warrant field evaluation in lake
+environments.
+
+The broader restoration literature supports both the structural
+principle and the choice of natural materials. Structurally stable
+crevices are important for freshwater species like crayfish
+(\citeproc{ref-Huolila1997}{Huolila \emph{et al.}, 1997};
+\citeproc{ref-Streissl2002}{Streissl and Hödl, 2002}), but also for
+marine environments, as reef fish, marine shrimp, and lobsters have all
+been shown to benefit from habitat enhancement structures such as
 artificial reefs (\citeproc{ref-Spanier1994}{Spanier, 1994};
 \citeproc{ref-Magnelia2008}{Magnelia \emph{et al.}, 2008};
 \citeproc{ref-Hylkema2020}{Hylkema \emph{et al.}, 2020};
@@ -751,29 +824,22 @@ contribute to plastic pollution in the environment
 natural materials also align with \emph{kaitiakitanga}, which is the
 Māori principle of environmental guardianship and preserves the natural
 character of culturally significant lake environments
-(\citeproc{ref-Clapcott2018}{Clapcott \emph{et al.}, 2018}). For in-lake
-deployment, existing habitat surveys suggest that kōura are associated
-with coarser substrate (\citeproc{ref-Kusabs2015b}{Kusabs \emph{et al.},
-2015b}; \citeproc{ref-Olsson2006}{Olsson \emph{et al.}, 2006};
+(\citeproc{ref-Clapcott2018}{Clapcott \emph{et al.}, 2018}).
+Furthermore, existing habitat surveys suggest that kōura are associated
+with coarser substrates (\citeproc{ref-Kusabs2015b}{Kusabs \emph{et
+al.}, 2015b}; \citeproc{ref-Olsson2006}{Olsson \emph{et al.}, 2006};
 \citeproc{ref-Jowett2008}{Jowett \emph{et al.}, 2008}), and cobbles have
 previously been used in stream and lake restoration
 (\citeproc{ref-Huolila1997}{Huolila \emph{et al.}, 1997};
-\citeproc{ref-Johnsen2008}{Johnsen and Taugbøl, 2008}). FlatStones and
-StonePile both provided shelter spaces across size classes, but for
-in-lake deployment stone pile structures are the preferred candidates
-for field evaluation as due to their elevated structure, stone piles are
-less likely to be buried into soft substrates than flat configurations
-(\citeproc{ref-Garron2024}{Garron \emph{et al.}, 2024}). With the threat
-from invasive predatory fish, like catfish preying on kōura
-(\citeproc{ref-Kusabs2026}{Kusabs \emph{et al.}, 2026}), enhancing
-habitat complexity which provides enclosed crevices can be important for
-kōura as refuge availability directly influences predation survival
-(\citeproc{ref-Adams2007}{Adams, 2007}; \citeproc{ref-Zhao2024}{Zhao
-\emph{et al.}, 2024}). While these mesocosm findings provide clear
-design guidance, field validation in lake environments remains an
-essential next step, as in-lake conditions including water movement,
-natural substrate, and predator pressure may modify kōura preferences in
-ways not captured under controlled conditions.
+\citeproc{ref-Johnsen2008}{Johnsen and Taugbøl, 2008}). For in-lake
+deployment stone pile structures are likely to be the most practical
+configuration, due to their elevated structure, stone piles are less
+likely to be buried into soft substrates than flat individual rocks
+(\citeproc{ref-Garron2024}{Garron \emph{et al.}, 2024}). Field
+validation in lake environments remains an essential next step, as
+in-lake conditions including water movement, natural substrate, and
+predator pressure may modify kōura preferences in ways not captured
+under controlled conditions.
 
 \subsection{Conclusion}\label{conclusion}
 
@@ -781,15 +847,15 @@ Across four mesocosm experiments, structural configuration and crevice
 complexity consistently predicted kōura shelter preference more strongly
 than material composition. The shift from individual preference for
 enclosed wooden log shelters to group preference for stone
-configurations shows that social context fundamentally changes what
-makes a shelter valuable. Size-dependent preferences further suggest
-that structures accommodating multiple body sizes simultaneously benefit
+configurations shows that social context plays a key role in determining
+shelter value for kōura. Size-dependent preferences further suggest that
+structures accommodating multiple body sizes simultaneously benefit
 whole populations rather than only dominant individuals. Stone-based
-structures using locally sourced materials are the most promising
-candidates for field evaluation, aligning with ecological and cultural
-values associated with restoring this taonga species. Field validation
-remains the essential next step for translating these findings into
-effective kōura habitat restoration practice.
+structures using locally sourced materials are promising candidates for
+field evaluation, aligning with ecological and cultural values
+associated with restoring this taonga species. Field validation remains
+the essential next step for translating these findings into effective
+kōura habitat restoration practice.
 
 \section{Acknowledgements}\label{acknowledgements}
 
@@ -801,7 +867,10 @@ Grant (Ngāti Pikiao).
 \subsection{Funding statement}\label{funding-statement}
 
 This research was supported by the Fish Futures programme funded through
-a Ministry of Business, Innovation and Employment grant (CAWX2101).
+a Ministry of Business, Innovation and Employment grant (CAWX2101) with
+additional funding provided by the Bay of Plenty Regional Council under
+the Toihuarewa Waimāori - Bay of Plenty Regional Council Chair in Lake
+and Freshwater Science programme.
 
 \subsection{Authors' contributions}\label{authors-contributions}
 
@@ -832,8 +901,8 @@ openly available on GitHub
 (https://github.com/OlivierRaven/Koura\_Mesocosm)and a rendered version
 of the analysis is hosted at
 https://olivierraven.github.io/Koura\_Mesocosm/. The primary raw dataset
-is archived on Zenodo (https://doi.org/\ldots\ldots). Peer review
-documents, including the cover letter and reviewer responses, are
+is archived on Zenodo (https://doi.org/10.5281/zenodo.20754344). Peer
+review documents, including the cover letter and reviewer responses, are
 available in the manuscript repository in the interest of open and
 transparent science.
 
@@ -849,14 +918,14 @@ transparent science.
 
 \caption{\label{fig-exp-setup}Overhead photographs of experimental tank
 configurations for each of the four mesocosm experiments. Experiment 1
-(Single kōura) and Experiment 2 (Group kōura): four shelter types,
-WoodLog (tānekaha log with drilled holes), FlatStone (stones arranged
-flat), StonePile (stones stacked), and SingleStone (individual stones
-placed separately). Experiment 3 (Wood vs Stone): WoodSplit shelter
-(tānekaha wood splits) and FlatStone shelter placed in opposing halves
-of the tank. Experiment 4 (Bricks): BrickConcrete (perforated concrete
-bricks) and BrickWood (wooden bricks of identical dimensions) placed in
-opposing quadrants of the tank.}
+(Individual preference) and Experiment 2 (Group dynamics): four shelter
+types, WoodLog (tānekaha log with drilled holes), FlatStone (stones
+arranged flat), StonePile (stones stacked), and SingleStone (individual
+stones placed separately). Experiment 3 (Wood vs Stone): WoodSplit
+shelter (tānekaha wood splits) and FlatStone shelter placed in opposing
+halves of the tank. Experiment 4 (Material comparison): ConcreteBrick
+(perforated concrete bricks) and WoodBlock (perforated wooden blocks of
+identical dimensions) placed in opposing quadrants of the tank.}
 
 \end{figure}%
 
@@ -870,10 +939,15 @@ opposing quadrants of the tank.}
 }
 
 \caption{\label{fig-exp1-ms}Proportion of individual kōura (Experiment
-1) found at each structure type at final observation (L1), shown
-separately for female and male kōura. Bars show observed proportions
-with sample sizes (n) shown in white. Letters above bars indicate
-significant pairwise differences (G-test, Bonferroni adjusted).}
+1) found at each structure type the next day, shown separately for
+female (white bars) and male (black bars) kōura. Bars show observed
+proportions with sample sizes (n) shown on bars. Letters above bars
+indicate results of pairwise G-tests with Bonferroni correction within
+each sex group, structure types sharing the same letter within a panel
+do not differ significantly from each other, while structure types with
+different letters differ significantly in use. No significant difference
+in overall structure preference was detected between sexes (see
+results).}
 
 \end{figure}%
 
@@ -890,7 +964,7 @@ Notebook}}
 
 }
 
-\caption{\label{fig-exp2-ms}structure type preference of group kōura
+\caption{\label{fig-exp2-ms}Structure type preference of group kōura
 (Experiment 2). (A) Proportion of kōura found at each structure type at
 L1 across all groups and rounds. The dashed line indicates the null
 expectation of equal distribution (0.25). Significance symbols indicate
@@ -915,13 +989,14 @@ Notebook}}
 
 }
 
-\caption{\label{fig-exp3-ms}structure type preference in stone versus
+\caption{\label{fig-exp3-ms}Structure type preference in stone versus
 wood comparison (Experiment 3). (A) Proportion of kōura found at each
-structure type at L1 across all groups and rounds. The dashed line
-indicates the null expectation of equal distribution (0.5). Significance
-symbols as in Figure 3. (B) Posterior predicted probability of structure
-type use by size class from Bayesian categorical mixed model, with 95\%
-credible intervals. TankWall excluded from model predictions.}
+structure type at next-day location across all groups and rounds. The
+dashed line indicates the null expectation of equal distribution (0.5).
+Significance symbols as in Figure 3. (B) Posterior predicted probability
+of structure type use by size class from Bayesian categorical mixed
+model, with 95\% credible intervals. ↑ used more than expected, ↓ used
+less than expected. TankWall excluded from model predictions.}
 
 \end{figure}%
 
@@ -938,12 +1013,13 @@ Notebook}}
 
 }
 
-\caption{\label{fig-exp4-ms}Brick material preference (Experiment 4).
-(A) Proportion of kōura found at each structure type at L1 across all
-groups and rounds. The dashed line indicates the null expectation of
-equal distribution (0.5). (B) Posterior predicted probability of
-structure type use by sex from Bayesian categorical mixed model, with
-95\% credible intervals. TankWall excluded from model predictions.}
+\caption{\label{fig-exp4-ms}Material preference (Experiment 4). (A)
+Proportion of kōura found at each structure type at next-day location
+across all groups and rounds. The dashed line indicates the null
+expectation of equal distribution (0.5). (B) Posterior predicted
+probability of structure type use by sex from Bayesian categorical mixed
+model, with 95\% credible intervals. TankWall excluded from model
+predictions.}
 
 \end{figure}%
 
@@ -965,10 +1041,28 @@ sand-bed streams. \emph{Environmental Management} \textbf{53}:
 382-\/-392.
 https://doi.org/\href{https://doi.org/10.1007/s00267-013-0197-3}{10.1007/s00267-013-0197-3}
 
+\bibitem[\citeproctext]{ref-Beck1995}
+Beck MW. 1995. Size-specific shelter limitation in stone crabs: A test
+of the demographic bottleneck hypothesis. \emph{Ecology} \textbf{76}:
+968--980.
+https://doi.org/\href{https://doi.org/10.2307/1939360}{10.2307/1939360}
+
 \bibitem[\citeproctext]{ref-Burkner2025}
 Bürkner P-C, Gabry J, Weber S, Johnson A. 2025.
 \href{https://cran.r-project.org/web/packages/brms/index.html}{{brms}:
 {Bayesian} regression models using {Stan}}.
+
+\bibitem[\citeproctext]{ref-Butler1999}
+Butler M, MacDiarmid A, Booth J. 1999. The cause and consequence of
+ontogenetic changes in social aggregation in new zealand spiny lobsters.
+\emph{Marine Ecology Progress Series} \textbf{188}: 179--191.
+https://doi.org/\href{https://doi.org/10.3354/meps188179}{10.3354/meps188179}
+
+\bibitem[\citeproctext]{ref-Childress2001}
+Childress MJ, Herrnkind WF. 2001. The guide effect influence on the
+gregariousness of juvenile caribbean spiny lobsters. \emph{Animal
+Behaviour} \textbf{62}: 465--472.
+https://doi.org/\href{https://doi.org/10.1006/anbe.2001.1760}{10.1006/anbe.2001.1760}
 
 \bibitem[\citeproctext]{ref-Clapcott2018}
 Clapcott J, Ataria J, Hepburn C, Hikuroa D, Jackson A, Kirikiri R,
@@ -976,6 +1070,12 @@ Williams E. 2018. Mātauranga māori: Shaping marine and freshwater
 futures. \emph{New Zealand Journal of Marine and Freshwater Research}
 \textbf{52}: 457--466.
 https://doi.org/\href{https://doi.org/10.1080/00288330.2018.1539404}{10.1080/00288330.2018.1539404}
+
+\bibitem[\citeproctext]{ref-Clay2017}
+Clay M, Stoeckel J, Helms B. 2017. The role of abiotic and biotic cues
+in burrow habitat selection by juvenile crayfish. \emph{Behaviour}
+\textbf{154}: 1177--1196.
+https://doi.org/\href{https://doi.org/10.1163/1568539x-00003463}{10.1163/1568539x-00003463}
 
 \bibitem[\citeproctext]{ref-Collier1997}
 Collier KJ, Parkyn SM, Rabeni CF. 1997. Koura: A keystone species.
@@ -1035,6 +1135,14 @@ temperature and water calcium concentration on growth, survival and
 moulting of freshwater crayfish, paranephrops zealandicus.
 \emph{Aquaculture} \textbf{251}: 271-\/-279.
 https://doi.org/\href{https://doi.org/10.1016/j.aquaculture.2005.05.032}{10.1016/j.aquaculture.2005.05.032}
+
+\bibitem[\citeproctext]{ref-Hazlett2007}
+Hazlett BA, Lawler S, Edney G. 2007. Agonistic behavior of the
+crayfish\textless i\textgreater euastacus
+armatus\textless/i\textgreater and\textless i\textgreater cherax
+destructor\textless/i\textgreater. \emph{Marine and Freshwater Behaviour
+and Physiology} \textbf{40}: 257--266.
+https://doi.org/\href{https://doi.org/10.1080/10236240701562412}{10.1080/10236240701562412}
 
 \bibitem[\citeproctext]{ref-Huolila1997}
 Huolila M, Marjomäki TJ, Laukkanen E. 1997. The success of crayfish
@@ -1100,6 +1208,13 @@ the synergistic threats of climate change and invasive species.
 \emph{Web Ecology} \textbf{25}: 221--239.
 https://doi.org/\href{https://doi.org/10.5194/we-25-221-2025}{10.5194/we-25-221-2025}
 
+\bibitem[\citeproctext]{ref-MacNeil2025}
+MacNeil C, Lee F, Kusabs I, Holmes R. 2025. The biter bit; scavenging
+behaviour of native freshwater crayfish on the carrion of native and
+introduced fish predators in aotearoa-new zealand. \emph{Knowledge
+\&amp; Management of Aquatic Ecosystems}: 29.
+https://doi.org/\href{https://doi.org/10.1051/kmae/2025022}{10.1051/kmae/2025022}
+
 \bibitem[\citeproctext]{ref-Magnelia2008}
 Magnelia SJ, Jesus MJD, Schlechte JW, Cummings GC, Duty JL. 2008.
 Comparison of plastic pipe and juniper tree fish attractors in a central
@@ -1151,6 +1266,13 @@ size in crayfish, orconectes rusticus: Consequences for agonistic
 fights. \emph{Behaviour} \textbf{147}: 103--119.
 https://doi.org/\href{https://doi.org/10.1163/000579509x12512685881053}{10.1163/000579509x12512685881053}
 
+\bibitem[\citeproctext]{ref-Pirtle2012}
+Pirtle JL, Eckert GL, Stoner AW. 2012. Habitat structure influences the
+survival and predator-prey interactions of early juvenile red king crab
+\emph{paralithodes camtschaticus}. \emph{Marine Ecology Progress Series}
+\textbf{465}: 169--184.
+https://doi.org/\href{https://doi.org/10.3354/meps09883}{10.3354/meps09883}
+
 \bibitem[\citeproctext]{ref-Ramalho2010}
 Ramalho RO, McClain WR, Anastacio PM. 2010. An effective and simple
 method of temporarily marking crayfish. \emph{Freshwater Crayfish}
@@ -1173,6 +1295,12 @@ D. (b) in review.
 \href{https://olivierraven.github.io/NCE_Koura_catfish/}{Fear of the
 new: A predatory invader may provoke stronger non-consumptive effects on
 a keystone native prey than a native predator}.
+
+\bibitem[\citeproctext]{ref-Reynolds2013}
+Reynolds J, Souty-Grosset C, Alastair A. 2013. Ecological roles of
+crayfish in freshwater and terrestrial habitats. \emph{Freshwater
+Crayfish} \textbf{19}: 197--218.
+https://doi.org/\href{https://doi.org/2010.5869/fc.2013.v19-2.197}{2010.5869/fc.2013.v19-2.197}
 
 \bibitem[\citeproctext]{ref-Richman2015}
 Richman NI, Böhm M, Adams SB, Alvarez F, Bergey EA, Bunn JJS, Burnham Q,
@@ -1211,6 +1339,12 @@ quality of shelters and prior residence on marmorkrebs (marbled
 crayfish). \emph{Journal of Experimental Biology}.
 https://doi.org/\href{https://doi.org/10.1242/jeb.197301}{10.1242/jeb.197301}
 
+\bibitem[\citeproctext]{ref-Tank1996}
+Tank JL, Winterbourn MJ. 1996. Microbial activity and invertebrate
+colonisation of wood in a new zealand forest stream. \emph{New Zealand
+Journal of Marine and Freshwater Research} \textbf{30}: 271--280.
+https://doi.org/\href{https://doi.org/10.1080/00288330.1996.9516714}{10.1080/00288330.1996.9516714}
+
 \bibitem[\citeproctext]{ref-Usio2000}
 Usio N, Townsend CR. 2000. Distribution of the new zealand crayfish
 {Paranephrops zealandicus} in relation to stream physico‐chemistry,
@@ -1230,6 +1364,12 @@ Xu W. 2024. The influence of shelter type and coverage on crayfish
 (procambarus clarkii) predation by catfish (silurus asotus): A
 controlled environment study. \emph{Animals} \textbf{14}: 1147.
 https://doi.org/\href{https://doi.org/10.3390/ani14081147}{10.3390/ani14081147}
+
+\bibitem[\citeproctext]{ref-ZimmerFaust1987}
+Zimmer-Faust RK, Spanier E. 1987. Gregariousness and sociality in spiny
+lobsters: Implications for den habitation. \emph{Journal of Experimental
+Marine Biology and Ecology} \textbf{105}: 57--71.
+https://doi.org/\href{https://doi.org/10.1016/s0022-0981(87)80029-1}{10.1016/s0022-0981(87)80029-1}
 
 \end{CSLReferences}
 
