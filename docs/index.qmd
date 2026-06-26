@@ -137,16 +137,16 @@ Experiment 4: To test whether kōura showed a preference between ConcreteBrick a
 
 # Results
 ## Experiment 1: Individual preference
-Individual kōura showed a strong preference for WoodLog, selecting it significantly more often than SingleStone, FlatStone, and StonePile (pairwise G-test, Bonferroni adjusted: `r format_pval(p_single_vs_wood1)`, `r format_pval(p_flat_vs_wood1, label = FALSE, symbol = FALSE)`, `r format_pval(p_pile_vs_wood1, label = FALSE, symbol = FALSE)`, respectively; overall multinomial test: `r format_pval(p_xmulti1)`; @fig-exp1-ms). No significant differences were found among the stone structure types. Overall, WoodLog was selected by `r pct_wood_overall` % of kōura at refuge (males: `r pct_wood_male` %; females: `r pct_wood_female` %), and no kōura were found at TankWall. Sex had no credible effect on structure preference `r format_brms(m_exp1_bayes, "muWoodLog_sexM", mean(as_draws_df(m_exp1_bayes)$b_muWoodLog_sexM > 0))` with credible intervals spanning zero for all structure types. The symmetry test indicated that structure type use shifted between initial and next-day location (`r format_pval(p_symtest1)`), suggesting kōura actively relocated to preferred structure types overnight rather than remaining at their initial location. The video footage showed kōura emerging, walking and climbing on the structures after sunset.
+Individual kōura showed a strong preference for WoodLog, selecting it significantly more often than SingleStone, FlatStone, and StonePile (pairwise G-test, Bonferroni adjusted: `r format_pval(p_single_vs_wood1)`, `r format_pval(p_flat_vs_wood1, label = FALSE, symbol = FALSE)`, `r format_pval(p_pile_vs_wood1, label = FALSE, symbol = FALSE)`, respectively; overall multinomial test: `r format_pval(p_xmulti1)`; @fig-exp1). No significant differences were found among the stone structure types. Overall, WoodLog was selected by `r pct_wood_overall` % of kōura at refuge (males: `r pct_wood_male` %; females: `r pct_wood_female` %), and no kōura were found at TankWall. Sex had no credible effect on structure preference `r format_brms(m_exp1_bayes, "muWoodLog_sexM", mean(as_draws_df(m_exp1_bayes)$b_muWoodLog_sexM > 0))` with credible intervals spanning zero for all structure types. The symmetry test indicated that structure type use shifted between initial and next-day location (`r format_pval(p_symtest1)`), suggesting kōura actively relocated to preferred structure types overnight rather than remaining at their initial location. The video footage showed kōura emerging, walking and climbing on the structures after sunset.
 
 ## Experiment 2: Group dynamics
-When housed in mixed-size groups, kōura showed a significant overall preference for stone-based structures (@fig-exp2-ms). FlatStone was used significantly more (`r format_pval(p_wilcox2_flat)`), while SingleStone (`r format_pval(p_wilcox2_single)`) and WoodLog (`r format_pval(p_wilcox2_wood)`) were significantly avoided. StonePile did not differ from random expectation (`r format_pval(p_wilcox2_pile)`) and did not differ significantly from FlatStone (`r format_pval(p_fs_vs_sp)`). No kōura were found at TankWall, indicating active structure selection across the group. Size classes had limited but credible effect on structure preference. Medium-sized kōura showed a weaker preference for FlatStone over SingleStone compared to small kōura `r format_brms(m_exp2_bayes, "muFlatStone_size_classM", p_post_flatM)`, while no other size class effect was credible. Overall, FlatStone remained the most selected structure type across all size classes, but its strength of preference declined from small (posterior probability of top choice = `r pct_top_S` %) to medium (`r pct_top_M` %), and with large kōura showing similar preference between FlatStone and StonePile (`r pct_flat_L` % vs `r pct_pile_L` %). Structure type use shifted directionally between initial and next-day location (Stuart-Maxwell test: `r format_pval(p_smtest2)`), indicating that kōura actively relocated to preferred structure types overnight.
+When housed in mixed-size groups, kōura showed a significant overall preference for stone-based structures (@fig-exp2). FlatStone was used significantly more (`r format_pval(p_wilcox2_flat)`), while SingleStone (`r format_pval(p_wilcox2_single)`) and WoodLog (`r format_pval(p_wilcox2_wood)`) were significantly avoided. StonePile did not differ from random expectation (`r format_pval(p_wilcox2_pile)`) and did not differ significantly from FlatStone (`r format_pval(p_fs_vs_sp)`). No kōura were found at TankWall, indicating active structure selection across the group. Size classes had limited but credible effect on structure preference. Medium-sized kōura showed a weaker preference for FlatStone over SingleStone compared to small kōura `r format_brms(m_exp2_bayes, "muFlatStone_size_classM", p_post_flatM)`, while no other size class effect was credible. Overall, FlatStone remained the most selected structure type across all size classes, but its strength of preference declined from small (posterior probability of top choice = `r pct_top_S` %) to medium (`r pct_top_M` %), and with large kōura showing similar preference between FlatStone and StonePile (`r pct_flat_L` % vs `r pct_pile_L` %). Structure type use shifted directionally between initial and next-day location (Stuart-Maxwell test: `r format_pval(p_smtest2)`), indicating that kōura actively relocated to preferred structure types overnight.
 
 ## Experiment 3: Wood vs Stone
-Kōura consistently selected FlatStone over WoodSplit, with the preference growing with body size (@fig-exp3-ms). At the group level, FlatStone was used significantly more than expected (`r format_pval(p_wilcox3_flat)`), while WoodSplit was significantly avoided (`r format_pval(p_wilcox3_split)`). Only one kōura was found at TankWall. The Bayesian model indicated that preference for FlatStone strengthened with body size, with the posterior probability of FlatStone being the top-ranked structure increasing from small (`r pct_top3_S` %) to medium (`r pct_top3_M` %), to large kōura (`r pct_top3_L` %). Large kōura showed a particularly strong and credible preference for FlatStone over WoodSplit `r format_brms(m_exp3_bayes, "size_classL", p_post3_L)`, while medium kōura did not differ from small kōura. Structure type use shifted directionally between initial and next-day location (Stuart-Maxwell test: `r format_pval(p_smtest3)`), with kōura relocating toward FlatStone overnight.
+Kōura consistently selected FlatStone over WoodSplit, with the preference growing with body size (@fig-exp3). At the group level, FlatStone was used significantly more than expected (`r format_pval(p_wilcox3_flat)`), while WoodSplit was significantly avoided (`r format_pval(p_wilcox3_split)`). Only one kōura was found at TankWall. The Bayesian model indicated that preference for FlatStone strengthened with body size, with the posterior probability of FlatStone being the top-ranked structure increasing from small (`r pct_top3_S` %) to medium (`r pct_top3_M` %), to large kōura (`r pct_top3_L` %). Large kōura showed a particularly strong and credible preference for FlatStone over WoodSplit `r format_brms(m_exp3_bayes, "size_classL", p_post3_L)`, while medium kōura did not differ from small kōura. Structure type use shifted directionally between initial and next-day location (Stuart-Maxwell test: `r format_pval(p_smtest3)`), with kōura relocating toward FlatStone overnight.
 
 ## Experiment 4: Material comparison
-Kōura used both structure types, showing no significant preference between ConcreteBrick and WoodBlock (`r format_pval(p_bw_vs_ba)`; @fig-exp4-ms), with mean group proportions of `r pct_bart4` % and `r pct_bwood4` % respectively. Neither structure type differed significantly from equal distribution (`r format_pval(p_wilcox4_bart)`). `r pct_wall4` % of kōura were found at TankWall, which is higher than in any previous experiment, likely reflecting the smaller total structure size in this experiment rather than active structure avoidance. Sex had no credible effect on preference between structure types `r format_brms(m_exp4_bayes, "sexM", p_post_sexM)`, indicating that both structures were equally suitable refuge for male and female kōura.
+Kōura used both structure types, showing no significant preference between ConcreteBrick and WoodBlock (`r format_pval(p_bw_vs_ba)`; @fig-exp4), with mean group proportions of `r pct_bart4` % and `r pct_bwood4` % respectively. Neither structure type differed significantly from equal distribution (`r format_pval(p_wilcox4_bart)`). `r pct_wall4` % of kōura were found at TankWall, which is higher than in any previous experiment, likely reflecting the smaller total structure size in this experiment rather than active structure avoidance. Sex had no credible effect on preference between structure types `r format_brms(m_exp4_bayes, "sexM", p_post_sexM)`, indicating that both structures were equally suitable refuge for male and female kōura.
 
 # Discussion
 ## Structure matters more than material
@@ -189,39 +189,11 @@ The code and derived data supporting the findings of this study are openly avail
 # Figures
 ![Overhead photographs of experimental tank configurations for each of the four mesocosm experiments. Experiment 1 (Individual preference) and Experiment 2 (Group dynamics): four shelter types, WoodLog (tānekaha log with drilled holes), FlatStone (stones arranged flat), StonePile (stones stacked), and SingleStone (individual stones placed separately). Experiment 3 (Wood vs Stone): WoodSplit shelter (tānekaha wood splits) and FlatStone shelter placed in opposing halves of the tank. Experiment 4 (Material comparison): ConcreteBrick (perforated concrete bricks) and WoodBlock (perforated wooden blocks of identical dimensions) placed in opposing quadrants of the tank.](images/Setup_exp_tanks.png){#fig-exp-setup}
 
-```{r}
-#| label: fig-exp1-ms
-#| echo: false
-#| fig-width: 5
-#| fig-height: 4
-#| fig-cap: "Proportion of individual kōura (Experiment 1) found at each structure type the next day, shown separately for female (white bars) and male (black bars) kōura. Bars show observed proportions with sample sizes (n) shown on bars. Letters above bars indicate results of pairwise G-tests with Bonferroni correction within each sex group, structure types sharing the same letter within a panel do not differ significantly from each other, while structure types with different letters differ significantly in use. No significant difference in overall structure preference was detected between sexes (see results)."
-knitr::include_graphics("outputs/fig-exp1.png")
-```
+{{< embed analysis.qmd#fig-exp1 >}}
 
-```{r}
-#| label: fig-exp2-ms
-#| echo: false
-#| fig-width: 8
-#| fig-height: 4
-#| fig-cap: "Structure type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95 % credible intervals."
-knitr::include_graphics("outputs/fig-exp2.png")
-```
+{{< embed analysis.qmd#fig-exp2 >}}
 
-```{r}
-#| label: fig-exp3-ms
-#| echo: false
-#| fig-width: 8
-#| fig-height: 4
-#| fig-cap: "Structure type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each structure type at next-day location across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95 % credible intervals. ↑ used more than expected, ↓ used less than expected. TankWall excluded from model predictions."
-knitr::include_graphics("outputs/fig-exp3.png")
-```
+{{< embed analysis.qmd#fig-exp3 >}}
 
-```{r}
-#| label: fig-exp4-ms
-#| echo: false
-#| fig-width: 8
-#| fig-height: 4
-#| fig-cap: "Material preference (Experiment 4). (A) Proportion of kōura found at each structure type at next-day location across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of structure type use by sex from Bayesian categorical mixed model, with 95 % credible intervals. TankWall excluded from model predictions."
-knitr::include_graphics("outputs/fig-exp4.png")
-```
+{{< embed analysis.qmd#fig-exp4 >}}
 
