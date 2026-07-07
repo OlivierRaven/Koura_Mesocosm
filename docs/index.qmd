@@ -81,21 +81,27 @@ knitr:
 
 ::: {.content-visible when-format="pdf"}
 \thispagestyle{empty}
+\clearpage
+\thispagestyle{empty}
 \AddToShipoutPictureBG*{\AtPageUpperLeft{\includegraphics[width=\paperwidth,height=\paperheight]{images/ch4_cover.jpg}}}
 \null
 \newpage
+\thispagestyle{empty}
 \pagecolor{thesissand}
 \vspace{1cm}
 \begin{center}
 \textit{Does shelter structure or material composition drive kōura refuge selection?}
 \end{center}
 \afterpage{\pagecolor{thesiscream}}
+\clearpage
 :::
 
 ::: {.content-visible unless-format="pdf"}
 ![](images/ch4_cover.jpg){fig-align="center" width="100%"}
 
 *Does shelter structure or material composition drive kōura refuge selection?*
+
+{{< pagebreak >}}
 :::
 
 ```{r}
