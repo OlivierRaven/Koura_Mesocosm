@@ -10,7 +10,7 @@
   numbers=noendperiod]{scrartcl}
 \usepackage{xcolor}
 \usepackage{amsmath,amssymb}
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -263,7 +263,7 @@ kōura populations.
 \end{center}
 \afterpage{\pagecolor{thesiscream}}
 
-\section{Introduction}\label{introduction}
+\subsection{Introduction}\label{introduction}
 
 Freshwater biodiversity is declining faster than in any other ecosystem
 globally, driven by habitat loss, pollution, and invasive species
@@ -399,9 +399,9 @@ practical guidance for designing cost-effective, ecologically
 appropriate habitat enhancement structures to enhance kōura abundance
 and support population recovery.
 
-\section{Materials and Methods}\label{materials-and-methods}
+\subsection{Materials and Methods}\label{materials-and-methods}
 
-\subsection{Animal collection and tank
+\subsubsection{Animal collection and tank
 setup}\label{animal-collection-and-tank-setup}
 
 In mid-August 2025, 72 kōura were sourced from Lakes Ōkāreka and
@@ -437,7 +437,7 @@ experimental procedures were conducted under University of Waikato
 animal ethics committee approval (protocol number: 1207; see Ethical
 Approval section).
 
-\subsection{Experiment 1: Individual
+\subsubsection{Experiment 1: Individual
 preference}\label{experiment-1-individual-preference}
 
 This experiment assessed individual kōura structure preference by
@@ -476,7 +476,7 @@ and not reused across temporal replicate blocks. To confirm nocturnal
 activity, three digital cameras (GoPro Hero 3) were placed in one tank
 and recorded for five hours at the end of each of the five days.
 
-\subsection{Experiment 2: Group
+\subsubsection{Experiment 2: Group
 dynamics}\label{experiment-2-group-dynamics}
 
 Building on Experiment 1, this experiment examined how group dynamics
@@ -504,7 +504,7 @@ were reused across all five blocks, with individuals staying with their
 assigned group between replicates. No mortality occurred during the
 experiment.
 
-\subsection{Experiment 3: Wood vs
+\subsubsection{Experiment 3: Wood vs
 Stone}\label{experiment-3-wood-vs-stone}
 
 Using the same male kōura groups from Experiment 2, this experiment
@@ -525,7 +525,7 @@ replaced with a size-matched individual to maintain group composition.
 One individual could not be located at the end of the final block and
 was assumed to have escaped the tank.
 
-\subsection{Experiment 4: Material
+\subsubsection{Experiment 4: Material
 comparison}\label{experiment-4-material-comparison}
 
 This experiment tested whether kōura showed a preference between
@@ -555,7 +555,7 @@ blocks). Structure placements and tank assignments were re-randomised
 between blocks, such that each group was housed in a different tank in
 each successive round.
 
-\subsection{Data analysis}\label{data-analysis}
+\subsubsection{Data analysis}\label{data-analysis}
 
 Experiment 1: To test the difference between the four structure types
 selected by the single kōura, a multinomial goodness-of-fit test was
@@ -619,9 +619,9 @@ following the same random effects structure as described for Experiment
 2. Finally, as only next-day locations were recorded in this experiment,
 no directional shift analysis was performed.
 
-\section{Results}\label{results}
+\subsection{Results}\label{results}
 
-\subsection{Experiment 1: Individual
+\subsubsection{Experiment 1: Individual
 preference}\label{experiment-1-individual-preference-1}
 
 Individual kōura showed a strong preference for WoodLog, selecting it
@@ -640,7 +640,7 @@ relocated to preferred structure types overnight rather than remaining
 at their initial location. The video footage showed kōura emerging,
 walking and climbing on the structures after sunset.
 
-\subsection{Experiment 2: Group
+\subsubsection{Experiment 2: Group
 dynamics}\label{experiment-2-group-dynamics-1}
 
 When housed in mixed-size groups, kōura showed a significant overall
@@ -663,7 +663,7 @@ type use shifted directionally between initial and next-day location
 (Stuart-Maxwell test: \emph{p} = 0.001), indicating that kōura actively
 relocated to preferred structure types overnight.
 
-\subsection{Experiment 3: Wood vs
+\subsubsection{Experiment 3: Wood vs
 Stone}\label{experiment-3-wood-vs-stone-1}
 
 Kōura consistently selected FlatStone over WoodSplit, with the
@@ -681,7 +681,7 @@ kōura. Structure type use shifted directionally between initial and
 next-day location (Stuart-Maxwell test: \emph{p} = 0.003), with kōura
 relocating toward FlatStone overnight.
 
-\subsection{Experiment 4: Material
+\subsubsection{Experiment 4: Material
 comparison}\label{experiment-4-material-comparison-1}
 
 Kōura used both structure types, showing no significant preference
@@ -696,9 +696,9 @@ structure types (β = -0.18, 95\% CI: -1.24 to 0.84; posterior
 probability = 0.65), indicating that both structures were equally
 suitable refuge for male and female kōura.
 
-\section{Discussion}\label{discussion}
+\subsection{Discussion}\label{discussion}
 
-\subsection{Structure matters more than
+\subsubsection{Structure matters more than
 material}\label{structure-matters-more-than-material}
 
 The consistent finding across all experiments that structural stability
@@ -776,7 +776,7 @@ Herrnkind, 2001}). Whether kōura exhibit similar gregarious tendencies
 remains understudied, but the preference shift observed in this study,
 might suggest that social context alters shelter preferences.
 
-\subsection{Body size and competitive
+\subsubsection{Body size and competitive
 dynamics}\label{body-size-and-competitive-dynamics}
 
 Size class consistently influenced refuge preference across experiments,
@@ -811,7 +811,7 @@ can reduce agonistic interactions and benefit the whole population
 complex structure configurations over structures with fixed hole
 dimensions.
 
-\subsection{Restoration implications}\label{restoration-implications}
+\subsubsection{Restoration implications}\label{restoration-implications}
 
 With the threat from invasive predatory fish, such as catfish preying on
 kōura (\citeproc{ref-Kusabs2026}{Kusabs \emph{et al.}, 2026}), enhancing
@@ -865,7 +865,7 @@ in-lake conditions including water movement, natural substrate, and
 predator pressure may modify kōura preferences in ways not captured
 under controlled conditions.
 
-\subsection{Conclusion}\label{conclusion}
+\subsubsection{Conclusion}\label{conclusion}
 
 Across four mesocosm experiments, structural configuration and crevice
 complexity consistently predicted kōura shelter preference more strongly
@@ -881,14 +881,14 @@ associated with restoring this taonga species. Field validation remains
 the essential next step for translating these findings into effective
 kōura habitat restoration practice.
 
-\section{Acknowledgements}\label{acknowledgements}
+\subsection{Acknowledgements}\label{acknowledgements}
 
 We thank Te Arawa Lakes Trust and Te Komiti Whakahaere for the
 opportunity to collect and study the treasured kōura. We are grateful to
 Soweeta Fort-D'ath and William Anaru (Te Arawa Lakes Trust), and Tihini
 Grant (Ngāti Pikiao).
 
-\subsection{Funding statement}\label{funding-statement}
+\subsubsection{Funding statement}\label{funding-statement}
 
 This research was supported by the Fish Futures programme funded through
 a Ministry of Business, Innovation and Employment grant (CAWX2101) with
@@ -896,7 +896,7 @@ additional funding provided by the Bay of Plenty Regional Council under
 the Toihuarewa Waimāori - Bay of Plenty Regional Council Chair in Lake
 and Freshwater Science programme.
 
-\subsection{Authors' contributions}\label{authors-contributions}
+\subsubsection{Authors' contributions}\label{authors-contributions}
 
 Study conception and design were undertaken by O.V.R., R.H. and F.J.B.
 Experiments were conducted by O.V.R. Data analysis was performed by
@@ -905,19 +905,19 @@ knowledge and kōura specimens. Manuscript drafting was led by O.V.R. All
 authors contributed to manuscript revision, approved the results, and
 the final manuscript.
 
-\subsection{Ethical approval}\label{ethical-approval}
+\subsubsection{Ethical approval}\label{ethical-approval}
 
 This study received ethical approval by University of Waikato animal
 ethics committee, protocol number: 1207. Additional permission to
 conduct experiments with kōura was granted by Te Arawa Lakes Trust and
 Te Komiti Whakahaere.
 
-\subsection{Declarations}\label{declarations}
+\subsubsection{Declarations}\label{declarations}
 
 The corresponding author has declared that none of the authors has any
 competing interests.
 
-\subsection{Data availability
+\subsubsection{Data availability
 statement}\label{data-availability-statement}
 
 The code and derived data supporting the findings of this study are
@@ -930,7 +930,7 @@ review documents, including the cover letter and reviewer responses, are
 available in the manuscript repository in the interest of open and
 transparent science.
 
-\section{Figures}\label{figures}
+\subsection{Figures}\label{figures}
 
 \begin{figure}
 
