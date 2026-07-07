@@ -140,6 +140,20 @@
  
 
 
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage[pagewise]{lineno}
+\linenumbers
+
+\usepackage{orcidlink}
+
+\usepackage{xcolor}
+\usepackage{afterpage}
+\usepackage{eso-pic}
+\definecolor{thesiscream}{RGB}{255, 252, 240}
+\definecolor{thesissand}{RGB}{232, 212, 162}
+\pagecolor{thesiscream}
 \KOMAoption{captions}{tableheading}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
@@ -202,7 +216,7 @@ reef, Behaviour, Habitat preference, Aotearoa New Zealand},
 in freshwater crayfish restoration}
 \author{Olivier V. Raven \and Robin Holmes \and Ian A. K.
 Kusabs \and Francis J. Burdon \and Deniz Özkundakci}
-\date{2026-06-26}
+\date{2026-07-07}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -237,6 +251,17 @@ kōura populations.
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
+
+\thispagestyle{empty}
+\AddToShipoutPictureBG*{\AtPageUpperLeft{\includegraphics[width=\paperwidth,height=\paperheight]{images/ch4_cover.jpg}}}
+\null
+\newpage
+\pagecolor{thesissand}
+\vspace{1cm}
+\begin{center}
+\textit{Does shelter structure or material composition drive kōura refuge selection?}
+\end{center}
+\afterpage{\pagecolor{thesiscream}}
 
 \section{Introduction}\label{introduction}
 
@@ -341,14 +366,14 @@ crayfish kōura (\emph{Paranephrops planifrons}) faces conservation
 pressure from habitat loss, water quality degradation, and predation by
 invasive species (\citeproc{ref-Lee2025}{Lee \emph{et al.}, 2025};
 \citeproc{ref-Kusabs2026}{Kusabs \emph{et al.}, 2026}). Kōura are a
-\emph{taonga} (culturally treasured) species for Māori, the indigenous
-people of Aotearoa, and hold significant ecological and cultural value
-in freshwater ecosystems (\citeproc{ref-Kusabs2015a}{Kusabs \emph{et
-al.}, 2015a}; \citeproc{ref-Kusabs2009}{Kusabs and Quinn, 2009}). In
-their natural habitat, kōura are positively associated with overhanging
-banks, coarse substrates, and woody debris (\citeproc{ref-Usio2000}{Usio
-and Townsend, 2000}; \citeproc{ref-Jowett2008}{Jowett \emph{et al.},
-2008}; \citeproc{ref-Parkyn2009}{Parkyn \emph{et al.}, 2009};
+taonga (culturally treasured) species for Māori, the indigenous people
+of Aotearoa, and hold significant ecological and cultural value in
+freshwater ecosystems (\citeproc{ref-Kusabs2015a}{Kusabs \emph{et al.},
+2015a}; \citeproc{ref-Kusabs2009}{Kusabs and Quinn, 2009}). In their
+natural habitat, kōura are positively associated with overhanging banks,
+coarse substrates, and woody debris (\citeproc{ref-Usio2000}{Usio and
+Townsend, 2000}; \citeproc{ref-Jowett2008}{Jowett \emph{et al.}, 2008};
+\citeproc{ref-Parkyn2009}{Parkyn \emph{et al.}, 2009};
 \citeproc{ref-Raveninreviewa}{Raven \emph{et al.}, (a) in review}).
 Kōura have been shown to significantly increase refuge use in the
 presence of predators (\citeproc{ref-Shave1994}{Shave \emph{et al.},
@@ -406,11 +431,11 @@ double layer of shade cloth to prevent escape and minimise solar
 heating. Fresh dechlorinated tap water and an air stone were added
 between rounds. To limit thermal stress, experiments were conducted
 during the Australasian spring (September to October). Because kōura are
-a \emph{taonga} (treasured) species, permission to conduct the
-experiments was obtained from Te Arawa Lakes Trust and Te Komiti
-Whakahaere. All experimental procedures were conducted under University
-of Waikato animal ethics committee approval (protocol number: 1207; see
-Ethical Approval section).
+a taonga (treasured) species, permission to conduct the experiments was
+obtained from Te Arawa Lakes Trust and Te Komiti Whakahaere. All
+experimental procedures were conducted under University of Waikato
+animal ethics committee approval (protocol number: 1207; see Ethical
+Approval section).
 
 \subsection{Experiment 1: Individual
 preference}\label{experiment-1-individual-preference}
@@ -928,15 +953,11 @@ identical dimensions) placed in opposing quadrants of the tank.}
 
 \end{figure}%
 
-\begin{verbatim}
-systemfonts and textshaping have been compiled with different versions of Freetype. Because of this, textshaping will not use the font cache provided by systemfonts
-\end{verbatim}
-
-\begin{figure}[H]
+\begin{figure}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/analysis-fig-exp1-output-2.png}}
+\includegraphics[width=5in,height=\textheight,keepaspectratio]{outputs/fig-exp1.png}
 
 }
 
@@ -952,15 +973,11 @@ overall structure preference was detected between sexes (see results).}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://OlivierRaven.github.io/4.Mesocosm_study/analysis-preview.html\#cell-fig-exp1}{Analysis
-Notebook}}
-
-\begin{figure}[H]
+\begin{figure}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/analysis-fig-exp2-output-1.png}}
+\includegraphics[width=6.5in,height=\textheight,keepaspectratio]{outputs/fig-exp2.png}
 
 }
 
@@ -976,15 +993,11 @@ credible intervals.}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://OlivierRaven.github.io/4.Mesocosm_study/analysis-preview.html\#cell-fig-exp2}{Analysis
-Notebook}}
-
-\begin{figure}[H]
+\begin{figure}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/analysis-fig-exp3-output-1.png}}
+\includegraphics[width=6.5in,height=\textheight,keepaspectratio]{outputs/fig-exp3.png}
 
 }
 
@@ -999,15 +1012,11 @@ less than expected. TankWall excluded from model predictions.}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://OlivierRaven.github.io/4.Mesocosm_study/analysis-preview.html\#cell-fig-exp3}{Analysis
-Notebook}}
-
-\begin{figure}[H]
+\begin{figure}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/analysis-fig-exp4-output-1.png}}
+\includegraphics[width=6.5in,height=\textheight,keepaspectratio]{outputs/fig-exp4.png}
 
 }
 
@@ -1021,23 +1030,18 @@ predictions.}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://OlivierRaven.github.io/4.Mesocosm_study/analysis-preview.html\#cell-fig-exp4}{Analysis
-Notebook}}
-
 \protect\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-Adams2007}
 Adams SB. 2007. Direct and indirect effects of channel catfish
 ({\emph{Ictalurus punctatus}}) on native crayfishes ({Cambaridae}) in
 experimental tanks. \emph{The American Midland Naturalist} \textbf{158}:
-85-\/-96.
+85--96.
 https://doi.org/\href{https://doi.org/10.1674/0003-0031(2007)158\%5B85:daieoc\%5D2.0.co;2}{10.1674/0003-0031(2007)158{[}85:daieoc{]}2.0.co;2}
 
 \bibitem[\citeproctext]{ref-Adams2014}
 Adams SB. 2014. Crayfish use of trash versus natural cover in incised,
-sand-bed streams. \emph{Environmental Management} \textbf{53}:
-382-\/-392.
+sand-bed streams. \emph{Environmental Management} \textbf{53}: 382--392.
 https://doi.org/\href{https://doi.org/10.1007/s00267-013-0197-3}{10.1007/s00267-013-0197-3}
 
 \bibitem[\citeproctext]{ref-Beck1995}
@@ -1084,7 +1088,7 @@ Collier KJ, Parkyn SM, Rabeni CF. 1997. Koura: A keystone species.
 Cooke SJ, Piczak ML, Vermaire JC, Kirkwood AE. 2023. On the troubling
 use of plastic {`habitat'} structures for fish in freshwater ecosystems
 -- or -- when restoration is just littering (D Lesbarrères, Ed).
-\emph{FACETS} \textbf{8}: 1-\/-19.
+\emph{FACETS} \textbf{8}: 1--19.
 https://doi.org/\href{https://doi.org/10.1139/facets-2022-0210}{10.1139/facets-2022-0210}
 
 \bibitem[\citeproctext]{ref-Dickson2023}
@@ -1112,14 +1116,14 @@ Figler MH, Blank GS, Peeke HVS. 2005. Shelter competition between
 resident male red swamp crayfish {\emph{Procambarus clarkii}} (girard)
 and conspecific intruders varying by sex and reproductive status.
 \emph{Marine and Freshwater Behaviour and Physiology} \textbf{38}:
-237-\/-248.
+237--248.
 https://doi.org/\href{https://doi.org/10.1080/10236240500376477}{10.1080/10236240500376477}
 
 \bibitem[\citeproctext]{ref-Figler1999}
 Figler MH, Cheverton HM, Blank GS. 1999. Shelter competition in juvenile
 red swamp crayfish ({\emph{Procambarus clarkii}}): The influences of sex
 differences, relative size, and prior residence. \emph{Aquaculture}
-\textbf{178}: 63-\/-75.
+\textbf{178}: 63--75.
 https://doi.org/\href{https://doi.org/10.1016/s0044-8486(99)00114-3}{10.1016/s0044-8486(99)00114-3}
 
 \bibitem[\citeproctext]{ref-Garron2024}
@@ -1139,7 +1143,7 @@ https://doi.org/\href{https://doi.org/10.1214/ss/1177011136}{10.1214/ss/11770111
 Hammond KS, Hollows JW, Townsend CR, Lokman PM. 2006. Effects of
 temperature and water calcium concentration on growth, survival and
 moulting of freshwater crayfish, {\emph{Paranephrops zealandicus}}.
-\emph{Aquaculture} \textbf{251}: 271-\/-279.
+\emph{Aquaculture} \textbf{251}: 271--279.
 https://doi.org/\href{https://doi.org/10.1016/j.aquaculture.2005.05.032}{10.1016/j.aquaculture.2005.05.032}
 
 \bibitem[\citeproctext]{ref-Hazlett2007}
@@ -1151,7 +1155,7 @@ https://doi.org/\href{https://doi.org/10.1080/10236240701562412}{10.1080/1023624
 \bibitem[\citeproctext]{ref-Huolila1997}
 Huolila M, Marjomäki TJ, Laukkanen E. 1997. The success of crayfish
 stocking in a dredged river with and without artificial shelter
-increase. \emph{Fisheries Research} \textbf{32}: 185-\/-189.
+increase. \emph{Fisheries Research} \textbf{32}: 185--189.
 https://doi.org/\href{https://doi.org/10.1016/s0165-7836(97)00046-5}{10.1016/s0165-7836(97)00046-5}
 
 \bibitem[\citeproctext]{ref-Hylkema2020}
@@ -1215,8 +1219,8 @@ https://doi.org/\href{https://doi.org/10.5194/we-25-221-2025}{10.5194/we-25-221-
 \bibitem[\citeproctext]{ref-MacNeil2025}
 MacNeil C, Lee F, Kusabs I, Holmes R. 2025. The biter bit; scavenging
 behaviour of native freshwater crayfish on the carrion of native and
-introduced fish predators in {Aotearoa-New Zealand}. \emph{Knowledge
-\&amp; Management of Aquatic Ecosystems}: 29.
+introduced fish predators in {Aotearoa-New Zealand}. \emph{Knowledge \&
+Management of Aquatic Ecosystems}: 29.
 https://doi.org/\href{https://doi.org/10.1051/kmae/2025022}{10.1051/kmae/2025022}
 
 \bibitem[\citeproctext]{ref-Magnelia2008}
@@ -1228,7 +1232,7 @@ texas reservoir.
 Mazlum Y, Guner Gurlek O, Sirin S. 2017. Effect of different substrates
 on survival and growth of juveniles of the freshwater narrow-clawed
 crayfish {\emph{Astacus leptodactylus}} eschscholtz, 1823 ({Decapoda,
-Astacidae}). \emph{Crustaceana} \textbf{90}: 1289-\/-1302.
+Astacidae}). \emph{Crustaceana} \textbf{90}: 1289--1302.
 https://doi.org/\href{https://doi.org/10.1163/15685403-00003724}{10.1163/15685403-00003724}
 
 \bibitem[\citeproctext]{ref-Momot1995}
@@ -1287,15 +1291,15 @@ Ranta E, Lindström K. 1993. Body size and shelter possession in mature
 signal crayfish, {\emph{Pacifastacus leniusculus}}. \emph{Annales
 Zoologici Fennici} \textbf{30}: 125--132.
 
-\bibitem[\citeproctext]{ref-Raveninreviewa}
-Raven OV, Burdon FJ, Kusabs IAK, Holmes R, Özkundakci D. (a) in review.
+\bibitem[\citeproctext]{ref-Raveninreviewb}
+Raven OV, Burdon FJ, Kusabs IAK, Holmes R, Özkundakci D. (b) in review.
 \href{https://olivierraven.github.io/Koura_shoreline_habitats/}{Littoral
 habitat structure influences freshwater crayfish populations in five
 volcanic lakes of {Aotearoa New Zealand}}.
 
-\bibitem[\citeproctext]{ref-Raveninreviewb}
+\bibitem[\citeproctext]{ref-Raveninreviewa}
 Raven OV, MacNeil C, Lee F, Holmes R, Kusabs IAK, Burdon FJ, Özkundakci
-D. (b) in review.
+D. (a) in review.
 \href{https://olivierraven.github.io/NCE_Koura_catfish/}{Fear of the
 new: A predatory invader may provoke stronger non-consumptive effects on
 a keystone native prey than a native predator}.
@@ -1322,7 +1326,7 @@ an introduced predator. \emph{New Zealand Journal of Ecology}
 
 \bibitem[\citeproctext]{ref-Spanier1994}
 Spanier E. 1994. What are the characteristics of a good artificial reef
-for lobsters? \emph{Crustaceana} \textbf{67}: 173-\/-186.
+for lobsters? \emph{Crustaceana} \textbf{67}: 173--186.
 
 \bibitem[\citeproctext]{ref-Stewart2011}
 Stewart C, Tabak J. 2011. Size‐based dominance hierarchies in the {New
