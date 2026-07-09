@@ -1,5 +1,6 @@
 ---
-title: "The importance of structure: mesocosm evidence for shelter design in freshwater crayfish restoration"
+title: "The Importance of Structure"
+subtitle: "The importance of structure: mesocosm evidence for shelter design in freshwater crayfish restoration"
 
 
 execute:
@@ -73,48 +74,69 @@ funding: "This research was supported by the Fish Futures programme funded throu
 
 citation:
   container-title: "..."
-  
+
+title-block-style: none
+
 knitr:
   opts_chunk:
     dev: "ragg_png"
 ---
 
 ::: {.content-visible when-format="pdf"}
+\ifcsname c@chapter\endcsname
+\setcounter{chapter}{4}
+\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}The Importance of Structure}
+\fi
+\providecommand{\thechapter}{4}
 \thispagestyle{empty}
-\clearpage
-\thispagestyle{empty}
-\AddToShipoutPictureBG*{\AtPageUpperLeft{\includegraphics[width=\paperwidth,height=\paperheight]{images/ch4_cover.jpg}}}
+\begin{tikzpicture}[remember picture, overlay]
+  \begin{scope}
+    \clip ([yshift=-7cm]current page.north west)
+          rectangle ([yshift=4.5cm]current page.south east);
+    \node[inner sep=0pt, anchor=north]
+      at ([yshift=-7cm]current page.north)
+      {\includegraphics[width=\paperwidth]{images/ch4_cover.jpg}};
+  \end{scope}
+  \fill[black]
+    (current page.north west) rectangle ([yshift=-7cm]current page.north east);
+  \node[color=thesissand, align=left,
+        font=\fontsize{13}{16}\selectfont\sffamily, anchor=west]
+    at ([xshift=1.5cm, yshift=-1.5cm]current page.north west)
+    {Chapter \thechapter};
+  \node[color=white, text width=0.85\paperwidth, align=left,
+        font=\fontsize{22}{28}\selectfont\bfseries\sffamily, anchor=west]
+    at ([xshift=1.5cm, yshift=-4cm]current page.north west)
+    {The Importance of Structure};
+  \fill[black]
+    (current page.south west) rectangle ([yshift=4.5cm]current page.south east);
+  \node[color=white, text width=0.85\paperwidth, align=left,
+        font=\fontsize{9}{13}\selectfont\sffamily, anchor=west]
+    at ([xshift=1.5cm, yshift=3.2cm]current page.south west)
+    {Olivier V.\ Raven, Robin Holmes, Ian A.\ K.\ Kusabs, Francis J.\ Burdon \& Deniz Özkundakci};
+  \node[color=thesissand, text width=0.85\paperwidth, align=left,
+        font=\fontsize{9}{13}\selectfont\itshape\sffamily, anchor=west]
+    at ([xshift=1.5cm, yshift=1.5cm]current page.south west)
+    {Aquatic Conservation: Marine and Freshwater Ecosystems --- Under review};
+\end{tikzpicture}
 \null
-\newpage
-\thispagestyle{empty}
-\pagecolor{thesissand}
-\vspace{1cm}
-\begin{center}
-\textit{Does shelter structure or material composition drive kōura refuge selection?}
-\end{center}
-\afterpage{\pagecolor{thesiscream}}
 \clearpage
-:::
-
-::: {.content-visible when-format="html"}
-![](images/ch4_cover.jpg){fig-align="center" width="100%"}
-
-*Does shelter structure or material composition drive kōura refuge selection?*
 :::
 
 ::: {.content-visible when-format="docx"}
 ![](images/ch4_cover.jpg){fig-align="center" width=15cm}
 
-*Does shelter structure or material composition drive kōura refuge selection?*
+Olivier V. Raven, Robin Holmes, Ian A. K. Kusabs, Francis J. Burdon & Deniz Özkundakci
+
+*Aquatic Conservation: Marine and Freshwater Ecosystems* — Under review
 
 {{< pagebreak >}}
 :::
 
 ```{r}
-#| label: start
+#| label: start-ch4
 #| include: false
 
-chapter_dir <- dirname(knitr::current_input(dir = TRUE))
+chapter_dir <- if (basename(normalizePath(getwd())) == "04_koura_mesocosm") normalizePath(getwd()) else normalizePath(file.path(getwd(), "04_koura_mesocosm"))
 fig_labels <- c("fig-exp1", "fig-exp2", "fig-exp3", "fig-exp4")
 out_dir <- file.path(chapter_dir, "outputs")
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
@@ -122,21 +144,24 @@ dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 parent_knit_env <- knitr::knit_global()
 
 tmp_r <- tempfile(fileext = ".R")
-withr::with_dir(chapter_dir, {
-  knitr::purl("analysis.qmd", output = tmp_r, quiet = TRUE, documentation = 0)
-  eval(parse(file = tmp_r), envir = parent_knit_env)
-})
+knitr::purl(file.path(chapter_dir, "analysis.qmd"), output = tmp_r, quiet = TRUE, documentation = 0)
+.old_wd <- setwd(chapter_dir)
+eval(parse(file = tmp_r), envir = parent_knit_env)
+setwd(.old_wd)
 
 if (!all(file.exists(file.path(out_dir, paste0(fig_labels, ".png"))))) {
-  withr::with_dir(chapter_dir, {
-    knitr::knit("analysis.qmd", output = tempfile(), quiet = TRUE, envir = parent_knit_env)
-  })
+  .old_wd <- setwd(chapter_dir)
+  knitr::knit(file.path(chapter_dir, "analysis.qmd"), output = tempfile(), quiet = TRUE, envir = parent_knit_env)
+  setwd(.old_wd)
   for (lbl in fig_labels) {
     src <- knitr::fig_chunk(lbl, "png")
     if (file.exists(src)) file.copy(src, file.path(out_dir, paste0(lbl, ".png")), overwrite = TRUE)
   }
 }
 ```
+
+## Abstract {.unnumbered}
+Freshwater crayfish are keystone species that rank among the most threatened invertebrate groups globally. While habitat loss and predation by non-native predators feature prominently as drivers of crayfish population declines, the optimal design of habitat enhancement structures for their restoration remains largely unknown. To better understand freshwater crayfish habitat preferences, our study focused on the endemic kōura (*Paranephrops planifrons*) found in Aotearoa New Zealand. We used four mesocosm experiments to examine how shelter structure, material composition, individual body size, and group dynamics influence refuge selection in kōura. Individual kōura strongly preferred a wooden log with enclosed drilled holes, but when housed in mixed-size groups, their preference shifted to flat and piled stone configurations that provided more complex refugia for individuals of different sizes. Flat stone structures were preferred over split wood pieces of similar dimensions, and this was strongest for large individuals. When structural dimensions were held constant, no significant preference was detected between concrete and wooden structures, indicating that material composition alone does not drive refuge selection. The findings of these mesocosm experiments suggest that stone pile configurations warrant field evaluations as habitat enhancement structures for kōura restoration. The stone piles create structural complexity that can provide habitat for different size classes and thus may add critical refuge from non-native predators for kōura populations.
 
 ## Introduction
 Freshwater biodiversity is declining faster than in any other ecosystem globally, driven by habitat loss, pollution, and invasive species [@Dudgeon2006]. Crayfish are among the most threatened freshwater invertebrates, with 32 % of species assessed as threatened with extinction due to these same pressures [@Richman2015]. As keystone species and ecosystem engineers, crayfish play crucial roles in freshwater food webs through shredding of leaf litter, bioturbation of sediments, and nutrient cycling, and their loss can have profound cascading effects on freshwater ecosystems [@Momot1995; @Collier1997; @Parkyn2001]. The increasing degradation of freshwater habitats therefore not only threatens crayfish populations but also risks disrupting the ecosystem processes crayfish sustain.
@@ -147,7 +172,7 @@ Shelter selection in crayfish is strongly influenced by body size, as individual
 
 The material and structural properties of shelters can influence their value as refugia. In a study comparing shelter configurations on reef fish assemblages, the availability and size of enclosed spaces mattered more than total structure volume [@Hylkema2020]. Additionally, enclosed structures such as PVC pipes provide greater protection against predatory fish than stone or vegetation structures, likely due to their consistent hole dimensions [@Zhao2024]. However, the use of synthetic materials like PVC pipes in restoration ecology brings ecological concerns, particularly in contexts where introducing non-native materials may conflict with conservation values or indigenous cultural frameworks [@Wehi2017; @Cooke2023]. Natural materials such as stones and wood offer ecologically compatible alternatives, yet the importance of structural configuration versus material composition for crayfish shelter preference is poorly understood.
 
-In Aotearoa-New Zealand (hereafter Aotearoa), the endemic freshwater crayfish kōura (*Paranephrops planifrons*) faces conservation pressure from habitat loss, water quality degradation, and predation by invasive species [@Lee2025; @Kusabs2026]. Kōura are a taonga (culturally treasured) species for Māori, the indigenous people of Aotearoa, and hold significant ecological and cultural value in freshwater ecosystems [@Kusabs2009; @Kusabs2015a]. In their natural habitat, kōura are positively associated with overhanging banks, coarse substrates, and woody debris [@Usio2000; @Jowett2008; @Parkyn2009; @Raveninreviewa]. Kōura have been shown to significantly increase refuge use in the presence of predators [@Shave1994; @Raveninreviewb]. Habitat restoration by increasing shelter availability represents a promising management tool for kōura recovery, and the use of natural materials aligns with ecological and cultural values.
+In Aotearoa-New Zealand (hereafter Aotearoa), the endemic freshwater crayfish kōura (*Paranephrops planifrons*) faces conservation pressure from habitat loss, water quality degradation, and predation by invasive species [@Lee2025; @Kusabs2026]. Kōura are a taonga (culturally treasured) species for Māori, the indigenous people of Aotearoa, and hold significant ecological and cultural value in freshwater ecosystems [@Kusabs2009; @Kusabs2015a]. In their natural habitat, kōura are positively associated with overhanging banks, coarse substrates, and woody debris [@Usio2000; @Jowett2008; @Parkyn2009; @Raven2026a]. Kōura have been shown to significantly increase refuge use in the presence of predators [@Shave1994; @Raven2026b]. Habitat restoration by increasing shelter availability represents a promising management tool for kōura recovery, and the use of natural materials aligns with ecological and cultural values.
 
 In this study, four mesocosm experiments were conducted to identify kōura habitat preferences. We assessed how different structures varying in material and configuration influence refuge selection, accounting for individual behaviour, body size, and group interactions. We predicted that 1) Structurally complex structures providing enclosed crevices would be preferred over isolated or open structures, as enclosed spaces reduce predation risk; 2) structure preference would be size-dependent, with larger kōura selecting structures with larger refuge spaces [@Streissl2002; @Percival2010]; 3) stone-based structures would be preferred over wood due to greater structural stability, and 4) material type alone would not influence refuge preference between concrete and wooden bricks. The results provide practical guidance for designing cost-effective, ecologically appropriate habitat enhancement structures to enhance kōura abundance and support population recovery.
 
@@ -217,6 +242,7 @@ Across four mesocosm experiments, structural configuration and crevice complexit
 ## Acknowledgements
 We thank Te Arawa Lakes Trust and Te Komiti Whakahaere for the opportunity to collect and study the treasured kōura. We are grateful to Soweeta Fort-D’ath and William Anaru (Te Arawa Lakes Trust), and Tihini Grant (Ngāti Pikiao). 
 
+::: {.chapter-only}
 ### Funding statement
 This research was supported by the Fish Futures programme funded through a Ministry of Business, Innovation and Employment grant (CAWX2101) with additional funding provided by the Bay of Plenty Regional Council under the Toihuarewa Waimāori - Bay of Plenty Regional Council Chair in Lake and Freshwater Science programme.
 
@@ -231,7 +257,7 @@ The corresponding author has declared that none of the authors has any competing
 
 ### Data availability statement
 The code and derived data supporting the findings of this study are openly available on GitHub (https://github.com/OlivierRaven/Koura_Mesocosm)and a rendered version of the analysis is hosted at https://olivierraven.github.io/Koura_Mesocosm/. The primary raw dataset is archived on Zenodo (https://doi.org/10.5281/zenodo.20754344). Peer review documents, including the cover letter and reviewer responses, are available in the manuscript repository in the interest of open and transparent science.
-
+:::
 
 ## Figures
 ![Overhead photographs of experimental tank configurations for each of the four mesocosm experiments. Experiment 1 (Individual preference) and Experiment 2 (Group dynamics): four shelter types, WoodLog (tānekaha log with drilled holes), FlatStone (stones arranged flat), StonePile (stones stacked), and SingleStone (individual stones placed separately). Experiment 3 (Wood vs Stone): WoodSplit shelter (tānekaha wood splits) and FlatStone shelter placed in opposing halves of the tank. Experiment 4 (Material comparison): ConcreteBrick (perforated concrete bricks) and WoodBlock (perforated wooden blocks of identical dimensions) placed in opposing quadrants of the tank.](images/Setup_exp_tanks.png){#fig-exp-setup}

@@ -140,6 +140,12 @@
  
 
 
+% Define chapter counter if document class doesn't have one (e.g. article)
+\ifdefined\thechapter\else
+  \newcounter{chapter}
+  \renewcommand*{\thechapter}{\arabic{chapter}}
+\fi
+
 \usepackage{setspace}
 \onehalfspacing
 
@@ -149,6 +155,7 @@
 \usepackage{orcidlink}
 
 \usepackage{xcolor}
+\usepackage{tikz}
 \usepackage{afterpage}
 \usepackage{eso-pic}
 \definecolor{thesiscream}{RGB}{255, 252, 240}
@@ -200,7 +207,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={The importance of structure: mesocosm evidence for shelter design in freshwater crayfish restoration},
+  pdftitle={The Importance of Structure},
   pdfauthor={Olivier V. Raven; Robin Holmes; Ian A. K. Kusabs; Francis J. Burdon; Deniz Özkundakci},
   pdfkeywords={Paranephrops planifrons, Artificial
 reef, Behaviour, Habitat preference, Aotearoa New Zealand},
@@ -212,11 +219,18 @@ reef, Behaviour, Habitat preference, Aotearoa New Zealand},
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{The importance of structure: mesocosm evidence for shelter design
-in freshwater crayfish restoration}
+\title{The Importance of Structure}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{The importance of structure: mesocosm evidence for shelter
+design in freshwater crayfish restoration}
 \author{Olivier V. Raven \and Robin Holmes \and Ian A. K.
 Kusabs \and Francis J. Burdon \and Deniz Özkundakci}
-\date{2026-07-08}
+\date{2026-07-10}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -252,20 +266,71 @@ kōura populations.
 \tableofcontents
 }
 
+\ifcsname c@chapter\endcsname \setcounter{chapter}{4}
+
+\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}The Importance of Structure}
+\fi
+\providecommand{\thechapter}{4}
 \thispagestyle{empty}
-\clearpage
-\thispagestyle{empty}
-\AddToShipoutPictureBG*{\AtPageUpperLeft{\includegraphics[width=\paperwidth,height=\paperheight]{images/ch4_cover.jpg}}}
+\begin{tikzpicture}[remember picture, overlay]
+  \begin{scope}
+    \clip ([yshift=-7cm]current page.north west)
+          rectangle ([yshift=4.5cm]current page.south east);
+    \node[inner sep=0pt, anchor=north]
+      at ([yshift=-7cm]current page.north)
+      {\includegraphics[width=\paperwidth]{images/ch4_cover.jpg}};
+  \end{scope}
+  \fill[black]
+    (current page.north west) rectangle ([yshift=-7cm]current page.north east);
+  \node[color=thesissand, align=left,
+        font=\fontsize{13}{16}\selectfont\sffamily, anchor=west]
+    at ([xshift=1.5cm, yshift=-1.5cm]current page.north west)
+    {Chapter \thechapter};
+  \node[color=white, text width=0.85\paperwidth, align=left,
+        font=\fontsize{22}{28}\selectfont\bfseries\sffamily, anchor=west]
+    at ([xshift=1.5cm, yshift=-4cm]current page.north west)
+    {The Importance of Structure};
+  \fill[black]
+    (current page.south west) rectangle ([yshift=4.5cm]current page.south east);
+  \node[color=white, text width=0.85\paperwidth, align=left,
+        font=\fontsize{9}{13}\selectfont\sffamily, anchor=west]
+    at ([xshift=1.5cm, yshift=3.2cm]current page.south west)
+    {Olivier V.\ Raven, Robin Holmes, Ian A.\ K.\ Kusabs, Francis J.\ Burdon \& Deniz Özkundakci};
+  \node[color=thesissand, text width=0.85\paperwidth, align=left,
+        font=\fontsize{9}{13}\selectfont\itshape\sffamily, anchor=west]
+    at ([xshift=1.5cm, yshift=1.5cm]current page.south west)
+    {Aquatic Conservation: Marine and Freshwater Ecosystems --- Under review};
+\end{tikzpicture}
 \null
-\newpage
-\thispagestyle{empty}
-\pagecolor{thesissand}
-\vspace{1cm}
-\begin{center}
-\textit{Does shelter structure or material composition drive kōura refuge selection?}
-\end{center}
-\afterpage{\pagecolor{thesiscream}}
 \clearpage
+
+\subsection*{Abstract}\label{abstract}
+\addcontentsline{toc}{subsection}{Abstract}
+
+Freshwater crayfish are keystone species that rank among the most
+threatened invertebrate groups globally. While habitat loss and
+predation by non-native predators feature prominently as drivers of
+crayfish population declines, the optimal design of habitat enhancement
+structures for their restoration remains largely unknown. To better
+understand freshwater crayfish habitat preferences, our study focused on
+the endemic kōura (\emph{Paranephrops planifrons}) found in Aotearoa New
+Zealand. We used four mesocosm experiments to examine how shelter
+structure, material composition, individual body size, and group
+dynamics influence refuge selection in kōura. Individual kōura strongly
+preferred a wooden log with enclosed drilled holes, but when housed in
+mixed-size groups, their preference shifted to flat and piled stone
+configurations that provided more complex refugia for individuals of
+different sizes. Flat stone structures were preferred over split wood
+pieces of similar dimensions, and this was strongest for large
+individuals. When structural dimensions were held constant, no
+significant preference was detected between concrete and wooden
+structures, indicating that material composition alone does not drive
+refuge selection. The findings of these mesocosm experiments suggest
+that stone pile configurations warrant field evaluations as habitat
+enhancement structures for kōura restoration. The stone piles create
+structural complexity that can provide habitat for different size
+classes and thus may add critical refuge from non-native predators for
+kōura populations.
 
 \subsection{Introduction}\label{introduction}
 
@@ -375,16 +440,16 @@ of Aotearoa, and hold significant ecological and cultural value in
 freshwater ecosystems (\citeproc{ref-Kusabs2015a}{Kusabs \emph{et al.},
 2015a}; \citeproc{ref-Kusabs2009}{Kusabs and Quinn, 2009}). In their
 natural habitat, kōura are positively associated with overhanging banks,
-coarse substrates, and woody debris (\citeproc{ref-Usio2000}{Usio and
-Townsend, 2000}; \citeproc{ref-Jowett2008}{Jowett \emph{et al.}, 2008};
-\citeproc{ref-Parkyn2009}{Parkyn \emph{et al.}, 2009};
-\citeproc{ref-Raveninreviewa}{Raven \emph{et al.}, (a) in review}).
-Kōura have been shown to significantly increase refuge use in the
-presence of predators (\citeproc{ref-Shave1994}{Shave \emph{et al.},
-1994}; \citeproc{ref-Raveninreviewb}{Raven \emph{et al.}, (b) in
-review}). Habitat restoration by increasing shelter availability
-represents a promising management tool for kōura recovery, and the use
-of natural materials aligns with ecological and cultural values.
+coarse substrates, and woody debris (\citeproc{ref-Raven2026a}{Raven
+\emph{et al.}, 2026a}; \citeproc{ref-Usio2000}{Usio and Townsend, 2000};
+\citeproc{ref-Jowett2008}{Jowett \emph{et al.}, 2008};
+\citeproc{ref-Parkyn2009}{Parkyn \emph{et al.}, 2009}). Kōura have been
+shown to significantly increase refuge use in the presence of predators
+(\citeproc{ref-Raven2026b}{Raven \emph{et al.}, 2026b};
+\citeproc{ref-Shave1994}{Shave \emph{et al.}, 1994}). Habitat
+restoration by increasing shelter availability represents a promising
+management tool for kōura recovery, and the use of natural materials
+aligns with ecological and cultural values.
 
 In this study, four mesocosm experiments were conducted to identify
 kōura habitat preferences. We assessed how different structures varying
@@ -1295,18 +1360,18 @@ Ranta E, Lindström K. 1993. Body size and shelter possession in mature
 signal crayfish, {\emph{Pacifastacus leniusculus}}. \emph{Annales
 Zoologici Fennici} \textbf{30}: 125--132.
 
-\bibitem[\citeproctext]{ref-Raveninreviewb}
-Raven OV, Burdon FJ, Kusabs IAK, Holmes R, Özkundakci D. (b) in review.
-\href{https://olivierraven.github.io/Koura_shoreline_habitats/}{Littoral
+\bibitem[\citeproctext]{ref-Raven2026b}
+Raven OV, Burdon FJ, Kusabs IAK, Holmes R, Özkundakci D. 2026b. Littoral
 habitat structure influences freshwater crayfish populations in five
-volcanic lakes of {Aotearoa New Zealand}}.
+volcanic lakes of aotearoa new zealand. \emph{Hydrobiologia}.
+https://doi.org/\href{https://doi.org/10.1007/s10750-026-06302-z}{10.1007/s10750-026-06302-z}
 
-\bibitem[\citeproctext]{ref-Raveninreviewa}
+\bibitem[\citeproctext]{ref-Raven2026a}
 Raven OV, MacNeil C, Lee F, Holmes R, Kusabs IAK, Burdon FJ, Özkundakci
-D. (a) in review.
-\href{https://olivierraven.github.io/NCE_Koura_catfish/}{Fear of the
-new: A predatory invader may provoke stronger non-consumptive effects on
-a keystone native prey than a native predator}.
+D. 2026a. Fear of the new: A predatory invader provokes stronger
+non-consumptive effects on a keystone native prey than a native
+predator.
+https://doi.org/\href{https://doi.org/10.21203/rs.3.rs-9891519/v1}{10.21203/rs.3.rs-9891519/v1}
 
 \bibitem[\citeproctext]{ref-Reynolds2013}
 Reynolds J, Souty-Grosset C, Alastair A. 2013. Ecological roles of

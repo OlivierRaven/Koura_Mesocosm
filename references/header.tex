@@ -1,3 +1,9 @@
+% Define chapter counter if document class doesn't have one (e.g. article)
+\ifdefined\thechapter\else
+  \newcounter{chapter}
+  \renewcommand*{\thechapter}{\arabic{chapter}}
+\fi
+
 \usepackage{setspace}
 \onehalfspacing
 
@@ -7,6 +13,7 @@
 \usepackage{orcidlink}
 
 \usepackage{xcolor}
+\usepackage{tikz}
 \usepackage{afterpage}
 \usepackage{eso-pic}
 \definecolor{thesiscream}{RGB}{255, 252, 240}
