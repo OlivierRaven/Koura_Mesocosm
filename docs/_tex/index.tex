@@ -230,7 +230,7 @@ reef, Behaviour, Habitat preference, Aotearoa New Zealand},
 design in freshwater crayfish restoration}
 \author{Olivier V. Raven \and Robin Holmes \and Ian A. K.
 Kusabs \and Francis J. Burdon \and Deniz Özkundakci}
-\date{2026-07-10}
+\date{2026-07-13}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -266,9 +266,14 @@ kōura populations.
 \tableofcontents
 }
 
-\ifcsname c@chapter\endcsname \setcounter{chapter}{4}
+\clearpage
+\providecommand{\chaptermark}[1]{}
 
-\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}The Importance of Structure}
+\ifcsname c@chapter\endcsname \setcounter{chapter}{4}
+\setcounter{section}{0}
+
+\addcontentsline{toc}{chapter}{\protect\numberline{4}The Importance of Structure}
+
 \fi
 \providecommand{\thechapter}{4}
 \thispagestyle{empty}
@@ -278,7 +283,7 @@ kōura populations.
           rectangle ([yshift=4.5cm]current page.south east);
     \node[inner sep=0pt, anchor=north]
       at ([yshift=-7cm]current page.north)
-      {\includegraphics[width=\paperwidth]{images/ch4_cover.jpg}};
+      {\includegraphics[width=18.2cm, height=\paperwidth, angle=90]{images/ch4_cover.jpg}};
   \end{scope}
   \fill[black]
     (current page.north west) rectangle ([yshift=-7cm]current page.north east);

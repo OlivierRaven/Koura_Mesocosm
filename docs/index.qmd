@@ -83,9 +83,13 @@ knitr:
 ---
 
 ::: {.content-visible when-format="pdf"}
+\clearpage
+\providecommand{\chaptermark}[1]{}
 \ifcsname c@chapter\endcsname
 \setcounter{chapter}{4}
-\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}The Importance of Structure}
+\setcounter{section}{0}
+\addcontentsline{toc}{chapter}{\protect\numberline{4}The Importance of Structure}
+\chaptermark{The Importance of Structure}
 \fi
 \providecommand{\thechapter}{4}
 \thispagestyle{empty}
@@ -95,7 +99,7 @@ knitr:
           rectangle ([yshift=4.5cm]current page.south east);
     \node[inner sep=0pt, anchor=north]
       at ([yshift=-7cm]current page.north)
-      {\includegraphics[width=\paperwidth]{images/ch4_cover.jpg}};
+      {\includegraphics[width=18.2cm, height=\paperwidth, angle=90]{images/ch4_cover.jpg}};
   \end{scope}
   \fill[black]
     (current page.north west) rectangle ([yshift=-7cm]current page.north east);
@@ -132,22 +136,40 @@ Olivier V. Raven, Robin Holmes, Ian A. K. Kusabs, Francis J. Burdon & Deniz Özk
 {{< pagebreak >}}
 :::
 
+::: {.content-visible when-format="html"}
+# The Importance of Structure {.unnumbered}
+:::
+
 ```{r}
 #| label: start-ch4
 #| include: false
 
-chapter_dir <- if (basename(normalizePath(getwd())) == "04_koura_mesocosm") normalizePath(getwd()) else normalizePath(file.path(getwd(), "04_koura_mesocosm"))
+chapter_dir <- normalizePath(file.path(dirname(knitr::current_input(dir = TRUE)), "04_koura_mesocosm"))
+if (!dir.exists(chapter_dir)) chapter_dir <- normalizePath(dirname(knitr::current_input(dir = TRUE)))
 fig_labels <- c("fig-exp1", "fig-exp2", "fig-exp3", "fig-exp4")
 out_dir <- file.path(chapter_dir, "outputs")
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 
 parent_knit_env <- knitr::knit_global()
 
-tmp_r <- tempfile(fileext = ".R")
-knitr::purl(file.path(chapter_dir, "analysis.qmd"), output = tmp_r, quiet = TRUE, documentation = 0)
-.old_wd <- setwd(chapter_dir)
-eval(parse(file = tmp_r), envir = parent_knit_env)
-setwd(.old_wd)
+qmd_lines <- readLines(file.path(chapter_dir, "analysis.qmd"), warn = FALSE)
+in_r_chunk <- FALSE
+r_lines <- character(0)
+for (ln in qmd_lines) {
+  if (grepl("^```\\{[rR]", ln)) { in_r_chunk <- TRUE; next }
+  if (grepl("^```", ln) && in_r_chunk) { in_r_chunk <- FALSE; next }
+  if (in_r_chunk) r_lines <- c(r_lines, ln)
+}
+r_lines <- c(
+  paste0(".chwd <- setwd(", deparse(chapter_dir), ")"),
+  r_lines,
+  "setwd(.chwd)", "rm(.chwd)"
+)
+tmp_r <- file.path(chapter_dir, ".analysis_tmp.R")
+writeLines(r_lines, tmp_r)
+eval(parse(file = tmp_r, encoding = "UTF-8"))
+unlink(tmp_r)
+out_dir <- file.path(chapter_dir, "outputs")
 
 if (!all(file.exists(file.path(out_dir, paste0(fig_labels, ".png"))))) {
   .old_wd <- setwd(chapter_dir)
@@ -158,6 +180,13 @@ if (!all(file.exists(file.path(out_dir, paste0(fig_labels, ".png"))))) {
     if (file.exists(src)) file.copy(src, file.path(out_dir, paste0(lbl, ".png")), overwrite = TRUE)
   }
 }
+input_dir <- normalizePath(dirname(knitr::current_input(dir = TRUE)))
+if (input_dir != chapter_dir) {
+  thesis_out <- file.path(input_dir, "outputs")
+  dir.create(thesis_out, showWarnings = FALSE, recursive = TRUE)
+  file.copy(list.files(out_dir, full.names = TRUE, pattern = "\\.(png|jpg)$"), thesis_out, overwrite = TRUE)
+}
+knitr::opts_knit$set(root.dir = chapter_dir)
 ```
 
 ## Abstract {.unnumbered}
