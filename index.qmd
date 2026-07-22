@@ -60,8 +60,6 @@ author:
 
 date: "today"
 
-abstract: Freshwater crayfish are keystone species that rank among the most threatened invertebrate groups globally. While habitat loss and predation by non-native predators feature prominently as drivers of crayfish population declines, the optimal design of habitat enhancement structures for their restoration remains largely unknown. To better understand freshwater crayfish habitat preferences, our study focused on the endemic kōura (*Paranephrops planifrons*) found in Aotearoa New Zealand. We used four mesocosm experiments to examine how shelter structure, material composition, individual body size, and group dynamics influence refuge selection in kōura. Individual kōura strongly preferred a wooden log with enclosed drilled holes, but when housed in mixed-size groups, their preference shifted to flat and piled stone configurations that provided more complex refugia for individuals of different sizes. Flat stone structures were preferred over split wood pieces of similar dimensions, and this was strongest for large individuals. When structural dimensions were held constant, no significant preference was detected between concrete and wooden structures, indicating that material composition alone does not drive refuge selection. The findings of these mesocosm experiments suggest that stone pile configurations warrant field evaluations as habitat enhancement structures for kōura restoration. The stone piles create structural complexity that can provide habitat for different size classes and thus may add critical refuge from non-native predators for kōura populations.
-
 keywords: 
   - Paranephrops planifrons
   - Artificial reef
@@ -82,7 +80,7 @@ knitr:
     dev: "ragg_png"
 ---
 
-::: {.content-visible when-format="pdf"}
+```{=latex}
 \clearpage
 \providecommand{\chaptermark}[1]{}
 \ifcsname c@chapter\endcsname
@@ -111,6 +109,10 @@ knitr:
         font=\fontsize{22}{28}\selectfont\bfseries\sffamily, anchor=west]
     at ([xshift=1.5cm, yshift=-4cm]current page.north west)
     {The Importance of Structure};
+  \node[color=white, text width=0.85\paperwidth, align=left,
+        font=\fontsize{10}{13}\selectfont\itshape\sffamily, anchor=north west]
+    at ([xshift=1.5cm, yshift=-5.0cm]current page.north west)
+    {The importance of structure: mesocosm evidence for shelter design in freshwater crayfish restoration};
   \fill[black]
     (current page.south west) rectangle ([yshift=4.5cm]current page.south east);
   \node[color=white, text width=0.85\paperwidth, align=left,
@@ -124,9 +126,12 @@ knitr:
 \end{tikzpicture}
 \null
 \clearpage
-:::
+```
 
 ::: {.content-visible when-format="docx"}
+Chapter 4 The Importance of Structure
+The importance of structure: mesocosm evidence for shelter design in freshwater crayfish restoration
+
 ![](images/ch4_cover.jpg){fig-align="center" width=15cm}
 
 Olivier V. Raven, Robin Holmes, Ian A. K. Kusabs, Francis J. Burdon & Deniz Özkundakci
@@ -293,9 +298,9 @@ The code and derived data supporting the findings of this study are openly avail
 
 ![Proportion of individual kōura (Experiment 1) found at each structure type the next day, shown separately for female (white bars) and male (black bars) kōura. Bars show observed proportions with sample sizes (n) shown on bars. Letters above bars indicate results of pairwise G-tests with Bonferroni correction within each sex group, structure types sharing the same letter within a panel do not differ significantly from each other, while structure types with different letters differ significantly in use. No significant difference in overall structure preference was detected between sexes (see results).](outputs/fig-exp1.png){#fig-exp1 width=5in}
 
-![Structure type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): ↑ used more than expected, ↓ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95 % credible intervals.](outputs/fig-exp2.png){#fig-exp2 width=6.5in}
+![Structure type preference of group kōura (Experiment 2). (A) Proportion of kōura found at each structure type at L1 across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.25). Significance symbols indicate deviation from null expectation (Wilcoxon signed-rank test, Bonferroni adjusted): $\uparrow$ used more than expected, $\downarrow$ used less than expected. Sample sizes shown in white. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95 % credible intervals.](outputs/fig-exp2.png){#fig-exp2 width=6.5in}
 
-![Structure type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each structure type at next-day location across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95 % credible intervals. ↑ used more than expected, ↓ used less than expected. TankWall excluded from model predictions.](outputs/fig-exp3.png){#fig-exp3 width=6.5in}
+![Structure type preference in stone versus wood comparison (Experiment 3). (A) Proportion of kōura found at each structure type at next-day location across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). Significance symbols as in Figure 3. (B) Posterior predicted probability of structure type use by size class from Bayesian categorical mixed model, with 95 % credible intervals. $\uparrow$ used more than expected, $\downarrow$ used less than expected. TankWall excluded from model predictions.](outputs/fig-exp3.png){#fig-exp3 width=6.5in}
 
 ![Material preference (Experiment 4). (A) Proportion of kōura found at each structure type at next-day location across all groups and rounds. The dashed line indicates the null expectation of equal distribution (0.5). (B) Posterior predicted probability of structure type use by sex from Bayesian categorical mixed model, with 95 % credible intervals. TankWall excluded from model predictions.](outputs/fig-exp4.png){#fig-exp4 width=6.5in}
 
