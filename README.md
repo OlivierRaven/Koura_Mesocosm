@@ -1,6 +1,6 @@
 # Kōura Artificial Reef Mesocosm Study
 
-Olivier V. Raven | olivier.raven@icloud.com
+Olivier V. Raven | <olivier.raven@icloud.com>
 
 **DOI:** To be added upon acceptance
 
@@ -26,21 +26,23 @@ for freshwater crayfish restoration.
 
 ## Repository structure
 
-    .
-    +-- data/
-    |   +-- raw/          # Raw experimental data
-    |   +-- derived/      # Processed data and model outputs (.rds)
-    +-- outputs/          # Exported figures and tables
-    +-- manuscript/       # Manuscript Word document
-    +-- images/           # Experimental setup photographs
-    +-- GoPro/             # Video footage from experimental trials
-    +-- references/       # Bibliography (.bib)
-    +-- scripts/          # Miscellaneous/archived scripts
-    +-- docs/             # Rendered HTML output (GitHub Pages)
-    +-- _quarto.yml       # Quarto project configuration
-    +-- deploy.R          # Post-render script that publishes docs/ to GitHub Pages
-    +-- analysis.qmd      # Full statistical analysis notebook
-    +-- index.qmd         # Manuscript
+```text
+.
++-- data/
+|   +-- raw/          # Raw experimental data
+|   +-- derived/      # Processed data and model outputs (.rds)
++-- outputs/          # Exported figures and tables
++-- manuscript/       # Manuscript Word document
++-- images/           # Experimental setup photographs
++-- GoPro/            # Video footage from experimental trials
++-- references/       # Bibliography (.bib)
++-- scripts/          # Miscellaneous/archived scripts
++-- docs/             # Rendered HTML output (GitHub Pages)
++-- _quarto.yml       # Quarto project configuration
++-- deploy.R          # Post-render script that publishes docs/ to GitHub Pages
++-- analysis.qmd      # Full statistical analysis notebook
++-- index.qmd         # Manuscript
+```
 
 ## Reproducing the analysis
 
@@ -51,14 +53,14 @@ All analyses are contained in `analysis.qmd`.
 
 - R >= 4.5
 - Quarto >= 1.4
-- R packages: `brms`, `tidyverse`, `patchwork`, `XNomial`,
-  `DescTools`, `coin`, `bib2df`
+- renv (installed automatically when you open the project)
 
 ### Install R packages
 
+This project uses [renv](https://rstudio.github.io/renv/) for reproducible package management. To restore the exact package versions used in the analysis:
+
 ```r
-install.packages(c("brms", "tidyverse", "patchwork",
-                   "XNomial", "DescTools", "coin"))
+renv::restore()
 ```
 
 ### Render the manuscript
@@ -79,10 +81,7 @@ using `brms` with `adapt_delta = 0.99` and 4000 iterations.
 
 ## Data availability
 
-Raw data are available in `data/raw/`. Permission to conduct
-the experiments was obtained from Te Arawa Lakes Trust and
-Te Komiti Whakahaere. Kōura were sourced from lakes Ōkāreka and
-Tikitapu, Rotorua Te Arawa Lakes, Aotearoa New Zealand.
+The code and derived data supporting the findings of this study are openly available on [GitHub](https://github.com/OlivierRaven/Koura_Mesocosm) and a rendered version of the analysis is hosted at <https://olivierraven.github.io/Koura_Mesocosm/>. Raw data will be archived on Zenodo upon acceptance. Peer review documents, including the cover letter and reviewer responses, are available in the manuscript repository in the interest of open and transparent science.
 
 ## Funding
 

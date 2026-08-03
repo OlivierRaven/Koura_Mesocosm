@@ -16,16 +16,18 @@ execute:
 ```{r}
 #| label: setup
 #| include: false
-packages <- c("emmeans","DescTools","coin","XNomial","brms","lme4","multcompView","patchwork","tidyverse","readxl")
-
-quiet_load <- function(pkg) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    suppressWarnings(suppressMessages(install.packages(pkg, dependencies = TRUE)))}
-  suppressPackageStartupMessages(require(pkg, character.only = TRUE, quietly = TRUE))
-  invisible(TRUE)}
-
-options(repos = c(CRAN = "https://cloud.r-project.org"))
-invisible(lapply(packages, quiet_load))
+suppressPackageStartupMessages({
+  library(emmeans)
+  library(DescTools)
+  library(coin)
+  library(XNomial)
+  library(brms)
+  library(lme4)
+  library(multcompView)
+  library(patchwork)
+  library(tidyverse)
+  library(readxl)
+})
 
 # Set paths
 exc_file_dir    <- "data/raw/Mesocosm_experiment.xlsx"

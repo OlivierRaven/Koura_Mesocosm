@@ -290,7 +290,7 @@ This study received ethical approval by University of Waikato animal ethics comm
 The corresponding author has declared that none of the authors has any competing interests.
 
 ### Data availability statement
-The code and derived data supporting the findings of this study are openly available on GitHub (https://github.com/OlivierRaven/Koura_Mesocosm)and a rendered version of the analysis is hosted at https://olivierraven.github.io/Koura_Mesocosm/. The primary raw dataset is archived on Zenodo (https://doi.org/10.5281/zenodo.20754344). Peer review documents, including the cover letter and reviewer responses, are available in the manuscript repository in the interest of open and transparent science.
+The code and derived data supporting the findings of this study are openly available on GitHub (https://github.com/OlivierRaven/Koura_Mesocosm)and a rendered version of the analysis is hosted at https://olivierraven.github.io/Koura_Mesocosm/. The primary raw dataset is archived on Zenodo (https://doi.org/...). Peer review documents, including the cover letter and reviewer responses, are available in the manuscript repository in the interest of open and transparent science.
 :::
 
 ## Figures
