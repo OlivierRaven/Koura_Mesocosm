@@ -36,7 +36,11 @@ der_data_dir    <- "data/derived"
 out_dir         <- "outputs"
 
 read_sheet <- function(sheet) {readxl::read_excel(exc_file_dir, sheet = sheet)}
-write_out <- function(df, name) {write.csv(df, file.path(der_data_dir, name), row.names = FALSE)}
+write_out <- function(df, name) {
+  path <- file.path(der_data_dir, name)
+  suppressWarnings(unlink(path))
+  write.csv(df, path, row.names = FALSE)
+}
 
 # Read data
 df_koura               <- read_sheet("Koura")

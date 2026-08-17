@@ -206,11 +206,16 @@
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
 \hypersetup{
   pdftitle={The Importance of Structure},
   pdfauthor={Olivier V. Raven; Robin Holmes; Ian A. K. Kusabs; Francis J. Burdon; Deniz Özkundakci},
-  pdfkeywords={Paranephrops planifrons, Artificial
-reef, Behaviour, Habitat preference, Aotearoa New Zealand},
+  pdfkeywords={\xmpquote{Paranephrops planifrons}, \xmpquote{Artificial
+reef}, \xmpquote{Behaviour}, \xmpquote{Habitat
+preference}, \xmpquote{Aotearoa New Zealand}},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -230,7 +235,7 @@ reef, Behaviour, Habitat preference, Aotearoa New Zealand},
 design in freshwater crayfish restoration}
 \author{Olivier V. Raven \and Robin Holmes \and Ian A. K.
 Kusabs \and Francis J. Burdon \and Deniz Özkundakci}
-\date{2026-08-04}
+\date{2026-08-17}
 \begin{document}
 \maketitle
 
@@ -289,9 +294,9 @@ threatened invertebrate groups globally. While habitat loss and
 predation by non-native predators feature prominently as drivers of
 crayfish population declines, the optimal design of habitat enhancement
 structures for their restoration remains largely unknown. To better
-understand freshwater crayfish habitat preferences, our study focused on
-the endemic kōura (\emph{Paranephrops planifrons}) found in Aotearoa New
-Zealand. We used four mesocosm experiments to examine how shelter
+understand freshwater crayfish habitat preferences, our study focussed
+on the endemic kōura (\emph{Paranephrops planifrons}) found in Aotearoa
+New Zealand. We used four mesocosm experiments to examine how shelter
 structure, material composition, individual body size, and group
 dynamics influence refuge selection in kōura. Individual kōura strongly
 preferred a wooden log with enclosed drilled holes, but when housed in
@@ -601,6 +606,27 @@ blocks). Structure placements and tank assignments were re-randomised
 between blocks, such that each group was housed in a different tank in
 each successive round.
 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/Setup_exp_tanks.png}}
+
+}
+
+\caption{\label{fig-exp-setup}Overhead photographs of experimental tank
+configurations for each of the four mesocosm experiments. Experiment 1
+(Individual preference) and Experiment 2 (Group dynamics): four shelter
+types, WoodLog (tānekaha log with drilled holes), FlatStone (stones
+arranged flat), StonePile (stones stacked), and SingleStone (individual
+stones placed separately). Experiment 3 (Wood vs Stone): WoodSplit
+shelter (tānekaha wood splits) and FlatStone shelter placed in opposing
+halves of the tank. Experiment 4 (Material comparison): ConcreteBrick
+(perforated concrete bricks) and WoodBlock (perforated wooden blocks of
+identical dimensions) placed in opposing quadrants of the tank.}
+
+\end{figure}%
+
 \subsubsection{Data analysis}\label{data-analysis}
 
 Experiment 1: To test the difference between the four structure types
@@ -613,19 +639,19 @@ correction were used to identify which structure types differed
 significantly from each other. Bayesian categorical mixed-effects models
 were used to test whether body size or sex affected structure preference
 across all experiments, fitted using the brms package
-(\citeproc{ref-Burkner2025}{Bürkner \emph{et al.}, 2025}). For
-Experiments 1 and 2, where kōura chose among four structure types, a
-categorical family was used. For Experiments 3 and 4, where only two
-structure types were directly compared, a Bernoulli family was used.
-Model convergence was assessed using the Gelman-Rubin diagnostic (all
-\(\hat{R}\) = 1.00) and divergent transition counts (all experiments: 0
-divergences), confirming reliable posterior sampling
-(\citeproc{ref-Gelman1992}{Gelman and Rubin, 1992}). To test whether
-structure type use differed between sexes, the Bayesian categorical
-mixed-effects model was fitted with structure type as the outcome, sex
-as a fixed effect and tank and experimental round as random intercepts.
-A permutation-based symmetry test was applied to assess whether
-structure type transitions between initial location and next-day
+(\citeproc{ref-Burkner2017}{Bürkner, 2017},
+\citeproc{ref-Burkner2018}{2018}). For Experiments 1 and 2, where kōura
+chose among four structure types, a categorical family was used. For
+Experiments 3 and 4, where only two structure types were directly
+compared, a Bernoulli family was used. Model convergence was assessed
+using the Gelman-Rubin diagnostic (all \(\hat{R}\) = 1.00) and divergent
+transition counts (all experiments: 0 divergences), confirming reliable
+posterior sampling (\citeproc{ref-Gelman1992}{Gelman and Rubin, 1992}).
+To test whether structure type use differed between sexes, the Bayesian
+categorical mixed-effects model was fitted with structure type as the
+outcome, sex as a fixed effect and tank and experimental round as random
+intercepts. A permutation-based symmetry test was applied to assess
+whether structure type transitions between initial location and next-day
 location were directional rather than random.
 
 Experiment 2: To test whether overall structure preference existed at
@@ -681,10 +707,30 @@ no kōura were found at TankWall. Sex had no credible effect on structure
 preference (β = 3.32, 95\% CI: -1.09 to 9.3; posterior probability =
 0.92) with credible intervals spanning zero for all structure types. The
 symmetry test indicated that structure type use shifted between initial
-and next-day location (\emph{p} = 0.001), suggesting kōura actively
-relocated to preferred structure types overnight rather than remaining
-at their initial location. The video footage showed kōura emerging,
-walking and climbing on the structures after sunset.
+and next-day location (\emph{p} \textless{} 0.001), suggesting kōura
+actively relocated to preferred structure types overnight rather than
+remaining at their initial location. The video footage showed kōura
+emerging, walking and climbing on the structures after sunset.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=5in,height=\textheight,keepaspectratio]{outputs/fig-exp1.png}
+
+}
+
+\caption{\label{fig-exp1}Proportion of individual kōura (Experiment 1)
+found at each structure type the next day, shown separately for female
+(white bars) and male (black bars) kōura. Bars show observed proportions
+with sample sizes (n) shown on bars. Letters above bars indicate results
+of pairwise G-tests with Bonferroni correction within each sex group,
+structure types sharing the same letter within a panel do not differ
+significantly from each other, while structure types with different
+letters differ significantly in use. No significant difference in
+overall structure preference was detected between sexes (see results).}
+
+\end{figure}%
 
 \subsubsection{Experiment 2: Group
 dynamics}\label{experiment-2-group-dynamics-1}
@@ -709,6 +755,26 @@ type use shifted directionally between initial and next-day location
 (Stuart-Maxwell test: \emph{p} = 0.001), indicating that kōura actively
 relocated to preferred structure types overnight.
 
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=6.5in,height=\textheight,keepaspectratio]{outputs/fig-exp2.png}
+
+}
+
+\caption{\label{fig-exp2}Structure type preference of group kōura
+(Experiment 2). (A) Proportion of kōura found at each structure type at
+L1 across all groups and rounds. The dashed line indicates the null
+expectation of equal distribution (0.25). Significance symbols indicate
+deviation from null expectation (Wilcoxon signed-rank test, Bonferroni
+adjusted): \(\uparrow\) used more than expected, \(\downarrow\) used
+less than expected. Sample sizes shown in white. (B) Posterior predicted
+probability of structure type use by size class from Bayesian
+categorical mixed model, with 95 \% credible intervals.}
+
+\end{figure}%
+
 \subsubsection{Experiment 3: Wood vs
 Stone}\label{experiment-3-wood-vs-stone-1}
 
@@ -727,6 +793,26 @@ kōura. Structure type use shifted directionally between initial and
 next-day location (Stuart-Maxwell test: \emph{p} = 0.003), with kōura
 relocating toward FlatStone overnight.
 
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=6.5in,height=\textheight,keepaspectratio]{outputs/fig-exp3.png}
+
+}
+
+\caption{\label{fig-exp3}Structure type preference in stone versus wood
+comparison (Experiment 3). (A) Proportion of kōura found at each
+structure type at next-day location across all groups and rounds. The
+dashed line indicates the null expectation of equal distribution (0.5).
+Significance symbols as in Figure 3. (B) Posterior predicted probability
+of structure type use by size class from Bayesian categorical mixed
+model, with 95 \% credible intervals. \(\uparrow\) used more than
+expected, \(\downarrow\) used less than expected. TankWall excluded from
+model predictions.}
+
+\end{figure}%
+
 \subsubsection{Experiment 4: Material
 comparison}\label{experiment-4-material-comparison-1}
 
@@ -741,6 +827,24 @@ structure avoidance. Sex had no credible effect on preference between
 structure types (β = -0.18, 95\% CI: -1.24 to 0.84; posterior
 probability = 0.65), indicating that both structures were equally
 suitable refuge for male and female kōura.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=6.5in,height=\textheight,keepaspectratio]{outputs/fig-exp4.png}
+
+}
+
+\caption{\label{fig-exp4}Material preference (Experiment 4). (A)
+Proportion of kōura found at each structure type at next-day location
+across all groups and rounds. The dashed line indicates the null
+expectation of equal distribution (0.5). (B) Posterior predicted
+probability of structure type use by sex from Bayesian categorical mixed
+model, with 95 \% credible intervals. TankWall excluded from model
+predictions.}
+
+\end{figure}%
 
 \subsection{Discussion}\label{discussion}
 
@@ -975,107 +1079,6 @@ is archived on Zenodo (https://doi.org/\ldots). Peer review documents,
 including the cover letter and reviewer responses, are available in the
 manuscript repository in the interest of open and transparent science.
 
-\subsection{Figures}\label{figures}
-
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{images/Setup_exp_tanks.png}}
-
-}
-
-\caption{\label{fig-exp-setup}Overhead photographs of experimental tank
-configurations for each of the four mesocosm experiments. Experiment 1
-(Individual preference) and Experiment 2 (Group dynamics): four shelter
-types, WoodLog (tānekaha log with drilled holes), FlatStone (stones
-arranged flat), StonePile (stones stacked), and SingleStone (individual
-stones placed separately). Experiment 3 (Wood vs Stone): WoodSplit
-shelter (tānekaha wood splits) and FlatStone shelter placed in opposing
-halves of the tank. Experiment 4 (Material comparison): ConcreteBrick
-(perforated concrete bricks) and WoodBlock (perforated wooden blocks of
-identical dimensions) placed in opposing quadrants of the tank.}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=5in,height=\textheight,keepaspectratio]{outputs/fig-exp1.png}
-
-}
-
-\caption{\label{fig-exp1}Proportion of individual kōura (Experiment 1)
-found at each structure type the next day, shown separately for female
-(white bars) and male (black bars) kōura. Bars show observed proportions
-with sample sizes (n) shown on bars. Letters above bars indicate results
-of pairwise G-tests with Bonferroni correction within each sex group,
-structure types sharing the same letter within a panel do not differ
-significantly from each other, while structure types with different
-letters differ significantly in use. No significant difference in
-overall structure preference was detected between sexes (see results).}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=6.5in,height=\textheight,keepaspectratio]{outputs/fig-exp2.png}
-
-}
-
-\caption{\label{fig-exp2}Structure type preference of group kōura
-(Experiment 2). (A) Proportion of kōura found at each structure type at
-L1 across all groups and rounds. The dashed line indicates the null
-expectation of equal distribution (0.25). Significance symbols indicate
-deviation from null expectation (Wilcoxon signed-rank test, Bonferroni
-adjusted): \(\uparrow\) used more than expected, \(\downarrow\) used
-less than expected. Sample sizes shown in white. (B) Posterior predicted
-probability of structure type use by size class from Bayesian
-categorical mixed model, with 95 \% credible intervals.}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=6.5in,height=\textheight,keepaspectratio]{outputs/fig-exp3.png}
-
-}
-
-\caption{\label{fig-exp3}Structure type preference in stone versus wood
-comparison (Experiment 3). (A) Proportion of kōura found at each
-structure type at next-day location across all groups and rounds. The
-dashed line indicates the null expectation of equal distribution (0.5).
-Significance symbols as in Figure 3. (B) Posterior predicted probability
-of structure type use by size class from Bayesian categorical mixed
-model, with 95 \% credible intervals. \(\uparrow\) used more than
-expected, \(\downarrow\) used less than expected. TankWall excluded from
-model predictions.}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=6.5in,height=\textheight,keepaspectratio]{outputs/fig-exp4.png}
-
-}
-
-\caption{\label{fig-exp4}Material preference (Experiment 4). (A)
-Proportion of kōura found at each structure type at next-day location
-across all groups and rounds. The dashed line indicates the null
-expectation of equal distribution (0.5). (B) Posterior predicted
-probability of structure type use by sex from Bayesian categorical mixed
-model, with 95 \% credible intervals. TankWall excluded from model
-predictions.}
-
-\end{figure}%
-
 \protect\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-Adams2007}
@@ -1096,10 +1099,18 @@ of the demographic bottleneck hypothesis. \emph{Ecology} \textbf{76}:
 968--980.
 https://doi.org/\href{https://doi.org/10.2307/1939360}{10.2307/1939360}
 
-\bibitem[\citeproctext]{ref-Burkner2025}
-Bürkner P-C, Gabry J, Weber S, Johnson A. 2025.
-\href{https://cran.r-project.org/web/packages/brms/index.html}{{brms}:
-{Bayesian} regression models using {Stan}}.
+\bibitem[\citeproctext]{ref-Burkner2017}
+Bürkner P-C. 2017. \textless B\textgreater brms\textless/b\textgreater{}
+: An \textless i\textgreater r\textless/i\textgreater{} package for
+bayesian multilevel models using
+\textless i\textgreater stan\textless/i\textgreater. \emph{Journal of
+Statistical Software} \textbf{80}.
+https://doi.org/\href{https://doi.org/10.18637/jss.v080.i01}{10.18637/jss.v080.i01}
+
+\bibitem[\citeproctext]{ref-Burkner2018}
+Bürkner P-C. 2018. Advanced bayesian multilevel modeling with the r
+package brms. \emph{The R Journal} \textbf{10}: 395.
+https://doi.org/\href{https://doi.org/10.32614/rj-2018-017}{10.32614/rj-2018-017}
 
 \bibitem[\citeproctext]{ref-Butler1999}
 Butler M, MacDiarmid A, Booth J. 1999. The cause and consequence of
