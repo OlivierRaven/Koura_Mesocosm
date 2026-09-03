@@ -160,7 +160,7 @@ format_brms <- function(model, param, post_prob = NULL) {
   b    <- get_brms(model, param)
   low  <- get_brms(model, param, "Q2.5")
   high <- get_brms(model, param, "Q97.5")
-  base <- paste0("(\u03b2 = ", b, ", 95% CI: ", low, " to ", high)
+  base <- paste0("($\\beta$ = ", b, ", 95% CI: ", low, " to ", high)
   if (!is.null(post_prob)) {
     pp_label <- ifelse(round(post_prob, 2) >= 1, "> 0.99", as.character(round(post_prob, 2)))
     paste0(base, "; posterior probability = ", pp_label, ")")
