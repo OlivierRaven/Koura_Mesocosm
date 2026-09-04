@@ -150,7 +150,7 @@ Olivier V. Raven, Robin Holmes, Ian A. K. Kusabs, Francis J. Burdon & Deniz Özk
 #| output: asis
 #| eval: !expr knitr::is_html_output()
 .i <- file.path(dirname(knitr::current_input(dir = TRUE)), "04_koura_mesocosm", "images", "ch4_cover.jpg")
-if (file.exists(.i)) cat(sprintf('<div class="ch-hero-wrap"><img class="ch-hero-img" src="%s" alt=""><div class="ch-hero-fade"></div><div class="ch-hero-text"><span class="ch-eyebrow">Chapter 4</span><p class="ch-hero-title">The Importance of Structure</p></div></div>', knitr::image_uri(.i)))
+if (file.exists(.i)) cat(sprintf('<div class="ch-hero-wrap"><img class="ch-hero-img" src="%s" alt=""><div class="ch-hero-fade"></div><div class="ch-hero-text"><span class="ch-eyebrow">Chapter 4</span><span class="ch-hero-title">The Importance of Structure</span></div></div>', knitr::image_uri(.i)))
 ```
 
 # Chapter 4 The Importance of Structure {.unnumbered}
