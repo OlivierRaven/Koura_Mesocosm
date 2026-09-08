@@ -153,7 +153,7 @@ Olivier V. Raven, Robin Holmes, Ian A. K. Kusabs, Francis J. Burdon & Deniz Özk
 if (file.exists(.i)) cat(sprintf('<div class="ch-hero-wrap"><img class="ch-hero-img" src="%s" alt=""><div class="ch-hero-fade"></div><div class="ch-hero-text"><span class="ch-eyebrow">Chapter 4</span><span class="ch-hero-title">The Importance of Structure</span></div></div>', knitr::image_uri(.i)))
 ```
 
-# Chapter 4 The Importance of Structure {.unnumbered}
+# Chapter 4 The Importance of Structure {.unnumbered .ch-page-heading}
 :::
 
 ```{r}
