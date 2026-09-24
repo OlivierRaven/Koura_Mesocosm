@@ -225,7 +225,7 @@ In Aotearoa-New Zealand (hereafter Aotearoa), the endemic freshwater crayfish k�
 
 In this study, four mesocosm experiments were conducted to identify kōura habitat preferences. We assessed how different structures varying in material and configuration influence refuge selection, accounting for individual behaviour, body size, and group interactions. We predicted that 1) Structurally complex structures providing enclosed crevices would be preferred over isolated or open structures, as enclosed spaces reduce predation risk; 2) structure preference would be size-dependent, with larger kōura selecting structures with larger refuge spaces [@Streissl2002; @Percival2010]; 3) stone-based structures would be preferred over wood due to greater structural stability, and 4) material type alone would not influence refuge preference between concrete and wooden bricks. The results provide practical guidance for designing cost-effective, ecologically appropriate habitat enhancement structures to enhance kōura abundance and support population recovery.
 
-## Materials and Methods
+## Methods
 ### Animal collection and tank setup
 In mid-August 2025, 72 kōura were sourced from Lakes Ōkāreka and Tikitapu, located within the Rotorua Te Arawa Lakes area in the North Island of Aotearoa. Collected animals were transported to the Aquatic Research Centre at the University of Waikato in Hamilton. Individuals were assigned to one of three size classes based on orbital carapace length (OCL): small (< 22 mm), medium (22–30 mm), and large (> 30 mm). Each animal was marked with a unique identification number written on the carapace using an orange oil-based paint marker (Sharpie, medium point) [@Ramalho2010].
 
@@ -299,7 +299,7 @@ The broader restoration literature supports both the structural principle and th
 Across four mesocosm experiments, structural configuration and crevice complexity consistently predicted kōura shelter preference more strongly than material composition. The shift from individual preference for enclosed wooden log shelters to group preference for stone configurations shows that social context plays a key role in determining shelter value for kōura. Size-dependent preferences further suggest that structures accommodating multiple body sizes simultaneously benefit whole populations rather than only dominant individuals. Stone-based structures using locally sourced materials are promising candidates for field evaluation, aligning with ecological and cultural values associated with restoring this taonga species. Field validation remains the essential next step for translating these findings into effective kōura habitat restoration practice.
 
 ## Acknowledgements
-We thank Te Arawa Lakes Trust and Te Komiti Whakahaere for the opportunity to collect and study the treasured kōura. We are grateful to Soweeta Fort-D’ath and William Anaru (Te Arawa Lakes Trust), and Tihini Grant (Ngāti Pikiao). 
+We thank Te Arawa Lakes Trust and Te Komiti Whakahaere for the opportunity to collect and study the treasured kōura. We are grateful to Soweeta Fort-D’ath and William Anaru (Te Arawa Lakes Trust), and Tihini Grant (Ngāti Pikiao) for their support of this research.
 
 ::: {.chapter-only}
 ### Funding statement
