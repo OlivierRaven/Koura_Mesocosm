@@ -125,9 +125,9 @@ knitr:
         font=\fontsize{9}{13}\selectfont\itshape\sffamily, anchor=west]
     at ([xshift=1.5cm, yshift=1.5cm]current page.south west)
     {Aquatic Conservation: Marine and Freshwater Ecosystems --- Under review};
-  \node[color=white!80, anchor=south east,
+  \node[color=white!80, anchor=south, text width=0.85\paperwidth, align=center,
         font=\fontsize{7}{9}\selectfont\itshape\sffamily]
-    at ([xshift=-1.2cm, yshift=5.0cm]current page.south east)
+    at ([yshift=5.0cm]current page.south)
     {Mesocosm tank with stone and wood shelter configurations used in k\={o}ura refuge selection trials.};
 \end{tikzpicture}
 \null
